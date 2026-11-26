@@ -1,0 +1,8 @@
+	<<set $lastgenerated to passage()>>
+
+	<<set _nam to _args[0]>>
+	<<set _i to $NPCNameList.indexOf(_nam)>>
+	<<if _i isnot -1 and ($NPCName[_i].state is "dead" or $NPCName[_i].state is "missing")>>
+		<<set $deadNPCName to _nam>>
+		<<goto "Dead NPC Absence">>
+	<</if>>

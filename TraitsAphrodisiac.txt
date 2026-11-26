@@ -1,0 +1,12 @@
+<<set _traitLists to [
+		{
+			title: "模组特质",
+			traits: [
+				{
+					name: "媚药改造",
+					colour: "lewd",
+					has: $backgroundTraits.includes("媚药改造"),
+					text: "粉色药片永久地改写了你的身体——性奋增长得更快，也更难平息。"
+				}
+			]
+		},

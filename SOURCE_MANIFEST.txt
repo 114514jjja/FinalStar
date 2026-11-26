@@ -1,0 +1,27 @@
+源码包说明
+
+这是 FinalStar v0.28 的可读源码包。
+
+包含
+boot.json
+framework.js
+fs-*.js
+jiusiSetup.js
+twee/
+css/
+img/
+根目录的 *.txt 替换片段
+tools/
+BUILD.txt
+README.md
+
+不包含
+.git/
+dist/
+docs/
+本地开发脚本
+本地缓存
+本地诊断文件
+FinalStar-v0.28.mod.zip
+
+安装包在 Releases 的 FinalStar-v0.28.mod.zip。

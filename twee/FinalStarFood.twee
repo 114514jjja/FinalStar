@@ -1,0 +1,46 @@
+/* ============================================================
+   终星 FinalStar —— 孤儿院大厅的长桌（每天限量的面包）
+   设计说明：孤儿院大厅新加一个餐桌选项，每天最多可以拿三个面包；
+             多拿会有其他孤儿阻止，语气有的好有的不好 —— 随机。
+   实现：随机文案与计数都在 fs-food.js 里（loafTake / loafToday），
+         段落这边只负责显示与跳转，不用 for 之类的动态列表宏（交接文档 §4.4）。
+   注意：本文件注释里不要写出那个宏的字面量（尖括号形式），
+         coderror 会把它当成"宏未闭合"报出来 —— 注释里就写"for 宏"。
+   ============================================================ */
+
+:: FS Bread Table
+<<set _link to true>>
+<<set $outside to 0>>
+大厅角落摆着一张长桌。桌上放着一个藤篮，里面的面包是孤儿院每天分的那一份——
+摆在这儿，谁先来谁拿。
+<br><br>
+<<set _n to finalStar.loafToday()>>
+<<if _n gte 3>>
+今天你已经拿过 <<print _n>> 个了。篮子里剩下的那些，是别人的。
+<br><br>
+<<link [[离开长桌|Orphanage]]>><</link>>
+<<else>>
+你伸手的时候犹豫了一下。篮子里还有你能拿的份。
+<br><br>
+<<link [[拿一个面包|FS Bread Take]]>><</link>>　
+<<link [[算了|Orphanage]]>><</link>>
+<</if>>
+
+:: FS Bread Take
+<<set _link to true>>
+<<set $outside to 0>>
+<<set _r to finalStar.loafTake()>>
+<<print _r.text>>
+<br><br>
+<<if _r.ok>>
+<span class="fs-sub">今天已拿 <<print finalStar.loafToday()>>／3 个。面包已经放进背包，饿了随时可以吃。</span>
+<br><br>
+<<if finalStar.loafToday() lt 3>>
+<<link [[再拿一个|FS Bread Take]]>><</link>>　
+<</if>>
+<<link [[离开长桌|Orphanage]]>><</link>>
+<<else>>
+<span class="fs-sub">今天已拿 <<print finalStar.loafToday()>>／3 个。明天桌上还会有新的。</span>
+<br><br>
+<<link [[离开长桌|Orphanage]]>><</link>>
+<</if>>

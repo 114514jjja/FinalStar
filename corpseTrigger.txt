@@ -1,0 +1,6 @@
+<<endevent _args[0]>>
+<<if $corpsePending is 1>>
+	<<unset $corpsePending>>
+	<<goto "FS Corpse Start">>
+<</if>>
+<<struggle_end>><<fs_on_combat_end>>

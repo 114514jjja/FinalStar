@@ -1,0 +1,101 @@
+:: FinalStar Combat [widget]
+/* ============================================================
+   终星 FinalStar —— 战斗物资面板 / 战斗收尾
+   技能动作与效果在 script/modules/fs-combat.js 里通过
+   maplebirch.combat.CombatAction.reg 注册，本文件只负责界面。
+   ============================================================ */
+
+/* ===== 战斗物资面板（折叠表格，注入到战斗界面最下方） ===== */
+<<widget "fs_combat_panel">>
+	<<set _fs_hasPistol to finalStar.pistolInHand()>>
+	<<set _fs_hasBook to ($magicBook is 1 and ($worn.handheld.name is "魔法书" or $worn.handheld2.name is "魔法书"))>>
+	<<if _fs_hasPistol or _fs_hasBook>>
+		<div class="fs-combat-wrap">
+			<details class="journal" open>
+				<summary class="journal"><<icon "finalstar/pistol-standard.png">> 战斗物资 · 手枪 / 魔书</summary>
+				<table class="fs-combat-table">
+					<thead>
+						<tr><th>物品</th><th>正在使用</th><th>已携带</th><th>余量</th></tr>
+					</thead>
+					<tbody>
+						<<if _fs_hasPistol>>
+							<tr>
+								<td><<icon "finalstar/pistol-standard.png">> 制式手枪<br><span class="fs-sub">（<<print finalStar.pistolHandKey() is "handheld2" ? "另一只手" : "主手">>）</span></td>
+								<td><span class="gold"><<print finalStar.bulletName(finalStar.activeBullet())>></span></td>
+								<td><span class="fs-sub"><<print finalStar.bulletListText()>></span></td>
+								<td class="fs-num"><span class="gold"><<print $pistolAmmo ? $pistolAmmo : 0>></span> 发</td>
+							</tr>
+						<<else>>
+							<tr>
+								<td><<icon "finalstar/pistol-standard.png">> 制式手枪</td>
+								<td colspan="2"><span class="red">不在手上</span> <span class="fs-sub">（在衣柜的「手持物 / 另一只手」里装备）</span></td>
+								<td class="fs-num">—</td>
+							</tr>
+						<</if>>
+						<<if _fs_hasBook>>
+							<tr>
+								<td><<icon "finalstar/skill-assault.png">> 魔法书</td>
+								<td>
+									吟唱 <<print $daily.magicCasts ? $daily.magicCasts : 0>> / 10
+									<<if $fsData and $fsData.sealEquipped and $fsData.sealEquipped isnot "none">>
+										<br><span class="fs-sub">刻印：<span class="teal"><<print finalStar.sealName($fsData.sealEquipped)>></span></span>
+									<</if>>
+								</td>
+								<td><span class="fs-sub">治疗术 · 强攻术 · 荡魂术</span></td>
+								<td class="fs-num"><<if ($daily.magicCasts || 0) gte 10>><span class="red">枯竭</span><<else>><span class="green">可用</span><</if>></td>
+							</tr>
+						<<else>>
+							<tr>
+								<td><<icon "finalstar/skill-assault.png">> 魔法书</td>
+								<td colspan="2"><span class="red">没有魔书</span> <span class="fs-sub">（在魔女小屋购买后即可吟唱）</span></td>
+								<td class="fs-num">—</td>
+							</tr>
+						<</if>>
+					</tbody>
+				</table>
+
+				<<if _fs_hasPistol>>
+					<div class="fs-combat-actions">
+						<span class="fs-sub">切换弹药：</span>
+						<<print finalStar.bulletButtons()>>
+					</div>
+				<</if>>
+				<div class="fs-sub">
+					射击与吟唱都在下方左右手动作里：<span class="gold">「射击」</span>打出一发（伤害按上面选中的子弹结算，一次只消耗一发），
+					<span class="gold">「吟唱魔法」</span>施放下面选中的那一系法术（消耗当日一次吟唱）。
+				</div>
+				<div class="fs-combat-actions">
+					<span class="fs-sub">法术一览：</span>
+					<<print finalStar.spellButtons()>>
+				</div>
+				<div class="fs-sub">最近施放：<<print finalStar.spellInfoText()>></div>
+				<<if $fs_panelLog>>
+					<div class="fs-combat-log"><<print $fs_panelLog>></div>
+				<</if>>
+				<<if $fs_undying is true>>
+					<div class="fs-sub"><span class="teal">不死族已开启：本场遭遇战不会因疼痛上限而结束。</span></div>
+				<</if>>
+			</details>
+		</div>
+	<</if>>
+<</widget>>
+
+/* ===== 战斗收尾：杀人不埋尸 / 不死族 / 埋尸环节（112） ===== */
+<<widget "fs_on_combat_end">>
+	<<run finalStar.onCombatEnd()>>
+	<<if $fs_noCorpseDrag is true>>
+		<<if $corpsePending>><<set $corpsePending to 0>><</if>>
+		<<if $fsCorpsePending>><<set $fsCorpsePending to 0>><</if>>
+	<</if>>
+	<<if $fsCorpsePending is 1>>
+		<<set $fsCorpsePending to 0>>
+		<<goto "FS Corpse Start">>
+	<</if>>
+<</widget>>
+
+/* ===== 反击刻印：受到伤害时提示（由战斗文本钩子调用） ===== */
+<<widget "fs_counter_notice">>
+	<<if $fsData and $fsData.sealEquipped is "counter">>
+		<span class="teal">反击刻印亮起——你挨下的这一下，被原样还了回去。</span>
+	<</if>>
+<</widget>>

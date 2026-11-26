@@ -1,0 +1,7 @@
+<<if Time.hour gte 9 and Time.hour lt 19>>
+	<<icon "bank.png">><<link [[银行 (0:02)|Bank Hall]]>><<pass 2>><</link>>
+<<else>>
+	<<icon "bank.png">><<link [[银行|Bank Hall]]>><<pass 2>><</link>>
+<</if>>
+<br>
+<<if $avery_mansion>>

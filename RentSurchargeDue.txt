@@ -1,0 +1,14 @@
+<<widget "rentdue">>
+	<<npc Bailey>><<person1>>
+	<<if $money gt 100000 and $baileyShot isnot 1>>
+		<<set $rentmoney to Math.floor($rentmoney * 1.5)>>
+		<<set $baileySurcharge to 1>>
+		<br>
+		<span class="red">贝利扫了眼你的钱包，嘴角微微翘起："看来你最近手头宽裕？那这周，咱们按新价码来。"</span>
+		<br>
+	<</if>>
+	<<if $weekly.bankVisits gte 3 and $baileyShot isnot 1>>
+		<br>
+		<span class="teal">贝利盯着你看了好一会儿："最近总往银行跑？"他眯起眼，"……最好别是我想的那样。"</span>
+		<br>
+	<</if>>

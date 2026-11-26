@@ -1,0 +1,14 @@
+/* 社交面板顶部：玖肆的状态条（长线剧情用）
+   · C 结局「死亡」：用户  要求**依然显示**，但清空所有好感与数值，只留红色「死亡」二字
+     （数值归零在 fs.morKillJiusi() 里做；这里只负责把这行红字显示出来）
+   · A 路线回头之后：12 天内显示红色「失踪」 */
+<<if V.fsData && V.fsData.mor && V.fsData.mor.jiusiGone === "dead">>
+<div class="fs-social-warn"><span class="red">玖肆　——　死亡</span></div>
+<<elseif V.fsData && V.fsData.mor && V.fsData.mor.jiusiGone === "missing">>
+<div class="fs-social-warn"><span class="red">玖肆　——　失踪</span></div>
+<</if>>
+<<if V.fsData && V.fsData.jiusiDisappointed === 1>>
+<div class="fs-social-warn"><span class="red">玖肆对你感到失望。</span></div>
+<</if>>
+
+<div id="faction-reputations" class="relation-box-list">

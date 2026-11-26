@@ -1,0 +1,5 @@
+<<set $rentmoney to Math.floor($rentmoney * $settings.rentCostModifier)>>
+<<if $money gt 100000 and $baileyShot isnot 1>>
+	<<set $rentmoney to Math.floor($rentmoney * 1.5)>>
+	<<set $baileySurcharge to 1>>
+<</if>>

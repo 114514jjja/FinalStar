@@ -1,0 +1,361 @@
+:: Witch Hut
+<<set $outside to 0>><<set $location to "town">><<effects>>
+<<if V.fsData.jiusiDisappointed === 1>>
+<span class="grey">木架上落了一层灰，窗纸破了一角也没人去补。柜台后面的女巫看着比上回更睁不开眼。</span>
+<br><br>
+<</if>>
+<<if $fsData.witch is undefined>><<set $fsData.witch to { met: false, asked: [] }>><</if>>
+<<if $fsData.witch.met isnot true>>
+	<<set $fsData.witch.met to true>>
+	门帘是用旧布拼的，颜色褪得看不出原样。你掀开它走进去——
+	<br><br>
+	屋里比外面窄得多，架子上堆着说不清用途的瓶罐，柜台后面趴着一个<span class="fs-celeste">身材矮小、米白色头发的女孩</span>，脸埋在胳膊里，呼吸均匀。
+	<br><br>
+	听见动静，她抬起半边眼皮看了你一眼。
+	<br><br>
+	"欢迎光临——"她的声音拖得很长，像是从梦里拽出来的，"我是<span class="fs-celeste">西蕾丝提娅</span>。这里是<span class="gold">魔女小屋</span>。"
+	<br><br>
+	说完，她又把脸埋了回去。
+<</if>>
+<<if $fsData.witch.met is true>>
+	帘子里的空气有股旧纸和草药混在一起的味道。西蕾丝提娅趴在柜台上，看起来并不打算醒。
+<</if>>
+
+<br><br>
+<span class="fs-sub">（她似乎不介意你自己看。）</span>
+<br><br>
+<<link [[瞧瞧有什么|Witch Hut Shop]]>><</link>>
+<br>
+<<link [[请求装备刻印|Witch Hut Seal]]>><</link>>
+<br>
+<<link [[询问|Witch Hut Ask]]>><</link>>
+<br>
+<<link [[离开|Elk Street]]>><</link>>
+
+:: Witch Hut Shop
+<<set $outside to 0>><<set $location to "town">><<effects>>
+<<if $fs_witchTab is undefined>><<set $fs_witchTab to "seal">><</if>>
+"自己看吧，"西蕾丝提娅没有抬头，"别碰左边的罐子，那里面装的是会记仇的东西。"
+<br><br>
+<<link [[魔法刻印|Witch Hut Shop]]>><<set $fs_witchTab to "seal">><</link>>
+<<if $fs_witchTab is "seal">> <span class="gold">←</span><</if>>
+|
+<<link [[魔法祝福卷轴|Witch Hut Shop]]>><<set $fs_witchTab to "scroll">><</link>>
+<<if $fs_witchTab is "scroll">> <span class="gold">←</span><</if>>
+|
+<<link [[魔法小道具|Witch Hut Shop]]>><<set $fs_witchTab to "items">><</link>>
+<<if $fs_witchTab is "items">> <span class="gold">←</span><</if>>
+<br><br>
+<span class="gold">持有：£<<print Math.floor($money / 100)>></span>
+<br><br>
+<<if $fs_witchTab is "seal">>
+	<<if $magicBook isnot 1>>
+		"刻印啊……"她终于抬起眼，"你要那个做什么？你连魔书都没有。"
+		<br>
+		<span class="fs-sub">（没有魔书的话，买了也没用。）</span>
+		<br><br>
+	<</if>>
+	<<for _sk range finalStar.sealList>>
+		<<set _s to finalStar.seals[_sk]>>
+		<div class="fs-shop-item">
+			<span class="fs-shop-name"><<icon _s.icon>> <<print _s.name>>刻印 <<if finalStar.hasSeal(_sk)>><span class="green">（已拥有）</span><<elseif $fsData.sealEquipped is _sk>><span class="teal">（装配中）</span><</if>></span>
+			<span class="fs-shop-desc"><<print _s.desc>></span>
+			<<if finalStar.hasSeal(_sk) or $fsData.sealEquipped is _sk>>
+				<span class="fs-shop-price"><span class="green">已在你的收藏中</span></span>
+			<<elseif $money gte (_s.price * 100)>>
+				<<capture _sk>>
+					<<set _label to "购买" + finalStar.seals[_sk].name + "刻印（£" + finalStar.seals[_sk].price + "）">>
+					<<link _label "Witch Hut Shop">>
+						<<set $money -= finalStar.seals[_sk].price * 100>>
+						<<run finalStar.giveSeal(_sk)>>
+						<<set $fs_witchTab to "seal">>
+					<</link>>
+				<</capture>>
+			<<else>>
+				<span class="fs-shop-price"><span class="red">£<<print _s.price>> —— 钱不够</span></span>
+			<</if>>
+		</div>
+	<</for>>
+<<elseif $fs_witchTab is "scroll">>
+	卷轴在匣子里躺着，纸边泛着淡金。
+	<br>
+	<span class="fs-sub">临时卷轴生效 30 天；永久卷轴的价格是两倍。</span>
+	<br><br>
+	<<for _ck range finalStar.scrollList>>
+		<<set _c to finalStar.scrolls[_ck]>>
+		<div class="fs-shop-item">
+			<span class="fs-shop-name"><<icon _c.icon>> <<print _c.name>></span>
+			<span class="fs-shop-desc"><<print _c.desc>></span>
+			<span class="fs-shop-price">
+				临时（30 天）：<span class="gold">£<<print _c.price>></span>
+				<<if $money gte (_c.price * 100)>>
+					<<capture _ck>>
+						<<link [[ 买下 |Witch Hut Shop]]>>
+							<<run finalStar.buyScroll(_ck, false)>>
+							<<set $fs_witchTab to "scroll">>
+						<</link>>
+					<</capture>>
+				<<else>> <span class="red">（钱不够）</span> <</if>>
+				<br>
+				永久：<span class="gold">£<<print _c.price * 2>></span>
+				<<if $money gte (_c.price * 200)>>
+					<<capture _ck>>
+						<<link [[ 买下 |Witch Hut Shop]]>>
+							<<run finalStar.buyScroll(_ck, true)>>
+							<<set $fs_witchTab to "scroll">>
+						<</link>>
+					<</capture>>
+				<<else>> <span class="red">（钱不够）</span> <</if>>
+			</span>
+		</div>
+	<</for>>
+	<<if $fsData.scrolls and $fsData.scrolls.length gt 0>>
+		<br>
+		<span class="gold">你身上带着的卷轴：</span>
+		<br>
+		<<for _i to 0; _i lt $fsData.scrolls.length; _i++>>
+			<<set _item to $fsData.scrolls[_i]>>
+			<<set _def to finalStar.scrolls[_item.key]>>
+			<<capture _i>>
+				<<set _label to "展开" + _def.name + "（" + (_item.permanent ? "永久" : (_item.days + " 天后失效")) + "）">>
+				<<link _label "Witch Hut Shop">>
+					<<run finalStar.useScroll(_i)>>
+				<</link>>
+			<</capture>>
+			<br>
+		<</for>>
+	<</if>>
+<<else>>
+	<<if $pistolOwned isnot 1 and finalStar.gunUnlocked() isnot true>>
+		"枪？"她掀起眼皮，"你走的是哪条线，自己心里清楚。"
+		<br>
+		<span class="fs-sub">（你不属于玖肆线，或者还没和她走到那一步——现在买这个没用。）</span>
+		<br><br>
+	<<elseif finalStar.gunUnlocked() isnot true>>
+		<<link [[告诉她自己把枪弄丢了|Witch Hut Gun]]>><</link>>
+		<br><br>
+	<</if>>
+	<<if finalStar.gunUnlocked()>>
+		<div class="fs-shop-item">
+			<span class="fs-shop-name"><<icon "finalstar/pistol-standard.png">> 制式手枪</span>
+			<span class="fs-shop-desc">通体发黑的手枪，不同的是枪身雕刻着一只蛇形图案。</span>
+			<<if $pistolOwned is 1>>
+				<span class="fs-shop-price"><span class="green">你已经有了一把</span></span>
+			<<elseif $money gte 90000>>
+				<<link [[购买（£900）|Witch Hut Shop]]>>
+					<<set $money -= 90000>>
+					<<set $pistolOwned to 1>>
+					<<set $pistolAmmo to ($pistolAmmo ? $pistolAmmo : 0) + 6>>
+					<<run finalStar.giveBullets("normal", 6)>>
+				<</link>>
+			<<else>>
+				<span class="fs-shop-price"><span class="red">£900 —— 钱不够</span></span>
+			<</if>>
+		</div>
+		<br>
+		<<for _bk range finalStar.bulletList>>
+			<<set _b to finalStar.bullets[_bk]>>
+			<div class="fs-shop-item">
+				<span class="fs-shop-name"><<icon _b.icon>> <<print _b.name>> <span class="fs-sub">（现有 <<print finalStar.bulletCount(_bk)>> 发）</span></span>
+				<span class="fs-shop-desc"><<print _b.desc>></span>
+				<span class="fs-shop-price">
+					单发 <span class="gold">£<<print _b.price>></span>
+					<<if $money gte (_b.price * 100)>>
+						<<capture _bk>>
+							<<link [[ 买 1 发 |Witch Hut Shop]]>>
+								<<set $money -= _b.price * 100>>
+								<<run finalStar.giveBullets(_bk, 1)>>
+								<<set $fs_witchTab to "items">>
+							<</link>>
+						<</capture>>
+					<<else>> <span class="red">（钱不够）</span> <</if>>
+					<<if $money gte (_b.price * 1000)>>
+						<<capture _bk>>
+							<<link [[ 买 10 发 |Witch Hut Shop]]>>
+								<<set $money -= _b.price * 1000>>
+								<<run finalStar.giveBullets(_bk, 10)>>
+								<<set $fs_witchTab to "items">>
+							<</link>>
+						<</capture>>
+					<</if>>
+				</span>
+			</div>
+		<</for>>
+	<</if>>
+		<br>
+		<span class="gold">◆ 小药瓶</span>
+		<br>
+		<span class="fs-sub">消耗品，买下后可以直接在这里喝掉。</span>
+		<br>
+		<<if $fs_vialMsg>>
+			<br><span class="green"><<print $fs_vialMsg>></span><br>
+			<<set $fs_vialMsg to "">>
+		<</if>>
+		<br>
+		<<for _vk range finalStar.vialList>>
+			<<set _v to finalStar.vials[_vk]>>
+			<div class="fs-shop-item">
+				<span class="fs-shop-name"><<icon _v.icon>> <<print _v.name>> <span class="fs-sub">（身上 <<print finalStar.vialCount(_vk)>> 瓶）</span></span>
+				<span class="fs-shop-desc"><<print _v.desc>></span>
+				<span class="fs-shop-price">
+					<span class="gold">£<<print _v.price>></span>
+					<<if $money gte (_v.price * 100)>>
+						<<capture _vk>>
+							<<link [[ 买一瓶 |Witch Hut Shop]]>>
+								/* ⚠️ 这里不能写 _v.price：_v 是段落级临时变量、循环结束时等于最后一个药瓶，
+								   点击时才求值 → 买 £70 的药会按 £100 扣（探针抓到的真 bug）。
+								   _vk 被 capture 了，所以用它现取。 */
+								<<set $money -= finalStar.vials[_vk].price * 100>>
+								<<run finalStar.buyVial(_vk)>>
+								<<set $fs_witchTab to "items">>
+							<</link>>
+						<</capture>>
+					<<else>> <span class="red">（钱不够）</span> <</if>>
+					<<if finalStar.vialCount(_vk) gt 0>>
+						<<capture _vk>>
+							<<link [[ 喝掉一瓶 |Witch Hut Shop]]>>
+								<<set _res to finalStar.useVial(_vk)>>
+								<<set $fs_vialMsg to _res.msg + (_res.notes and _res.notes.length ? "（" + _res.notes.join("；") + "）" : "")>>
+								<<set $fs_witchTab to "items">>
+							<</link>>
+						<</capture>>
+					<</if>>
+				</span>
+			</div>
+		<</for>>
+<</if>>
+<br>
+<<link [[回到柜台|Witch Hut]]>><</link>>
+
+:: Witch Hut Gun
+<<set $outside to 0>><<set $location to "town">><<effects>>
+"弄丢了？"西蕾丝提娅这次是真的醒了。她坐直身体，眯着眼把你从头看到脚。
+<br><br>
+"枪是响尾蛇的东西。丢了就得再买一把——不过，规矩是规矩。"她伸手在柜台下摸索了一阵，把一枚刻着蛇形的小木牌推给你。
+<br><br>
+"拿着。以后你要买枪和子弹，我不拦你。"
+<br><br>
+<span class="green">西蕾丝提娅为你开放了枪械购买权限。</span>
+<<run finalStar.unlockGun()>>
+<br><br>
+<<link [[继续|Witch Hut Shop]]>><</link>>
+
+:: Witch Hut Seal
+<<set $outside to 0>><<set $location to "town">><<effects>>
+<<if $magicBook isnot 1>>
+	"我说了，"西蕾丝提娅闭着眼，"没有魔书，刻印贴在你脸上也没用。"
+	<br><br>
+	<<link [[回到柜台|Witch Hut]]>><</link>>
+<<else>>
+	她终于睁开眼，直起身子。
+	<br><br>
+	"把书拿出来。"
+	<br><br>
+	你把魔书放在柜台上。她伸手在上面按了一下——纸页无声地翻动，露出一片空白。
+	<br><br>
+	"要贴哪一枚？"
+	<br><br>
+	<<if $fsData.sealEquipped and $fsData.sealEquipped isnot "none">>
+		<span class="fs-sub">当前装配：<span class="teal"><<print finalStar.sealName($fsData.sealEquipped)>></span>（替换下来的刻印不会返还）</span>
+		<br><br>
+	<</if>>
+	<<set _owned to 0>>
+	<<for _sk range finalStar.sealList>>
+		<<set _s to finalStar.seals[_sk]>>
+		<<if finalStar.hasSeal(_sk)>>
+			<<set _owned++>>
+			<<capture _sk>>
+				<<set _label to "装配" + finalStar.seals[_sk].name + "刻印">>
+				<<link _label "Witch Hut Seal Done">>
+					<<run finalStar.equipSeal(_sk)>>
+				<</link>>
+			<</capture>>
+			<br>
+		<<else>>
+			<span class="fs-sub"><<icon _s.icon>> <<print _s.name>>刻印 —— <span class="grey">未拥有</span></span>
+			<br>
+		<</if>>
+	<</for>>
+	<<if _owned is 0>>
+		<br>
+		<span class="fs-sub">（你身上一枚刻印也没有。）</span>
+		<br>
+	<</if>>
+	<br>
+	<<link [[算了|Witch Hut]]>><</link>>
+<</if>>
+
+:: Witch Hut Seal Done
+<<set $outside to 0>><<set $location to "town">><<effects>>
+西蕾丝提娅把那张印着图案的羊皮纸按在书页上。纸面浮起一层金色的流沙，一层层渗进纸里，直到什么也看不见。
+<br><br>
+她收回手，撑着脑袋看你："好了。"
+<br><br>
+<span class="green">刻印已装配到魔书上。</span>
+<br><br>
+"还有什么事吗？"
+<br><br>
+<<link [[没有|Witch Hut]]>><</link>>
+
+:: Witch Hut Ask
+<<set $outside to 0>><<set $location to "town">><<effects>>
+<<if $fsData.witch.asked is undefined>><<set $fsData.witch.asked to []>><</if>>
+<<if $fsData.witch.asked.length is 0>>
+	"问吧。"她没有睁眼。
+	<br><br>
+<</if>>
+<<if !$fsData.witch.asked.includes("origin")>>
+	<<link [[为什么你们会出现在这里|Witch Hut Ask Origin]]>><</link>>
+	<br>
+<</if>>
+<<if !$fsData.witch.asked.includes("world")>>
+	<<link [[这个世界究竟怎么了|Witch Hut Ask World]]>><</link>>
+	<br>
+<</if>>
+<<if $fsData.witch.asked.includes("origin") or $fsData.witch.asked.includes("world")>>
+	<<link [[聊日常|Witch Hut Ask Daily]]>><</link>>
+	<br>
+<</if>>
+<<link [[没事了|Witch Hut]]>><</link>>
+
+:: Witch Hut Ask Origin
+<<set $outside to 0>><<set $location to "town">><<effects>>
+<<run $fsData.witch.asked.pushUnique("origin")>>
+西蕾丝提娅睁开眼。这次她的表情认真得有些陌生。
+<br><br>
+"这里出现了非常恐怖的异常。"她说，"不是怪物，也不是诅咒——是<span class="red">现实本身在被改写</span>。有些东西正在把这座镇子的因果拆开重写，今天发生的事，明天就会变成'从来没有发生过'。"
+<br><br>
+"我们是被派来稳定它的。组织里叫这个任务<span class="gold">『终星』</span>——因为如果最后一点光也熄了，就没有人能记得这里曾经有过什么。"
+<br><br>
+她顿了顿，声音低下去。
+<br><br>
+"这件事，别对任何人说。不是不信任你——是知道的人越多，异常扩散得越快。"
+<br><br>
+<span class="green">你似乎明白了什么，又似乎什么也没明白。</span>
+<br><br>
+<<link [[继续|Witch Hut Ask]]>><</link>>
+
+:: Witch Hut Ask World
+<<set $outside to 0>><<set $location to "town">><<effects>>
+<<run $fsData.witch.asked.pushUnique("world")>>
+她没有回答，只是伸出手，在你头上揉了两下。她的手很凉。
+<br><br>
+"这个世界怎么了？"她把问题重复了一遍，像是在念一句别人的台词，"还能怎么了——坏掉了，烂掉了，被人啃过一遍又一遍。"
+<br><br>
+"但只要我们还在一天。"她收回手，重新趴回柜台，"一切都会好起来的。"
+<br><br>
+她说这话时的语气很轻，轻得像是怕吵醒自己。
+<br><br>
+<<link [[继续|Witch Hut Ask]]>><</link>>
+
+:: Witch Hut Ask Daily
+<<set $outside to 0>><<set $location to "town">><<effects>>
+你试着不去想那些糟心的事——至少现在你还活着，还能看见太阳，还能看见熟悉的人。
+<br><br>
+你决定和西蕾丝提娅聊聊日常：今天的天气、麋鹿街的猫、镇上新开的赌场。
+<br><br>
+她没有理你。呼吸很均匀。
+<br><br>
+<span class="fs-sub">（……睡得真快。）</span>
+<br><br>
+<<link [[回到柜台|Witch Hut]]>><</link>>

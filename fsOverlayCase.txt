@@ -1,0 +1,4 @@
+<<switch _key>>
+			<<case "finalStarPanel">>
+				<<replace #customOverlayTitle>><<fs_title_panel>><</replace>>
+				<<replace #customOverlayContent>><<fs_panel_settings>><</replace>>

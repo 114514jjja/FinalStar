@@ -1,0 +1,8 @@
+<<set _robin to statusCheck("Robin")>>
+<<if $noteGivenBailey is 1 and $baileyCasinoIntro is 1 and $baileyNoteDay isnot (Time.year + "-" + Time.month + "-" + Time.monthDay) and $magicBook isnot 1 and $magicBookLost isnot 1>>
+	<br><br>
+	<span class="blue">大厅角落的书架有些异样——靠墙的那一格，仿佛比昨天多出了一道缝隙。</span>
+	<br>
+	<<investigateicon>><<link [[调查 (0:05)|Magic Book Investigate]]>><<pass 5>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,11 @@
+<<mathsWhitneyAttendChance>>
+<<if $jiusiMeet is 1 and $jiusiProtect is 1 and $NPCNameList.includes("玖肆") and $NPCName[$NPCNameList.indexOf("玖肆")].love gte 50 and $NPCName[$NPCNameList.indexOf("玖肆")].state is "active">>
+	<<set _jiusiInClass to 1>>
+	你注意到教室后排多了一个白色长发的身影——玖肆穿着一身校服，正低头翻着课本，假装自己不是全教室最显眼的人。
+	<br><br>
+	<<if $daily.jiusiMathsSave isnot 1 and random(1, 100) lte 40>>
+		<<set $daily.jiusiMathsSave to 1>>
+		<<link [[有人偷偷绕到了你身后|Maths Bully Jiusi Stop]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

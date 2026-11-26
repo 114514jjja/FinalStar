@@ -1,0 +1,1 @@
+T.otherNPCs = V.NPCName.filter(npc => !T.importantNpcOrder.includes(npc.nam) && !T.specialNPCs.includes(npc.nam) && npc.state !== "dead");

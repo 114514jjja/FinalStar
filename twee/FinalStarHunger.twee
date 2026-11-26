@@ -1,0 +1,40 @@
+/* 终星 —— 饥饿归零：饿晕与三个面包
+
+   用户口述的规格（照此写，不自创设定）：
+     饥饿掉到 0 → 显示玩家饿晕了过去 → 再次睁眼 → 莫名其妙出现了三个面包
+     → 随后背包里多出三个面包。
+   段落一律放独立文件：本项目踩过「`:: 段落名` 把 [widget] 段落切开」的坑。
+   ============================================================ */
+
+:: FS Hunger Faint
+<<set _link to true>>
+<<set $outside to 0>>
+肚子里的空响变得很响，响到最后连声音都没有了。
+<br><br>
+你想扶住墙，手却先一步没了力气。视野从边缘开始发黑，像有人慢慢把灯拧小。
+<br><br>
+<span class="red">你饿晕了过去。</span>
+<br><br>
+<<link [[……|FS Hunger Wake]]>><</link>>
+
+:: FS Hunger Wake
+<<set _link to true>>
+<<set $outside to 0>>
+你是被自己胃里的声音吵醒的。
+<br><br>
+光线回来了，墙壁还是那面墙。你撑着坐起来，手边却多了点东西——
+<br><br>
+<span class="gold">三个面包。</span>
+<br><br>
+油纸还带着温度，像是刚出炉不久。四下没有人。窗关着，门也关着。
+<br><br>
+你盯着它们看了很久，最后决定先不去想这件事。
+<br><br>
+<<run finalStar.hungerFaintBread()>>
+<span class="teal">背包里多了 3 个面包。</span>
+<br><br>
+/* 这里**故意不写** <<endevent>>：本段落不是「事件」，是被时间钩子强行跳进来的。
+   <<endevent>> 会走 <<endnpc>> → <<clearnpc>> → Object.keys($per_npc)，
+   一旦该字段缺失就抛 TypeError，**并连带中断这次链接跳转**（玩家点了没反应）——
+   验证在缺少 $per_npc 的存档里点「站起来」会卡在原地。 */
+<<link [[站起来|Bedroom]]>><</link>>

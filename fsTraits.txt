@@ -1,0 +1,18 @@
+<<set _traitLists to [
+		{
+			title: "终星",
+			traits: [
+				{
+					name: "见证者",
+					colour: "gold",
+					has: $backgroundTraits.includes("见证者"),
+					text: "追随终星最后光芒，希望永远存在。你的压力、疲劳、创伤与疼痛会随时间流逝而消减。"
+				},
+				{
+					name: "窥视真相",
+					colour: "red",
+					has: $backgroundTraits.includes("窥视真相"),
+					text: "你看见过世界外面那只眼睛，也听见了档案写下你名字的声音。遭遇战里落下的疼痛变轻了——但每天夜里 23:00，那道视线会回来。"
+				}
+			]
+		},

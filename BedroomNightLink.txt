@@ -1,0 +1,12 @@
+<<home_effects>>
+<<if $noteHidden is 1 and $jiusiMeet isnot 1 and Time.hour is 23 and Time.minute lte 15>>
+	<br>
+	<span class="purple">窗外似乎有什么动静。</span>
+	<br>
+	<<link [[查看窗口 (0:01)|Bedroom Night Visitor]]>><<pass 1>><</link>>
+	<br>
+<<elseif $noteHidden is 1 and $jiusiMeet isnot 1 and Time.hour is 22 and Time.minute gte 45>>
+	<br>
+	<span class="purple">你感觉今晚的夜色里藏着什么。快到 23:00 了，最好待在家里。</span>
+	<br>
+<</if>>

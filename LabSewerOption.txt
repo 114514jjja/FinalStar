@@ -1,0 +1,8 @@
+<<destination>>
+<<if finalStar.labOpened()>>
+	<br><<icon "finalstar/lab-door.png">><span class="teal">检修井口内侧的砖缝里，那道暗门虚掩着。</span><br>
+	<<link [[推开暗门|FS Lab Inside]]>><</link>>
+<<elseif finalStar.hasLabKey()>>
+	<br><<icon "finalstar/lab-door.png">><span class="gold">你突然发现某一处地方有一个钥匙孔——就在检修井口内侧的砖缝里。</span><br>
+	<<link [[？？？|FS Lab Unlock]]>><</link>>
+<</if>>

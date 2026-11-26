@@ -1,0 +1,560 @@
+/* FinalStar 样式：设置面板 / 战斗物资面板 / 地下洞穴 / 魔女小屋 */
+/* 图标均为 32x32 像素图，置于 img/misc/icon/finalstar/ */
+
+/* ===== 侧边栏设置按钮：白框 + 文字（与作弊按钮同一样式） ===== */
+.fs_sidebar_btn {
+	width: 100%;
+	min-height: 24px;
+	font-size: 0.95em;
+	cursor: pointer;
+}
+#mobileStats > .fs_sidebar_btn { width: 100%; }
+
+/* ===== 地点入口（挂在正文下方） ===== */
+.fs-loc-links { margin-top: 0.5rem; }
+.fs-loc-links a { cursor: pointer; }
+
+/* ===== 设置面板 ===== */
+.fs-panel { padding: 0.5rem; }
+.fs-panel h3 { color: var(--gold); margin-bottom: 0.35rem; }
+.fs-switch-grid { display: grid; grid-template-columns: 1fr; gap: 0.25rem; }
+.fs-switch-item {
+	display: flex; align-items: center; gap: 0.4rem;
+	padding: 4px 6px; border: 1px solid var(--300); border-radius: 4px;
+}
+.fs-switch-item img.icon { vertical-align: middle; }
+.fs-switch-item label { flex: 1; cursor: pointer; }
+.fs-info-btn {
+	display: inline-flex; align-items: center; gap: 0.35rem;
+	margin: 0.25rem 0.25rem 0 0; padding: 4px 10px;
+	border: 1px solid var(--gold); border-radius: 4px;
+	background: rgba(212, 160, 23, 0.12); cursor: pointer;
+}
+.fs-info-btn:hover { background: rgba(212, 160, 23, 0.28); }
+.fs-info-body { padding: 0.5rem; border-left: 2px solid var(--gold); margin: 0.35rem 0 0.6rem 0; }
+.fs-tag { color: var(--gold); font-weight: bold; }
+
+/* ===== 战斗物资面板（折叠表格） ===== */
+.fs-combat-wrap { margin: 0.5rem 0; }
+.fs-combat-table { width: 100%; border-collapse: collapse; font-size: 0.92em; }
+.fs-combat-table th,
+.fs-combat-table td {
+	border: 1px solid var(--300);
+	padding: 2px 6px;
+	text-align: left;
+	vertical-align: middle;
+}
+.fs-combat-table th { color: var(--gold); font-weight: normal; }
+.fs-combat-table td.fs-num { text-align: right; }
+.fs-combat-actions { margin-top: 0.35rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.fs-combat-actions .fs-btn {
+	border: 1px solid var(--300); border-radius: 4px;
+	padding: 3px 9px; cursor: pointer; background: rgba(255, 255, 255, 0.04);
+}
+.fs-combat-actions .fs-btn:hover { border-color: var(--gold); color: var(--gold); }
+.fs-combat-actions .fs-btn.fs-active { border-color: var(--gold); color: var(--gold); }
+.fs-sub { color: var(--500); font-size: 0.85em; }
+
+/* ===== 背包 ===== */
+.fs-bag-list { margin: 0.4rem 0; }
+.fs-bag-row {
+	display: flex; align-items: center; justify-content: space-between;
+	gap: 0.6rem; padding: 2px 5px; border-bottom: 1px solid var(--300);
+}
+.fs-bag-row:hover { background: rgba(255, 255, 255, 0.05); }
+.fs-bag-name { flex: 1 1 auto; }
+.fs-bag-eat { flex: 0 0 auto; cursor: pointer; text-decoration: underline; }
+.fs-bag-eat:hover { color: var(--gold); }
+.fs-bag-empty { padding: 3px 0; }
+.fs-combat-log { margin-top: 0.3rem; padding: 3px 6px; border-left: 2px solid var(--gold); font-size: 0.9em; }
+.fs-combat-actions .fs-btn.fs-disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ===== 地下洞穴 ===== */
+.fs-cave-wrap { border: 1px solid var(--300); border-radius: 4px; padding: 0.5rem; margin: 0.4rem 0; }
+.fs-cave-depth { color: var(--gold); letter-spacing: 2px; }
+.fs-cave-dark { color: #6a6a82; font-style: italic; }
+.fs-cave-env { color: #a9a2bd; font-style: italic; }
+.fs-corpse-wrap { border: 1px solid var(--300); border-radius: 4px; padding: 0.5rem; margin: 0.4rem 0; }
+.fs-chance { color: var(--gold); }
+.fs-chance-bad { color: #c0554f; }
+.fs-chance-good { color: #6fae6f; }
+
+/* ===== 魔女小屋 ===== */
+.fs-shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 0.4rem; }
+.fs-shop-item {
+	border: 1px solid var(--300); border-radius: 4px; padding: 5px 7px;
+	display: flex; flex-direction: column; gap: 2px;
+}
+.fs-shop-item .fs-shop-name { color: var(--gold); }
+.fs-shop-item .fs-shop-desc { font-size: 0.85em; color: var(--600); }
+.fs-shop-item .fs-shop-price { font-size: 0.85em; }
+.fs-celeste { color: #efe6d0; }
+
+.fs-cast-result { margin-top: 0.4rem; padding: 4px 6px; border-left: 2px solid var(--gold); }
+
+/* 侧栏「模组设置」按钮：单独成行、带星标装饰 */
+.fs_sidebar_row { display: block; width: 100%; margin: 4px 0 2px 0; }
+.fs_sidebar_row .fs_sidebar_btn { width: 100%; }
+
+/* 荆棘藤条 + 星星边框（侧栏「⭐ 模组设置」入口，独占一行） */
+.fs_sidebar_row {
+	display: block; width: 100%; margin: 6px 0 2px 0; padding: 5px 8px; position: relative;
+	border: 1px solid var(--gold, #d4af37); border-radius: 6px;
+	background:
+		radial-gradient(circle at 3px 3px, rgba(212,175,55,.5) 1px, transparent 1.6px) 0 0 / 7px 7px,
+		repeating-linear-gradient(115deg, rgba(212,175,55,.16) 0 2px, transparent 2px 9px),
+		linear-gradient(180deg, rgba(24,18,28,.55), rgba(16,12,20,.8));
+	box-shadow: inset 0 0 7px rgba(212,175,55,.22);
+}
+.fs_sidebar_row::before, .fs_sidebar_row::after {
+	content: '✦'; position: absolute; top: -8px; font-size: 11px; line-height: 1;
+	color: var(--gold, #d4af37); text-shadow: 0 0 4px rgba(212,175,55,.7);
+}
+.fs_sidebar_row::before { left: 5px; }
+.fs_sidebar_row::after { right: 5px; }
+.fs_sidebar_row .fs_sidebar_btn { width: 100%; }
+#mobileStats > .fs_sidebar_row { width: 100%; }
+
+/* ============================================================
+   控制台 —— 「故障 / 被篡改感」主题
+   设计意图：这不是一个你该看到的界面。它像一段被人改过的日志：
+   扫描线、色散重影、被涂黑的字符、以及一个不是"游戏"在说话的旁白。
+   全部用纯 CSS（不引 JS），并尊重 prefers-reduced-motion。
+   ============================================================ */
+.fs-console {
+	position: relative;
+	background-color: #07080a;
+	background-image:
+		/* 扫描线 */
+		repeating-linear-gradient(to bottom, rgba(255,255,255,.035) 0 1px, transparent 1px 3px),
+		/* 若有若无的干涉条纹（水平错位感） */
+		repeating-linear-gradient(to bottom, rgba(255,40,60,.045) 0 2px, transparent 2px 97px),
+		repeating-linear-gradient(to bottom, rgba(40,220,255,.035) 0 2px, transparent 2px 131px),
+		/* 四角压暗，像老屏幕 */
+		radial-gradient(ellipse 120% 90% at 50% 45%, transparent 45%, rgba(0,0,0,.55) 100%);
+}
+/* 顶部一条"信号故障"的亮带 */
+.fs-console:before {
+	content: '';
+	position: absolute; left: 0; right: 0; top: 0; height: 2px;
+	background: linear-gradient(90deg, transparent, rgba(90,255,190,.75), rgba(255,60,90,.55), transparent);
+	animation: fs-glitch-bar 7s steps(1) infinite;
+}
+@keyframes fs-glitch-bar {
+	0%, 92% { opacity: .0; }
+	92.5% { opacity: .9; transform: translateX(-8%); }
+	93.5% { opacity: .3; transform: translateX(12%); }
+	94.5% { opacity: .85; transform: translateX(-3%); }
+	96% { opacity: 0; }
+}
+.fs-console .fs-info-body {
+	background: rgba(6,10,9,.72);
+	border-left-color: rgba(90,255,190,.45);
+	font-family: ui-monospace, "Cascadia Mono", Consolas, "Noto Sans Mono CJK SC", monospace;
+	letter-spacing: .02em;
+}
+/* 折叠分组：像一条条被改过的日志行 */
+.fs-console-group { margin: .3rem 0; border-left: 2px solid rgba(90,255,190,.35); padding-left: .4rem; }
+.fs-console-group > summary {
+	cursor: pointer; color: #8ff0c0; padding: .25rem 0;
+	text-shadow: 1px 0 rgba(255,60,90,.35), -1px 0 rgba(60,200,255,.30);   /* 色散重影 */
+}
+.fs-console-group > summary:hover { color: #eafff5; }
+.fs-console-group > div { padding: .3rem .2rem; }
+.fs-console-group a { margin-right: .45rem; }
+.fs-console-group > summary { list-style: none; }
+.fs-console-group > summary::-webkit-details-marker { display: none; }
+.fs-console-group > summary:before { content: '> '; color: #5affbe; }
+.fs-console-group[open] > summary:before { content: 'v '; }
+
+/* 控制台入口：终端条目样式的按钮 */
+.fs-console a, .fs-console-group a {
+	display: inline-block; margin: .16rem .32rem .16rem 0; padding: .14rem .5rem;
+	border: 1px solid rgba(90,255,190,.28); border-radius: 2px;
+	background: rgba(6,14,12,.85); color: #cfe9e0 !important; text-decoration: none !important;
+	font-size: .9em; line-height: 1.5;
+}
+.fs-console a:hover, .fs-console-group a:hover {
+	color: #0a0f0d !important; background: #5affbe; border-color: #5affbe;
+	box-shadow: 0 0 10px rgba(90,255,190,.55);
+}
+/* ⚠️ 这里原来做过「被涂黑的段落」：background-clip:text + 62% 处转透明的渐变。
+   问题记录（）：控制台里「西蕾丝提娅」显示成「西蕾丝」+半个字，而且很多地方都只显示一半。
+   根因就是它 —— color:transparent 之后，每个 .fs-tag 文字的后 38% 被涂成透明：
+   名字/标题越长切掉越多（验证 西蕾丝提娅 = 宽 90px，62% = 55.8px ≈ 只显示 3.1 个字；
+   ◆ 刻印遭遇（自动装备魔法书 + 该刻印）宽 260px，后 99px 全没了）。
+   永远不要再写成 background-clip:text + transparent 的任何变体：
+   要「被涂黑」就用数据里真实的 █ 字符（残缺版本来就是这么写的），别用 CSS 切字形。
+   回归断言：开发检查脚本 会检查控制台里不存在被涂黑的 .fs-tag。 */
+.fs-console .fs-tag {
+	font-weight: 700; letter-spacing: .04em;
+	color: #8ff0c0; background: none; text-shadow: none;
+}
+.fs-console .fs-sub { color: #7d9a91; }
+/* 搜索框也做成终端风 */
+.fs-console input#fs-cheat-search {
+	background: #060d0b; color: #cfe9e0; border: 1px solid rgba(90,255,190,.35);
+	font-family: inherit; padding: .18rem .4rem; border-radius: 2px;
+}
+.fs-console input#fs-cheat-search:focus { outline: none; border-color: #5affbe; box-shadow: 0 0 8px rgba(90,255,190,.4); }
+/* 长列表滚动区 */
+.fs-cheat-scroll { max-height: 22em; overflow-y: auto; padding-right: .3rem; }
+.fs-cheat-scroll::-webkit-scrollbar { width: 8px; }
+.fs-cheat-scroll::-webkit-scrollbar-thumb { background: rgba(90,255,190,.35); border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) {
+	.fs-console:before { animation: none; opacity: 0; }
+}
+
+/* 原版进食挂钩追加的旁白（fs-food.js 插在正文末尾） */
+.fs-food-note { color: #cfd8d2; }
+
+/* ---- 控制台：改成「原版作弊模式」那种扁平分区（fix_console_vanilla.cjs） ----
+   原版 cheats.twee 的一个子面板 = 一长条扁平分区 + <div class="settingsGrid"> 网格 + <hr> 分隔，
+   不用 <details> 折叠。这里照那个结构重排，只换外壳、不动链接。
+   注意：原版 settingsGrid 的样式是编译进 HTML 的，在 .css 里查不到，
+        所以这里给 .fs-console-grid 自己写网格，不依赖它。 */
+.fs-console-sec { display: block; margin: .5rem 0 .2rem; border-left: none !important; padding-left: 0 !important; }
+.fs-console-h {
+	font-weight: 700; letter-spacing: .06em; color: #8ff0c0; margin: .1rem 0 .3rem;
+	text-shadow: 1px 0 rgba(255,60,90,.28), -1px 0 rgba(60,200,255,.24);
+}
+.fs-console-grid {
+	display: grid; grid-template-columns: repeat(auto-fill, minmax(12.5em, 1fr));
+	gap: .26rem; align-items: stretch;
+}
+.fs-console-grid > a {
+	display: block; margin: 0 !important; text-align: center;
+	/* 同一类毛病：地点/剧情直达里有很长的中文名，原来 nowrap + ellipsis 会被省略号吃掉后半截。
+	   允许换行，宁可占两行也别切字。 */
+	white-space: normal; overflow-wrap: anywhere; line-height: 1.25;
+}
+.fs-console-grid > br, .fs-console-grid > .fs-tag, .fs-console-grid > .fs-sub, .fs-console-grid > div { grid-column: 1 / -1; }
+.fs-console-hr { border: none; border-top: 1px solid rgba(90,255,190,.22); margin: .55rem 0; }
+/* 标题后面那个空的 <br> 在网格里没用，隐藏掉免得撑出一行 */
+.fs-console-sec .fs-console-grid > br:only-child { display: none; }
+
+/* ---- 控制台子标签行（照原版 titleCheats 的「标签行 + 可替换容器」形态） ---- */
+.fs-console-tabs {
+	display: flex; flex-wrap: wrap; gap: .22rem;
+	margin: .25rem 0 .5rem; padding-bottom: .3rem;
+	border-bottom: 1px solid rgba(90,255,190,.28);
+}
+.fs-console-tabs .fs-tab {
+	font: inherit; font-size: .86em; line-height: 1.4;
+	padding: .2rem .6rem; cursor: pointer;
+	border: 1px solid rgba(90,255,190,.3); border-radius: 2px;
+	background: rgba(8,18,16,.85); color: #b9d8d0 !important;
+	/* 问题记录：手机端部分分类文字太长被截断。允许换行、允许被压缩，别用 nowrap/ellipsis 硬切。 */
+	white-space: normal; word-break: break-word; overflow-wrap: anywhere;
+	min-width: 0; max-width: 100%;
+	text-align: center;
+}
+.fs-console-tabs .fs-tab:hover { color: #eafff5 !important; border-color: rgba(90,255,190,.6); }
+.fs-console-tabs .fs-tab.fs-tab-on {
+	background: #5affbe; border-color: #5affbe; color: #06110d !important;
+	box-shadow: 0 0 10px rgba(90,255,190,.5);
+}
+/* 窄屏（手机）：标签缩小、最多两列，保证每个分类都能看全 */
+@media (max-width: 640px) {
+	.fs-console-tabs { gap: .18rem; }
+	.fs-console-tabs .fs-tab {
+		font-size: .78em; padding: .18rem .42rem;
+		flex: 1 1 calc(50% - .2rem);      /* 每行两个，宽度均分 */
+		min-width: 0;
+	}
+	/* 分区标题与说明在窄屏也别溢出 */
+	.fs-console-h, .fs-console-note, .fs-sub { overflow-wrap: anywhere; }
+}
+
+/* ---- 网格按钮：朝原版作弊面板那种「等宽小按钮」靠 ---- */
+.fs-console-grid > a {
+	padding: .28rem .5rem !important;
+	border-radius: 2px !important;
+	background: linear-gradient(rgba(22,38,34,.92), rgba(7,15,13,.92)) !important;
+	box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 1px 0 rgba(0,0,0,.35);
+	transition: background .12s, color .12s, box-shadow .12s;
+}
+.fs-console-grid > a:active { transform: translateY(1px); box-shadow: inset 0 1px 2px rgba(0,0,0,.5); }
+.fs-console-grid > a:focus-visible { outline: 2px solid rgba(90,255,190,.6); outline-offset: 1px; }
+
+/* ---- 原版调试菜单条目（<<debugGenerateDivs>> 渲染出来的）在控制台里的样子 ----
+   原版条目结构：<div id="Group-N"><a>名字</a>（+收藏图标）</div>，没有自己的 class，所以要我们兜底。 */
+.fs-console-note { margin: .1rem 0 .35rem; }
+.fs-debug-filter input {
+	width: 70%; box-sizing: border-box; font: inherit; font-size: .84em;
+	padding: .18rem .4rem; margin: .1rem 0 .35rem;
+	background: #060d0b; color: #cfe9e0;
+	border: 1px solid rgba(90,255,190,.35); border-radius: 2px;
+}
+.fs-debug-filter input:focus { outline: none; border-color: #5affbe; box-shadow: 0 0 8px rgba(90,255,190,.4); }
+.fs-debug-list { max-height: 26em; overflow-y: auto; padding-right: .3rem; }
+.fs-debug-list::-webkit-scrollbar { width: 8px; }
+.fs-debug-list::-webkit-scrollbar-thumb { background: rgba(90,255,190,.35); border-radius: 4px; }
+.fs-debug-list > div { display: block; margin: .12rem 0; }
+.fs-debug-list a {
+	display: inline-block; padding: .12rem .45rem; cursor: pointer;
+	border: 1px solid rgba(90,255,190,.22); border-radius: 2px;
+	background: rgba(8,16,14,.8); color: #cfe9e0 !important; text-decoration: none !important;
+	font-size: .88em;
+}
+.fs-debug-list a:hover { color: #06110d !important; background: #5affbe; border-color: #5affbe; }
+
+
+/* ============================================================
+   响尾蛇系统：控制台的"第一次载入"动画 + 登录门 + 94 彩蛋
+   （fs-rattlesnake.js / gen_rattlesnake_icon.cjs）
+   ============================================================ */
+/* ============ 响尾蛇开屏：铺满整个屏幕 ============
+   设计上「这串循环代码动画要充斥整个屏幕」。
+   用 position:fixed + inset:0 盖住整页（含正文与侧栏），z-index 取 9000（SugarCube 的 overlay 一般在 100 上下）。
+   ⚠️ 如果哪天发现它没铺满，先量 `#fs-rs-stage` 的 getBoundingClientRect 是否等于视口 ——
+   祖先元素一旦有 transform / filter / will-change / contain，fixed 就会改以那个祖先为包含块。
+   （探针里已经有这条断言，别靠眼睛猜。） */
+.fs-rs-stage {
+	text-align: center;
+	position: fixed; inset: 0; z-index: 9000;
+	width: 100vw; height: 100vh; max-width: none; min-height: 0;
+	display: flex; flex-direction: column;
+	background: radial-gradient(125% 95% at 50% 38%, rgba(6,17,15,.985) 0%, rgba(2,6,6,.995) 62%, #000 100%);
+	box-sizing: border-box; padding: .7rem 1.1rem .9rem;
+	overflow: hidden;
+}
+.fs-rs-brand { flex: 0 0 auto; margin: .15rem 0 .35rem; }
+.fs-rs-eye {
+	width: 88px; height: 88px;
+	/* 图标现在是 256×256 的抗锯齿图：不要再 pixelated，否则缩到 88px 全是马赛克 */
+	image-rendering: auto;
+	filter: drop-shadow(0 0 8px rgba(255,190,90,.45)) drop-shadow(0 0 18px rgba(90,255,190,.30));
+	animation: fs-rs-eye 3.2s ease-in-out infinite;
+}
+@keyframes fs-rs-eye { 0%, 100% { opacity: .78; } 50% { opacity: 1; } }
+.fs-rs-eye-sm { width: 20px; height: 20px; image-rendering: auto; vertical-align: -3px; }
+.fs-rs-title {
+	font-size: 1.5em; letter-spacing: .35em; color: #d9fff2; margin-top: .35rem;
+	text-shadow: 1.5px 0 rgba(255,60,90,.5), -1.5px 0 rgba(60,200,255,.45);
+}
+.fs-rs-sub { color: #7d9a91; letter-spacing: .2em; font-size: .92em; margin-top: .2rem; }
+/* 滚动中的代码：吃掉剩余的全部高度，铺满屏幕 */
+.fs-rs-code {
+	flex: 1 1 auto; min-height: 0; width: 100%; max-width: none; height: auto;
+	margin: .45rem 0; overflow: hidden; text-align: left;
+	background: rgba(3,8,7,.82); border: 1px solid rgba(90,255,190,.22); border-radius: 2px;
+	font-family: ui-monospace, Consolas, monospace; font-size: .84em; line-height: 1.42;
+	color: #6fd8b4; padding: .45rem .6rem; white-space: pre-wrap; word-break: break-all;
+}
+.fs-rs-code-quiet { opacity: .38; }
+/* 行号栏 + 循环分隔注释 */
+.fs-rs-ln { color: #2f6a5c; margin-right: .7em; -webkit-user-select: none; user-select: none; }
+.fs-rs-cmt { color: #ffb347; letter-spacing: .06em; }
+/* 错位小字 */
+.fs-rs-glitch { flex: 0 0 auto; min-height: 4.6em; margin-top: .3rem; }
+.fs-rs-line { font-size: .95em; letter-spacing: .18em; margin: .16rem 0; animation: fs-rs-glitch 2.4s steps(1) infinite; }
+@keyframes fs-rs-glitch {
+	0%, 88% { transform: translateX(0); }
+	89% { transform: translateX(-2px); }
+	90% { transform: translateX(2px); }
+	91% { transform: translateX(-1px); }
+	92% { transform: translateX(0); }
+}
+.fs-rs-w { color: #f2fbff; text-shadow: 1px 0 rgba(255,60,90,.45), -1px 0 rgba(60,200,255,.4); }
+.fs-rs-r { color: #ff5a6e; text-shadow: 1px 0 rgba(255,255,255,.35), -1px 0 rgba(255,0,40,.5); }
+.fs-rs-line.dim { opacity: .55; font-size: .88em; }
+.fs-rs-red { color: #ff5a6e; }
+.fs-rs-dim { color: #7d9a91; }
+.fs-rs-actions { margin-top: .5rem; }
+.fs-rs-btn { margin: 0 .45rem !important; min-width: 6.5em; }
+.fs-rs-btn-exit { opacity: .8; }
+.fs-rs-skip { margin-top: .35rem; font-size: .8em; opacity: .6; }
+.fs-rs-skip a { color: #7d9a91 !important; }
+/* 94 彩蛋 */
+.fs-rs-egg { text-align: left; }
+.fs-rs-log {
+	font-family: ui-monospace, Consolas, monospace; font-size: .84em; line-height: 1.7;
+	color: #9fe8cf; background: rgba(4,9,8,.7); border-left: 2px solid rgba(255,90,110,.5);
+	padding: .5rem .6rem; margin: .4rem 0;
+}
+.fs-rs-hr { border: none; border-top: 1px dashed rgba(90,255,190,.3); margin: .7rem 0; }
+.fs-rs-words { line-height: 1.85; color: #dfeee9; }
+.fs-rs-sig { color: #7d9a91; margin-bottom: .4rem; letter-spacing: .08em; }
+
+
+/* ---- 终星设置开关：各自独占一行（settingsToggleItem 是原版类，原版一行排好几个） ---- */
+.settingsToggleItem.fs-toggle-row {
+	display: block;
+	width: 100%;
+	clear: both;
+	float: none;
+	margin: .25rem 0;
+}
+.settingsToggleItem.fs-toggle-row > label { display: inline-block; }
+
+/* ===== 长线剧情「莫伦斯」演出样式 ===== */
+/* 回头那一下：满屏 +疼痛 + 屏幕抖动（用户  规格） */
+.fs-mor-storm { position: fixed; inset: 0; z-index: 9500; pointer-events: none; overflow: hidden; }
+.fs-mor-pain {
+	color: #ff3b30; font-weight: 700; white-space: nowrap;
+	text-shadow: 0 0 6px rgba(255, 0, 0, .55), 0 0 2px rgba(255, 255, 255, .35);
+}
+@keyframes fs-mor-shake {
+	0%, 100% { transform: translate(0, 0); }
+	25% { transform: translate(-3px, 2px); }
+	50% { transform: translate(3px, -2px); }
+	75% { transform: translate(-2px, -3px); }
+}
+body.fs-mor-shake { animation: fs-mor-shake .1s infinite; }
+/* 单人版：白色的字斜着插进画面 */
+.fs-mor-slip {
+	position: fixed; left: 10%; top: 36%; z-index: 9600;
+	color: #fff; font-weight: 700; font-size: 1.15em;
+	transform: rotate(-14deg); letter-spacing: .04em;
+	text-shadow: 0 0 8px rgba(255, 255, 255, .65), 0 0 2px #fff;
+	pointer-events: none; max-width: 76%;
+}
+
+/* ===== 长线剧情「莫伦斯」城市地图 ===== */
+.fs-mor-map {
+	display: block; margin: .5rem auto .2rem;
+	width: 100%; max-width: 360px; height: auto;
+	border: 1px solid rgba(90, 255, 190, .28); border-radius: 3px;
+	background: #121a1b;
+}
+.fs-mor-legend { color: #7d9a91; font-size: .82em; line-height: 1.5; text-align: center; }
+
+/* .fs-mor-map 里的 <<icon>> 要撑满容器（DoL 的 .icon 自带固定尺寸） */
+.fs-mor-map img { width: 100%; height: auto; display: block; }
+.fs-mor-map { padding: .2rem; }
+
+/* ===== 莫伦斯新城地图（0.28）===== */
+.fs-city { position: relative; max-width: 440px; margin: 10px auto 4px; }
+.fs-city > img.icon { width: 100% !important; height: auto !important; display: block; border: 1px solid #3b414c; border-radius: 6px; }
+.fs-city-hit { position: absolute; display: block; border-radius: 6px; }
+.fs-city-hit:hover, .fs-city-hit:focus { background: rgba(212, 178, 92, .14); outline: 1px solid rgba(212, 178, 92, .35); }
+.fs-city-hit:active { background: rgba(212, 178, 92, .24); }
+.fs-city-road { border-radius: 10px; }
+.fs-city-pin { position: absolute; transform: translate(-50%, -50%); pointer-events: none; width: 36px; height: 36px; display: block; }
+.fs-city-pin img { width: 36px !important; height: 36px !important; filter: drop-shadow(0 1px 2px #000); }
+.fs-city-legend { margin-top: 6px; text-align: center; color: #c9c3b2; font-size: .9em; line-height: 1.5; }
+@media (max-width: 380px) {
+  .fs-city-pin { width: 28px; height: 28px; }
+  .fs-city-pin img { width: 28px !important; height: 28px !important; }
+}
+
+
+/* 第五天之后：红月天气（只在莫伦斯城内） */
+body.fs-mor-red #passage { background: rgba(60, 0, 0, .18); }
+body.fs-mor-red #passage-content { text-shadow: 0 0 8px rgba(190, 40, 40, .22); }
+body.fs-mor-red .fs-city-map-img, body.fs-mor-red .fs-city > img.icon { filter: hue-rotate(-18deg) saturate(.8) brightness(.9); }
+
+/* ===== 魔书遭遇战（卡牌战斗） ===== */
+.fs-duel { margin: 8px 0; }
+.fs-duel-foe { border: 1px solid #5a3a3a; border-radius: 6px; padding: 6px 8px; background: rgba(90, 30, 30, .18); }
+.fs-duel-bar { display: flex; align-items: center; gap: 8px; margin: 6px 0; font-size: .9em; }
+.fs-duel-track { flex: 1; height: 10px; background: #222; border: 1px solid #444; border-radius: 5px; overflow: hidden; }
+.fs-duel-fill { height: 100%; transition: width .25s; }
+.fs-duel-foe-fill { background: #b23a3a; }
+.fs-duel-pain-fill { background: #c98a2a; }
+.fs-duel-log { margin: 8px 0; padding: 6px 8px; border-left: 2px solid #555; background: rgba(255, 255, 255, .03); font-size: .9em; line-height: 1.6; max-height: 9em; overflow-y: auto; }
+.fs-duel-hand { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.fs-duel-card { flex: 1 1 30%; min-width: 96px; border: 1px solid #6a5a3a; border-radius: 8px; padding: 8px; background: linear-gradient(180deg, rgba(60, 50, 30, .55), rgba(30, 26, 20, .75)); cursor: pointer; user-select: none; }
+.fs-duel-card:active { transform: scale(.97); }
+.fs-duel-card-name { color: #e0c070; font-weight: 600; margin-bottom: 4px; }
+.fs-duel-card-text { font-size: .82em; line-height: 1.45; color: #cfc8b8; }
+.fs-duel-end { margin-top: 10px; padding: 8px 22px; border: 1px solid #8a6a3a; border-radius: 6px; background: rgba(80, 60, 30, .5); color: #e8d8b0; font-size: 1em; }
+
+/* 服装店：原版式的行（图标 + 名称 + 已拥有 + 价格） */
+.fs-shop-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+.fs-shop-row .icon { width: 28px; height: 28px; }
+.fs-shop-search { width: 55%; }
+
+/* 服装店：原版式分类图标网格 */
+.fs-shop-cats { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
+.fs-shop-cat { display: flex; flex-direction: column; align-items: center; padding: 6px; border: 1px solid transparent; border-radius: 8px; min-width: 64px; }
+.fs-shop-cat img { width: 36px; height: 36px; }
+.fs-shop-cat.sel { border-color: #c9a75a; background: rgba(200, 160, 70, .12); }
+
+/* 地图上的「你在这里」标记 */
+.fs-city-here { position: absolute; transform: translate(-50%, -50%) translateY(-26px); background: rgba(20, 16, 10, .85); border: 1px solid #d8b45a; color: #f0d890; font-size: 11px; padding: 2px 6px; border-radius: 8px; white-space: nowrap; pointer-events: none; box-shadow: 0 0 6px rgba(216, 180, 90, .5); }
+.fs-city-here::after { content: ''; position: absolute; left: 50%; top: 100%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: #d8b45a; }
+
+/* 异变后：地图上的地点图标也跟着变暗发红，不再显得完好 */
+body.fs-mor-red .fs-city-pin img { filter: sepia(1) hue-rotate(-28deg) saturate(.9) brightness(.55) drop-shadow(0 0 4px rgba(190, 40, 30, .55)); opacity: .9; }
+body.fs-mor-red .fs-city-here { border-color: #b8472e; color: #f0b0a0; }
+
+/* 商店行：图标 + 名称 + 价格吊牌 + 已拥有 */
+.fs-shop-row { display: flex; align-items: center; gap: 10px; padding: 6px 8px; margin: 4px 0; border: 1px solid rgba(255,255,255,.12); border-radius: 6px; background: rgba(255,255,255,.03); }
+.fs-shop-name { flex: 1; }
+.fs-shop-tag { background: #d8c48a; color: #1a1408; border-radius: 10px; padding: 1px 8px; font-size: .85em; }
+
+
+/* 天赋树 */
+.fs-talent-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+.fs-talent-title { color: var(--gold); font-size: 1.2em; font-weight: bold; white-space: nowrap; }
+.fs-talent-title img.icon { width: 24px; height: 24px; vertical-align: middle; }
+.fs-talent-stats { display: grid; grid-template-columns: repeat(4, minmax(58px, auto)); gap: 5px; }
+.fs-talent-stats > div { border: 1px solid var(--300); border-radius: 4px; padding: 2px 6px; text-align: center; background: rgba(255,255,255,.02); }
+.fs-stat-k { display: block; color: var(--500); font-size: .7em; line-height: 1.25; }
+.fs-stat-v { display: block; color: var(--gold); font-size: 1.05em; line-height: 1.3; }
+@media (max-width: 560px) { .fs-talent-stats { grid-template-columns: repeat(2, 1fr); width: 100%; } }
+#fs-talent-tabs { display: flex; }
+#fs-talent-tabs button { flex: 1 1 0; min-width: 0; max-width: 180px; width: auto; }
+.fs-talent-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 8px; }
+.fs-talent { width: auto; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; border: 1px solid #4a4a4a; border-radius: 8px; padding: 8px; background: rgba(255,255,255,.03); }
+.fs-talent.on { border-color: #c9a75a; background: rgba(200,160,70,.12); }
+.fs-talent.off { opacity: .58; }
+.fs-talent.off:hover { opacity: .85; }
+.fs-talent-ico { flex: 0 0 38px; }
+.fs-talent img.icon { width: 36px; height: 36px; display: block; }
+.fs-talent-name { color: #e0c070; flex: 1 1 0; min-width: 0; }
+.fs-talent-desc { flex: 1 1 100%; font-size: .82em; color: #cfc8b8; margin: 2px 0; }
+.fs-talent-actions { flex: 1 1 100%; }
+
+
+/* ===== 控制台：原版建筑解锁 ===== */
+.fs-build {
+	margin: .55rem 0;
+	padding: .55rem .65rem;
+	border: 1px solid rgba(90, 255, 190, .28);
+	border-radius: 6px;
+	background: rgba(5, 18, 16, .78);
+}
+.fs-build-h {
+	display: flex; align-items: baseline; justify-content: space-between; gap: .5rem;
+	margin-bottom: .25rem;
+}
+.fs-build-pct { color: #5affbe; font-weight: bold; }
+.fs-build input[type="range"] {
+	width: 100%;
+	margin: .55rem 0 .3rem;
+	accent-color: #5affbe;
+}
+.fs-build-row {
+	display: flex; align-items: center; justify-content: space-between; gap: .5rem;
+	color: #b8d8cd; font-size: .95em;
+}
+.fs-build-btn, .fs-build-confirm, .fs-build-branch-btn {
+	font: inherit;
+	font-size: .92em;
+	padding: .22rem .65rem;
+	border: 1px solid rgba(90, 255, 190, .45);
+	border-radius: 4px;
+	background: rgba(90, 255, 190, .08);
+	color: #d9fff1;
+	cursor: pointer;
+}
+.fs-build-btn:hover, .fs-build-confirm:hover, .fs-build-branch-btn:hover { background: rgba(90, 255, 190, .18); }
+.fs-build-confirm {
+	display: block;
+	width: 100%;
+	margin-top: .5rem;
+	background: rgba(90, 255, 190, .18);
+	font-weight: bold;
+}
+.fs-build-branch { margin-top: .45rem; }
+.fs-build-branch-btn { margin-right: .35rem; opacity: .65; }
+.fs-build-branch-btn.on {
+	opacity: 1;
+	background: rgba(90, 255, 190, .28);
+	border-color: #5affbe;
+	color: #fff;
+}
+.fs-build-msg { margin-top: .3rem; font-size: .9em; min-height: 1em; }
