@@ -1,0 +1,9 @@
+<<bedclotheson "bed">>
+<<if $fsData and $fsData.mor and $fsData.mor.stage is "done">>
+	<br><br>
+	<<if $fsData.bookFound>>
+		<<link [[棕色封面的童话书|FS Book Menu]]>><</link>>
+	<<else>>
+		<<link [[你发现床头有东西|FS Book Find]]>><</link>>
+	<</if>>
+<</if>>

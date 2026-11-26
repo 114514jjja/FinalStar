@@ -1,0 +1,2233 @@
+/* 终星 —— 长线剧情「莫伦斯」
+
+   ── 入口链（已验收 44/44）──
+   实验室开启后第 3 天 → FS Lab Third Day → 问 x计划 → 二选一
+     · FS Lab Third Day Coop（双人：给银环 charm=1）
+     · FS Lab Third Day Solo（单人：四条注意事项）
+   十天之后宅邸街「走进灰色迷雾」→ FS Morans Fog → FS Morans Wake（傍晚遇苏梦棠）
+   → FS Morans Where → FS Morans Home（笙不瑜）→ FS Morans Age → FS Morans Morning
+   → FS Morans City（田字形枢纽）
+
+   ── 城市内容（第二轮）──
+   · 大厦：可以做一夜巡检赚钱（一天一次）
+   · 商业步行街：速食摊 / 甜品店 / 服装店 / 街上走走（随机原创事件）
+   · 公园：跑步 / 坐长椅（第 4 次会被保安盘问：有身份证→道歉；没有→罚 50；没钱→纯战斗）
+   · 高档小区：进不去；政府大厦：只能看
+   · 原创遭遇：撞到路人 → 道歉 or 反抗 → 反抗进入**纯战斗**（不涉性）
+     · 战斗规则：疼痛到上限算输；敌人血量归零算赢（扔小费求放走）；10 回合或随机回合后对方抽身逃走
+
+   ⚠️ 城市里一律不用 <<pass>>/<<dayPassed>>：剧情日是 fs.morNextDay() 独立计数，现实时间必须不动。
+   ⚠️ 段落一律独立、名字唯一（本项目踩过 `:: 段落名` 把 widget 切开的坑）。 */
+
+:: FS Lab Third Day
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "drain">><<npc 玖肆>><<person1>>
+<<run finalStar.mor().met = 1>>
+实验台前坐着一个人。
+<br><br>
+她把外套搭在椅背上，袖子挽到手肘，低着头，正用一把很细的镊子夹着什么。灯从她侧后方打下来，把她的影子压在那张拼起来的长桌上，桌角垫着的砖露在外面。
+<br><br>
+你走近两步才看清她手里那件东西——一枚戒指。银的，戒面里嵌着一颗很小的蓝宝石，托爪松了一边，她正在把它一点一点掰回原位。
+<br><br>
+"——！"
+<br><br>
+她整个人弹了一下，镊子差点脱手。看清是你之后，她愣了两秒，才慢慢把呼吸放平，把戒指攥进掌心。
+<br><br>
+"你走路没声音的？"她说，"吓我一跳。"
+<br><br>
+<<link [[问她手里那枚戒指|FS Lab Third Day Ask]]>><</link>>
+<br>
+<<link [[问她「x计划」到底是什么|FS Lab Third Day X]]>><</link>>
+
+:: FS Lab Third Day Ask
+<<set _link to true>>
+"修个东西。"她没有把戒指给你看，"坏了很多年了。"
+<br><br>
+她把镊子放回绒布上，指节上有一道很旧的疤，越过手背。
+<br><br>
+"别盯着看。"她说，"不是什么值钱玩意儿。"
+<br><br>
+<<link [[把话头转回来|FS Lab Third Day]]>><</link>>
+
+:: FS Lab Third Day X
+<<set _link to true>>
+"x计划？"她抬眼，"你翻我本子了。"
+<br><br>
+她说这话时没有生气，语气里甚至有点想笑的意思——像是在说"果然"。
+<br><br>
+"那本东西我压在器材堆底下，三层。你倒是会找。"
+<br><br>
+她把戒指收进内袋，站起来，靠着实验台看你。
+<br><br>
+"行吧。既然你看过了，我也不瞒你。"
+<br><br>
+"我不是自己想来的。"
+<br><br>
+"十天。"她伸出一根手指，"十天之后，那些只存在于幻想里的东西，会从这边渗出来。先是雾，然后就不是雾了。等它们真的踩到街上，现实就算彻底堕落了——到那一步，做什么都晚。"
+<br><br>
+她顿了一下，像在斟酌要不要说。
+<br><br>
+
+<br><br>
+"所以要赶在那之前把幻界解决掉。而这件事，我一个人做不成。"
+<br><br>
+她看着你，停了一会儿。
+<br><br>
+"我给你一个证明自己的机会。跟我一起，还是你自己去——你选。"
+<br><br>
+<<link [[一起。|FS Lab Third Day Coop]]>><</link>>
+<br>
+<<link [[我自己去。|FS Lab Third Day Solo]]>><</link>>
+
+:: FS Lab Third Day Coop
+<<set _link to true>>
+"一起。"你说。
+<br><br>
+玖肆看了你一会儿，才把那口气慢慢松出来。
+<br><br>
+"好。"她说，"那我就当你答应了。"
+<br><br>
+她从抽屉里摸出一小把子弹，按在桌上推到你面前。
+<br><br>
+"带上。别省着。"
+<br><br>
+然后她在手心里翻找了一下，拿出一枚很小的银环——和刚才那枚戒面扁平的戒指不是一个东西，这个只是一道环，内侧磨得发亮。
+<br><br>
+"戴上。"她说，"进了那个地方，只要你还在城里，我就能找到你。"
+<br><br>
+"十天之后，街尾会起雾。那天我会在。"
+<br><br>
+<<run finalStar.morPick('coop')>>
+<<run finalStar.giveBullets('silver', 6)>>
+<<run finalStar.mor().charm = 1>>
+<<link [[把银环戴上|FS Lab Inside]]>><</link>>
+
+:: FS Lab Third Day Solo
+<<set _link to true>>
+玖肆点了点头，没有劝。
+<br><br>
+"行。"她说，"你想自己去，那就自己去。拦你也没用。"
+<br><br>
+她从内袋里掏出一小把子弹，按在桌上，推到你面前。
+<br><br>
+"带上。别省着。"
+<br><br>
+"听着。"她把手撑在桌沿上，"进了那种地方，记住四条。"
+<br><br>
+"一，别回头。听见有人叫你名字也别回头——那不是人。"
+<br><br>
+"二，记住来路。去的时候走哪边、拐几个弯，出来的时候要原样倒着走。"
+<br><br>
+"三，别信任何自称认识你的人。它知道你叫什么，不代表它认识你。"
+<br><br>
+"四，疼到撑不住就退。那种地方不会因为你硬撑就放你过去。"
+<br><br>
+说完她低头看了一眼手机屏幕，眉心动了一下。
+<br><br>
+"……我得走了。"
+<br><br>
+她抓起外套，脚步很快地出去了。门在你身后合上，那声音比平时重。
+<br><br>
+<<run finalStar.morPick('solo')>>
+<<run finalStar.giveBullets('silver', 6)>>
+<<link [[在实验室里站一会儿|FS Lab Inside]]>><</link>>
+
+:: FS Morans Fog
+<<set _link to true>>
+<<set $outside to 1>><<set $location to "town">>
+雾在街尾堆着，像一堵没有厚度的墙。你朝它走过去，脚下的路还是路，只是越往前走，声音越少。
+<br><br>
+它不散，也没有味道，只有一点凉，贴在手背上。
+<br><br>
+<span class="gold">从这里开始是一段很长的路。</span>
+<br><br>
+<<link [[走进去|FS Morans Wake]]>><</link>>
+<br>
+<<link [[再等等|Danube Street]]>><</link>>
+
+:: FS Morans Wake
+<<set _link to true>>
+<<set $outside to 1>>
+<<run finalStar.morEnter()>>
+你睁开眼。
+<br><br>
+天是傍晚的颜色。橘红压在楼顶上，风里有一点凉，街上人不多，路灯还没亮起来。你躺在一条长椅上，脸侧贴着的扶手是湿的。
+<br><br>
+——这不是你睡着的地方。
+<br><br>
+离你三步远的地方，有个人正来回走着。她走得很急，隔几步就回头看你一眼，又转回去。听到你动，她几乎是跳着过来的。
+<br><br>
+"你醒了！"她蹲下来，"能听懂我说话吗？有没有哪里疼？"
+<br><br>
+她看上去和你差不多大，头发用一根很旧的头绳扎着。
+<br><br>
+"我叫苏梦棠。"她说，"你刚才躺在这儿，怎么叫都不应。"
+<br><br>
+她左右看了一眼街上，声音低下去：
+<br><br>
+"这座城市，晚上如果没有地方睡的话……会很危险的。不是吓你。"
+<br><br>
+"你家在哪？我送你回去。"
+<br><br>
+<<link [[这里是哪里？|FS Morans Where]]>><</link>>
+<br>
+<<link [[我没有家|FS Morans Where2]]>><</link>>
+
+:: FS Morans Where
+<<set _link to true>>
+"莫伦斯。"她说，然后看你，"……你没听说过？"
+<br><br>
+你摇头。她盯着你的脸看了两秒，表情慢慢变了。
+<br><br>
+"那你怎么会在这儿。"她小声说，更像是在问自己。
+<br><br>
+街另一头传来一阵咳嗽声。她整个人绷了一下，很快站起来。
+<br><br>
+"别想了。"她说，"先跟我回去，我家有空房间。这个点一个人待在外面，说什么都不行。"
+<br><br>
+她伸手把你拉起来。走了两步，又回过头，压低了声音：
+<br><br>
+<span class="red">"还有一件事。这条街上，千万、千万小心乞丐。"</span>
+<br><br>
+"他们不是你想的那样。别盯着看，别搭话，别给钱。"
+<br><br>
+<<link [[跟她走|FS Morans Home]]>><</link>>
+
+:: FS Morans Where2
+<<set _link to true>>
+"没有家。"她重复了一遍，没有追问为什么。
+<br><br>
+"那就先跟我回去。"她说，"我家有空房间。别的明天再说。"
+<br><br>
+她伸手把你拉起来。走了两步，又回过头，压低了声音：
+<br><br>
+<span class="red">"这条街上，千万小心乞丐。"</span>
+<br><br>
+"他们不是你想的那样。别盯着看，别搭话，别给钱。"
+<br><br>
+<<link [[跟她走|FS Morans Home]]>><</link>>
+
+:: FS Morans Home
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">>
+苏梦棠的住处在一栋很旧的居民楼里，四层，没有电梯。楼道灯坏了两盏，她走在前面，一级一级数着台阶。
+<br><br>
+门一开，屋里的灯是亮着的。
+<br><br>
+靠窗的椅子上坐着一个人，面前摊着一本练习册，笔尖停在半空，正看着门口。
+<br><br>
+你认识她。
+<br><br>
+"笙不瑜。"苏梦棠说，"我这边的朋友。"
+<br><br>
+脑子里的某一块忽然对上了——宅邸街，同一所学校，同一个年级。她坐在教室靠后的位置，你从没在课上注意过这个人，可你现在能想起她的校服、她的书包带子、她在走廊上侧身让路的动作。
+<br><br>
+她把笔放下，很轻地"嗯"了一声。
+<br><br>
+苏梦棠倒了杯水放在你手边，坐下，打量了你一会儿。
+<br><br>
+"你多大了？"
+<br><br>
+<<link [[报上自己的年龄|FS Morans Age]]>><</link>>
+
+:: FS Morans Age
+<<set _link to true>>
+她听完点了点头，像是早就在心里排好了下一步。
+<br><br>
+"明天我带你去学校。"她说，"旁听也行，先跟着上。跟笙不瑜一个班，正好有个照应。"
+<br><br>
+笙不瑜在旁边翻了一页练习册，没有反对。
+<br><br>
+"今天先睡。"苏梦棠把一条薄毯搭在沙发上，"明天早上我喊你。"
+<br><br>
+<<run finalStar.mor().stage = 'home'>>
+<<link [[躺下|FS Morans Morning]]>><</link>>
+
+:: FS Morans Morning
+<<set _link to true>>
+<<run finalStar.morNextDay()>>
+天亮了。
+<br><br>
+楼下有人在收晾干的衣服，铁杆滑过支架，响了一声。苏梦棠把早饭放在桌上，笙不瑜已经背着书包站在门口。
+<br><br>
+"走吧。"苏梦棠说，"先去学校，放学后你自己认认路——这座城市是田字形的，认准中间那栋楼就不容易丢。"
+<br><br>
+<<run finalStar.mor().stage = 'city'>>
+<<link [[出门|FS Morans City]]>><</link>>
+
+/* ================= 城市枢纽（田字形） ================= */
+
+/* ================= 城市枢纽（0.28：田字地图 · 可点击走） ================= */
+
+
+:: FinalStar City [widget]
+<<widget "fs_city_map">>
+<div class="fs-city">
+	/* ⚠️ 底图必须用 <<icon>>：模组图片不在游戏目录里，裸 <img src> 会 404；
+	   ImageLoaderHook 只认 <<icon>> 产出的 ml-src。 */
+	<<if finalStar.morAnomaly()>><<icon "finalstar/morans-map-red.png">><<else>><<icon "finalstar/morans-map-city.png">><</if>>
+	/* 九格街区：透明命中区 + 图标。百分比按 640×640 底图算：
+	   格子的 x/y 起点 2.8% / 35.6% / 68.4%，边长 28.8%。 */
+	<a class="fs-city-hit" style="left:2.8%;top:2.8%;width:28.8%;height:28.8%" title="公园" onclick="finalStar.cityGo('park')"></a>
+	<a class="fs-city-hit" style="left:35.6%;top:2.8%;width:28.8%;height:28.8%" title="学校" onclick="finalStar.cityGo('school')"></a>
+	<a class="fs-city-hit" style="left:68.4%;top:2.8%;width:28.8%;height:28.8%" title="高档小区" onclick="finalStar.cityGo('estate')"></a>
+	<a class="fs-city-hit" style="left:2.8%;top:35.6%;width:28.8%;height:28.8%" title="商业步行街" onclick="finalStar.cityGo('street')"></a>
+	<a class="fs-city-hit" style="left:35.6%;top:35.6%;width:28.8%;height:28.8%" title="莫伦科技大厦" onclick="finalStar.cityGo('tower')"></a>
+	<a class="fs-city-hit" style="left:68.4%;top:35.6%;width:28.8%;height:28.8%" title="政府大厦" onclick="finalStar.cityGo('government')"></a>
+	<a class="fs-city-hit" style="left:2.8%;top:68.4%;width:28.8%;height:28.8%" title="便利商店" onclick="finalStar.cityGo('store')"></a>
+	<a class="fs-city-hit" style="left:35.6%;top:68.4%;width:28.8%;height:28.8%" title="织工巷" onclick="finalStar.cityGo('home')"></a>
+	<a class="fs-city-hit" style="left:68.4%;top:68.4%;width:28.8%;height:28.8%" title="诊所" onclick="finalStar.cityGo('clinic')"></a>
+	/* 四条马路：路口点上放小命中区，点一下就站到马路上（必定出事）。放在街区之后，压在格子上。 */
+	<a class="fs-city-hit fs-city-road" style="left:40%;top:29.6%;width:20%;height:8%" title="北面的马路" onclick="finalStar.cityGo('road')"></a>
+	<a class="fs-city-hit fs-city-road" style="left:40%;top:62.4%;width:20%;height:8%" title="南面的马路" onclick="finalStar.cityGo('road')"></a>
+	<a class="fs-city-hit fs-city-road" style="left:29.6%;top:40%;width:8%;height:20%" title="西面的马路" onclick="finalStar.cityGo('road')"></a>
+	<a class="fs-city-hit fs-city-road" style="left:62.4%;top:40%;width:8%;height:20%" title="东面的马路" onclick="finalStar.cityGo('road')"></a>
+	/* 图标（不拦截点击） */
+	<span class="fs-city-pin" style="left:17.1%;top:17.1%"><<icon "finalstar/morans-park.png">></span>
+	<span class="fs-city-pin" style="left:50%;top:17.1%"><<icon "finalstar/morans-school.png">></span>
+	<span class="fs-city-pin" style="left:82.9%;top:17.1%"><<icon "finalstar/morans-estate.png">></span>
+	<span class="fs-city-pin" style="left:17.1%;top:50%"><<icon "finalstar/morans-street.png">></span>
+	<span class="fs-city-pin" style="left:50%;top:50%"><<icon "finalstar/morans-tower.png">></span>
+	<span class="fs-city-pin" style="left:82.9%;top:50%"><<icon "finalstar/morans-government.png">></span>
+	<span class="fs-city-pin" style="left:17.1%;top:82.9%"><<icon "finalstar/morans-store.png">></span>
+	<span class="fs-city-pin" style="left:50%;top:82.9%"><<icon "finalstar/morans-home.png">></span>
+	<span class="fs-city-pin" style="left:82.9%;top:82.9%"><<icon "finalstar/morans-clinic.png">></span>
+	<<set _here to finalStar.morHere()>>
+	<<set _pos to finalStar.morDistrictPos(_here)>>
+	<span class="fs-city-here" @style="'left:' + _pos.left + '%;top:' + _pos.top + '%'">你在这里</span>
+</div>
+<div class="fs-city-legend">
+	上：橡树街 · 圣安妮街 · 松林坡　中：市场街 · <span class="gold">钟楼广场</span> · 王冠街　下：灰桥街 · 织工巷 · 圣玛丽街<br>
+	<span class="fs-sub">地图可以直接点；<span class="teal">马路上四个路口</span>点下去必定遇到点事。</span><br>
+	<span class="fs-sub">你现在在：<span class="gold"><<print finalStar.morDistrict(finalStar.morHere()) ? finalStar.morDistrict(finalStar.morHere()).name : "路上">></span></span>
+</div>
+<</widget>>
+
+/* 小地点随机事件：正文与选项之间插一段，不挡路。用法 <<fs_mor_event "school_hall" 0.35>> */
+<<widget "fs_mor_event">>
+	<<set _fsEv to finalStar.morRandom(_args[0], _args[1])>>
+	<<if _fsEv>>
+		<span class="fs-sub">——</span><br>
+		<<print _fsEv.text>>
+		<br><br>
+	<</if>>
+<</widget>>
+
+:: FS Morans Walk
+<<set _link to true>>
+<<set $outside to 1>><<set $location to "town">>
+<<set _path to ($fs_morPath ? $fs_morPath.split(",") : [])>>
+<<if not _path.length>>
+	<<goto "FS Morans District">>
+<<else>>
+	<<set _next to _path.shift()>>
+	<<set $fs_morPath to _path.join(",")>>
+	<<set $fs_morDistrict to _next>>
+	<<set _d to finalStar.morDistrict(_next)>>
+	你沿着马路往<<print _d ? _d.name : "前">>走。<<if $fs_morPath>>这一段走完，还有 <<print _path.length>> 段路。<<else>>过了前面的路口就到了。<<</if>>
+	<br><br>
+	<<set _ev to finalStar.morRandom(finalStar.morBlockPool(_next), 0.22)>>
+	<<if _ev>>
+		<<print _ev.text>>
+		<br><br>
+	<</if>>
+	<<if $fs_morPath>>
+		<<link [[继续走|FS Morans Walk]]>><</link>>
+	<<else>>
+		<<link [[到了|FS Morans Arrive]]>><</link>>
+	<</if>>
+<</if>>
+
+:: FS Morans District
+<<set _link to true>>
+<<set $outside to 1>><<set $location to "town">>
+<<if finalStar.morDay() gte 5 and not finalStar.morAnomalyStarted()>><<goto "FS Morans Anomaly Prelude">><</if>>
+<<set $fs_morDistrict to $fs_morDest>>
+<<set _d to finalStar.morDistrict($fs_morDest)>>
+<<if not _d>>
+	<<goto "FS Morans City">>
+<<else>>
+	<span class="gold"><<print _d.name>></span>
+	<br><br>
+	<<print _d.desc>>
+	<<set _nl to finalStar.morNightLine()>>
+	<<if _nl>>
+		<br>
+		<<print _nl>>
+	<</if>>
+	<<if finalStar.morAnomaly()>>
+		<br>
+		<span class="red">红月的光落在这条街上，影子比平时长。</span>
+	<</if>>
+	<br><br>
+	<<for _p range _d.places>>
+		<<capture _p>>
+			<img class="icon" @ml-src="'img/misc/icon/finalstar/' + _p.icon">
+			<<link _p.label>><<goto _p.passage>><</link>>
+			<br>
+		<</capture>>
+	<</for>>
+	<br>
+	<<link [[回路口|FS Morans City]]>><</link>>
+<</if>>
+
+:: FS Morans Arrive
+<<set _link to true>>
+<<set $outside to 1>><<set $location to "town">>
+<<if not $fs_morDest or not finalStar.cityPlaces[$fs_morDest]>>
+	<<goto "FS Morans City">>
+<<else>>
+	<<set _place to finalStar.cityPlaces[$fs_morDest]>>
+	<<set _ev to finalStar.morRandom(finalStar.morBlockPool($fs_morDest), 0.3)>>
+	你穿过<<print _place.district>>，朝<<print _place.label>>走过去。
+	<br><br>
+	<<if _ev>>
+		<<print _ev.text>>
+		<br><br>
+		<<link [[继续|$fs_morDestPass]]>><</link>>
+	<<else>>
+		<<goto $fs_morDestPass>>
+	<</if>>
+<</if>>
+
+:: FS Morans City
+<<set _link to true>>
+<<set $outside to 1>><<set $location to "town">>
+/* 位置：第一次进城默认在住宅区，之后按玩家走过的街区记 */
+<<if not $fs_morDistrict>><<set $fs_morDistrict to "home">><</if>>
+/* 第七天：什么也没做 → 直接 D 结局 */
+<<if finalStar.morDayLimitDue()>><<goto "FS Morans Ending Nothing">><</if>>
+/* 第 5 天之后世界开始异常：第一次进入城市时转场（只演一次） */
+<<if finalStar.morDay() gte 5 and not finalStar.morAnomalyStarted()>><<goto "FS Morans Anomaly Prelude">><</if>>
+莫伦斯的路口很规整，横的横，竖的竖，像有人在纸上画了一个「田」字。
+<br><br>
+<span class="fs-sub">（第 <<print finalStar.morDay()>> 天　·　<<print finalStar.morClockText()>>）</span>
+<br>
+你现在的目标：<<print finalStar.morGoal()>>
+<<set _night to finalStar.morNightLine()>>
+<<if _night>>
+	<br>
+	<<print _night>>
+<</if>>
+<<if $fs_morBlockMsg>>
+	<br>
+	<span class="red"><<print $fs_morBlockMsg>></span>
+	<<set $fs_morBlockMsg to "">>
+<</if>>
+<<if finalStar.morAnomaly()>>
+	<br>
+	<span class="red">红月还挂在天上。街上的灯是红的，人很少。</span>
+<</if>>
+<br><br>
+<br><br>
+/* 选项在上 */
+<<icon "finalstar/morans-tower.png">><<link 正中央：钟楼广场>><<run finalStar.cityGo("tower")>><</link>>
+<br>
+<<icon "finalstar/morans-street.png">><<link 西：市场街>><<run finalStar.cityGo("street")>><</link>>
+<br>
+<<icon "finalstar/morans-park.png">><<link 西北：橡树街>><<run finalStar.cityGo("park")>><</link>>
+<br>
+<<icon "finalstar/morans-school.png">><<link 北：圣安妮街>><<run finalStar.cityGo("school")>><</link>>
+<br>
+<<icon "finalstar/morans-estate.png">><<link 东北：松林坡>><<run finalStar.cityGo("estate")>><</link>>
+<br>
+<<icon "finalstar/morans-government.png">><<link 东：王冠街>><<run finalStar.cityGo("government")>><</link>>
+<br>
+<<icon "finalstar/morans-home.png">><<link 南：织工巷>><<run finalStar.cityGo("home")>><</link>>
+<br>
+<<icon "finalstar/morans-store.png">><<link 西南：灰桥街>><<run finalStar.cityGo("store")>><</link>>
+<br>
+<<icon "finalstar/morans-clinic.png">><<link 东南：圣玛丽街>><<run finalStar.cityGo("clinic")>><</link>>
+<br>
+<<icon "finalstar/morans-road.png">><<link [[站到马路上|FS Morans Road]]>><</link>>
+<br><br>
+/* 地图在下，可点 */
+<<fs_city_map>>
+<br>
+<<link [[过一天|FS Morans Next Day]]>><</link>>
+
+:: FS Morans Next Day
+<<set _link to true>>
+<<run finalStar.morNextDay()>>
+<<if finalStar.morDayLimitDue()>><<goto "FS Morans Ending Nothing">><</if>>
+又过了一天。
+<br><br>
+<span class="fs-sub">（第 <<print finalStar.morDay()>> 天）</span>
+<br><br>
+<<link [[回路口|FS Morans City]]>><</link>>
+
+/* ================= 马路（站上去必定触发事件） ================= */
+
+:: FS Morans Road
+<<set _link to true>>
+<<set $outside to 1>><<set $location to "town">>
+<<set _ev to finalStar.morRoadPick()>>
+你站到路中间。车流从身侧过去，风把衣角掀起来。
+<br><br>
+<<print _ev.text>>
+<br><br>
+<span class="fs-sub"></span>
+<br>
+<<link [[再等一会儿|FS Morans Road]]>><</link>>
+<br>
+<<link [[走回路口|FS Morans City]]>><</link>>
+
+/* ================= 便利商店 ================= */
+
+:: FS Morans Store
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">>
+自动门"叮"了一声。店里灯很白，货架排得很紧，收银台后面的收音机在放一首很旧的歌。
+<br><br>
+<span class="fs-sub">（钱包 <<print formatMoney($money)>>）</span>
+<br><br>
+<<set _r to $fs_morStoreResult>>
+<<if _r>>
+	<span class="gold"><<print _r>></span>
+	<br><br>
+	<<set $fs_morStoreResult to "">>
+<</if>>
+<<fs_mor_event "store" 0.35>>
+<<icon "finalstar/morans-store.png">><<link [[买个面包（£3）|FS Morans Store]]>><<set $fs_morStoreResult to (finalStar.morStoreBuy("bread") is "ok" ? "你买了一个面包，就着门口的风吃了。" + finalStar.statHint("饥饿", 1, "green") : "钱不够。")>><</link>>
+<br>
+<<link [[买瓶水（£1）|FS Morans Store]]>><<set $fs_morStoreResult to (finalStar.morStoreBuy("water") is "ok" ? "水是凉的，喝下去胃里松了一点。" + finalStar.statHint("饥饿", 1, "green") + finalStar.statHint("压力", -1, "green") : "钱不够。")>><</link>>
+<br>
+<<link [[买卷绷带（£5）|FS Morans Store]]>><<set $fs_morStoreResult to (finalStar.morStoreBuy("bandage") is "ok" ? "你在店门口的台阶上把伤口缠好了。" + finalStar.statHint("疼痛", -1, "green") : "钱不够。")>><</link>>
+<br>
+<<link [[买包水果糖（£1.5）|FS Morans Store]]>><<set $fs_morStoreResult to (finalStar.morStoreBuy("sweet") is "ok" ? "糖在嘴里化开，甜得有点假，但确实让人缓了一口气。" + finalStar.statHint("压力", -1, "green") : "钱不够。")>><</link>>
+<br>
+<<icon "finalstar/morans-store.png">><<link [[逛货架|FS Morans Store Shelf]]>><</link>>
+<br>
+<<link [[去收银台|FS Morans Store Counter]]>><</link>>
+<br>
+<<link [[出去|FS Morans City]]>><</link>>
+
+/* ================= 诊所 ================= */
+
+:: FS Morans Clinic
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">>
+诊所的走廊有一股消毒水味。挂号窗口后面坐着一个戴口罩的人，头也不抬："哪儿不舒服？"
+<br><br>
+<span class="fs-sub">（钱包 <<print formatMoney($money)>>　·　<<print finalStar.infectWord()>>）</span>
+<br><br>
+<<set _rc to $fs_morClinicResult>>
+<<if _rc>>
+	<span class="gold"><<print _rc>></span>
+	<br><br>
+	<<set $fs_morClinicResult to "">>
+<</if>>
+<<fs_mor_event "clinic" 0.35>>
+<<link [[处理伤口（£30）|FS Morans Clinic]]>><<set $fs_morClinicResult to (finalStar.morClinicTreat("pain") is "ok" ? "护士把你按在椅子上清理了伤口，动作不算温柔，但很利落。" + finalStar.statHint("疼痛", -1, "green") : "钱不够。")>><</link>>
+<br>
+<<link [[打一针（£80）|FS Morans Clinic]]>><<set $fs_morClinicResult to (finalStar.morClinicTreat("infect") is "ok" ? "针扎进去的时候你屏住了呼吸。药水冰凉，顺着血管散开。" + finalStar.statHint("感染", -1, "green") : "钱不够。")>><</link>>
+<br>
+<<link [[和心理医生谈谈（£50）|FS Morans Clinic]]>><<set $fs_morClinicResult to (finalStar.morClinicTreat("mind") is "ok" ? "你说了很多，也停了很多次。对面的人没有催你。" + finalStar.statHint("压力", -1, "green") + finalStar.statHint("创伤", -1, "green") : "钱不够。")>><</link>>
+<br>
+<<icon "finalstar/morans-clinic.png">><<link [[挂号处|FS Morans Clinic Desk]]>><</link>>
+<br>
+<<link [[进诊室|FS Morans Clinic Room]]>><</link>>
+<br>
+<<link [[出去|FS Morans City]]>><</link>>
+
+/* ================= 旅店 ================= */
+
+:: FS Morans Inn
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">>
+旅店的楼梯很窄，墙上贴着褪色的壁纸。前台的老太太把钥匙推过来，一句话也没多问。
+<br><br>
+<span class="fs-sub">（住一晚 £25，会直接到第二天；钱包 <<print formatMoney($money)>>）</span>
+<br><br>
+<<set _ri to $fs_morInnResult>>
+<<if _ri>>
+	<span class="gold"><<print _ri>></span>
+	<br><br>
+	<<set $fs_morInnResult to "">>
+<</if>>
+<<link [[住一晚|FS Morans Inn]]>><<set $fs_morInnResult to (finalStar.morInnSleep() is "ok" ? "床单有点潮。你躺下之后很快就睡着了，再睁眼已经是第二天。" : "钱不够。")>><</link>>
+<br>
+<<link [[回步行街|FS Morans Street]]>><</link>>
+
+/* ================= 魔书专属遭遇战（卡牌战斗） ================= */
+
+:: FS Duel Intro
+<<set _link to true>>
+<<set $outside to 1>>
+<<set _handBook to finalStar.hasBookInHand()>>
+<<set _handGun to finalStar.pistolInHand()>>
+<<if not _handBook and not _handGun>>
+	<span class="red">有什么东西从巷子里出来了。</span>你下意识去摸手里——空的。
+	<br><br>
+	你什么也没有拿。它比你高，正朝你走过来。
+	<br><br>
+	<<link [[跑|FS Duel Flee]]>><</link>>
+<<else>>
+	<<set _d to finalStar.duelBegin()>>
+	<<if not _d>>
+		<<goto "FS Morans City">>
+	<<else>>
+		<span class="red"><<print _d.name>>突然现身。</span>幸好它没有立刻做什么——你做足了准备。
+		<br><br>
+		<<if _handBook and _handGun>>
+			左手是魔书，右手是枪。经历过这么多场战斗，你不再胆怯——这一次，两样都能用。
+		<<elseif _handBook>>
+			这一次，你的魔书能发挥出原本的能力。
+		<<else>>
+			经历过这么多场战斗，你不再胆怯。手里的枪比任何咒文都直接。
+		<</if>>
+		<br><br>
+		<<print _d.desc>>
+		<br><br>
+		<span class="fs-sub">（疼痛达到上限就会倒下。怪物的攻击只会让你更疼。）</span>
+		<br><br>
+		<<link [[开始战斗|FS Duel Battle]]>><</link>>
+		<br>
+		<<link [[转身走开|FS Duel Flee]]>><</link>>
+	<</if>>
+<</if>>
+
+:: FS Duel Battle
+<<set _link to true>>
+<<set _d to finalStar.duel()>>
+<<if not _d>>
+	<<goto "FS Morans City">>
+<<elseif _d.over is "win">>
+	<<goto "FS Duel Win">>
+<<elseif _d.over is "lose">>
+	<<goto "FS Duel Lose">>
+<<else>>
+	<<print finalStar.duelHtml()>>
+	<br>
+	<button type="button" class="fs-duel-end" onclick="finalStar.duelEnd()">结束回合</button>
+	<br><br>
+	<<link [[转身逃走|FS Duel Flee]]>><</link>>
+<</if>>
+
+:: FS Duel Win
+<<set _link to true>>
+<<set _d to finalStar.duel()>>
+<<set _r to finalStar.duelFinish()>>
+它倒下去的时候没有声音，像一袋东西被放到了地上。
+<br><br>
+魔书自己合上了。你站在原地，手还在抖，但脑子很清醒。
+<br><br>
+<<run finalStar.duelReward()>>
+<<print finalStar.statHint("压力", -1, "green")>>
+<br><br>
+<<link [[离开|FS Duel Return]]>><</link>>
+
+:: FS Duel Lose
+<<set _link to true>>
+<<set _d to finalStar.duel()>>
+<<set _r to finalStar.duelFinish()>>
+疼痛涨过头的那一刻，眼前一黑。
+<br><br>
+<span class="gold">一阵耀眼的闪光覆盖住了你的身体——你活了下来。</span>
+<br><br>
+再睁开眼的时候，那东西已经不在了。空气里有烧焦的味道，你的皮肤下面有什么在慢慢动。
+<br><br>
+<<run finalStar.duelPenalty()>>
+<<print finalStar.statHint("感染", 1, "red")>>
+<br><br>
+<<link [[爬起来|FS Duel Return]]>><</link>>
+
+:: FS Duel Flee
+<<set _link to true>>
+<<run finalStar.duelFinish()>>
+你退了两步，转身就走。身后的声音跟了一段，停了。
+<br><br>
+<<link [[离开|FS Duel Return]]>><</link>>
+
+:: FS Duel Return
+<<set _link to true>>
+<<if finalStar.hasPassage(finalStar.duelReturnTo ? finalStar.duelReturnTo() : "")>>
+	<<goto finalStar.duelReturnTo()>>
+<<else>>
+	<<goto "FS Morans City">>
+<</if>>
+
+/* ================= 色情相关事件（10 个，小镇随机） ================= */
+
+:: FS Erotic Scene
+<<set _link to true>>
+<<set $outside to 1>>
+<<if not finalStar.eroticNow()>><<set $fsData.eroticKey to random(0, 9)>><</if>>
+<<set _ev to finalStar.eroticNow()>>
+<<if not _ev>>
+	<<goto "Bedroom">>
+<<else>>
+	<<print _ev.text>>
+	<br><br>
+	<<link [[没有躲开|FS Erotic Do]]>><<set $fs_eroticChoice to "accept">><</link>>
+	<br>
+	<<link [[退开一步|FS Erotic Do]]>><<set $fs_eroticChoice to "refuse">><</link>>
+<</if>>
+
+:: FS Erotic Do
+<<set _link to true>>
+<<set _r to finalStar.eroticResolve($fs_eroticChoice)>>
+<<print _r>>
+<br><br>
+<<link [[离开|FS Erotic Return]]>><</link>>
+
+:: FS Erotic Return
+<<set _link to true>>
+<<set _back to finalStar.eroticReturnTo()>>
+<<if finalStar.hasPassage(_back)>>
+	<<goto _back>>
+<<else>>
+	<<goto "Bedroom">>
+<</if>>
+
+/* ================= 建筑内部的小地点（房间） ================= */
+
+:: FS Morans Estate Gate
+<<set _link to true>>
+<<set $outside to 1>><<set $location to "town">>
+大门是关着的，铁栅栏后面是一条笔直的路。保安亭的玻璃反着光，里面的人正低头看什么。
+<br><br>
+你走近半步，他就抬起头，隔着玻璃摆了摆手——不是打招呼，是让你走。
+<br><br>
+<<link [[退回去|FS Morans Estate]]>><</link>>
+
+:: FS Morans Estate Garden
+<<set _link to true>>
+<<set $outside to 1>><<set $location to "town">>
+花园沿着一堵矮墙，墙头上爬着修剪过的藤。有人在里面浇花，水声很细。
+<br><br>
+你隔着栅栏看了一会儿。浇花的人没有抬头。
+<br><br>
+<<link [[回门口|FS Morans Estate]]>><</link>>
+
+:: FS Morans Tower Floor14
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">>
+十四层的走廊比大堂冷。灯是一段一段亮的，你走过去，身后的那段就暗下来。
+<br><br>
+走廊尽头有一扇没有牌子的门，门缝底下透出光。
+<br><br>
+<<link [[下楼|FS Morans Tower]]>><</link>>
+
+:: FS Morans Government Steps
+<<set _link to true>>
+<<set $outside to 1>><<set $location to "town">>
+台阶很高，一共二十七级。你数着走上去，风从两侧的石柱之间穿过去，带着一点凉。
+<br><br>
+走到顶端回头看，整条街都在下面。
+<br><br>
+<<link [[推开玻璃门|FS Morans Government Window]]>><</link>>
+<br>
+<<link [[下台阶|FS Morans Government]]>><</link>>
+
+:: FS Morans Government Window
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">>
+办事大厅里没有人排队。窗口后面坐着一个穿灰色衣服的人，面前摆着一沓表格。
+<br><br>
+"办什么？"他问，笔已经拿起来了。
+<br><br>
+<<link [[问几句关于这座城的事|FS Morans Government Talk]]>><</link>>
+<br>
+<<link [[出去|FS Morans Government]]>><</link>>
+
+:: FS Morans Government Talk
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">>
+你问这座城建了多久，问路为什么这么规整。对方一边听一边在表格边上画了个小小的"田"字。
+<br><br>
+"规划的时候就画成这样的。"他说，"先画的线，后盖的楼。"
+<br><br>
+他把那张纸推过来一点，又不着痕迹地收回去。
+<br><br>
+<<print finalStar.statHint('压力', -1, 'green')>>
+<br><br>
+<<link [[出去|FS Morans Government]]>><</link>>
+
+:: FS Morans Store Shelf
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">>
+货架排得很紧，从零食到日用品挤在一起。价签有的手写，有的已经褪色。
+<br><br>
+你在货架之间慢慢走。有人在你身后绕过，说了声"借过"。
+<br><br>
+<<link [[回门口|FS Morans Store]]>><</link>>
+
+:: FS Morans Store Counter
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">>
+收银台前面排着两个人。后面坐着的店员一边扫码，一边用肩膀夹着手机在说话。
+<br><br>
+她看见你，把手机放下了一点："要什么？"
+<br><br>
+<<link [[还是先看看货架|FS Morans Store Shelf]]>><</link>>
+<br>
+<<link [[出去|FS Morans Store]]>><</link>>
+
+:: FS Morans Clinic Desk
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">>
+挂号的窗口比人矮一截，你得低下头才能说话。里面的人头也不抬："哪儿不舒服？"
+<br><br>
+<<link [[说要去诊室看看|FS Morans Clinic Room]]>><</link>>
+<br>
+<<link [[出去|FS Morans Clinic]]>><</link>>
+
+:: FS Morans Clinic Room
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">>
+诊室里只有一张床、一个柜子和一盏台灯。医生让你坐下，翻了一下手里的本子。
+<br><br>
+"听你的呼吸不太顺。"他把听诊器挂上，"别紧张。"
+<br><br>
+<<print finalStar.statHint('创伤', -1, 'green')>>
+<br><br>
+<<link [[出去|FS Morans Clinic]]>><</link>>
+
+/* ================= 大厦 ================= */
+
+:: FS Morans Tower
+<<set _link to true>>
+莫伦科技实业大厦的大堂比外面凉。前台后面没有人，闸机亮着一条绿线，走廊深处有机器运转的嗡嗡声。
+<br><br>
+墙边的公告板上钉着一张招聘启事，边角卷起来了。
+<br><br>
+<<fs_mor_event "tower" 0.35>>
+<<link [[按启事上的号码问一句|FS Morans Tower Job]]>><</link>>
+<br>
+<<icon "finalstar/morans-tower.png">><<link [[去十四层|FS Morans Tower Floor14]]>><</link>>
+<br>
+<<link [[回路口|FS Morans City]]>><</link>>
+
+:: FS Morans Tower Job
+<<set _link to true>>
+<<set _r to finalStar.morWork()>>
+<<if _r is "done">>
+	前台的人抬眼看了你一下："今晚已经有人了。明天再来。"
+<<else>>
+	"夜间巡检，一层到十四层，走完就下班。"对方把一张表推过来，"£80。干不干？"
+	<br><br>
+	你签了字。电梯停在十四层的时候，走廊的灯是一段一段亮起来的，像有人跟在你后面。
+	<br><br>
+	走完一圈，你在表上签了第二个名字，领到 £80。
+<</if>>
+<br><br>
+<<link [[回大堂|FS Morans Tower]]>><</link>>
+
+/* ================= 商业步行街 ================= */
+
+:: FS Morans Street
+<<set _link to true>>
+商业步行街的石板被踩得发亮。两边一家挨一家：速食、衣服、杂货，招牌换得很快，有几块已经空了。
+<br><br>
+空气里飘着炸物和甜味混在一起的味道。
+<br><br>
+<<link [[速食摊（汉堡 £4）|FS Morans Street Food]]>><</link>>
+<br>
+<<link [[甜品店（£6）|FS Morans Sweet]]>><</link>>
+<br>
+<<link [[服装店|FS Morans Street Clothes]]>><</link>>
+<br>
+<<icon "finalstar/morans-shop.png">><<link [[杂货店（£20）|FS Morans Shop]]>><</link>>
+<br>
+<<icon "finalstar/morans-home.png">><<link [[街尾的小旅店（住一晚 £25）|FS Morans Inn]]>><</link>>
+<br>
+<<link [[在街上走走|FS Morans Street Walk]]>><</link>>
+<br>
+<<link [[回路口|FS Morans City]]>><</link>>
+
+:: FS Morans Street Food
+<<set _link to true>>
+<<set _r to finalStar.morBuy('burger')>>
+<<if _r is "poor">>
+	你摸了摸口袋，又把手抽出来。摊主看了你一眼，什么也没说。
+<<else>>
+	你买了一份热的，站在店门口吃完。纸袋上印着店名，油透过来一圈。身体暖了一点。
+<</if>>
+<br><br>
+<<link [[回步行街|FS Morans Street]]>><</link>>
+
+:: FS Morans Sweet
+<<set _link to true>>
+<<set _r to finalStar.morBuy('sweet')>>
+<<if _r is "poor">>
+	玻璃柜里的东西摆得很整齐，价格牌写得很小。你数了数口袋里的钱，退了出来。
+<<else>>
+	你买了一份甜点。糖霜在盒子里晃出一圈白印，甜味在舌根留了很久。
+<</if>>
+<br><br>
+<<link [[回步行街|FS Morans Street]]>><</link>>
+
+:: FS Morans Street Clothes
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">><<set $bus to "clothingshop">>
+服装店的门是玻璃的，里面灯很白，衣架一排一排。店员站在收银台后面，抬了下眼，又低下去。
+<br><br>
+<span class="fs-sub">这里只卖日常衣服。太露的那种，这家店不进货。</span>
+<br><br>
+<div id="clothingShop-div" class="main-shop-div"><<finalstar_cityShop-main>></div>
+<br>
+<<link [[出去|FS Morans Street]]>><<set $shopName to "clothing">><<set $bus to "danube">><<set $location to "town">><</link>>
+
+:: FS Morans Shop
+<<set _link to true>>
+杂货店里堆得很满，货架一直顶到天花板。老板在柜台后面修一台收音机，没抬头。
+<br><br>
+靠门的架子上摆着一排手工做的小东西：布偶、护身符、木头刻的兽。
+<br><br>
+最里面那个不太一样。它说不上是什么做的，布面是脏的，针脚歪斜，脸上缝着两只眼睛——你数了两遍，是两只。
+<br><br>
+<span class="fs-sub">（£20）</span>
+<br><br>
+<<link [[买下那个娃娃|FS Morans Shop Doll]]>><</link>>
+<br>
+<<link [[回步行街|FS Morans Street]]>><</link>>
+
+:: FS Morans Shop Doll
+<<set _link to true>>
+<<set _r to finalStar.morBuyDoll()>>
+<<if _r is "poor">>
+	你把口袋翻了一遍，又放回去。老板抬了下眼："二十，不赊。"你没说话，退了出来。
+<<elseif _r is "have">>
+	背包侧袋里已经有一个了。你不想再买第二个。
+<<else>>
+	你数出二十放在柜台上。老板看了一眼，没说什么，把钱扫进抽屉。
+	<br><br>
+	你把娃娃塞进背包侧袋。它比看上去沉。
+<</if>>
+<br><br>
+<<link [[回步行街|FS Morans Street]]>><</link>>
+
+:: FS Morans Street Walk
+<<set _link to true>>
+<<set _ev to finalStar.morRollStreet()>>
+<<if not _ev>>
+	你在街上走了一段。招牌一块一块亮起来，风把纸屑吹到路沿。
+	<br><br>
+	什么也没发生。
+	<br><br>
+	<<link [[回步行街|FS Morans Street]]>><</link>>
+<<else>>
+	<<goto "FS Morans Bump">>
+<</if>>
+
+/* ---- 原创遭遇：撞到路人（原来的性遭遇一律换成这个） ---- */
+
+:: FS Morans Bump
+<<set _link to true>>
+<<set _taunt to finalStar.morTransTaunt(finalStar.morTrans()[0])>>
+你走得急，肩膀撞上一个人。
+<br><br>
+对方手里的东西晃了一下，随即转过身来——
+<br><br>
+<span class="red">"你手往哪儿放呢？"</span>他的声音一下子高了，"手脚不干净是不是？想偷东西？"
+<<if _taunt isnot "">>
+	<br><br>
+	他上下打量你一圈，忽然笑了一下，那笑很难看。
+	<br><br>
+	"<span class="red"><<print _taunt>></span>"
+<</if>>
+<br><br>
+街对面有个穿制服的正在慢慢走过去。他把声音压低了一点，但没有让开。
+<br><br>
+<<link [[低头道歉|FS Morans Bump Sorry]]>><</link>>
+<br>
+<<link [[我没碰你。|FS Morans Bump Resist]]>><</link>>
+
+:: FS Morans Bump Sorry
+<<set _link to true>>
+你低下头，说了对不起。
+<br><br>
+他骂了两句，把手里的东西扶正，转身走了。走之前回头看了你一眼。
+<br><br>
+<<run finalStar.morAddStress(6)>><<run finalStar.morAddTrauma(3)>>
+<<link [[回步行街|FS Morans Street]]>><</link>>
+
+:: FS Morans Bump Resist
+"我没碰你。"你说。
+<br><br>
+他愣了一下，然后笑了。
+<br><br>
+"行啊。"他把袖子往上推了推，"那咱们就在这儿说清楚。"
+<br><br>
+<<run finalStar.morFightBegin(finalStar.morRollFoe())>>
+<<goto "FS Morans Fight">>
+
+/* ================= 公园 ================= */
+
+:: FS Morans Park
+<<set _link to true>>
+公园比想象中大，草修得很齐，长椅一排排朝着湖。有几个老人坐在远处下棋，棋子落在木板上，声音很脆。
+<br><br>
+<span class="fs-sub"><<print finalStar.morClockText()>></span>
+<br><br>
+<<fs_mor_event "park" 0.35>>
+<<icon "finalstar/morans-run.png">><<link [[沿着跑道跑一会儿（0:20）|FS Morans Park Run]]>><</link>>
+<br>
+<<link [[在长椅上坐一会儿|FS Morans Park Sit]]>><</link>>
+<br>
+<<link [[回路口|FS Morans City]]>><</link>>
+
+:: FS Morans Park Run
+<<set _link to true>>
+<<run finalStar.morPass(20)>>
+你沿着跑道跑了一圈。风从湖面上过来，把汗吹干了一点。
+<br><br>
+跑到第二圈的时候呼吸才匀过来，腿有点沉，但脑子空了。
+<br><br>
+<<athletics 2>><<gtiredness>>
+<br><br>
+<span class="fs-sub"><<print finalStar.morClockText()>></span>
+<br><br>
+<<link [[再跑一圈（0:20）|FS Morans Park Run]]>><</link>>
+<br>
+<<link [[回公园|FS Morans Park]]>><</link>>
+
+:: FS Morans Park Sit
+<<set _link to true>>
+<<set _n to finalStar.morParkRest()>>
+<<if finalStar.morParkGuardReady()>>
+	<<goto "FS Morans Park Guard">>
+<<else>>
+	你在长椅上坐下。湖面很平，远处有人在喂鸟。
+	<br><br>
+	<span class="fs-sub"></span>
+	<br><br>
+	<<link [[回公园|FS Morans Park]]>><</link>>
+<</if>>
+
+:: FS Morans Park Guard
+<<set _link to true>>
+<<run finalStar.morParkGuardDone()>>
+你刚坐稳，一道影子落到脚边。
+<br><br>
+"这一片不让长时间逗留。"保安把对讲机从腰上摘下来，拇指压着按键，"你在这儿坐了有一会儿了吧。身份证。"
+<br><br>
+<<if finalStar.morHasId()>>
+	你把证件递过去。他对着灯看了一会儿，又看了看你。
+	<br><br>
+	"……行吧。"他把证件还回来，语气软下来，"抱歉，这几天上面查得紧。你坐，别太久。"
+	<br><br>
+	他转身走了，皮鞋在石板上一格一格地响。
+	<br><br>
+	<<link [[回公园|FS Morans Park]]>><</link>>
+<<else>>
+	你摸了半天，什么也没摸出来。
+	<br><br>
+	"没证。"他把对讲机别回去，"那按规定，五十。"
+	<br><br>
+	<<if $money gte 5000>>
+		你数出五十递过去。他点了点，塞进胸前的口袋，随口说了句"下次记得办"，就走了。
+		<br><br>
+		<<run finalStar.morMoney(-5000)>>
+		<<link [[回公园|FS Morans Park]]>><</link>>
+	<<else>>
+		你把口袋翻给他看。他盯着看了一会儿，脸上的表情变了。
+		<br><br>
+		<span class="red">"那就跟我走一趟。"</span>
+		<br><br>
+		他没有掏手铐，只是把袖子往上一推。
+		<br><br>
+		<<run finalStar.morFightBegin('guard')>>
+		<<goto "FS Morans Fight">>
+	<</if>>
+<</if>>
+
+/* ================= 纯战斗（不涉性） ================= */
+
+:: FS Morans Fight
+<<set _link to true>>
+<<set _f to finalStar.morFight()>>
+<<if not _f>><<goto "FS Morans Fight End">><</if>>
+<<if _f.over>><<goto "FS Morans Fight End">><</if>>
+<<set _pm to finalStar.morPainMax()>>
+你和对面的<<print _f.name>>贴得很近，谁都没退。
+<br><br>
+<span class="gold">第 <<print _f.round + 1>> 回合</span>
+<br>
+对方：<span class="red"><<print _f.ehp>> / <<print _f.emax>></span>
+<br>
+你的疼痛：<span class="red"><<print _f.php>> / <<print _pm>></span>
+<br><br>
+<<link [[出拳|FS Morans Fight]]>><<run finalStar.morFightAct('hit')>><</link>>
+<br>
+<<link [[踹一脚|FS Morans Fight]]>><<run finalStar.morFightAct('kick')>><</link>>
+<br>
+<<link [[推开他|FS Morans Fight]]>><<run finalStar.morFightAct('push')>><</link>>
+<br>
+<<link [[护住自己要害|FS Morans Fight]]>><<run finalStar.morFightAct('guard')>><</link>>
+
+:: FS Morans Fight End
+<<set _link to true>>
+<<set _f to finalStar.morFight()>>
+<<if not _f>>
+	街道恢复了平常的样子。你站在路沿边，喘了几口气。
+<<elseif _f.result is "win">>
+	<<set _tip to _f.tip>>
+	他膝盖一软，靠着墙滑下去，随即从口袋里掏出一把钱塞过来。
+	<br><br>
+	<<if _f.kind is "beggar">>
+		"拿着拿着——"他的声音发抖，"别叫警察。我不想再进去了，真的不想了。"
+		<br><br>
+		他把钱塞完，转身就跑，跑得很快，一只手还按着肋下。
+	<<elseif _f.kind is "guard">>
+		他松开手，退了半步，最后什么也没说，把帽子扶正，转身走了。
+	<<else>>
+		"我还有工作。"他喘着说，"迟到一次扣两百。我求你了，就这样吧。"
+		<br><br>
+		他把钱往你手里一塞，从你身边挤过去，走得很快，一边走一边把衬衫下摆往回塞。
+	<</if>>
+	<<if _tip gt 0>>
+		<br><br>
+		<span class="gold">小费 +<<print formatMoney(_tip)>></span>
+	<</if>>
+<<elseif _f.result is "lose">>
+	你听见自己的呼吸变得很远，膝盖先落地，然后是肩膀。
+	<br><br>
+	最后看见的是他往后退了一步，像是怕血溅到自己鞋上。
+	<br><br>
+	<span class="red">你被打倒了。</span>
+<<else>>
+	<<if _f.kind is "guard">>
+		他后退一步，把对讲机别回腰上，看了一眼四周，像是突然想起自己还有别的地方要巡。
+	<<elseif _f.kind is "beggar">>
+		他一缩，钻进巷子里不见了。
+	<<else>>
+		他看了眼手表，骂了一句，抽身往地铁口跑了。
+	<</if>>
+	<br><br>
+	你站在原地，肺里烧得厉害。
+<</if>>
+<<run finalStar.morFightEnd()>>
+<br><br>
+<<link [[回路口|FS Morans City]]>><</link>>
+
+/* ================= 高档小区 / 政府大厦 ================= */
+
+:: FS Morans Estate
+<<set _link to true>>
+高档小区的门是关着的。铁栅栏后面是修剪得很好的树和一排排独栋房子，保安亭的玻璃反着光。
+<br><br>
+你刚走近，亭子里的人就抬起头，隔着玻璃对你摆了摆手——不是打招呼，是让你走。
+<br><br>
+<<icon "finalstar/morans-estate.png">><<link [[往里张望|FS Morans Estate Garden]]>><</link>>
+<br>
+<<link [[走到门口|FS Morans Estate Gate]]>><</link>>
+<br>
+<<link [[回路口|FS Morans City]]>><</link>>
+
+:: FS Morans Government
+<<set _link to true>>
+政府大厦的台阶很高，两侧立着没有字的石柱。门口没有人排队，也没有人进出。
+<br><br>
+你站在台阶下看了一会儿，玻璃门后面有个影子动了一下，随即又不动了。
+<br><br>
+<<icon "finalstar/morans-government.png">><<link [[上台阶|FS Morans Government Steps]]>><</link>>
+<br>
+<<link [[回路口|FS Morans City]]>><</link>>
+
+/* ================= 住宅区 / 苏梦棠家 =================
+   用户的意见：家只有一个总入口、没有房间。现在照原版住宅的样子分：
+   楼门口 → 客厅（hub）/ 主卧 / 厨房 / 浴室，动作会消耗城市里的时间。 */
+
+:: FS Morans Home Base
+<<set _link to true>>
+<<set $outside to 1>><<set $location to "town">>
+住宅区的房子一栋挨一栋，楼下的树修得很低，晾衣杆横在两户之间。
+<br><br>
+苏梦棠住在四楼，没有电梯。楼道灯坏了两盏，踩上去一级一级响。
+<br><br>
+<span class="fs-sub"><<print finalStar.morClockText()>></span>
+<br><br>
+<<icon "finalstar/morans-home.png">><<link [[上楼敲门|FS Morans Home Flat]]>><</link>>
+<br>
+<<link [[回路口|FS Morans City]]>><</link>>
+
+:: FS Morans Home Flat
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">>
+门开的时候屋里的灯是亮着的。玄关很窄，鞋架上多摆了一双，是笙不瑜的。
+<br><br>
+客厅连着厨房，靠窗摆着一张旧沙发。苏梦棠在灶台边，回头看了你一眼："回来了。"
+<br><br>
+<span class="fs-sub"><<print finalStar.morClockText()>></span>
+<br><br>
+<<icon "finalstar/morans-living.png">><<link [[客厅|FS Morans Home Living]]>><</link>>
+<br>
+<<icon "finalstar/morans-home.png">><<link [[主卧|FS Morans Home Bed]]>><</link>>
+<br>
+<<icon "finalstar/morans-kitchen.png">><<link [[厨房|FS Morans Home Kitchen]]>><</link>>
+<br>
+<<icon "finalstar/morans-bath.png">><<link [[浴室|FS Morans Home Bath]]>><</link>>
+<br>
+<<link [[下楼|FS Morans Home Base]]>><</link>>
+
+:: FS Morans Home Living
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">>
+客厅不大：一张沙发、一台开着的电视、一张摊满练习册的矮桌。笙不瑜坐在电视前的地毯上，背对着门。
+<br><br>
+<<fs_mor_event "home_living" 0.18>>
+<<icon "finalstar/morans-living.png">><<link [[跟苏梦棠聊几句|FS Morans Home Chat]]>><</link>>
+<br>
+<<if finalStar.morSbyChatDay()>>
+	笙不瑜在做题，笔一直没停。
+	<br>
+<<else>>
+	<<link "问问笙不瑜的作业">><<goto "FS Morans Sby Talk">><</link>>
+	<br>
+<</if>>
+<<link [[看一会儿电视（0:20）|FS Morans Home TV]]>><</link>>
+<br>
+<<link [[回客厅|FS Morans Home Flat]]>><</link>>
+
+:: FS Morans Home TV
+<<set _link to true>>
+<<run finalStar.morPass(20)>>
+你在沙发上坐下。电视里在放一档很吵的节目，主持人的笑声一段一段地录好。
+<br><br>
+你其实没看进去，只是让那个声音在屋子里响着。
+<br><br>
+<<lstress>>
+<br><br>
+<span class="fs-sub"><<print finalStar.morClockText()>></span>
+<br><br>
+<<link [[回客厅|FS Morans Home Living]]>><</link>>
+
+:: FS Morans Home Bed
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">>
+主卧里摆着一张双人床，被子叠得很整齐。窗帘没拉严，街灯从缝里漏进来一条。
+<br><br>
+<span class="fs-sub"><<print finalStar.morClockText()>></span>
+<br><br>
+<<if finalStar.morClock() gte 21 * 60>>
+	<<link [[睡下（到第二天）|FS Morans Home Sleep]]>><</link>>
+	<br>
+<<else>>
+	<<link [[躺一会儿（0:30）|FS Morans Home Lie]]>><</link>>
+	<br>
+	<span class="fs-sub"></span>
+	<br>
+<</if>>
+<<link [[回客厅|FS Morans Home Flat]]>><</link>>
+
+:: FS Morans Home Lie
+<<set _link to true>>
+<<run finalStar.morPass(30)>>
+你和衣躺了一会儿。床垫有点软，屋外的声音隔着墙传进来，闷闷的。
+<br><br>
+<<ltiredness>> <<lstress>>
+<br><br>
+<<link [[起来|FS Morans Home Flat]]>><</link>>
+
+:: FS Morans Home Sleep
+<<set _link to true>>
+<<run finalStar.morNextDay()>>
+<<run finalStar.morSleepRestore()>>
+你睡下的时候窗帘缝里还有光，再睁眼的时候，屋里已经亮透了。
+<br><br>
+楼下有人在收晾干的衣服，铁杆滑过支架，响了一声。
+<br><br>
+<span class="fs-sub">（第 <<print finalStar.morDay()>> 天　·　<<print finalStar.morClockText()>>）</span>
+<br><br>
+<<link [[起床|FS Morans Home Flat]]>><</link>>
+
+:: FS Morans Home Kitchen
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">>
+厨房很小，灶台上坐着一口锅，抽油烟机嗡嗡地响。苏梦棠背对着门在切东西。
+<br><br>
+<<set _h to $fs_morKitchen>>
+<<if _h>>
+	<span class="gold"><<print _h>></span>
+	<br><br>
+	<<set $fs_morKitchen to "">>
+<</if>>
+<<fs_mor_event "home_kitchen" 0.35>>
+<<icon "finalstar/morans-kitchen.png">><<link [[吃一碗（0:30）|FS Morans Home Eat]]>><</link>>
+<br>
+<<link [[帮她打下手（0:30）|FS Morans Home Help]]>><</link>>
+<br>
+<<link [[回客厅|FS Morans Home Flat]]>><</link>>
+
+:: FS Morans Home Eat
+<<set _link to true>>
+<<run finalStar.morPass(30)>>
+<<run finalStar.morHomeEat()>>
+你盛了一碗，坐在厨房的小桌边吃完。锅里的东西很烫，吃到一半额头就出了汗。
+<br><br>
+<<print finalStar.statHint("饥饿", 1, "green")>>
+<br><br>
+<span class="fs-sub"><<print finalStar.morClockText()>></span>
+<br><br>
+<<link [[回厨房|FS Morans Home Kitchen]]>><</link>>
+
+:: FS Morans Home Help
+<<set _link to true>>
+<<run finalStar.morPass(30)>>
+你站在她旁边帮着洗菜、递东西。她没说什么，只是把切好的往你那边推了推。
+<br><br>
+<<lstress>>
+<br><br>
+<<link [[回厨房|FS Morans Home Kitchen]]>><</link>>
+
+:: FS Morans Home Bath
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">>
+浴室的门有点卡。镜子上蒙着一层水汽，架子上摆着三把牙刷。
+<br><br>
+<<fs_mor_event "home_bath" 0.35>>
+<<icon "finalstar/morans-bath.png">><<link [[洗个澡（0:20）|FS Morans Home Shower]]>><</link>>
+<br>
+<<link [[回客厅|FS Morans Home Flat]]>><</link>>
+
+:: FS Morans Home Shower
+<<set _link to true>>
+<<run finalStar.morPass(20)>>
+热水冲下来的时候，肩膀才慢慢松开。你在里面站了很久，直到镜子上什么都看不见。
+<br><br>
+<<run finalStar.morShower()>>
+<<lstress>> <<ltrauma>>
+<br><br>
+<<link [[擦干|FS Morans Home Flat]]>><</link>>
+
+:: FS Morans Home Chat
+<<set _link to true>>
+饭是热的。笙不瑜在客厅写作业，笔尖沙沙地响。
+<br><br>
+<<if finalStar.morChatToday()>>
+	苏梦棠在灶台边收拾碗筷，没多说什么。你们今天的对话已经结束了。
+<<else>>
+	<<link [[跟苏梦棠聊几句|FS Morans Home Chat Talk]]>><</link>>
+<</if>>
+<br>
+<<link [[回客厅|FS Morans Home Living]]>><</link>>
+
+:: FS Morans Home Chat Talk
+<<set _link to true>>
+<<run finalStar.morChat()>>
+你问了些这座城市的琐事——哪条街晚上不能走、公交几点收班、大厦几点熄灯。
+<br><br>
+她一条条答，答得很细，连哪家店半夜还开着门都说得出。说到一半她停下来，看了你一眼。
+<br><br>
+"你问得真细。"她笑了一下，"是想留下来吗？"　<<print finalStar.statHint('好感', 1, 'green')>>
+<br><br>
+<<set _coinGift to finalStar.morTryCoin()>>
+<<if _coinGift is "ok">>
+	她忽然想起什么，起身拉开抽屉，摸出一枚硬币，放在你手心里。
+	<br><br>
+	"拿着。"她说，"说不定哪天用得上。"
+	<br><br>
+<</if>>
+<<link [[回客厅|FS Morans Home Living]]>><</link>>
+
+/* ================= 学校（旁听 · 和笙不瑜一个班） =================
+   用户的意见：原来的「学校」只有选项、没有地点。现在照原版学校的样子分：
+   前操场（进门）→ 走廊 → 教室 / 图书馆 / 食堂 / 天台，另外操场可以跑步。
+   上课按科目来（数学 / 文学 / 历史 / 自习），一节 45 分钟，一天三节，成绩按科目涨。 */
+
+:: FS Morans School
+<<set _link to true>>
+<<set $outside to 1>><<set $location to "school">>
+校门口的铁栅栏漆成绿色，掉了一块，露出底下的锈。
+<br><br>
+前操场比想象中大，篮球架歪着，跑道上有人慢跑。教学楼在三楼，玻璃上贴着一排褪色的标语。
+<br><br>
+<span class="fs-sub"><<print finalStar.morClockText()>>　·　成绩 <<print finalStar.morGradeText()>>　·　今天还能上 <<print finalStar.morClassLeft()>> 节课</span>
+<br><br>
+<<fs_mor_event "school_yard" 0.35>>
+<<icon "finalstar/morans-run.png">><<link [[在跑道上跑一会儿（0:20）|FS Morans School Run]]>><</link>>
+<br>
+<<icon "finalstar/morans-class.png">><<link [[进教学楼|FS Morans School Hall]]>><</link>>
+<br>
+<<link [[回路口|FS Morans City]]>><</link>>
+
+:: FS Morans School Run
+<<set _link to true>>
+<<run finalStar.morPass(20)>>
+你绕着跑道跑了几圈。鞋底踩在塑胶上，声音一下一下地闷。
+<br><br>
+跑到第三圈的时候呼吸才顺过来，风把汗吹凉。
+<br><br>
+<<athletics 2>><<gtiredness>>
+<br><br>
+<span class="fs-sub"><<print finalStar.morClockText()>></span>
+<br><br>
+<<link [[再跑一会儿（0:20）|FS Morans School Run]]>><</link>>
+<br>
+<<link [[回教学楼|FS Morans School]]>><</link>>
+
+:: FS Morans School Hall
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "school">>
+走廊很长，地砖被鞋底磨得发亮。墙上一排奖状，纸都黄了，边角卷起来。
+<br><br>
+<span class="fs-sub"><<print finalStar.morClockText()>></span>
+<br><br>
+<<fs_mor_event "school_hall" 0.35>>
+<<icon "finalstar/morans-class.png">><<link [[教室|FS Morans School Class]]>><</link>>
+<br>
+<<icon "finalstar/morans-library.png">><<link [[图书馆|FS Morans School Library]]>><</link>>
+<br>
+<<icon "finalstar/morans-store.png">><<link [[食堂|FS Morans School Canteen]]>><</link>>
+<br>
+<<icon "finalstar/morans-roof.png">><<link [[上天台|FS Morans School Roof]]>><</link>>
+<br>
+<<link [[回前操场|FS Morans School]]>><</link>>
+
+:: FS Morans School Class
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "school">>
+教室里坐了大半。讲台上的人在写板书，粉笔灰落下来，在窗光里慢慢飘。
+<br><br>
+笙不瑜坐在靠窗第三排，书包挂在椅背上，课本立着。
+<br><br>
+<<set _left to finalStar.morClassLeft()>>
+<<if not finalStar.morSchoolOpen()>>
+	已经放学了。教室里只剩下值日的人在擦黑板，走廊那头有人在锁门。
+	<br><br>
+	<span class="fs-sub"></span>
+	<br><br>
+<<elseif _left lte 0>>
+	今天的课已经上完了。走廊里开始有人走动。
+	<br><br>
+<<else>>
+	<span class="fs-sub"></span>
+	<br><br>
+	<<fs_mor_event "school_class" 0.35>>
+<<link [[数学课（0:45）|FS Morans School Class Do]]>><<set $fs_morSubject to "maths">><</link>>
+	<br>
+	<<link [[文学课（0:45）|FS Morans School Class Do]]>><<set $fs_morSubject to "english">><</link>>
+	<br>
+	<<link [[历史课（0:45）|FS Morans School Class Do]]>><<set $fs_morSubject to "history">><</link>>
+	<br>
+	<<link [[自习（0:45）|FS Morans School Class Do]]>><<set $fs_morSubject to "study">><</link>>
+	<br>
+<</if>>
+<<if finalStar.morSbyChatDay()>>
+	笙不瑜在整理笔记，没空说话。
+<<else>>
+	<<link [[跟笙不瑜说说话|FS Morans Sby Talk]]>><</link>>
+	<br>
+<</if>>
+<<link [[出教室|FS Morans School Hall]]>><</link>>
+
+:: FS Morans School Class Do
+<<set _link to true>>
+<<set _r to finalStar.morTakeClass()>>
+<<if _r is "done">>
+	今天的三节课都已经上完了。你合上书，教室里只剩下收拾书包的声音。
+<<elseif $fs_morSubject is "maths">>
+	你在草稿纸上跟着板书算。前两道解得还顺，第三道卡住了，卡了很久，下课铃响的时候才勉强算出个答案。
+	<<mathsskill 2>><<gstress>>
+<<elseif $fs_morSubject is "english">>
+	这一节讲的是课文。老师让人朗读，没人举手，最后点了你。你磕磕巴巴地念完，坐下时耳朵有点热。
+	<<englishskill 2>><<gstress>>
+<<elseif $fs_morSubject is "history">>
+	这一节讲这座城以前的样子。老师说得很慢，黑板上的年份写了一遍又擦掉。你把它们都记下来了。
+	<<historyskill 1>><<lstress>>
+<<else>>
+	你只是把借来的课本摊开，把前面几页的笔记重抄了一遍。抄到后面，有些地方忽然就通了。
+	<<mathsskill 1>><<englishskill 1>><<lstress>>
+<</if>>
+<br><br>
+<span class="fs-sub">成绩 <<print finalStar.morGradeText()>>　·　<<print finalStar.morClockText()>></span>
+<br><br>
+<<link [[下课|FS Morans School Class]]>><</link>>
+
+:: FS Morans School Library
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "school">>
+图书馆在走廊尽头，比教室安静。书架的漆掉了一半，窗边摆着几张长桌。
+<br><br>
+<<fs_mor_event "school_library" 0.35>>
+<<icon "finalstar/morans-library.png">><<link [[找本书看（0:30）|FS Morans School Library Read]]>><</link>>
+<br>
+<<link [[抄笔记（0:20）|FS Morans School Library Notes]]>><</link>>
+<br>
+<<link [[回走廊|FS Morans School Hall]]>><</link>>
+
+:: FS Morans School Library Read
+<<set _link to true>>
+<<run finalStar.morPass(30)>>
+你从架子上抽出一本边角磨圆的书。翻了几页，字有点小，读着读着就慢下来了。
+<br><br>
+<<englishskill 1>><<lstress>>
+<br><br>
+<span class="fs-sub"><<print finalStar.morClockText()>></span>
+<br><br>
+<<link [[回图书馆|FS Morans School Library]]>><</link>>
+
+:: FS Morans School Library Notes
+<<set _link to true>>
+<<run finalStar.morPass(20)>>
+你把这几天的笔记摊开，按科目重新理了一遍。有的地方当时没听懂，现在再看，反倒清楚了。
+<br><br>
+<<mathsskill 1>><<lstress>>
+<br><br>
+<<link [[回图书馆|FS Morans School Library]]>><</link>>
+
+:: FS Morans School Canteen
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "school">>
+食堂的窗口还开着，托盘叠在一边，空气里是油和米饭的味道。
+<br><br>
+<<set _h to $fs_morCanteen>>
+<<if _h>>
+	<span class="gold"><<print _h>></span>
+	<br><br>
+	<<set $fs_morCanteen to "">>
+<</if>>
+<<fs_mor_event "school_canteen" 0.35>>
+<<link [[买一份饭（£5）|FS Morans School Canteen Buy]]>><</link>>
+<br>
+<<link [[坐一会儿（0:20）|FS Morans School Canteen Sit]]>><</link>>
+<br>
+<<link [[回走廊|FS Morans School Hall]]>><</link>>
+
+:: FS Morans School Canteen Buy
+<<set _link to true>>
+<<set _ok to finalStar.morCanteenBuy()>>
+<<if _ok is "ok">>
+	你把五块放在台面上。打饭的人舀了一勺扣在盘子里，米饭堆得很高。
+	<br><br>
+	你坐下来吃完。<<print finalStar.statHint("饥饿", 1, "green")>>
+<<else>>
+	口袋里的钱不够。你在窗口前站了一会儿，退开了。
+<</if>>
+<br><br>
+<<link [[回食堂|FS Morans School Canteen]]>><</link>>
+
+:: FS Morans School Canteen Sit
+<<set _link to true>>
+<<run finalStar.morPass(20)>>
+你在角落坐下，没买东西，只是把书包放在腿上。周围的人来得快去得也快。
+<br><br>
+<<lstress>>
+<br><br>
+<<link [[回食堂|FS Morans School Canteen]]>><</link>>
+
+:: FS Morans School Roof
+<<set _link to true>>
+<<set $outside to 1>><<set $location to "school">>
+天台的门没锁。推开的瞬间风灌进来，把衣角往身后拽。
+<br><br>
+整座城在下面铺开：横的横，竖的竖，中间那栋楼最高。远处有雾，压在城市的边上。
+<br><br>
+<<fs_mor_event "school_roof" 0.35>>
+<<icon "finalstar/morans-roof.png">><<link [[靠着栏杆吹风（0:30）|FS Morans School Roof Wind]]>><</link>>
+<br>
+<<link [[回走廊|FS Morans School Hall]]>><</link>>
+
+:: FS Morans School Roof Wind
+<<set _link to true>>
+<<run finalStar.morPass(30)>>
+你靠着栏杆站了很久。风一直没停，把脑子里的东西都吹散了一点。
+<br><br>
+<<lstress>> <<ltrauma>>
+<br><br>
+<span class="fs-sub"><<print finalStar.morClockText()>></span>
+<br><br>
+<<link [[回天台|FS Morans School Roof]]>><</link>>
+
+:: FS Morans Sby Talk
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "home">>
+<<run finalStar.morChatSby()>>
+你在她旁边坐下。
+<br><br>
+"旁听生也要考试。"她头也不抬地说，"你打算怎么办。"
+<br><br>
+"……凉拌。"
+<br><br>
+她停了一下，笔尖悬在纸上，然后很轻地笑了一声。
+<br><br>
+"那我把笔记借你。"　<<print finalStar.statHint('好感', 1, 'green')>>
+<br><br>
+<<link [[回教室|FS Morans School Class]]>><</link>>
+
+/* ================= 第 5 天：异变前置 ================= */
+
+:: FS Morans Anomaly Prelude
+<<set _link to true>>
+<<set $outside to 1>><<set $location to "town">>
+早上还很正常。
+<br><br>
+下午三点多，光先不对了——不是变暗，是颜色偏了。影子被拉得很长，朝着和太阳相反的方向。
+<br><br>
+街角的钟停在同一分钟。你抬头看了两次，秒针都没有动。
+<br><br>
+然后声音一层一层退掉。车还在开，人还在走，可是所有的响动都像隔着一层水。
+<br><br>
+信号灯的红变得格外红，绿的那盏干脆不亮了。
+<br><br>
+有人在路中间停下来，抬头看天。接着是第二个、第三个。
+<br><br>
+街边的广播"咔"了一声，放出一段杂音，里面反复念着同一句听不清的话。
+<br><br>
+<span class="red">太阳开始往下掉。</span>
+<br><br>
+不是落山。是往下掉。
+<br><br>
+你想起玖肆说过的那句话——<span class="grey">"十天之后，那些只存在于幻想里的东西，会从这边渗出来。"</span>
+<br><br>
+只是没到十天。
+<br><br>
+<<link [[往住宅区跑|FS Morans Anomaly]]>><</link>>
+
+/* ================= 第 5 天：世界开始异常 ================= */
+
+:: FS Morans Anomaly
+<<set _link to true>>
+<<set $outside to 1>><<set $location to "town">>
+<<run finalStar.morStartAnomaly()>>
+课间的时候，窗外忽然暗了一下。
+<br><br>
+不是云。太阳在往下降——不是落山那种落法，是<span class="red">掉</span>。它掉得很快，边缘先被烧红，然后整块压到楼顶后面去了。
+<br><br>
+天却没有黑。天上浮起来一轮红月，比太阳大，也比太阳近。
+<br><br>
+乌鸦从四面八方的屋顶上起来，落在电线、招牌、窗台上，全都在叫。
+<br><br>
+街上的声音变了。有人在跑，有人在喊，还有一种很低的、像布被撕开的声音，一阵一阵。
+<br><br>
+只有住宅区的方向还亮着。阳光好好的，晾衣杆上的衣服还在风里慢慢晃。
+<br><br>
+你想起来玖肆说过的话。
+<br><br>
+<span class="grey">"十天之后，那些只存在于幻想里的东西，会从这边渗出来。"</span>
+<br><br>
+只是没到十天。
+<br><br>
+你往住宅区的方向走。
+<br><br>
+走出十几步，心口忽然猛地一颤——像有一只手从里面攥住你的心脏，拧了一下，又松开。
+<br><br>
+那一瞬间，街上的声音全远了。远处有人在喊，声音像从水底传上来。
+<br><br>
+你扶着墙站稳，抬起头。
+<br><br>
+路不见了。
+<br><br>
+<<link [[继续走|FS Morans Lost]]>><</link>>
+
+/* ================= 时间遥变：四个方向都是「？」 ================= */
+
+:: FS Morans Lost
+<<set _link to true>>
+<<set _l to finalStar.morLost()>>
+<<if finalStar.morLostDone()>><<goto "FS Morans Lost Home">><</if>>
+时间在这里塌了一块。
+<br><br>
+不是黑，也不是裂缝——你看着它，它却没有在走。刚才那一下心口的颤还没散干净，像有人在你胸腔里按着一个开关。
+<br><br>
+路牌上的字全没了。四个方向都还在，每个方向写的东西却都一样：
+<br><br>
+<span class="red">？</span>　<span class="red">？</span>　<span class="red">？</span>　<span class="red">？</span>
+<br><br>
+<span class="fs-sub">（已经走对 <<print _l.prog>> / 4 步　·　选错 <<print _l.errors>> 次）</span>
+<<if _l.hint isnot "" and finalStar.morIsCoop()>>
+	<br><br>
+	<span class="teal">背后传来玖肆的声音，很轻：「往<<print finalStar.morDirName(_l.hint)>>。」</span>
+<</if>>
+<br><br>
+<<link [[往上|FS Morans Lost Try]]>><<set $fs_morDir to "up">><</link>>
+<br>
+<<link [[往下|FS Morans Lost Try]]>><<set $fs_morDir to "down">><</link>>
+<br>
+<<link [[往左|FS Morans Lost Try]]>><<set $fs_morDir to "left">><</link>>
+<br>
+<<link [[往右|FS Morans Lost Try]]>><<set $fs_morDir to "right">><</link>>
+
+:: FS Morans Lost Try
+<<set _link to true>>
+<<set _r to finalStar.morLostStep($fs_morDir)>>
+<<if _r.ok>>
+	你朝<<print finalStar.morDirName($fs_morDir)>>走。路在脚下重新接上，街灯一盏一盏亮起来——亮的是红光，但确实是灯。
+	<br><br>
+	<span class="green">（走对了，<<print _r.prog>> / 4）</span>
+<<else>>
+	你朝<<print finalStar.morDirName($fs_morDir)>>走。走了很久，抬头看见的还是同一块路牌。
+	<br><br>
+	<span class="red">（不对。你已经在这里绕了 <<print _r.errors>> 次。）</span>
+	<<if _r.hint isnot "" and finalStar.morIsCoop()>>
+		<br><br>
+		<span class="teal">「往<<print finalStar.morDirName(_r.hint)>>。」玖肆的声音贴着耳朵，"别自己乱走。"</span>
+	<</if>>
+<</if>>
+<br><br>
+<<link [[再看看路牌|FS Morans Lost]]>><</link>>
+
+:: FS Morans Lost Home
+<<set _link to true>>
+你最后拐过一个角，红月被楼挡住了。
+<br><br>
+这里的路灯是暖黄的，楼道口堆着几袋没收的垃圾，二楼有人在炒菜，油烟味顺着风下来。
+<br><br>
+住宅区一点异常都没有。抬头看，天是亮的。
+<br><br>
+苏梦棠家的窗户亮着灯。
+<br><br>
+<<link [[上楼|FS Morans Anomaly Home]]>><</link>>
+
+/* ================= 笙不瑜的对峙 ================= */
+
+:: FS Morans Anomaly Home
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">>
+门没有关严，留了一指宽的缝。
+<br><br>
+屋里灯是亮的，桌上摊着练习册，笔倒在旁边。苏梦棠不在。
+<br><br>
+笙不瑜跪坐在卧室的床上，双手捂着脸，肩膀一抽一抽的。
+<br><br>
+她听见门响，抬起头来。眼睛是红的，脸上没有妆，很干净，也很陌生。
+<br><br>
+<span class="red">"你为什么要背叛我。"</span>
+<br><br>
+"我们给了你最好的。"她说，"住在这里有什么不好？"
+<br><br>
+"外面有什么——"
+<br><br>
+"我七岁那年，在巷子里看见过一次。一个大人把一个女孩按在墙上，一只手捂着她的嘴。她的鞋掉了一只，滚到下水道口。我一直看着那只鞋，一直没敢动。"
+<br><br>
+"回家以后我洗了三遍手。到现在还能闻到那条巷子。"
+<br><br>
+"学校里——我的桌子被搬到走廊上，天天被搬到走廊上。课本被从窗户扔下去，我下楼去捡，回来的时候座位已经被人坐了。"
+<br><br>
+"值日表上永远是我。鞋子里被倒过拖把水，冬天穿一天。我的书包被人挂在女厕所门把手上，我去拿，他们就在走廊上笑，笑得整层楼都听得见。"
+<br><br>
+"他们喊我的名字，喊得像在叫一条狗。一开始我还应，后来不应了，他们就改成学狗叫。"
+<br><br>
+"老师看见了。老师说，'你别理他们就好了'。"
+<br><br>
+"成绩掉到倒数的时候，没有人问我怎么了。回家也没有人问。"
+<br><br>
+她停了一下，声音低下去，低到几乎听不见：
+<br><br>
+"苏梦棠是病死的。就死在我面前。我什么也做不了。"
+<br><br>
+"所以我做了这个地方。"她抬起头，"她跟我讲她家乡的样子，讲了很多年。我把她讲的那些全画下来了。"
+<br><br>
+"画得不好。有地方是错的。是我的错——我不干净，所以把这里弄脏了。"
+<br><br>
+"只要画假成真，只要它盖住现实……最后那点不幸也能一起抹掉。"
+<br><br>
+她伸出手。
+<br><br>
+<span class="red">"你回头吗。"</span>
+<br><br>
+<<link [[回头|FS Morans Back]]>><</link>>
+<br>
+<<link [[拒绝|FS Morans Refuse]]>><</link>>
+<<if finalStar.morHasCoin()>>
+	<br><br>
+	<span class="gold">口袋里那枚纪念币硌着腿。你也知道它该什么时候用。</span>
+	<br>
+	<<icon "finalstar/morans-coin.png">><<link [[掏出那枚硬币|FS Morans Coin]]>><</link>>
+<</if>>
+<<if finalStar.morHasDoll()>>
+	<br><br>
+	<span class="red">背包侧袋里那个东西一直在动。你不想承认它动了。</span>
+	<br>
+	<<icon "finalstar/morans-doll.png">><<link [[拿出那个巫毒娃娃|FS Morans Doll]]>><</link>>
+<</if>>
+
+/* ================= 卧室里的童话书 ================= */
+
+:: FS Book Find
+<<set _link to true>>
+回到卧室，床头柜上多了一样东西。
+<br><br>
+你确定昨天这里什么都没有。房间里没有别人进来的痕迹，窗户也关着。
+<br><br>
+它摆得很正，像一直在那里。
+<br><br>
+<<link [[继续|FS Book Inspect]]>><</link>>
+
+:: FS Book Inspect
+<<set _link to true>>
+<<set $fsData.bookFound to 1>>
+是一本棕色封面的童话书。
+<br><br>
+书脊上没有书名，边角磨得发白，像被人翻过很多次，又像很久没有人碰。
+<br><br>
+你翻开它。
+<br><br>
+<span class="gold">只有几页能翻动。</span>其余的书页像被粘死了，指甲抠进去，纸边都不动一下。你用了些力，整本书都没有一点要松开的意思。
+<br><br>
+<<link [[查看第一页|FS Book Menu]]>><</link>>
+
+:: FS Book Menu
+<<set _link to true>>
+<<icon "finalstar/book-brown.png">>　棕色封面的童话书
+<br><br>
+<<if not finalStar.bookUnlocked().length>>
+	第一页是空白的。你合上书，它安安静静地待在床头柜上。
+<<else>>
+	你翻到能翻动的那几页。
+	<br><br>
+	<<if finalStar.bookHas("a")>>
+		<<link "翻开这一页 · 兵将疾行">><<goto "FS Book Page A">><</link>>　<span class="fs-sub">第 <<print finalStar.bookPageNo("a")>> 页</span><br>
+	<</if>>
+	<<if finalStar.bookHas("b")>>
+		<<link "翻开这一页 · 爱">><<goto "FS Book Page B">><</link>>　<span class="fs-sub">第 <<print finalStar.bookPageNo("b")>> 页</span><br>
+	<</if>>
+	<<if finalStar.bookHas("c")>>
+		<<link "翻开这一页 · 崩坏">><<goto "FS Book Page C">><</link>>　<span class="fs-sub">第 <<print finalStar.bookPageNo("c")>> 页</span><br>
+	<</if>>
+	<<if finalStar.bookHas("d")>>
+		<<link "翻开这一页 · 留影">><<goto "FS Book Page D">><</link>>　<span class="fs-sub">第 <<print finalStar.bookPageNo("d")>> 页</span><br>
+	<</if>>
+	<<if finalStar.bookHas("e")>>
+		<<link "翻开这一页 · 无声的第十天">><<goto "FS Book Page E">><</link>>　<span class="fs-sub">第 <<print finalStar.bookPageNo("e")>> 页</span><br>
+	<</if>>
+<</if>>
+<br>
+<<link [[合上书|Bedroom]]>><</link>>
+
+:: FS Book Page A
+<<set _link to true>>
+<span class="gold">「如果你读到这里，说明你没有回头。」</span>
+<br><br>
+「棠棠说她早知道你会这么选。她总是把最难的那条路留给自己，把好走的那条留给你。」
+<br><br>
+「我们没有怪你。你走的时候，那座城还在；你走后，它才真的开始塌。」
+<br><br>
+<span class="fs-sub">—— 苏梦棠　笙不瑜</span>
+<br><br>
+你想起来那条走廊。你说「不」。她的手停在半空，然后整座城市开始碎。你跑下楼梯，穿过塌下来的街，跑回现实。醒来的时候天已经亮了，手心里全是灰。
+<br><br>
+你把那一页看了两遍，才翻回来。
+<br><br>
+<span class="gold">梦中棠溪过，笙苏不渝</span>
+<br><br>
+<<link [[合上书|FS Book Menu]]>><</link>>
+
+:: FS Book Page B
+<<set _link to true>>
+<span class="gold">「那枚硬币是我们一起埋的。」</span>
+<br><br>
+「你说你不想欠谁。可有些东西不是欠，是有人愿意给。」
+<br><br>
+「你把硬币抛起来的时候，我们都在看你。」
+<br><br>
+<span class="fs-sub">—— 苏梦棠　笙不瑜</span>
+<br><br>
+硬币在空中转了很久。落下来的时候，光把三个人照在一起。城市没有塌，只是慢慢淡下去，街上的灯一盏一盏灭掉，声音也跟着退远。
+<br><br>
+你记得那天的风，记得手心里的温度。
+<br><br>
+<span class="gold">梦中棠溪过，笙苏不渝</span>
+<br><br>
+<<link [[合上书|FS Book Menu]]>><</link>>
+
+:: FS Book Page C
+<<set _link to true>>
+<span class="gold">「你用了那个娃娃。」</span>
+<br><br>
+「她没有恨你。她到最后都在说对不起——对不起把你卷进来，对不起没能带你走。」
+<br><br>
+「如果重来一次，我们希望你还是别用它。可我们知道你会用。」
+<br><br>
+<span class="fs-sub">—— 苏梦棠　笙不瑜</span>
+<br><br>
+针扎下去的时候，走廊那头的影子晃了一下，像被风吹灭的灯。城市从中间裂开。魔女把一张死亡报告交到你手里，纸是冷的。
+<br><br>
+你一直没敢再打开它。
+<br><br>
+<span class="gold">梦中棠溪过，笙苏不渝</span>
+<br><br>
+<<link [[合上书|FS Book Menu]]>><</link>>
+
+:: FS Book Page D
+<<set _link to true>>
+<span class="gold">「你回头了。」</span>
+<br><br>
+「那一瞬间她抱得很紧，紧到你都听见她心跳很快。她其实很怕你真的走掉。」
+<br><br>
+「谢谢你回头。哪怕只有这一次。」
+<br><br>
+<span class="fs-sub">—— 苏梦棠　笙不瑜</span>
+<br><br>
+你朝她走过去。她扑进你怀里，声音在你耳边发抖。然后是从胸口最里面拧出来的疼，红色的疼，一层一层盖住眼睛。
+<br><br>
+再睁开眼时，你在自己的床上。窗帘是老样子，楼下有人说话。
+<br><br>
+<span class="gold">梦中棠溪过，笙苏不渝</span>
+<br><br>
+<<link [[合上书|FS Book Menu]]>><</link>>
+
+:: FS Book Page E
+<<set _link to true>>
+<span class="gold">「第十天，你站在路口，什么都没做。」</span>
+<br><br>
+「我们也在等。等到光落下来，等到那座城自己合上。」
+<br><br>
+「不怪你。有些人只能在旁边看着。」
+<br><br>
+<span class="fs-sub">—— 苏梦棠　笙不瑜</span>
+<br><br>
+红月一点一点往下掉，影子朝四面八方拉长。大钟敲了一下就停了。你站在路口，什么也没做。
+<br><br>
+光从大厦的方向涌过来，白得没有声音。
+<br><br>
+<span class="gold">梦中棠溪过，笙苏不渝</span>
+<br><br>
+<<link [[合上书|FS Book Menu]]>><</link>>
+
+:: FS Book Test
+<<set _link to true>>
+<<run finalStar.mor().stage = 'done'>>
+<<if not finalStar.mor().ending>><<run finalStar.morEnd('e')>><</if>>
+<<if not finalStar.mor().endings>><<run finalStar.mor().endings = [finalStar.mor().ending]>><</if>>
+<<goto "FS Book Find">>
+
+/* ================= 结局 E：无声的第十天 ================= */
+
+:: FS Console Endings
+<<set _link to true>>
+【结局预览】直接写入对应结局（会改存档状态，测完可用「重置」清掉）
+<br><br>
+<<link "A · 兵将疾行">><<run finalStar.morEnd('a')>><<run finalStar.morExit()>><<goto "FS Morans Wake Up">><</link>>
+<br>
+<<link "B · 爱">><<run finalStar.morEndB()>><<run finalStar.morExit()>><<goto "FS Morans Wake Up">><</link>>
+<br>
+<<link "C · 崩坏（玖肆死亡）">><<run finalStar.morEndC()>><<run finalStar.morExit()>><<goto "FS Morans Wake Up">><</link>>
+<br>
+<<link "D · 留影">><<run finalStar.morEnd('d')>><<run finalStar.morExit()>><<goto "FS Morans Wake Up">><</link>>
+<br>
+<<link "E · 无声的第十天">><<goto "FS Morans Ending Nothing">><</link>>
+<br><br>
+<span class="fs-sub">「玖肆　死亡」是 C 结局的状态（写在我们自己的社交/声誉补丁里），不是凭空出现的。</span>
+<br>
+<<link "玖肆回归（清除死亡/失踪，好感回到 50）">><<run finalStar.morCheat('revive')>><<goto "FS Console Endings">><</link>>
+<br><br>
+<<link [[回城市|FS Morans City]]>><</link>>
+
+:: FS Morans Ending Nothing
+<<set _link to true>>
+<<set $outside to 1>><<set $location to "town">>
+<<run finalStar.morEndingMigrate()>>
+九天里，你什么都没有做。
+<br><br>
+你照常起床、照常吃饭、照常在街上走一圈，然后回房间。钟照常走，红月照常低。你只是不去碰任何一件该做的事。
+<br><br>
+第九天，雾开始涨了。不是漫过来，是立起来。
+<br><br>
+第十天深夜，大门被猛地撞开。玖肆带着一身寒气冲进来，抓住你的胳膊往外推。她脸上有伤，声音哑得厉害：
+<br><br>
+<span class="gold">"跑。"</span>
+<br><br>
+你顺着她推的方向闷头跑。雾在身后合拢，街灯一盏一盏灭掉。
+<br><br>
+跑到雾的边缘，你才敢回头。
+<br><br>
+她横身挡在路中间，没有再往前一步。
+<br><br>
+你低头，发现手里多了一小片深色外套布，撕裂的边缘还是新的口子，不是你的。
+<br><br>
+<<run finalStar.morEnd('e')>>
+<<run finalStar.morExit()>>
+<<link [[闭上眼睛|FS Morans Ending Nothing End]]>><</link>>
+
+:: FS Morans Ending Nothing End
+<<set _link to true>>
+白。
+<br><br>
+没有声音，没有风，也没有疼。
+<br><br>
+再睁开眼的时候，你在自己的床上。窗帘是老样子，楼下有人在说话，声音很正常。
+<br><br>
+手机上的日期是一个你认得的日期。
+<br><br>
+什么都没有发生过——至少街上是这样。
+<br><br>
+只是从那以后，你偶尔会在夜里醒过来，想起那座城市，想起那轮一直往下掉的月亮，想起那个站在路口、什么都没做的人。
+<br><br>
+那是你。
+<br><br>
+<span class="fs-sub">结局 · 无声的第十天</span>
+<br><br>
+<<print finalStar.morAftermath()>>
+<br><br>
+<<link [[起来|Bedroom]]>><</link>>
+
+:: FS Morans Back
+<<set _link to true>>
+你朝她走过去。
+<br><br>
+她扑过来，把你抱进怀里，抱得很紧，像是怕你消失。
+<br><br>
+"我就知道。"她说，声音在你耳边发抖，"我就知道你会回来的。"
+<br><br>
+然后你感到一阵酸心的疼痛——不是被撞到的那种，是从胸口最里面拧出来的。
+<br><br>
+<<run finalStar.morEnd('a')>>
+<<run finalStar.morSetJiusiMissing(12)>>
+<<run finalStar.morExit()>>
+<<run finalStar.morPainStorm(30)>>
+<<if finalStar.morIsSolo()>><<run finalStar.morWhiteSlip('玖肆：请坚持住——别答应她')>><</if>>
+<span class="red">疼。</span>
+<br><br>
+<span class="red">疼。</span>　<span class="red">疼。</span>　<span class="red">疼。</span>
+<br><br>
+眼前全是红的，什么都看不清了。
+<br><br>
+<<run finalStar.morEnd('d')>>
+<<run finalStar.morExit()>>
+<<link [[醒过来|FS Morans Wake Up]]>><<run finalStar.morStormClear()>><</link>>
+
+:: FS Morans Refuse
+<<set _link to true>>
+"不。"你说。
+<br><br>
+她的手停在半空。
+<br><br>
+<<if finalStar.morIsCoop()>>
+	身后有脚步声。玖肆从门口走进来，站到你侧面半步的位置。
+	<br><br>
+	"你先走。"她说，眼睛没有离开床上那个人，"这儿我来。"
+	<br><br>
+	你退到门口，回了一次头。屋里的光已经不对了。
+	<br><br>
+	你咬紧牙关冲下楼梯。脚下的砖石一块一块裂开，整条街的建筑像被抽掉了骨头的布景，往里塌。
+	<br><br>
+	你穿过漫天烟尘，在巷尾推开那扇生锈的铁门。门缝合拢前的最后一秒，你又回了一次头——
+	<br><br>
+	她一个人站在破裂的街心，猎枪横在身前，那件黑外套被红光整个染透。
+	<br><br>
+	<<run finalStar.morEnd('a')>>
+	<<run finalStar.morExit()>>
+	你心口一颤。
+	<br><br>
+	<<link [[……|FS Morans Wake Up]]>><</link>>
+<<else>>
+	"我知道你会这么说。"她慢慢把手放下来，"那你就走吧。下楼，往中间那栋楼去，从后门出去。"
+	<br><br>
+	"路上的东西不会让你过去。"
+	<br><br>
+	你转身往楼下跑。
+	<br><br>
+	<<link [[往下跑|FS Morans Chase]]>><</link>>
+<</if>>
+
+/* ---- 单人·最终逃跑（迷途追逐）：每走一步，身后的东西就更近一点，
+        街道的描述会被红色的「留下」一点点替换掉 ---- */
+
+:: FS Morans Chase
+<<set _link to true>>
+有个声音贴着你后颈，很近：「往中间那栋楼去。别停。」
+<br><br>
+第一家店的招牌原本写着「面包」。现在上面只剩一个字：<span class="red">留下</span>。
+<br><br>
+<<link [[往前跑|FS Morans Chase 2]]>><</link>>
+<br>
+<<link [[拐进巷子|FS Morans Chase 2b]]>><</link>>
+
+:: FS Morans Chase 2
+<<set _link to true>>
+你跑过第二条街。招牌、海报、公交站牌上的字全被替换了，一行行全是同样的两个字。
+<br><br>
+<span class="red">留下　留下　留下　留下</span>
+<br><br>
+身后的脚步声变多了。不是一个，是很多个，踩在同一个节拍上。
+<br><br>
+<<link [[继续往前|FS Morans Chase 3]]>><</link>>
+
+:: FS Morans Chase 2b
+<<set _link to true>>
+巷子比外面还暗。墙上有人用红漆反复写同一个词，写到墙皮都花了。
+<br><br>
+<span class="red">留下　留下　留下</span>
+<br><br>
+你从巷口冲出去，回到大路上。那栋楼就在前面，玻璃幕墙上的字还是原来的字。
+<br><br>
+<<link [[冲向大厦|FS Morans Chase 3]]>><</link>>
+
+:: FS Morans Chase 3
+<<set _link to true>>
+你跑到台阶下的时候，身后的东西已经不用猜了——它的影子铺过整条街，把路灯一盏一盏吞掉。
+<br><br>
+一只手抓住了你的肩膀。
+<br><br>
+然后那只手被撞开了。
+<br><br>
+一抹白色的身影从侧面插进来，落在你和那东西之间。短发，猎枪，外套下摆被风掀起。
+<br><br>
+"跑。"玖肆没有回头，"后门。现在。"
+<br><br>
+你跑了。跑进后门的那一刻，身后传来一声很闷的巨响，整栋楼都在抖。
+<br><br>
+门合上前的最后一眼：她背对着你站在街心，猎枪横在身前，黑外套被红光整个染透。
+<br><br>
+<<run finalStar.morEnd('a')>>
+<<run finalStar.morExit()>>
+你再醒过来的时候，人已经在孤儿院的床上。
+<br><br>
+<span class="fs-sub">（兵将疾行。玖肆失联——接下来十二天，你不会再见到她。）</span>
+<br><br>
+<<link [[起来|Bedroom]]>><</link>>
+
+/* ---- B 结局：掏出纪念币 ---- */
+
+:: FS Morans Coin
+<<set _link to true>>
+你把那枚硬币捏在指间，举到她面前。
+<br><br>
+是苏梦棠给你的那枚。边缘被磨得发亮，正面压着一个很浅的图案——像一座城，也像一朵花。
+<br><br>
+笙不瑜的表情停住了。
+<br><br>
+"……那是她的。"她的声音一下子散了，"她把这个给你了？"
+<br><br>
+"她给你的？"她又问了一遍，像是在确认一件她不想确认的事。
+<br><br>
+你把硬币翻过来。背面有一行更浅的字，是她自己刻的：<span class="gold">「好好活着」</span>。
+<br><br>
+笙不瑜的手开始抖。屋子里那些不对劲的地方——墙角的暗影、天花板上慢慢爬动的纹路——全都停住了。
+<br><br>
+"她说过这句话。"她说，"她也对我这么说过。"
+<<if finalStar.morAffGet('sby') gte 40>>
+	<br><br>
+	她看了你一眼，那一眼很长。"你在这儿的这些天……"她没有说完，摇了摇头，"算了。"
+<</if>>
+<br><br>
+执念松了。像一根绷了太久的线，从中段慢慢散开。
+<br><br>
+城市开始褪色。窗外的红月暗下去，街上的东西一件一件变回它们原来的样子。
+<br><br>
+笙不瑜跪坐在床上，身体正在变得透明。
+<br><br>
+<span class="red">"我撑不住了。"</span>她抬起头，居然在笑，<span class="red">"这些本来就不该存在。是我借的。"</span>
+<br><br>
+她最后看了一眼窗外。
+<br><br>
+<<run finalStar.morEndB()>>
+<<run finalStar.morExit()>>
+恍惚之间，你看见两个影子。
+<br><br>
+一个高一点，一个矮一点。她们牵着彼此的手，往光很亮的地方走，谁都没有回头。
+<br><br>
+原本凝滞的空气忽然裂开。一只冰凉、很稳的手扣住你的手腕，把你从那道正在合拢的缝里拽了出去。
+<br><br>
+耳边只剩她一声很轻的喘："抓紧。"
+<br><br>
+再睁眼时，四周已经安静下来。那枚硬币还硌在手心里，被汗浸得温热。你翻过来，背面朝上——<span class="gold">「好好活着」</span>。
+<br><br>
+远处的城市正在一点点变淡，灯一盏一盏灭掉。苏梦棠和笙不瑜并肩走在长街尽头，牵着手，走进白光里。
+<br><br>
+<span class="fs-sub">（笙不瑜失去了执念，奇迹的透支让她彻底死去；苏梦棠与笙不瑜一起离开了。）</span>
+<br><br>
+<<link [[……|FS Morans Wake Up]]>><</link>>
+
+/* ---- C 结局：拿出巫毒娃娃 ---- */
+
+:: FS Morans Doll
+<<set _link to true>>
+你从背包侧袋里把那个东西掏出来。
+<br><br>
+它说不上是什么做的。布面的颜色是脏的，针脚歪斜，脸上一共缝了三只眼睛——而且你确定，买它的时候是两只。
+<br><br>
+笙不瑜看见它的瞬间，整个人僵住了。
+<br><br>
+"你从哪儿拿到的。"她的声音变了，变了不止一点，"你从哪儿拿到的——"
+<br><br>
+她猛地缩到床角，抱着头，指甲抓进自己的头发里。
+<br><br>
+"拿开。拿开拿开拿开——"
+<br><br>
+娃娃在你手里转了一下。没有人碰它。
+<br><br>
+屋子里的光开始一块一块地掉。墙面裂开的声音像有人在你耳朵里撕纸。笙不瑜的哭喊变成了一种持续的、没有词的尖叫。
+<br><br>
+城市从窗外的街角开始崩。红月碎成一片一片往下掉，掉到哪儿，哪儿就什么都没有了。
+<br><br>
+屋子塌下来之前，有人从侧面把你撞开。温热的血腥气一闪而过，所有的重量都被隔在那一具单薄的脊背外面。
+<br><br>
+<<run finalStar.morEndC()>>
+<<run finalStar.morExit()>>
+<span class="red">你在孤儿院的床上醒来。</span>
+<br><br>
+天亮着。楼下有人在说话。一切都正常得让人想吐。
+<br><br>
+你摸了摸口袋，摸到半块硬糖——不是你的。糖纸被体温焐得发软，像是揣了很久。
+<br><br>
+那天以后，你再也没见过玖肆。
+<br><br>
+<<link [[起来|Bedroom]]>><</link>>
+
+:: FS Morans Wake Up
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "home">>
+<span class="fs-sub">结局 · <<print finalStar.morEndName($fsData ? $fsData.mor.ending : "")>></span>
+<br><br>
+你醒在自己的床上。
+<br><br>
+是孤儿院那间卧室。窗外是平常的天，楼下有人在说话，声音很正常。被子还是你离开时那个样子。
+<br><br>
+你坐起来，摸了摸胸口。不疼。
+<br><br>
+<<print finalStar.morAftermath()>>
+<br><br>
+
+<br><br>
+<<link [[起来|Bedroom]]>><</link>>
+
+
+
+/* ================= 城市服装店（原版组件，专属店标） ================= */
+:: FinalStar City Shop [widget]
+<<widget "finalstar_cityShop-main">>
+	<<set $outside to 0>><<set $location to "town">><<set $shopName to "finalstar_city">>
+	<<run finalStar.morShopVanillaInit()>>
+	<<run finalStar.morShopUnlockAll()>>
+	<<unset $clothes_choice>>
+	<div id="clothes-list" class="clothes-list"><<clothingShopv2 $shopName "upper">></div>
+<</widget>>
+
+/* 原版「返回商店」在我们店是坏按钮：覆盖掉，只在城市店换成「出去」 */
+<<widget "exitclothingshop">>
+	<<if $shopName is "finalstar_city">>
+		<div class="button-back-to-shop div-link">
+			<<link "出去">><<run finalStar.morShopRestoreLocks()>><<set $shopName to "clothing">><<set $bus to "danube">><<set $location to "town">><<goto "FS Morans Street">><</link>>
+		</div>
+	<<else>>
+		<div class="button-back-to-shop div-link">
+			<<if $clothes_choice and $shopDefaults.alwaysBackToShopButton is false>>
+				<<link "Back">><<unset $clothes_choice>><<updateclotheslist>><<set $retrieveShopCustomColor to {}>><</link>>
+			<<else>>
+				<<link "Back to shop">><<unset $clothes_choice>><<updateclothingshop>><<set _shopNameFilter to "">><<set $retrieveShopCustomColor to {}>><</link>>
+			<</if>>
+		</div>
+	<</if>>
+<</widget>>
+
+/* ================= 原版小镇随机事件 ================= */
+
+:: FS Town Event
+<<set _link to true>>
+<<if not finalStar.townEventNow()>><<set $fsData.townEventKey to random(0, 7)>><</if>>
+<<set _ev to finalStar.townEventNow()>>
+<<if not _ev>>
+	<<goto "Bedroom">>
+<<else>>
+	<<print _ev.t>>
+	<br><br>
+	<<link [[做点什么|FS Town Event Do]]>><<set $fs_townChoice to "a">><</link>>
+	<br>
+	<<link [[不理会|FS Town Event Do]]>><<set $fs_townChoice to "b">><</link>>
+<</if>>
+
+:: FS Town Event Do
+<<set _link to true>>
+<<set _r to finalStar.townEventResolve($fs_townChoice)>>
+<<print _r>>
+<br><br>
+<<set _back to finalStar.townEventReturn()>>
+<<if finalStar.hasPassage(_back)>>
+	<<goto _back>>
+<<else>>
+	<<goto "Bedroom">>
+<</if>>

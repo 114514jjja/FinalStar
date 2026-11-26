@@ -1,0 +1,87 @@
+:: FinalStar Casino [widget]
+/* ============================================================
+   终星 FinalStar —— 赌场（规划书 119）
+   赌场内高潮：一群人耻笑、扔筹码、要求再表演一个
+   赌场内昏倒：被绑在机子上（接原版赌场昏倒流程）
+   ============================================================ */
+
+:: FS Casino Orgasm
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<set _chips to finalStar.casinoOrgasmResult()>>
+你没能忍住。
+<br><br>
+那一下颤抖从脊椎一路窜上来，你的手指在筹码堆里抓空，整个人趴在赌桌边缘，腿软得撑不住身体。你听见自己的声音——在这片嗡嗡作响的大厅里，那声音清楚得可怕。
+<br><br>
+赌桌停了一瞬。
+<br><br>
+然后是一阵哄笑。
+<br><br>
+"哟——"有人吹了声口哨，"这也能到？"
+<br><br>
+"喂，看看这边，她刚才那一下！"
+<br><br>
+有人把筹码朝你扔过来，一枚打在你肩上，弹到地上，滚了两圈。接着是第二枚、第三枚——不是给你钱，是像喂狗一样丢过来。荷官面无表情地推了推眼镜，没有阻止任何人。
+<br><br>
+"再来一个！"人群里有人喊。
+<br><br>
+"对，再来一个！这次我们给你加注！"
+<br><br>
+/* ⚠️ 数值已经在 finalStar.casinoOrgasmResult() 里结算过了（+60 压力 / +40 创伤 / 性奋降到 25%）。
+   这里原来又写了一遍：`<<set _stress to 60>>` 写的是**临时变量**（不生效），
+   而 `<<set $trauma += 40>>` 是**真的生效** —— 于是创伤被加成 +80，与压力 +60 不对称。
+   删掉这份重复结算，只保留下面的原生提示宏。 */
+<<gstress>> <<gtrauma>> <span class="gold">筹码 +<<print _chips / 100>> 枚（被人扔过来的）</span>
+<br><br>
+<span class="pink">你慢慢直起身，脸上烫得发麻。这一晚，大厅里至少有三十个人记住了你的脸。</span>
+<br><br>
+<<link [[整理好衣服，回大厅|Casino Jiusi Lobby]]>><<pass 5>><</link>>
+<br>
+<<link [[顺着他们的话，再来一次（性奋 +）|FS Casino Encore]]>><</link>>
+
+:: FS Casino Encore
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<set _gain to 3000>>
+<<if $backgroundTraits.includes("媚药改造")>><<set _gain *= 2>><</if>>
+<<arousal _gain>>
+你扶着赌桌，没有走。
+<br><br>
+人群的声音一下子高了起来。有人真的把筹码推到桌子中央，荷官犹豫了一下，居然没有反对。
+<br><br>
+"看吧，"有人笑着说，"我就说她来劲了。"
+<br><br>
+<<set $stress += 50>><<set $trauma += 30>>
+<<garousal>>　<<gstress>>　<<gtrauma>>
+<br><br>
+<<if $arousal gte $arousalmax>>
+	你的身体比你诚实——它又一次替你把话说了出来。
+	<br><br>
+	大厅里响起一片更响的哄笑和掌声。
+	<br><br>
+	<<set _chips to finalStar.casinoOrgasmResult()>>
+	<span class="gold">筹码 +<<print _chips / 100>> 枚</span>
+	<br><br>
+<</if>>
+<<if finalStar.casinoFaintCheck()>>
+	<<run finalStar.casinoFaintResult()>>
+	视野开始发白。人群的声音像是隔了一层水。你听见有人在笑，然后什么也听不见了。
+	<br><br>
+	<<link [[……|Casino Jiusi Pass Out]]>><</link>>
+<<else>>
+	<<link [[够了，回大厅|Casino Jiusi Lobby]]>><<pass 5>><</link>>
+<</if>>
+
+:: FS Casino Faint
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<run finalStar.casinoFaintResult()>>
+你抓着筹码的手忽然松了。
+<br><br>
+筹码落在地上，发出很轻的一串响声。你想说点什么，但声音没有出来——视野从边缘开始变白，然后收成一条线。
+<br><br>
+倒下之前，你看见荷官站了起来，看见有人绕过赌桌朝你走过来。他们的脸都很平静，像是见过很多次这种事。
+<br><br>
+<span class="red">你昏了过去。</span>
+<br><br>
+<<link [[……|Casino Jiusi Pass Out]]>><</link>>

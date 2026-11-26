@@ -1,0 +1,610 @@
+{
+  "name": "FinalStar",
+  "nickName": {
+    "en": "Final Star",
+    "cn": "终星"
+  },
+  "version": "v0.28",
+  "description": "终星：魔书三系魔法与刻印、魔女小屋、地下洞穴三层、手枪与战斗物资面板、玖肆线与贝利线、赌场、银行与代理缴费、埋尸扩展、饥饿/理智/感染、排水系统尽头的实验室、长线剧情「莫伦斯」（三结局）、控制台与响尾蛇系统、设置面板（含 MyFirstMod 全部内容，已是同一个模组）。",
+  "styleFileList": [
+    "css/finalstar.css"
+  ],
+  "scriptFileList": [],
+  "scriptFileList_inject_early": [
+    "jiusiSetup.js",
+    "framework.js",
+    "fs-core.js",
+    "fs-jiusi.js",
+    "fs-combat.js",
+    "fs-settings.js",
+    "fs-events.js",
+    "fs-witch.js",
+    "fs-cave.js",
+    "fs-bank.js",
+    "fs-corpse.js",
+    "fs-school.js",
+    "fs-casino.js",
+    "fs-item.js",
+    "fs-links.js",
+    "fs-star.js",
+    "fs-duel.js",
+    "fs-book.js",
+    "fs-legacy.js",
+    "fs-storybattles.js",
+    "fs-cheat.js",
+    "fs-food.js",
+    "fs-lab.js",
+    "fs-morans.js",
+    "fs-rattlesnake.js",
+    "fs-talent.js",
+    "fs-talent-effects.js",
+    "fs-succubus.js"
+  ],
+  "tweeFileList": [
+    "twee/FinalStarSettings.twee",
+    "twee/FinalStarCombat.twee",
+    "twee/FinalStarWitch.twee",
+    "twee/FinalStarInfect.twee",
+    "twee/FinalStarCave.twee",
+    "twee/FinalStarBank.twee",
+    "twee/FinalStarCorpse.twee",
+    "twee/FinalStarSchool.twee",
+    "twee/FinalStarCasino.twee",
+    "twee/FinalStarStar.twee",
+    "twee/FinalStarFood.twee",
+    "twee/MyModNote.twee",
+    "twee/FinalStarHunger.twee",
+    "twee/FinalStarLab.twee",
+    "twee/FinalStarUtil.twee",
+    "twee/FinalStarMorans.twee"
+  ],
+  "imgFileList": [
+    "img/misc/icon/finalstar/skill-heal.png",
+    "img/misc/icon/finalstar/skill-assault.png",
+    "img/misc/icon/finalstar/skill-soulshake.png",
+    "img/misc/icon/finalstar/seal-assault.png",
+    "img/misc/icon/finalstar/seal-firststrike.png",
+    "img/misc/icon/finalstar/seal-counter.png",
+    "img/misc/icon/finalstar/seal-alchemy.png",
+    "img/misc/icon/finalstar/bullet-soft.png",
+    "img/misc/icon/finalstar/bullet-silver.png",
+    "img/misc/icon/finalstar/bullet-normal.png",
+    "img/misc/icon/finalstar/bullet-silverrune.png",
+    "img/misc/icon/finalstar/bullet-blackrune.png",
+    "img/misc/icon/finalstar/pistol-standard.png",
+    "img/misc/icon/finalstar/scroll-bless.png",
+    "img/misc/icon/finalstar/scroll-curse.png",
+    "img/misc/icon/finalstar/medal-witness.png",
+    "img/misc/icon/finalstar/cave-entrance.png",
+    "img/misc/icon/finalstar/cave-floor1.png",
+    "img/misc/icon/finalstar/cave-floor2.png",
+    "img/misc/icon/finalstar/cave-floor3.png",
+    "img/misc/icon/finalstar/ui-settings.png",
+    "img/misc/icon/finalstar/ui-overview.png",
+    "img/misc/icon/finalstar/ui-future.png",
+    "img/misc/icon/finalstar/ui-notice.png",
+    "img/misc/icon/finalstar/shop-witch-house.png",
+    "img/misc/icon/finalstar/npc-celeste.png",
+    "img/misc/icon/casino/casino-sign.png",
+    "img/misc/icon/casino/chip-red.png",
+    "img/misc/icon/casino/chip-blue.png",
+    "img/misc/icon/casino/chip-gold.png",
+    "img/misc/icon/casino/card.png",
+    "img/misc/icon/casino/dice.png",
+    "img/misc/icon/casino/bunny.png",
+    "img/misc/icon/bank.png",
+    "img/misc/icon/bank-atm.png",
+    "img/misc/icon/bank-card.png",
+    "img/misc/icon/ticket.png",
+    "img/misc/icon/magic-book.png",
+    "img/misc/icon/finalstar/seal-bloodmoon.png",
+    "img/misc/icon/finalstar/seal-echo.png",
+    "img/misc/icon/finalstar/seal-silence.png",
+    "img/misc/icon/finalstar/seal-venom.png",
+    "img/misc/icon/finalstar/seal-starlight.png",
+    "img/misc/icon/finalstar/ui-rattlesnake.png",
+    "img/misc/icon/finalstar/vial-cleanse.png",
+    "img/misc/icon/finalstar/vial-sanity.png",
+    "img/misc/icon/finalstar/snake-cross.png",
+    "img/misc/icon/finalstar/snake-cross-icon.png",
+    "img/ui/clothes/traits/magic.png",
+    "img/ui/clothes/traits/miracle.png",
+    "img/misc/icon/finalstar/lab-door.png",
+    "img/misc/icon/finalstar/lab-equipment.png",
+    "img/misc/icon/finalstar/lab-box.png",
+    "img/misc/icon/finalstar/morans-tower.png",
+    "img/misc/icon/finalstar/morans-street.png",
+    "img/misc/icon/finalstar/morans-park.png",
+    "img/misc/icon/finalstar/morans-estate.png",
+    "img/misc/icon/finalstar/morans-government.png",
+    "img/misc/icon/finalstar/morans-school.png",
+    "img/misc/icon/finalstar/morans-shop.png",
+    "img/misc/icon/finalstar/morans-home.png",
+    "img/misc/icon/finalstar/morans-road.png",
+    "img/misc/icon/finalstar/morans-fog.png",
+    "img/misc/icon/finalstar/morans-coin.png",
+    "img/misc/icon/finalstar/morans-doll.png",
+    "img/misc/icon/finalstar/morans-map.png",
+    "img/misc/icon/finalstar/morans-map-city.png",
+    "img/misc/icon/finalstar/morans-store.png",
+    "img/misc/icon/finalstar/morans-clinic.png",
+    "img/misc/icon/finalstar/morans-class.png",
+    "img/misc/icon/finalstar/morans-library.png",
+    "img/misc/icon/finalstar/morans-roof.png",
+    "img/misc/icon/finalstar/morans-bath.png",
+    "img/misc/icon/finalstar/morans-kitchen.png",
+    "img/misc/icon/finalstar/morans-living.png",
+    "img/misc/icon/finalstar/morans-run.png",
+    "img/misc/icon/finalstar/ui-ward.png",
+    "img/misc/icon/finalstar/morans-map-red.png",
+    "img/misc/icon/finalstar/book-brown.png",
+    "img/misc/icon/finalstar/talent-sword.png",
+    "img/misc/icon/finalstar/talent-shield.png",
+    "img/misc/icon/finalstar/talent-heart.png",
+    "img/misc/icon/finalstar/talent-drop.png",
+    "img/misc/icon/finalstar/talent-moon.png",
+    "img/misc/icon/finalstar/talent-coin.png",
+    "img/misc/icon/finalstar/talent-star.png",
+    "img/misc/icon/finalstar/talent-eye.png",
+    "img/misc/icon/finalstar/talent-lips.png",
+    "img/misc/icon/finalstar/talent-boot.png",
+    "img/misc/icon/finalstar/talent-bullet.png",
+    "img/misc/icon/finalstar/talent-armor.png",
+    "img/misc/icon/finalstar/talent-cards.png",
+    "img/misc/icon/finalstar/talent-fist.png"
+  ],
+  "additionFile": [],
+  "addonPlugin": [
+    {
+      "modName": "ModLoader DoL ImageLoaderHook",
+      "addonName": "ImageLoaderAddon",
+      "modVersion": "^2.3.0",
+      "params": []
+    },
+    {
+      "modName": "TweeReplacer",
+      "addonName": "TweeReplacerAddon",
+      "modVersion": "^1.0.0",
+      "params": [
+        {
+          "passage": "Danube Street",
+          "findString": "<<if $exposed lte 0 and Time.openingHours(2)>>",
+          "replaceFile": "CasinoEntrance.txt",
+          "_comment": "合并自 MyFirstMod｜CasinoEntrance.txt"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜富人区银行入口（9:00-19:00 营业）",
+          "passage": "Danube Street",
+          "findString": "<<if $avery_mansion>>",
+          "replaceFile": "BankEntrance.txt"
+        },
+        {
+          "passage": "Orphanage",
+          "findString": "<<gardenicon>>",
+          "replaceFile": "OrphanageNoteLink.txt",
+          "_comment": "合并自 MyFirstMod｜OrphanageNoteLink.txt"
+        },
+        {
+          "passage": "Bedroom",
+          "findString": "<<home_effects>>",
+          "replaceFile": "BedroomNightLink.txt",
+          "_comment": "合并自 MyFirstMod｜BedroomNightLink.txt"
+        },
+        {
+          "passage": "npcNamed",
+          "findString": "<<npcPregnancyUpdater>>",
+          "replaceFile": "AddJiusi.txt",
+          "_comment": "合并自 MyFirstMod｜AddJiusi.txt"
+        },
+        {
+          "passage": "Widgets Named Npcs",
+          "findString": "<<case Bailey>>",
+          "replaceFile": "JiusiRelation.txt",
+          "_comment": "合并自 MyFirstMod｜JiusiRelation.txt"
+        },
+        {
+          "passage": "Social",
+          "findString": "\"Ivory Wraith\" : {",
+          "replaceFile": "AddNpcConfig.txt",
+          "_comment": "合并自 MyFirstMod｜AddNpcConfig.txt"
+        },
+        {
+          "passage": "Widgets Named Npcs",
+          "findString": "\"Zephyr\"]>>",
+          "replace": "\"Zephyr\", \"玖肆\"]>>",
+          "_comment": "合并自 MyFirstMod｜Widgets Named Npcs"
+        },
+        {
+          "passage": "Widgets Named Npcs",
+          "findString": "\"Ivory Wraith\", \"Mason\"]>>",
+          "replace": "\"Ivory Wraith\", \"Mason\", \"玖肆\"]>>",
+          "_comment": "合并自 MyFirstMod｜Widgets Named Npcs"
+        },
+        {
+          "passage": "Widgets Effects Man",
+          "findString": "<<effectsdildowhack>>",
+          "replaceFile": "shootEffect.txt",
+          "_comment": "合并自 MyFirstMod｜shootEffect.txt"
+        },
+        {
+          "_comment": "遭遇战结束：埋尸入口 + 终星物资面板锚点 + 埋尸跳转，三者合并为同一条补丁。原先它们是三条独立补丁共用一个锚点 <<endevent _args[0]>>\\n\\t<<struggle_end>>，其中「埋尸入口」这条一旦先执行就会把该锚点拆开，导致另外两条再也匹配不上（先后顺序一变就静默失效）。现在合成一条，顺序无关。",
+          "passage": "Widgets End Combat",
+          "findString": "<<endevent _args[0]>>\n\t<<struggle_end>>",
+          "replaceFile": "corpseTrigger.txt"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜死亡/失踪 NPC 不再直接出场（npc 召唤门控）",
+          "passage": "Widgets Named Npcs",
+          "findString": "\t<<set $lastgenerated to $passage>>\n\n\t<<set _nam to _args[0]>>\n\t<<set _i to $NPCNameList.indexOf(_nam)>>",
+          "replaceFile": "DeadNPCGate.txt"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜开始游玩时的后果警告（锚点用代码，兼容汉化版）",
+          "passage": "Start2",
+          "findString": "<<variablesStart2>>",
+          "replaceFile": "StartWarning.txt"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜社交菜单：显示已逝之人（间接出场大改；锚点用代码，兼容汉化版）",
+          "passage": "Social",
+          "findString": "<div id=\"faction-reputations\" class=\"relation-box-list\">",
+          "replaceFile": "SocialJiusiDisappointed.txt"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜社交菜单：已死亡/失踪 NPC 从主要关系列表移除并记录",
+          "passage": "Social",
+          "findString": "T.importantNPCs = T.importantNpcOrder.map(name => V.NPCName[V.NPCNameList.indexOf(name)]);",
+          "replaceFile": "SocialDeadFilter.txt"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜社交菜单：已死亡/失踪 NPC 从其他人物列表移除",
+          "passage": "Social",
+          "findString": "T.otherNPCs = V.NPCName.filter(npc => !T.importantNpcOrder.includes(npc.nam) && !T.specialNPCs.includes(npc.nam));",
+          "replaceFile": "SocialDeadList.txt"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜社交菜单：显示已逝之人（间接出场大改；锚点用代码，兼容汉化版）",
+          "passage": "Social",
+          "findString": "<div id=\"faction-reputations\" class=\"relation-box-list\">",
+          "replaceFile": "SocialMemorial.txt"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜医院大厅：摩根病房入口（8:00-19:00；锚点用代码，兼容汉化版）",
+          "passage": "Hospital Foyer",
+          "findString": "<<set $outside to 0>><<set $location to \"hospital\">><<effects>>",
+          "replaceFile": "HospitalMorganLink.txt"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜贝利租金：手上有钱超1000元加收五成（当期）",
+          "passage": "Widgets Rent",
+          "findString": "<<widget \"rentdue\">>\n\t<<npc Bailey>><<person1>>",
+          "replaceFile": "RentSurchargeDue.txt"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜贝利租金：手上有钱超1000元加收五成（下周）",
+          "passage": "Widgets Rent",
+          "findString": "<<set $rentmoney to Math.floor($rentmoney * $settings.rentCostModifier)>>",
+          "replaceFile": "RentSurchargeMod.txt"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜社交框：摩根（主要NPC）显示心结/精神状态条",
+          "passage": "Widgets",
+          "findString": "T.importantNpcStats = [\"love\", \"lust\", \"dom\", \"trauma\", \"rage\", \"purity\", \"corruption\", \"harmony\", \"ferocity\"];",
+          "replace": "T.importantNpcStats = [\"love\", \"lust\", \"dom\", \"trauma\", \"rage\", \"purity\", \"corruption\", \"harmony\", \"ferocity\", \"knot\", \"spirit\"];"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜社交框：摩根与其他重要NPC一样渲染全部状态条",
+          "passage": "Widgets",
+          "findString": "<<if _importantNPCs[_k].nam is \"Black Wolf\">><<set _npcStats to _importantNpcStats.length>>",
+          "replace": "<<if _importantNPCs[_k].nam is \"Black Wolf\" or _importantNPCs[_k].nam is \"Morgan\">><<set _npcStats to _importantNpcStats.length>>"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜一般特质栏：媚药改造（新分组插入；锚点用代码，兼容汉化版）",
+          "passage": "Traits",
+          "findString": "<<set _traitLists to [",
+          "replaceFile": "TraitsAphrodisiac.txt"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜校门口：乞丐事件（唯一）与学校霸凌事件入口。110 的「不再显示按钮」逻辑已并入本文件，不再用第二条补丁去匹配本补丁自己插入的中文文本（整合包一换译文就失配）。锚点 <<schoolperiodtext>> 是纯代码，0.5.11.9 已核实存在。",
+          "passage": "School Front Courtyard",
+          "findString": "<<schoolperiodtext>>",
+          "replaceFile": "SchoolCourtyardLinks.txt"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜数学课：玖肆入学（好感50%）+ 阻止数学课霸凌",
+          "passage": "Maths Lesson",
+          "findString": "<<mathsWhitneyAttendChance>>",
+          "replaceFile": "MathsJiusiLinks.txt"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜衣柜：另一只手作为独立装备分类（像面饰/颈部一样的装备格；锚点用代码，兼容汉化版）",
+          "passage": "Widgets Wardrobe",
+          "findString": "<<set _wardrobeLinks=[",
+          "replace": "<<set _wardrobeLinks=[\n\t\t{ id: 'handheld2', label: '另一只手' },"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜衣柜：另一只手槽位渲染（当前装备 + 装备/卸下）",
+          "passage": "Widgets Wardrobe",
+          "findString": "<<if !Object.keys($worn).includes(_wardrobe_list)>>",
+          "replaceFile": "WardrobeHandheld2Slot.txt"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜孤儿院：给贝利纸条后第二天出现调查选项（获得魔书；锚点用代码，兼容汉化版）",
+          "passage": "Orphanage",
+          "findString": "<<set _robin to statusCheck(\"Robin\")>>",
+          "replaceFile": "OrphanageInvestigate.txt"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜贝利办公室：魔书丢失后花900元买回",
+          "passage": "Bailey's Office",
+          "findString": "\t<<set $daily.baileyVisit++>>\n\t<br><br>\n<</if>>",
+          "replaceFile": "BaileyOfficeMagic.txt"
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜历史课：副手书包也能带书学习（all=true：罗宾台词与学习判定两处都要改）",
+          "passage": "History Classroom",
+          "findString": "<<elseif !$worn.handheld.type.includes(\"bookbag\")>>",
+          "replace": "<<elseif !$worn.handheld.type.includes(\"bookbag\") and !$worn.handheld2.type.includes(\"bookbag\")>>",
+          "all": true
+        },
+        {
+          "_comment": "合并自 MyFirstMod｜科学课：副手书包也能带书学习",
+          "passage": "Science Classroom",
+          "findString": "<<elseif !$worn.handheld.type.includes(\"bookbag\")>>",
+          "replace": "<<elseif !$worn.handheld.type.includes(\"bookbag\") and !$worn.handheld2.type.includes(\"bookbag\")>>"
+        },
+        {
+          "_comment": "覆盖层：追加终星面板路由（备用打开方式）",
+          "passage": "overlayReplace",
+          "findString": "<<switch _key>>",
+          "replaceFile": "fsOverlayCase.txt"
+        },
+        {
+          "_comment": "110-1. 数学课霸凌事件（起哄围堵）改为玖肆出面",
+          "passage": "Widgets Events Maths",
+          "findString": "<<addinlineevent \"mathsEvent1\">>",
+          "replace": "<<addinlineevent \"mathsEvent1\">><<if $jiusiProtect is 1 and $jiusiMeet is 1 and $location is \"school\">><<goto \"Maths Bully Jiusi Stop\">><</if>>"
+        },
+        {
+          "_comment": "110-2. 数学课霸凌事件（小纸条/纸团）改为玖肆出面",
+          "passage": "Widgets Events Maths",
+          "findString": "<<addinlineevent \"mathsWhitneyPaperBall\">>",
+          "replace": "<<addinlineevent \"mathsWhitneyPaperBall\">><<if $jiusiProtect is 1 and $jiusiMeet is 1 and $location is \"school\">><<goto \"Maths Bully Jiusi Stop\">><</if>>"
+        },
+        {
+          "_comment": "110-3. 数学课霸凌事件（扔钢笔）改为玖肆出面",
+          "passage": "Widgets Events Maths",
+          "findString": "<<addinlineevent \"mathsWhitneyPen\">>",
+          "replace": "<<addinlineevent \"mathsWhitneyPen\">><<if $jiusiProtect is 1 and $jiusiMeet is 1 and $location is \"school\">><<goto \"Maths Bully Jiusi Stop\">><</if>>"
+        },
+        {
+          "_comment": "110-4. 数学课霸凌事件（圆规戳刺）改为玖肆出面",
+          "passage": "Widgets Events Maths",
+          "findString": "<<addinlineevent \"mathsWhitneyProtractor\">>",
+          "replace": "<<addinlineevent \"mathsWhitneyProtractor\">><<if $jiusiProtect is 1 and $jiusiMeet is 1 and $location is \"school\">><<goto \"Maths Bully Jiusi Stop\">><</if>>"
+        },
+        {
+          "_comment": "110-5. 数学课霸凌事件（钢笔砸老师嫁祸）改为玖肆出面",
+          "passage": "Widgets Events Maths",
+          "findString": "<<addinlineevent \"mathsPenThrow\">>",
+          "replace": "<<addinlineevent \"mathsPenThrow\">><<if $jiusiProtect is 1 and $jiusiMeet is 1 and $location is \"school\">><<goto \"Maths Bully Jiusi Stop\">><</if>>"
+        },
+        {
+          "_comment": "110-6. 数学课霸凌事件（图钉扎人）改为玖肆出面",
+          "passage": "Widgets Events Maths",
+          "findString": "<<addinlineevent \"mathsSafe6\">>",
+          "replace": "<<addinlineevent \"mathsSafe6\">><<if $jiusiProtect is 1 and $jiusiMeet is 1 and $location is \"school\">><<goto \"Maths Bully Jiusi Stop\">><</if>>"
+        },
+        {
+          "_comment": "110-7. 数学课霸凌事件（掀裙子）改为玖肆出面",
+          "passage": "Widgets Events Maths",
+          "findString": "<<addinlineevent \"mathsLowerLiftTease\">>",
+          "replace": "<<addinlineevent \"mathsLowerLiftTease\">><<if $jiusiProtect is 1 and $jiusiMeet is 1 and $location is \"school\">><<goto \"Maths Bully Jiusi Stop\">><</if>>"
+        },
+        {
+          "_comment": "110-8. 数学课霸凌事件（揪耳朵（兽耳））改为玖肆出面",
+          "passage": "Widgets Events Maths",
+          "findString": "<<addinlineevent \"mathsTFears\">>",
+          "replace": "<<addinlineevent \"mathsTFears\">><<if $jiusiProtect is 1 and $jiusiMeet is 1 and $location is \"school\">><<goto \"Maths Bully Jiusi Stop\">><</if>>"
+        },
+        {
+          "_comment": "110-9. 数学课霸凌事件（送信 → 玖肆陪同）改为玖肆出面",
+          "passage": "Widgets Events Maths",
+          "findString": "<<addinlineevent \"mathsMessageDelivery\">>",
+          "replace": "<<addinlineevent \"mathsMessageDelivery\">><<if $jiusiProtect is 1 and $jiusiMeet is 1 and $location is \"school\">><<goto \"FS Maths Note Jiusi\">><</if>>"
+        },
+        {
+          "_comment": "65. 特质页新增「终星 · 见证者」分组",
+          "passage": "Traits",
+          "findString": "<<set _traitLists to [\n",
+          "replaceFile": "fsTraits.txt"
+        },
+        {
+          "_comment": "0.27 动作区兜底（左手）：手枪在手 → 射击；拥有魔书 → 吟唱魔法（单一动作，法术由面板切换）",
+          "passage": "Widgets Actions Left Hand",
+          "findString": "to \"lefthit\">>",
+          "replace": "to \"lefthit\">><<run finalStar.ensureActions(_leftaction)>>"
+        },
+        {
+          "_comment": "0.27 动作区兜底（右手）：手枪在手 → 射击；拥有魔书 → 吟唱魔法（单一动作，法术由面板切换）",
+          "passage": "Widgets Actions Right Hand",
+          "findString": "to \"righthit\">>",
+          "replace": "to \"righthit\">><<run finalStar.ensureActions(_rightaction)>>"
+        },
+        {
+          "_comment": "105 修正：开通代理缴费且卡里够钱 → 贝利连门都不用敲（原来 $rentmoney 还是 0，所以永远不扣款）",
+          "passage": "Widgets Rent",
+          "findString": "<<widget \"rentdue\">>",
+          "replace": "<<widget \"rentdue\">>\n\t<<if finalStar.autopayTry()>><<goto \"FS Rent Autopay Done\">><</if>>"
+        },
+        {
+          "_comment": "105+ 新选项：手上有钱时，也能把银行信封掀给他看（够钱就直接划扣结清这一周）",
+          "passage": "Widgets Rent",
+          "findString": "<<if $money gte $rentmoney + ($babyRent or 0)>>",
+          "replace": "<<if $money gte $rentmoney + ($babyRent or 0)>>\n\t\t<<if $bankCard is 1>><<link [[让贝利看看新送来的信封|FS Rent Envelope]]>><</link>><br><</if>>"
+        },
+        {
+          "_comment": "105+ 新选项：手头没钱时同样能掀信封（卡里不够 → 他抓信封露疑惑，你才发现忘了存钱）",
+          "passage": "Widgets Rent",
+          "findString": "<<rentnopay true>>",
+          "replace": "<<if $bankCard is 1>><<link [[让贝利看看新送来的信封|FS Rent Envelope]]>><</link>><br><</if>>\n\t\t<<rentnopay true>>"
+        },
+        {
+          "_comment": "实验室（用户 2026-10-17 规格）：下水道菜单里加第三个选项。持有钥匙时把描述改成「你突然发现某一处地方有一个钥匙孔」，并出现「？？？」，点了先走一段剧情再进实验室。锚点 <<destination>> 在该段落只出现 1 次。",
+          "passage": "Storm Drain Entrance",
+          "findString": "<<destination>>",
+          "replaceFile": "LabSewerOption.txt"
+        },
+        {
+          "passage": "Bedroom",
+          "findString": "<<bedclotheson \"bed\">>",
+          "replaceFile": "BedroomBook.txt",
+          "_comment": "床头童话书入口（原版写法）"
+        },
+        {
+          "passage": "Widgets variablesStart2",
+          "findString": "<<set _backgroundOptions to [\"waif\",\"nerd\",\"athlete\",\"delinquent\",\"promiscuous\",\"exhibitionist\",\"deviant\",\"beautiful\",\"lustful\",\"plantlover\"]>>",
+          "replace": "<<set _backgroundOptions to [\"waif\",\"nerd\",\"athlete\",\"delinquent\",\"promiscuous\",\"exhibitionist\",\"deviant\",\"beautiful\",\"lustful\",\"plantlover\"],\"succubus\"]>>"
+        },
+        {
+          "passage": "Widgets variablesStart2",
+          "findString": "\t<<elseif $background is \"plantlover\">>\n\t\t<<set $nectar_addiction to 200>>",
+          "replace": "\t<<elseif $background is \"succubus\">>\n\t\t<<set $succubus to true>>\n\t\t<<set $beauty to ($beautymax * 5 / 6)>>\n\t\t<<set $awareness to 200>>\n\t\t<<set $promiscuity to 50>>\n\t\t<<set $exhibitionism to 50>>\n\t\t<<set $deviancy to 50>>\n\t\t<<set $seductionskill to 400>><<set $chestskill to 400>><<set $handskill to 400>><<set $bottomskill to 400>><<set $thighskill to 400>><<set $feetskill to 400>><<set $oralskill to 400>><<set $vaginalskill to 400>><<set $analskill to 400>><<set $penileskill to 400>>\n\t\t<<set $backgroundTraits to [\"lustful\"]>>\n\t<<elseif $background is \"plantlover\">>\n\t\t<<set $nectar_addiction to 200>>"
+        },
+        {
+          "passage": "Widgets Settings",
+          "findString": "\t\t\t</div>\n\t\t</div>\n\t\t<hr>\n\t\t<<quickStart>>",
+          "replace": "\t\t\t\t<br>\n\t\t\t\t<label><span class=\"lewd\">天生魅魔</span> <<radiobutton \"$background\" \"succubus\" autocheck>> - 没人知道你心底的秘密，对吧？</label>\n\t\t\t\t<br>\n\t\t\t</div>\n\t\t</div>\n\t\t<hr>\n\t\t<<quickStart>>"
+        },
+        {
+          "passage": "Traits",
+          "findString": "\t\t\ttraits: [\n\t\t\t\t{",
+          "replace": "\t\t\ttraits: [\n\t\t\t\t{\n\t\t\t\t\tname: \"天生魅魔\",\n\t\t\t\t\tcolour: \"lewd\",\n\t\t\t\t\thas: $succubus is true,\n\t\t\t\t\ttext: \"没人知道你心底的秘密，对吧？\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tname: \"纯洁魅魔\",\n\t\t\t\t\tcolour: \"gold\",\n\t\t\t\t\thas: $pureSuccubus is true,\n\t\t\t\t\ttext: \"天啊，你简直就是魅魔之耻。你的纯洁会缓慢恢复。\",\n\t\t\t\t},\n\t\t\t\t{"
+        },
+        {
+          "passage": "Widgets variablesVersionUpdate",
+          "findString": "\t<<if $sexStats.vagina.pregnancy.fetus is undefined or $sexStats.anus.pregnancy.fetus is undefined or $sexStats.anus.pregnancy.type is undefined>>",
+          "replace": "\t<<if !$sexStats or !$sexStats.vagina or !$sexStats.vagina.pregnancy or !$sexStats.vagina.pregnancy.fetus or !$sexStats.anus or !$sexStats.anus.pregnancy or $sexStats.anus.pregnancy.fetus is undefined or $sexStats.anus.pregnancy.type is undefined>>",
+          "_comment": "旧档缺少 sexStats.vagina/pregnancy 时，先让 physicalAdjustmentsInit 补齐，避免 backComp 读 fetus 报错"
+        },
+        {
+          "passage": "PassageHeader",
+          "findString": "\t<<doVersionCheck>>",
+          "replace": "\t<<if !$sexStats or !$sexStats.vagina or !$sexStats.vagina.pregnancy or !$sexStats.vagina.pregnancy.fetus or !$sexStats.anus or !$sexStats.anus.pregnancy or $sexStats.anus.pregnancy.fetus is undefined or $sexStats.anus.pregnancy.type is undefined>><<physicalAdjustmentsInit>><</if>>\n\t<<doVersionCheck>>",
+          "_comment": "旧档 sexStats.vagina/anus 缺失时，在 doVersionCheck 前先用游戏自己的 physicalAdjustmentsInit 补齐"
+        },
+        {
+          "passage": "Widgets Exams",
+          "findString": "\t\t<<default>>\n\t\t\t<<run throw new Error(\"Invalid argument passed to 'exam' widget: \", _args[0])>>\n\t<</switch>>",
+          "replace": "\t\t<<default>>\n\t\t\t<<run throw new Error(\"Invalid argument passed to 'exam' widget: \", _args[0])>>\n\t<</switch>>\n\t<<if finalStar.talentHas('d8')>><<set $exam_chance += 5>><</if>>",
+          "_comment": "学业天赋：所有科目考试通过率 +5%"
+        },
+        {
+          "passage": "Widgets Rent",
+          "findString": "<<widget \"rentpay\">>",
+          "replace": "<<widget \"rentpay\">>\n\t<<run finalStar.markRentPaidByHand()>>",
+          "_comment": "手交租后 7 天内不让银行代缴/存折再次扣款"
+        }
+      ]
+    },
+    {
+      "modName": "ReplacePatcher",
+      "addonName": "ReplacePatcherAddon",
+      "modVersion": "^1.0.0",
+      "params": [
+        {
+          "js": [
+            {
+              "_comment": "合并自 MyFirstMod｜把射击注册进默认动作库（左手）",
+              "from": "[\"lefthit\", \"leftstruggle\"]",
+              "to": "[\"lefthit\", \"leftstruggle\", \"shoot\"]",
+              "fileName": "ingame.js"
+            },
+            {
+              "_comment": "合并自 MyFirstMod｜把射击注册进默认动作库（右手）",
+              "from": "[\"penwhack\", \"righthit\", \"rightstruggle\", \"hypnosiswhack\"]",
+              "to": "[\"penwhack\", \"righthit\", \"rightstruggle\", \"hypnosiswhack\", \"shoot\"]",
+              "fileName": "ingame.js"
+            },
+            {
+              "_comment": "合并自 MyFirstMod｜给射击/魔法/武器上战斗按钮颜色（红色，同击打）",
+              "from": "\"spray\", \"lefthit\", \"righthit\", \"leftstruggle\", \"rightstruggle\", \"stopchokenoncon\", \"pursuit_grab\",",
+              "to": "\"spray\", \"lefthit\", \"righthit\", \"leftstruggle\", \"rightstruggle\", \"stopchokenoncon\", \"pursuit_grab\", \"shoot\", \"cast\",",
+              "fileName": "ingame.js"
+            },
+            {
+              "_comment": "合并自 MyFirstMod｜触手战里魔法/武器按钮也有颜色",
+              "from": "\"lefthittentacle\", \"righthittentacle\", \"lefthit\", \"righthit\", \"leftbanish\", \"rightbanish\",",
+              "to": "\"lefthittentacle\", \"righthittentacle\", \"lefthit\", \"righthit\", \"leftbanish\", \"rightbanish\", \"cast\",",
+              "fileName": "ingame.js"
+            },
+            {
+              "_comment": "合并自 MyFirstMod｜次日枪失踪 + 贝利受伤7天不催租 + 每周一发子弹 + 救场周重置",
+              "from": "function dayPassed() {",
+              "to": "function dayPassed() {\n\tif (V.pistolLostTimer && !V.pistolLostDone) {\n\t\tV.pistolOwned = 0;\n\t\tV.pistolAmmo = 0;\n\t\tV.pistolLostDone = 1;\n\t\tV.pistolLostNotice = 1;\n\t}\n\tif (V.baileyRentSkipDays > 0) {\n\t\tV.baileyRentSkipDays--;\n\t\tV.renttime++;\n\t}\n\t/* 玖肆每周一支：黑色雕纹子弹（终星子弹系统） */\n\tif (V.jiusiProtect === 1 && Time.weekDay === 2 && !V.daily.jiusiAmmo) {\n\t\tvar _jidx = V.NPCNameList.indexOf(\"玖肆\");\n\t\tif (_jidx !== -1 && V.NPCName[_jidx] && V.NPCName[_jidx].love >= 10) {\n\t\t\tV.fsData = V.fsData || {};\n\t\t\tV.fsData.bullets = V.fsData.bullets || {};\n\t\t\tV.fsData.bullets.blackrune = (V.fsData.bullets.blackrune || 0) + 1;\n\t\t\tif (!V.fsData.currentBullet) V.fsData.currentBullet = \"blackrune\";\n\t\t\tV.daily.jiusiAmmo = 1;\n\t\t\tV.jiusiAmmoNotice = 1;\n\t\t\tV.jiusiRescueUsed = 0;\n\t\t}\n\t}",
+              "fileName": "time.js"
+            },
+            {
+              "_comment": "合并自 MyFirstMod｜死亡/失踪 NPC：statusCheck 提前返回，停止其日程与状态逻辑（间接出场大改）",
+              "from": "/* Assume this is successful, unless the game is severely unhinged. */\n\tif (nnpc.init === 1) {",
+              "to": "/* Assume this is successful, unless the game is severely unhinged. */\n\tif (nnpc.state === \"dead\" || nnpc.state === \"missing\") return nnpc;\n\tif (nnpc.init === 1) {",
+              "fileName": "named-npc.js"
+            },
+            {
+              "_comment": "合并自 MyFirstMod｜死亡 NPC：艾弗里日程按 dismissed 处理（不再接人/约会/上班）",
+              "from": "if (C.npc.Avery.init !== 1 || C.npc.Avery.state === \"dismissed\") return;",
+              "to": "if (C.npc.Avery.init !== 1 || [\"dismissed\", \"dead\", \"missing\"].includes(C.npc.Avery.state)) return;",
+              "fileName": "named-npc.js"
+            },
+            {
+              "_comment": "合并自 MyFirstMod｜死亡/失踪 NPC：不再狩猎玩家（伊甸/黑狼/格薇兰等）",
+              "from": "function npcCanHunt(npc) {\n\tswitch (npc) {",
+              "to": "function npcCanHunt(npc) {\n\tif (typeof npc === \"string\" && V.NPCNameList.includes(npc) && [\"dead\", \"missing\"].includes(C.npc[npc].state)) return false;\n\tswitch (npc) {",
+              "fileName": "named-npc.js"
+            },
+            {
+              "_comment": "合并自 MyFirstMod｜副手透明伞也能挡雨（另一只手手持物功能生效）",
+              "from": "!V.worn.head.type.includes(\"rainproof\") && !V.worn.handheld.type.includes(\"rainproof\")) {",
+              "to": "!V.worn.head.type.includes(\"rainproof\") && !V.worn.handheld.type.includes(\"rainproof\") && !(V.worn.handheld2 && V.worn.handheld2.type.includes(\"rainproof\"))) {",
+              "fileName": "time.js"
+            },
+            {
+              "_comment": "0.27：把单一「吟唱魔法」动作 cast 注册进默认动作库（左手）",
+              "from": "[\"lefthit\", \"leftstruggle\", \"shoot\"]",
+              "to": "[\"lefthit\", \"leftstruggle\", \"shoot\", \"cast\"]",
+              "fileName": "ingame.js"
+            },
+            {
+              "_comment": "0.27：把单一「吟唱魔法」动作 cast 注册进默认动作库（右手）",
+              "from": "[\"penwhack\", \"righthit\", \"rightstruggle\", \"hypnosiswhack\", \"shoot\"]",
+              "to": "[\"penwhack\", \"righthit\", \"rightstruggle\", \"hypnosiswhack\", \"shoot\", \"cast\"]",
+              "fileName": "ingame.js"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "dependenceInfo": [
+    {
+      "modName": "ModLoader",
+      "version": ">=2.0.0"
+    },
+    {
+      "modName": "GameVersion",
+      "version": ">=0.5.0.0"
+    },
+    {
+      "modName": "ModLoader DoL ImageLoaderHook",
+      "version": ">=2.0.0"
+    },
+    {
+      "modName": "TweeReplacer",
+      "version": ">=1.0.0"
+    },
+    {
+      "modName": "ReplacePatcher",
+      "version": ">=1.0.0"
+    }
+  ]
+}

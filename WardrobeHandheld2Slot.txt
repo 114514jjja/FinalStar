@@ -1,0 +1,29 @@
+<<if _wardrobe_list is "handheld2">>
+	<<set _wornItem to $worn.handheld2>>
+	<<set _wornItemData to setup.clothes.handheld[clothesIndex("handheld",_wornItem)]>>
+	__另一只手__ <i>_selectedWardrobe.handheld.length / _selectedWardrobe.space</i>
+	<br>
+	当前装备：
+	<<if $worn.handheld2.name is "naked">>
+		空着
+		<br>
+	<<else>>
+		<<clothingicon _wornItem "handheld">>
+		<<print _wornItemData.name_cap>>
+		<br>
+		<div class="wardrobeItem wardrobe-action no-numberify"><a @id="Dynamic.eventBinder()" onclick="() => finalStar.unequipHandheld2()">卸下</a></div>
+	<</if>>
+	<br>
+	<<for _i to 0; _i lt _selectedWardrobe.handheld.length; _i++>>
+		<<set _item to _selectedWardrobe.handheld[_i]>>
+		<<set _itemData to setup.clothes.handheld[clothesIndex("handheld",_item)]>>
+		<div class="wardrobeItem wardrobe-action no-numberify">
+			<<clothingicon _item "handheld">>
+			<a @id="Dynamic.eventBinder(_item)" onclick="(_item) => finalStar.equipHandheld2(_item)">_itemData.name_cap</a>
+			<<if _item.gender is "m">><span class="blue">♂</span><<elseif _item.gender is "f">><span class="pink">♀</span><</if>>
+			<<wardrobeintegrity _item "handheld">>
+			<<reveal _item.reveal>>
+		</div>
+	<</for>>
+	<div style="clear:both;"></div>
+<<elseif !Object.keys($worn).includes(_wardrobe_list)>>

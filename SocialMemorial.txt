@@ -1,0 +1,12 @@
+<<if T.deadNPCs.length gte 1>>
+	<br>
+	<span class="red">已逝之人</span>
+	<div class="relation-box-list">
+		<<for _dk = 0; _dk lt T.deadNPCs.length; _dk++>>
+			<span class="red"><<print T.deadNPCs[_dk]>>——你亲手杀死了ta，并把它埋在了孤儿院的花园里。ta不会再回来了。</span>
+			<br>
+		<</for>>
+	</div>
+	<br>
+<</if>>
+<div id="faction-reputations" class="relation-box-list">

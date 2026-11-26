@@ -1,0 +1,6 @@
+dist/
+__pycache__/
+*.pyc
+_tools_run/
+_*.cjs
+*.local.md

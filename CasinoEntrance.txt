@@ -1,0 +1,3 @@
+<<icon "casino/casino-sign.png">><<link [[赌场|Casino Jiusi]]>><<pass 1>><</link>>
+<br>
+<<if $exposed lte 0 and Time.openingHours(2)>>

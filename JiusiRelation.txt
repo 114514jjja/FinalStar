@@ -1,0 +1,56 @@
+<<case 玖肆>>
+	玖肆
+	/* 长线剧情状态优先：C 结局「死亡」/ A 路线「失踪」时，这一行只显示这两个字
+	   （用户 ：清空所有好感与数值，**只显示红色的死亡二字**） */
+	<<if V.fsData and V.fsData.mor and V.fsData.mor.jiusiGone is "dead">>
+		<span class="red">死亡</span>。
+	<<elseif V.fsData and V.fsData.mor and V.fsData.mor.jiusiGone is "missing">>
+		<span class="red">失踪</span>。
+	<<elseif $NPCName[_i].love gte 100>>
+		<<if $NPCName[_i].lust gte 75>>
+			<span class="pink">对你十分混沌</span>。
+		<<else>>
+			<span class="green">感谢你出现在她的生活中</span>。
+		<</if>>
+	<<elseif $NPCName[_i].love gte 75>>
+		<<if $NPCName[_i].lust gte 50>>
+			<span class="lewd">努力克制对你的感情</span>。
+		<<else>>
+			<span class="teal">觉得你是一个要好的朋友</span>。
+		<</if>>
+	<<elseif $NPCName[_i].love gte 50>>
+		<<if $NPCName[_i].lust gte 25>>
+			<span class="lblue">觉得你很不一般</span>。
+		<<else>>
+			<span class="blue">对你感到可怜，希望带你走</span>。
+		<</if>>
+	<<else>>
+		<span class="grey">你是一个暂时的同伴</span>。
+	<</if>>
+<<case 苏梦棠>>
+	苏梦棠
+	<<if $NPCName[_i].love gte 80>>
+		<span class="green">把你当很亲近的人</span>。
+	<<elseif $NPCName[_i].love gte 60>>
+		<span class="teal">愿意和你多相处一会儿</span>。
+	<<elseif $NPCName[_i].love gte 40>>
+		<span class="blue">觉得你还算可靠</span>。
+	<<elseif $NPCName[_i].love gte 20>>
+		<span class="white">记得你这个人</span>。
+	<<else>>
+		<span class="grey">对你没什么印象</span>。
+	<</if>>
+<<case 笙不瑜>>
+	笙不瑜
+	<<if $NPCName[_i].love gte 80>>
+		<span class="green">把你当很亲近的人</span>。
+	<<elseif $NPCName[_i].love gte 60>>
+		<span class="teal">愿意和你多相处一会儿</span>。
+	<<elseif $NPCName[_i].love gte 40>>
+		<span class="blue">觉得你还算可靠</span>。
+	<<elseif $NPCName[_i].love gte 20>>
+		<span class="white">记得你这个人</span>。
+	<<else>>
+		<span class="grey">对你没什么印象</span>。
+	<</if>>
+<<case Bailey>>

@@ -1,0 +1,14 @@
+/* 终星 · 通用小工具 widget
+
+   这两个把「数值增减标签」包成 widget，给**正文**用（没有竖线）：
+     <<fsl stress>>           →  <span class="green">- 压力</span>      （名字与配色来自原版宏）
+     <<fsg love "玖肆">>      →  <span class="green">+ 玖肆的好感</span> （第二参数透传给带参数的宏）
+   为什么要有它们：原版宏 <<gXXX>>/<<lXXX>> 的输出是 `| … |`，前后各一个竖线，
+   正文里连写两个就成了 `|| - 压力 || - 创伤`（用户  报的"竖线变成两个"）。
+
+   ⚠️ 选项旁边要显示加减时**直接用原版宏** <<gXXX>> / <<lXXX>>，它们自带竖线，那是原版样式。
+   ============================================================ */
+
+:: FinalStar Util [widget]
+<<widget "fsg">><<print finalStar.statTag(_args[0], true, _args[1])>><</widget>>
+<<widget "fsl">><<print finalStar.statTag(_args[0], false, _args[1])>><</widget>>

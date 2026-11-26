@@ -1,0 +1,200 @@
+/* 终星 —— 排水系统尽头的实验室（新内容）
+
+   用户口述规格（照此写，不自创设定）：
+     玖肆好感 50% 时与她聊天 → 她交给玩家一把钥匙 → 玩家在宅邸街的下水道住宅区排水系统
+     发现有一道墙上有钥匙孔 → 打开是简陋的实验室 → 地上散落大片实验材料 → 有一个纸箱可以睡
+     → 第三次玖肆会说「这里似乎被盯上了」，此后纸箱无法再提供睡觉的帮助
+     → 摆弄器材会发现一本日记：一段传奇的冒险故事，后面被撕掉或涂黑，末尾写着「x计划」，
+       并浮现出熟悉的地点「宅邸街」，还有「有重大事件要发生」「已无法阻止」「现实堕落」
+
+   段落一律放独立文件：本项目踩过「`:: 段落名` 把 [widget] 段落切开」的坑。
+   ============================================================ */
+
+:: Orphanage Talk Jiusi Key
+<<set $outside to 0>><<set $location to "home">><<npc 玖肆>><<person1>>
+<<run finalStar.giveLabKey()>>
+玖肆从外套内袋里摸出一把钥匙，放在桌上，朝你推过来。
+<br><br>
+"拿着。"她说，"住宅区那一段排水系统，往下走。有一道墙上有锁孔。"
+<br><br>
+你问她这把钥匙是开什么的。她把杯子挪了个位置，像是没听见。
+<br><br>
+"你自己去看。"她说，"看完别跟人说是我给的。"
+<br><br>
+<<link [[把钥匙收起来|Orphanage]]>><</link>>
+
+:: FS Lab Unlock
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "drain">>
+<<run finalStar.openLab()>>
+<<icon "finalstar/lab-door.png">>你把钥匙插进那个孔里，转了半圈。
+<br><br>
+检修井口竟然有一处暗门被打开了——砖缝里的灰簌簌落下来，一块砖那么大的门向内退了半指。
+<br><br>
+你不知道这个暗室是按什么原理建起来的。
+<br><br>
+<<link [[继续|FS Lab Inside]]>><</link>>
+
+:: FS Lab Inside
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "drain">>
+/* 长线剧情「莫伦斯」的触发点（用户  规格）：
+   实验室开启后**第 3 天**再进实验室，会意外遇到玖肆 —— 直接转场，不在这里演。 */
+<<if finalStar.morThirdDayReady()>><<goto "FS Lab Third Day">><</if>>
+门后是一间简陋的实验室。
+<br><br>
+没有窗。一盏不知靠什么亮着的灯吊在头顶，把影子压得很短。几张长桌拼在一起，桌角垫着砖，才勉强平。墙上的架子摆着一排排蒙尘的瓶罐，标签大多看不清了，只剩几条褪色的笔迹。
+<br><br>
+空气里的味道很怪，像是铁锈，又像是放久了的药。你站在门口，先听见的是自己的呼吸。
+<br><br>
+地上散落着大片的东西——某种实验材料，铺开了一整片，几乎没给脚留地方。有的已经碎成粉末，有的还保持着原来的形状。你往里走的时候，脚下会发出细碎的声响。
+<br><br>
+靠里的墙边放着一个纸箱。尺寸正好够一个人蜷进去，箱口朝上，像是有人特意摆在那儿的。
+<br><br>
+<<if finalStar.labBoxCanSleep()>>
+	<<icon "finalstar/lab-box.png">><<link [[钻进纸箱里|FS Lab Box Menu]]>><</link>>
+	<br>
+<<else>>
+	<<icon "finalstar/lab-box.png">><<link [[在纸箱边坐一会儿|FS Lab Box Done]]>><</link>>
+	<br>
+<</if>>
+<<if finalStar.labDiaryFound()>>
+	<<icon "finalstar/lab-equipment.png">><<link [[再把那本本子翻一遍|FS Lab Diary]]>><</link>>
+	<br>
+<<else>>
+	<<icon "finalstar/lab-equipment.png">><<link [[摆弄那些器材|FS Lab Diary]]>><</link>>
+	<br>
+<</if>>
+<<link [[出去|Residential Drain]]>><</link>>
+
+/* 用户 ：要「先点纸箱、再选睡多久」，不要一进实验室就把 8 个时长摊在正文里。
+   所以这里多一层：实验室里只放「钻进纸箱里」一个链接，时长选择在本段落里。
+   第三次（labBoxSleeps 已经 2）时不再给时长 —— 直接走玖肆警告那一段，
+   顺手把 labBoxUse() 调一次，让 warned 落地（这样只会在菜单处被打断，不会选完时长再被打断）。 */
+:: FS Lab Box Menu
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "drain">>
+你把纸箱放倒，拍了拍底面。硬纸板被压出一道折痕，正好够一个人蜷进去。
+<br><br>
+<<if finalStar.labBoxSleeps() gte 2>>
+	你刚把箱盖拉上来，就听见门口有人咳嗽了一声。
+	<br><br>
+	<<run finalStar.labBoxUse()>>
+	<<link [[抬头看|FS Lab Watched]]>><</link>>
+<<else>>
+	你钻进去，把箱盖拉下一半。
+	<br><br>
+	睡多久？
+	<br>
+	<<generateSleepLinks "FS Lab Box Sleep">>
+	<br>
+	<<link [[算了，不睡了|FS Lab Inside]]>><</link>>
+<</if>>
+
+:: FS Lab Box Sleep
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "drain">>
+<<set _boxr to finalStar.labBoxUse()>>
+<<if _boxr is "ok">>
+	你把箱盖拉上。硬纸板硌得慌，但至少把地上的凉气挡在了外面。
+	<br><br>
+	你听着很远的水声，慢慢睡着了。
+	<br><br>
+	/* 照原版孤儿院那张床的做法：睡多久由 <<generateSleepLinks>> 写进 $sleephour，
+	   这里只负责推进 —— <<sleep>> 会按 $sleephour 走时间并结算状态。 */
+	<<sleep>>
+	<<effects>>
+	你醒的时候，灯还亮着，和睡前一样。地上的材料还是那样铺着，没有被动过。
+	<br><br>
+	<<link [[坐起来|FS Lab Inside]]>><</link>>
+<<elseif _boxr is "warn">>
+	你刚把纸箱的盖子拉上来，就听见门口有人咳嗽了一声。
+	<br><br>
+	<<link [[抬头看|FS Lab Watched]]>><</link>>
+<<else>>
+	你看着那个纸箱，没有钻进去。
+	<br><br>
+	<<link [[站起来|FS Lab Inside]]>><</link>>
+<</if>>
+
+:: FS Lab Watched
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "drain">><<npc 玖肆>><<person1>>
+玖肆站在门口，没有进来。
+<br><br>
+她看了看地上那一大片东西，又看了看你，没有问那是什么。
+<br><br>
+"你在这儿。"她说。
+<br><br>
+停了一会儿，她才补上下一句：
+<br><br>
+<span class="red">"这里似乎被盯上了。"</span>
+<br><br>
+她没有说是谁盯上的，也没有解释怎么知道的。说完就转过身，脚步声沿着排水管一路远去。
+<br><br>
+你再看那个纸箱——它现在只是个纸箱了。你很清楚：再在里面睡着，不会有人来叫你。
+<br><br>
+<<link [[站起来|FS Lab Inside]]>><</link>>
+
+:: FS Lab Box Done
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "drain">>
+你在纸箱边蹲了一会儿，最后还是没钻进去。
+<br><br>
+那句话还在耳边：这里似乎被盯上了。你靠着箱子坐了一阵，听着水声，一次也没有睡着。
+<br><br>
+<<link [[站起来|FS Lab Inside]]>><</link>>
+
+:: FS Lab Diary
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "drain">>
+<<run finalStar.findLabDiary()>>
+器材堆底下压着一本硬皮本子。封面上没有字，边角磨得发白。你把它抽出来，翻开。
+<br><br>
+前面的字迹很密，写得很急，像是怕来不及记下来。
+<br><br>
+「第一次进去的时候，我以为只要跑得够快就行。」
+<br><br>
+再往后是一列地名和品级，一个挨着一个：光辉小区。口字型的回廊。正中央刻着六芒星的法阵。新月车站，还有它对面那个不存在的旧日车站。荆棘列车。B 区棚户老街。
+<br><br>
+每一条后面都跟着三栏：任务目标、伤亡、结论。任务目标那一栏越写越短。伤亡那一栏越写越长。结论那一栏，从第三条起就一直空着。
+<br><br>
+字迹从这里开始抖。
+<br><br>
+「学院那件事之后，队里还能站着的人只有两个。」
+<br><br>
+「我数过。我把名字在心里念了一遍，念到一半就不敢往下念了。」
+<br><br>
+后面这一段被划掉了，划得很重，笔尖把纸戳破了两处。
+<br><br>
+「白蛇的名单换得太快。新的代号我记不住——记不住的人，我不该往这上面写。」
+<br><br>
+「S.W. 现在只剩下那块牌子。签字的人还在，办事的人没了。」
+<br><br>
+再往后翻，纸就不对了。
+<br><br>
+<span class="grey">中间整整几页被撕掉，只留下页根那一小条毛边。</span>
+<br><br>
+<span class="grey">剩下的部分，大段大段的字被墨涂黑了——不是划掉，是用力涂满，涂到纸背都透出黑来。你对着灯举起来看，什么也看不出。</span>
+<br><br>
+一直到最后一页。
+<br><br>
+那一页几乎是空的，只在正中央写着两个字：
+<br><br>
+<span class="gold">「x计划」</span>
+<br><br>
+你盯着那两个字看了很久，忽然想起本子里反复出现过的那个地名。那个熟悉的地点一下子映入眼帘——
+<br><br>
+<span class="gold">宅邸街。</span>
+<br><br>
+在最下面还有一行小字。笔迹和前面完全不同，像是另一个人后来添上去的：
+<br><br>
+<span class="red">「有重大事件要发生。」</span>
+<br><br>
+<span class="red">「已无法阻止。」</span>
+<br><br>
+<span class="red">「现实堕落。」</span>
+<br><br>
+你把本子合上，指腹上留了一层灰。
+<br><br>
+<<link [[把它放回原处|FS Lab Inside]]>><</link>>

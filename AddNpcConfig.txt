@@ -1,0 +1,11 @@
+"玖肆" : {
+	love : { maxValue : 100 },
+	lust : { name : "欲望", maxValue : 100 }
+},
+"Morgan" : {
+	important : V.morganHospital === 1,
+	love : { maxValue : 100 },
+	knot : { name : "心结", value : V.NPCName[V.NPCNameList.indexOf("Morgan")].knot || 0, maxValue : 100, color : "blue", activeIcon : "img/ui/sym-rage.png" },
+	spirit : { name : "精神", value : V.NPCName[V.NPCNameList.indexOf("Morgan")].spirit || 0, maxValue : 100, color : "teal", activeIcon : "img/ui/sym-confidence.png" }
+},
+"Ivory Wraith" : {

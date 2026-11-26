@@ -1,0 +1,850 @@
+:: FinalStar Settings [widget]
+/* ============================================================
+   终星 FinalStar —— 设置面板 / 内容速览 / 未来更新 / 游玩须知
+   入口：侧边栏「模组设置」按钮（StoryCaption）、布告板里的入口
+   （均不依赖框架）
+   ============================================================ */
+
+/* ===== 侧边栏按钮：白框 + 文字，和作弊按钮同一套样式 ===== */
+<<widget "fs_sidebar_button">>
+	<<if $fs_sidebarIcon isnot false>>
+		<div class="fs_sidebar_row"><input type="button" class="saveMenuButton fs_sidebar_btn" value="模组设置" title="终星 · 模组设置（点开可开关各项功能）" onclick="finalStar.openSettings()"></div>
+	<</if>>
+<</widget>>
+
+/* 这里原先有一个叫 fs_options_inline 的 widget（原版「选项」页内联设置区）。
+   它从来没被调用过 —— 原设计靠 maplebirch 框架的 addto: Options 注入，
+   但 boot.json 里既没有 maplebirch 的配置、也没把它列为依赖，游戏里 window.maplebirch 是 undefined。
+   后果是「剧情战斗不救场」($fs_jiusiStoryGuard) 在游戏里根本没有勾选框。
+   已把它唯一的独有内容（那个开关）并入 fs_panel_board（游玩须知 → 功能开关），
+   其余 8 个开关本来就与 fs_panel_settings / fs_panel_board 重复。
+   以后若要恢复「原版选项页」入口：用 TweeReplacer 补丁挂到 Options Overlay 里
+   那些真正渲染的 widget（optionsgeneral / optionstheme / …）内部，别指望 maplebirch。
+   注：本注释里故意不写宏的字面量 —— 尖括号形式会被 coderror 当成未闭合的宏报出来。 */
+
+/* ===== 面板标题栏（页签导航） ===== */
+<<widget "fs_title_panel">>
+	<<setupTabs>>
+	<div id="overlayTabs" class="tab">
+		<<closeButtonMobile>>
+		<<button "设置">>
+			<<toggleTab>>
+			<<replace #customOverlayContent>><<fs_panel_settings>><</replace>>
+		<</button>>
+		<<button "内容速览">>
+			<<toggleTab>>
+			<<replace #customOverlayContent>><<fs_panel_overview>><</replace>>
+		<</button>>
+		<<button "未来更新">>
+			<<toggleTab>>
+			<<replace #customOverlayContent>><<fs_panel_future>><</replace>>
+		<</button>>
+		<<button "控制台">>
+			<<toggleTab>>
+			<<replace #customOverlayContent>><<fs_panel_console>><</replace>>
+		<</button>>
+		<<button "游玩须知">>
+			<<toggleTab>>
+			<<replace #customOverlayContent>><<fs_panel_notice>><</replace>>
+		<</button>>
+	</div>
+	<<closeButton>>
+<</widget>>
+
+/* ===== 设置主面板 ===== */
+<<widget "fs_panel_settings">>
+	<<if V.fsData && V.fsData.jiusiDisappointed === 1>>
+		<div class="fs-info-body fs_jiusi_status">
+			<span class="red">玖肆对你感到失望。</span>（当前好感 <<print finalStar.jiusiLove()>>%）
+			<br>
+			<span class="fs-sub">她不再出现在孤儿院与学校；魔女小屋看起来也更破败了。解决掉你手上的奴隶，才有机会弥补。</span>
+		</div>
+		<br>
+	<</if>>
+	<<if V.fsData && finalStar.slaveCount && finalStar.slaveCount() gt 0>>
+		<div class="fs-info-body">
+			<span class="gold">你手下有 <<print finalStar.slaveCount()>> 名奴隶。</span>
+			<br>
+			<span class="fs-sub">每周欠款已永久增加 £<<print (V.fsData.pillRentAdded || 0)>>；周六可以在孤儿院大厅让 ta 们上缴。</span>
+		</div>
+		<br>
+	<</if>>
+	<div class="fs-panel">
+		<h3><<icon "finalstar/medal-witness.png">> 终星 FinalStar <span class="fs-sub"><<print window.modSC2DataManager?.getModLoader()?.getModZip("FinalStar")?.modInfo?.version ?? "1.0.0">></span></h3>
+		<div class="fs-sub">魔书魔法 · 魔法刻印 · 魔女小屋 · 地下洞穴 · 手枪重置</div>
+		<br>
+		<<if $fs_noCorpseDrag is undefined>><<set $fs_noCorpseDrag to false>><</if>>
+		<<if $fs_freeCasino is undefined>><<set $fs_freeCasino to false>><</if>>
+		<<if $fs_freeEncounter is undefined>><<set $fs_freeEncounter to false>><</if>>
+		<<if $fs_casinoMaster is undefined>><<set $fs_casinoMaster to false>><</if>>
+		<<if $fs_undying is undefined>><<set $fs_undying to false>><</if>>
+		<<if $fs_alchemyMaster is undefined>><<set $fs_alchemyMaster to false>><</if>>
+		<<if $fs_sidebarIcon is undefined>><<set $fs_sidebarIcon to true>><</if>>
+		<<if $fs_combatPanel is undefined>><<set $fs_combatPanel to true>><</if>>
+
+		/* 「功能开关」那一整块已按设计上搬走 —— 注意是搬进「游玩须知」页面里面
+		   （由 fs_panel_notice 调用片段 widget fs_panel_board），不是新开一个页签。
+		   用户澄清过这一点：「把布告板的内容挪到游玩须知里面」。
+		   默认值那几行（判断开关是不是 undefined 再赋初值的那种）留在这里不动 ——
+		   它们要在设置面板一打开就生效，不能跟着搬走，否则不开那一页就不会初始化。
+		   注：这里故意不写出尖括号形式的宏，免得被 coderror 当成未闭合的宏。 */
+		<div class="settingsHeader options">界面</div>
+		<div class="fs-switch-grid">
+			<div class="fs-switch-item">
+				<<icon "finalstar/pistol-standard.png">>
+				<label><<checkbox "$fs_combatPanel" false true autocheck>> 战斗中显示「手枪 / 魔书」物资面板</label>
+				<mouse class="tooltip linkBlue">(?)<span>在战斗界面下方以折叠表格显示弹药余量、正在使用的子弹、魔书技能与今日吟唱次数。</span></mouse>
+			</div>
+			<div class="fs-switch-item">
+				<<icon "finalstar/ui-settings.png">>
+				<label><<checkbox "$fs_sidebarIcon" false true autocheck>> 侧边栏显示终星设置按钮</label>
+			</div>
+		</div>
+		<br>
+		/* 功能开关整块（片段 widget fs_panel_board）放设置页这里。
+		   用户澄清过：「功能开关就是在设置里面」—— 之前跟着布告板内容一起被搬到了游玩须知，
+		   那是我搬错了。布告板那些碎碎念留在游玩须知，开关回设置页。 */
+		<<fs_panel_board>>
+		<div class="fs-sub">提示：以上开关立即生效并随存档保存。</div>
+	</div>
+<</widget>>
+
+/* ===== 内容速览 ===== */
+<<widget "fs_panel_overview">>
+	<div class="fs-panel">
+		<h3><<icon "finalstar/ui-overview.png">> 内容速览</h3>
+		<div class="fs-sub">以下是终星模组添加的全部内容与机制。</div>
+		<br>
+		<details class="journal" open>
+			<summary class="journal"><<icon "finalstar/skill-assault.png">> 魔书魔法技能</summary>
+			<div class="fs-info-body">
+				持有魔书（主手或副手）时，战斗动作栏会出现三种魔法：
+				<br>
+				<span class="fs-tag">治疗术</span>：降低 <span class="gold">150</span> 点疼痛（装配炼金刻印时再多 <span class="gold">50</span>）。疼痛上限是 200，所以这一下能压下大半 —— 它占用的是每日 10 次吟唱里的一次，写"小幅"反而对不上数。
+				<br>
+				<span class="fs-tag">强攻术</span>：凝聚黑蛇扑向敌人，造成 <span class="gold">150</span> 点伤害。
+				<br>
+				<span class="fs-tag">荡魂术</span>：大幅削减敌人的怒气，让对方的攻势平息下来。
+				<br>
+				三种魔法共享每日吟唱次数，用尽后只能等第二天。
+			</div>
+		</details>
+		<details class="journal">
+			<summary class="journal"><<icon "finalstar/seal-alchemy.png">> 魔法刻印与魔女小屋</summary>
+			<div class="fs-info-body">
+				麋鹿街开了一家「魔女小屋」，店主是名叫<span class="fs-celeste">西蕾丝提娅</span>的矮个女孩。
+				<br>
+				店内出售：<span class="fs-tag">魔法刻印</span>、<span class="fs-tag">魔法祝福卷轴</span>（临时 30 天 / 永久）、<span class="fs-tag">魔法小道具</span>（制式手枪、各类子弹、以及缓解感染与恢复理智的两瓶药）。
+				<br>
+				刻印共九枚：<span class="fs-tag">强攻</span> 1500 · <span class="fs-tag">先动</span> 2000 · <span class="fs-tag">反击</span> 500 · <span class="fs-tag">炼金</span> 2500 · <span class="fs-tag">血月</span> 3000 · <span class="fs-tag">回响</span> 3500 · <span class="fs-tag">静默</span> 2800 · <span class="fs-tag">毒牙</span> 3200 · <span class="fs-tag">星辉</span> 8000。
+				<br>
+				刻印可以装配到魔书上，装备后立即生效；被替换下来的刻印不会返还。
+			</div>
+		</details>
+		<details class="journal">
+			<summary class="journal"><<icon "finalstar/cave-entrance.png">> 地下洞穴</summary>
+			<div class="fs-info-body">
+				森林湖泊处存在一处地下洞穴，共<span class="fs-tag">三层</span>，每层需要前进十次才能抵达下一层。
+				<br>
+				洞内的怪物不会试图与你性爱——它们只想杀死你。疼痛达到 <span class="gold">100</span> 时会立即结束遭遇战。
+				<br>
+				洞穴深处埋着与「终星」有关的秘密，以及一枚刻着「记忆会证明我们来过」的勋章。
+			</div>
+		</details>
+		<details class="journal">
+			<summary class="journal"><<icon "finalstar/pistol-standard.png">> 手枪重置与子弹系统</summary>
+			<div class="fs-info-body">
+				手枪改为标准手持物，可在衣柜中装备与取下，战斗中通过下方物资面板切换弹药。
+				<br>
+				子弹从软弹到黑色雕纹弹共五种：普通子弹只能击退敌人（伤口会奇妙地愈合），
+				只有<span class="fs-tag">雕纹子弹</span>才能真正杀死已命名角色。
+			</div>
+		</details>
+		<details class="journal">
+			<summary class="journal"><<icon "finalstar/medal-witness.png">> 见证者与其它调整</summary>
+			<div class="fs-info-body">
+				<span class="fs-tag">见证者</span>特质：压力、疲劳、创伤、疼痛随时间自动降低。
+				<br>
+				贝利被枪杀后会在一段时间后回归，并加倍索取租金；银行新增代理缴费与存款利息；
+				埋尸系统扩展至森林，并显示成功率；赌场新增高潮与昏倒事件。
+			</div>
+		</details>
+		<details class="journal">
+			<summary class="journal"><<icon "finalstar/vial-cleanse.png">> 感染 · 饥饿 · 理智</summary>
+			<div class="fs-info-body">
+				三个数值都显示在左侧栏。下面写清各自怎么涨、怎么降、以及拖到最后会怎样。
+				<br><br>
+				<span class="fs-tag">感染</span>（0~100）
+				<br>
+				　增加：携带<span class="gold">制式手枪</span>时，每天 +5。
+				<br>
+				　减少：携带<span class="gold">魔法书</span>时，每小时 −1；<span class="gold">净化剂</span>（£70）一次 −15。
+				<br>
+				　到 <span class="gold">75</span> 以上：饥饿掉得更慢（每小时 +1），理智每天多回 1 点。
+				<br>
+				　到 <span class="gold">100</span>：触发「响尾蛇档案」，见下一条。
+				<br><br>
+				<span class="fs-tag">饥饿</span>（0~100，100 是吃饱）
+				<br>
+				　减少：每 <span class="gold">2 小时</span> −10（睡一觉起来会明显更饿）。
+				<br>
+				　恢复：吃东西。食堂一顿 +50，学校套餐 +45；随身食物按 土豆 15 / 蜂蜜 10 / 面包 20 /
+				苹果 12 / 奶酪 18 / 熟肉 25 / 罐装食物 22 / 巧克力 15 / 水 3。
+				<br>
+				　后果①：饿着的时候压力涨得更快。低于 <span class="gold">50</span> 每过 1 小时压力 +1，
+				低于 <span class="gold">25</span> +2，低于 <span class="gold">10</span> +4 —— 越饿越顶不住。
+				<br>
+				　后果②：掉到 <span class="gold">0</span> 会当场饿晕过去。再睁眼时，身边莫名其妙出现了三个面包。
+				<br><br>
+				<span class="fs-tag">理智</span>（0~100）
+				<br>
+				　恢复：每天 +2；<span class="gold">清明剂</span>（£100）一次 +20。
+				<br>
+				　　另有两条恢复途径（原先漏写在说明里）：
+				理智低于 <span class="gold">50</span> 时，每天有 <span class="gold">25%</span> 概率有人从门缝下塞来信封，
+				打开就是一瓶水与一片药（<span class="gold">理智 +30</span>，在卧室会看到提示）；
+				以及在银行或赌场<span class="gold">昏倒</span>醒来时，理智补回 <span class="gold">50</span>（每天只算一次）。
+				<br>
+				　减少：战败（疼痛见底）时 −5。
+				<br>
+				　后果：归零会陷入<span class="red">混乱</span>——压力直接 +200；你自己的检定会被扣掉最多 <span class="gold">30</span> 个百分点（看到多少成功率，掷的就是多少），地点入口的文字也会糊成「？？？」。
+				<br><br>
+				两个药都在魔女小屋的「魔法小道具」页：<span class="gold">净化剂</span>（£70，感染 −15）、
+				<span class="gold">清明剂</span>（£100，理智 +20）。
+			</div>
+		</details>
+		<details class="journal">
+			<summary class="journal"><<icon "finalstar/snake-cross-icon.png">> 窥视真相 · 响尾蛇档案</summary>
+			<div class="fs-info-body">
+				感染满 <span class="gold">100</span> 时，时间会直接跳过七天，然后有一个存在隔着屏幕对你说话。
+				<br>
+				它会问你：要<span class="fs-tag">与堕落共沉沦</span>，还是<span class="fs-tag">为了别的而努力</span>。
+				两个回答它都接受，只是回应不同。
+				<br>
+				随后响尾蛇档案自动记录你的名字，你获得人物特质<span class="red">窥视真相</span>：
+				<br>
+				　收益：遭遇战中受到的<span class="gold">疼痛减少 25%</span>。
+				<br>
+				　代价：每晚 <span class="gold">23:00</span> 会感到被偷窥，压力 +40。
+				<br><br>
+				「窥视真相」可以在特质页看到，与「见证者」并列。
+			</div>
+		</details>
+		<details class="journal">
+			<summary class="journal"><<icon "finalstar/lab-door.png">> 排水系统尽头的实验室</summary>
+			<div class="fs-info-body">
+				玖肆好感达到 <span class="gold">50%</span> 时，与她在孤儿院聊天会拿到一把钥匙。
+				<br>
+				原版「下水道」菜单里会多出第三个选项<span class="fs-tag">「？？？」</span>（开过一次后变成「推开暗门」）。
+				<br>
+				里面是一间简陋的实验室：散落一地的实验材料、一个能钻进去的纸箱、一堆还能用的器材。
+				纸箱可以睡、时长自己选，但<span class="red">第三次</span>玖肆会告诉你「这里似乎被盯上了」，之后就不能再睡了。
+				<br>
+				摆弄器材会发现一本硬皮本子——幻界任务清单、被撕掉与涂黑的页，最后一页写着「x计划」。
+			</div>
+		</details>
+		<details class="journal">
+			<summary class="journal"><<icon "finalstar/morans-fog.png">> 长线剧情「莫伦斯」</summary>
+			<div class="fs-info-body">
+				实验室开启后<span class="gold">第 3 天</span>再去，会撞见玖肆在修一枚银镶蓝宝石的戒指；
+				谈完可以选<span class="fs-tag">双人</span>或<span class="fs-tag">单人</span>（各拿 6 发银弹）。
+				<br>
+				<span class="gold">十天之后</span>，宅邸街会出现「走进灰色迷雾」——文本很长，建议先存档；到日子后会一直存在。
+				<br>
+				城市里的时间<span class="fs-tag">独立计数</span>，不影响现实时间。整座城是「田」字九格：
+				<span class="fs-tag">中央大厦</span>、西侧步行街（速食／甜品／服装／杂货／旅店）、西北公园、
+				北边学校、东北高档小区、东边政府大厦、南边住宅区，另有<span class="gold">西南便利商店</span>、
+				<span class="gold">东南诊所</span>与四条<span class="gold">马路</span>（站上去必定遇到街头事件）。
+				地图就在段落下方，可以直接点着走。另有第 5 天的世界异变、时间遥变迷图，以及与笙不瑜的对峙。
+				<br>
+				对峙时有三个方向：<span class="fs-tag">A · 兵将疾行</span>（回头 / 拒绝）、
+				<span class="gold">B · 爱</span>（苏梦棠好感 ≥70% 拿到纪念币，对峙时「掏出那枚硬币」）、
+				<span class="red">C · 崩坏</span>（步行街杂货店买巫毒娃娃，对峙时「拿出那个巫毒娃娃」→ 玖肆死亡）。
+				<br>
+				控制台第 12 个分区「◆ 莫伦斯」可以看进度、提前解锁结局、让她回来。
+			</div>
+		</details>
+	</div>
+<</widget>>
+
+/* ===== 未来更新 ===== */
+<<widget "fs_panel_future">>
+	<div class="fs-panel">
+		<h3><<icon "finalstar/ui-future.png">> 未来更新</h3>
+
+		<div class="fs-info-body">
+			<span class="fs-tag">v0.28 · 正式版</span>
+			<br>
+			① <span class="gold">走路终于会饿了</span>：以前只有触发事件才掉饥饿，走路一整天不掉。根因是每小时都在推进时间戳、却要求"跨满 2 小时"才扣，小数小时被永久丢弃。现在改成零头累加。
+			<br>
+			② <span class="gold">饥饿后果重做</span>：撤掉"低于 50 拖慢行动"，改为<span class="gold">越低压力涨得越快</span>（低于 50 每小时 +1、低于 25 +2、低于 10 +4）；饥饿掉到 0 会当场<span class="red">饿晕</span>，醒来时身边莫名多出<span class="gold">三个面包</span>。
+			<br>
+			③ <span class="gold">埋尸误触发修复（本次最严重）</span>：以前<b>每一场打赢的架</b>都会把你拖进"你杀了人、去埋尸"。原因是被当成了"敌人血量 ≤ 0 = 你杀死了对方"——而原版自己就是用血量归零表示软模式下说服对方走开的。现在只有真的用致命子弹打死人才进埋尸。
+			<br>
+			④ <span class="gold">开枪结果终于显示</span>：此前每次射击都会因一个未声明的变量抛异常并被静默吞掉 —— 扣弹扣血照常，但「弹仓 X 发 · 本次伤害 X 点」永远不显示。
+			<br>
+			⑤ <span class="gold">修复若干"根本不存在的数据字段"</span>：疼痛上限、周期时间戳、护理技能、疲劳上限此前读写的都是原版没有的字段，导致<span class="red">战败 −5 理智从未触发过</span>、奴隶上缴一生只能领一次、埋尸伪装率恒 0%、疲劳永远不触发晕倒。现已全部改用原版真实字段，旧存档会自动迁移。
+			<br>
+			⑥ <span class="gold">银行通知恢复</span>：利息入账与代理缴款（含失败）的通知此前写在一个没有任何入口的旧段落里 —— 钱被划走却没有提示。现在进银行大厅时职员会当面告知。
+			<br>
+			⑦ <span class="gold">其它修复</span>：洞穴遭遇战里「继续」不再被送去卧室；「杀人不埋尸」开关在枪杀路径上也生效；保举名额现在真的扣 £2000；代理缴费不再一周扣两次；低理智下难度提示只降一档（以前"简单"会被改写成"不可能"）；进食不再因为重绘而重复加饥饿。
+			<br><br>
+			<span class="fs-tag">上次更新（0.27）</span>
+			<br>
+			① <span class="gold">魔法刻印扩充</span>：新增血月 / 回响 / 静默 / 毒牙 / 星辉五枚，魔女小屋已上架；刻印触发时会在正文显示金色流光的提示。
+			<br>
+			② <span class="gold">炼金大能</span>：设置里新增开关，开启后炼金刻印必定触发 —— 收到钱必定<span class="gold">双倍</span>，花钱必定<span class="gold">免单</span>。
+			<br>
+			③ <span class="gold">侧边栏</span>：「模组设置」移到「存档」下方独占一行，并做了荆棘藤纹与星辰的边框。
+			<br>
+			④ <span class="gold">人格洗脑丸</span>：<s class="grey">赌场三楼办公室已开放购买（两条线各有门路），可以下在食物里、也可以直接塞进对方嘴里。</s>
+			<br>
+			⑤ <span class="gold">修复</span>：作弊面板里疼痛数值消失、报错的问题（同时会自动修复已损坏的存档数值）；银行与赌场不再被判定为室外淋雨；赌场的高潮与昏倒事件现在能正常触发。
+		</div>
+
+		<br>
+		<div class="fs-sub">以下是终星的后续计划。</div>
+		<br>
+		<div class="fs-info-body">
+			<span class="fs-tag">1.</span> 城镇中更多的遭遇战。<br>
+			<span class="fs-tag">2.</span> 更多专属于天使与恶魔的故事。<br>
+			<span class="fs-tag">3.</span> 两条主线（玖肆线 / 贝利线）的新内容。<br>
+			<span class="fs-tag">4.</span> 第一个长篇故事。<br>
+			<span class="fs-tag">5.</span> 修复已知问题。<br>
+			<span class="fs-tag">6.</span> <s class="grey">人格洗脑丸<span class="fs-sub">（已完成 · 见上方 0.27 更新）</span></s>
+			<br>
+			<span class="fs-sub">
+				一枚会在肠胃里化开的小药片。它不杀人，它<span class="gold">拆人</span>——从心理到生理，把一个人的意志一层层剥下来，
+				直到对方只剩下听话这一件事还做得像样。<br>
+				它最主要的用法并不是塞进谁嘴里，而是<span class="gold">混进吃的里面</span>：一口面包、一杯水，比任何强迫都有效。<br>
+				遇到麻烦时也可以直接塞进对方嘴里——只要对方肯张嘴。咽下去之后，那场冲突会自己结束，
+				而 ta 会从事实上成为你的奴隶：你可以在孤儿院大厅找到 ta，命令 ta 干活、解决你的欲望，或者让 ta 自己走开再也不回来。<br>
+				<span class="red">这玩意儿没法后悔。</span>买到手就是买到手了，用掉就是用掉了，而且一次最多只卖你<span class="gold">两颗</span>。<br>
+				另外，对拥有<span class="gold">异常力量</span>的人——天使、恶魔、以及那些身上缠着别的东西的家伙——它<span class="red">几乎没有效果</span>。<br>
+				想要买到它，得先想办法进赌场三楼的办公室。至于怎么进去，老板只跟"自己人"谈生意。
+			</span>
+		</div>
+	</div>
+<</widget>>
+
+
+/* ===== 控制台（含剧透警告确认） ===== */
+<<widget "fs_console_sec_0">>
+<div class="fs-console-group fs-console-sec"><div class="fs-console-h">◆ 遭遇事件（20）</div><div class="settingsGrid fs-console-grid">
+				<<link [[赌场·高潮（现用流程）|FS Casino Orgasm]]>><</link>>　
+				<<link [[赌场·再来一次|FS Casino Encore]]>><</link>>　
+				<<link [[赌场·昏倒（现用流程）|FS Casino Faint]]>><</link>>　
+				<<link [[赌场·大厅|Casino Jiusi Lobby]]>><</link>>　
+				<<link [[赌场·赌桌|Casino Jiusi Table]]>><</link>>　
+				<<link [[一楼赌桌·出千|Casino Jiusi Table Cheat]]>><</link>>　
+				<<link [[赌场·换衣间|Casino Jiusi Dressing]]>><</link>>　
+				<<link [[和兔子小姐闲聊|Casino Jiusi Bunny Chat]]>><</link>>　
+				<<link [[兔子小姐的秘密|Casino Jiusi Bunny Secret]]>><</link>>　
+				<<link [[赌场·高台|Casino Jiusi Second Floor]]>><</link>>　
+				<<link [[二楼赌桌|Casino Jiusi Second Floor Table]]>><</link>>　
+				<<link [[二楼赌桌·出千|Casino Jiusi Second Floor Cheat]]>><</link>>　
+				<<link [[赌场打工·接下工作|Casino Job Accept]]>><</link>>　
+				<<link [[赌场打工·第一天|Casino Job First]]>><</link>>　
+				<<link [[赌场打工·挣扎一|Casino Job Struggle 1]]>><</link>>　
+				<<link [[赌场打工·挣扎二|Casino Job Struggle 2]]>><</link>>　
+				<<link [[赌场打工·挣扎三|Casino Job Struggle 3]]>><</link>>　
+				<<link [[赌场打工|Casino Job]]>><</link>>　
+				<<link [[校门口·霸凌事件|School Bully Event]]>><</link>>　
+				<<link [[校门口·乞丐事件|School Beggar Event]]>><</link>>　
+			<br>
+			</div></div><hr class="fs-console-hr">
+<</widget>>
+<<widget "fs_console_sec_1">>
+<div class="fs-console-group fs-console-sec"><div class="fs-console-h">◆ 洞穴事件（14）</div><div class="settingsGrid fs-console-grid">
+				<<link [[发现洞穴|Cave Discover]]>><</link>>　
+				<<link [[洞穴·入口|Cave Entrance]]>><</link>>　
+				<<link [[洞穴·探索|Cave Explore]]>><</link>>　
+				<<link [[洞穴·下潜|Cave Descend]]>><</link>>　
+				<<link [[洞穴·遭遇战|Cave Fight]]>><</link>>　
+				<<link [[洞穴·战斗之后|Cave After Fight]]>><</link>>　
+				<<link [[洞穴·离开|Cave Leave]]>><</link>>　
+				<<link [[洞穴·战败|Cave Defeat]]>><</link>>　
+				<<link [[洞穴·战败·玖肆出现|Cave Defeat Jiusi]]>><</link>>　
+				<<link [[洞穴·战败·询问|Cave Defeat Ask]]>><</link>>　
+				<<link [[洞穴·战败·回想|Cave Defeat Reflect]]>><</link>>　
+				<<link [[洞穴·战败·沉默|Cave Defeat Silent]]>><</link>>　
+				<<link [[洞穴·尽头|Cave End]]>><</link>>　
+				<<link [[博物馆·给温特看勋章|Museum Witness Medal]]>><</link>>　
+			<br>
+			</div></div><hr class="fs-console-hr">
+<</widget>>
+<<widget "fs_console_sec_2">>
+<div class="fs-console-group fs-console-sec"><div class="fs-console-h">◆ 赌场与银行（20）</div><div class="settingsGrid fs-console-grid">
+				<<link [[赌场门口|Casino Jiusi]]>><</link>>　
+				<<link [[赌场·休息|Casino Jiusi Rest]]>><</link>>　
+				<<link [[赌场·喝一杯|Casino Jiusi Drink]]>><</link>>　
+				<<link [[赌场·群戏一|Casino Jiusi Orgy 1]]>><</link>>　
+				<<link [[赌场·群戏二|Casino Jiusi Orgy 2]]>><</link>>　
+				<<link [[赌场·群戏三|Casino Jiusi Orgy 3]]>><</link>>　
+				<<link [[赌场·那颗药|Casino Jiusi Pill]]>><</link>>　
+				<<link [[赌场·昏过去|Casino Jiusi Pass Out]]>><</link>>　
+				<<link [[赌场·昏过去（二）|Casino Jiusi Pass Out 2]]>><</link>>　
+				<<link [[赌场·昏过去（三）|Casino Jiusi Pass Out 3]]>><</link>>　
+				<<link [[赌场·昏过去（四）|Casino Jiusi Pass Out 4]]>><</link>>　
+				<<link [[银行·大厅|Bank Hall]]>><</link>>　
+				<<link [[银行·压力晕倒|Bank Faint]]>><</link>>　
+				<<link [[银行·柜台职员|Bank Hall Clerk]]>><</link>>　
+				<<link [[赌场·兔子小姐保举|Casino Jiusi Referral]]>><</link>>　
+				<<link [[赌场·三楼楼梯|Casino Jiusi Third Stairs]]>><</link>>　
+				<<link [[赌场·三楼|Casino Jiusi Third Floor]]>><</link>>　
+				<<link [[赌场·三楼办公室|Casino Jiusi Office]]>><</link>>　
+				<<link [[赌场·老板开价|Casino Jiusi Office Offer]]>><</link>>　
+				<<link [[赌场·买下药丸|Casino Jiusi Office Buy]]>><</link>>　
+			<br>
+			</div></div><hr class="fs-console-hr">
+<</widget>>
+<<widget "fs_console_sec_3">>
+<div class="fs-console-group fs-console-sec"><div class="fs-console-h">◆ 洗脑丸与奴隶（9）</div><div class="settingsGrid fs-console-grid">
+				<<link [[骗 ta 吃下药丸|FS Pill Use]]>><</link>>　
+				<<link [[面包·下药|FS Pill Bread]]>><</link>>　
+				<<link [[面包·交给在场的人|FS Pill Bread Give]]>><</link>>　
+				<<link [[奴隶管理|FS Slaves]]>><</link>>　
+				<<link [[奴隶·去赚钱|FS Slave Pay]]>><</link>>　
+				<<link [[奴隶·解决欲望|FS Slave Serve]]>><</link>>　
+				<<link [[奴隶·解决欲望（二）|FS Slave Serve 2]]>><</link>>　
+				<<link [[奴隶·「……停下。」|FS Slave Serve Stop]]>><</link>>　
+				<<link [[奴隶·让 ta 走开|FS Slave Kill]]>><</link>>　
+			<br>
+			</div></div><hr class="fs-console-hr">
+<</widget>>
+<<widget "fs_console_sec_4">>
+<div class="fs-console-group fs-console-sec"><div class="fs-console-h">◆ 校园与其它原创（65）</div><div class="settingsGrid fs-console-grid">
+				<<link [[贝利回归|Bailey Return Notice]]>><</link>>　
+				<<link [[租金·自动扣缴完成|FS Rent Autopay Done]]>><</link>>　
+				<<link [[租金信封|FS Rent Envelope]]>><</link>>　
+				<<link [[埋尸·开始（现用流程）|FS Corpse Start]]>><</link>>　
+				<<link [[埋尸·拖行（现用流程）|FS Corpse Drag]]>><</link>>　
+				<<link [[埋尸·被撞见（现用流程）|FS Corpse Discovered]]>><</link>>　
+				<<link [[埋尸·欺骗路人（现用流程）|FS Corpse Deceive]]>><</link>>　
+				<<link [[埋尸·扭打（现用流程）|FS Corpse Wrestle]]>><</link>>　
+				<<link [[埋尸·逃跑（现用流程）|FS Corpse Flee]]>><</link>>　
+				<<link [[埋尸·警察（现用流程）|FS Corpse Police]]>><</link>>　
+				<<link [[埋尸·抵达花园（现用流程）|FS Corpse Arrive Garden]]>><</link>>　
+				<<link [[埋尸·抵达森林（现用流程）|FS Corpse Arrive Forest]]>><</link>>　
+				<<link [[埋尸·掩埋（现用流程）|FS Corpse Bury]]>><</link>>　
+				<<link [[埋尸·继续挖（现用流程）|FS Corpse Bury More]]>><</link>>　
+				<<link [[埋尸·喘口气（现用流程）|FS Corpse Bury Pause]]>><</link>>　
+				<<link [[埋尸·丢弃（现用流程）|FS Corpse Dump]]>><</link>>　
+				<<link [[埋尸·完成（现用流程）|FS Corpse Done]]>><</link>>　
+				<<link [[数学课·玖肆送信|FS Maths Note Jiusi]]>><</link>>　
+				<<link [[刻印遭遇战|FS Console Seal]]>><</link>>　
+				<<link [[屋顶·最后一颗星|Rooftop Last Star]]>><</link>>　
+				<<link [[魔女小屋|Witch Hut]]>><</link>>　
+				<<link [[魔女小屋·商店|Witch Hut Shop]]>><</link>>　
+				<<link [[魔女小屋·买枪|Witch Hut Gun]]>><</link>>　
+				<<link [[魔女小屋·刻印|Witch Hut Seal]]>><</link>>　
+				<<link [[魔女小屋·刻印已购|Witch Hut Seal Done]]>><</link>>　
+				<<link [[魔女小屋·询问|Witch Hut Ask]]>><</link>>　
+				<<link [[魔女小屋·问来历|Witch Hut Ask Origin]]>><</link>>　
+				<<link [[魔女小屋·问这世界|Witch Hut Ask World]]>><</link>>　
+				<<link [[魔女小屋·问日常|Witch Hut Ask Daily]]>><</link>>　
+				<<link [[孤儿院·布告板|Orphanage Mysterious Note]]>><</link>>　
+				<<link [[孤儿院·告示背面|Orphanage Note Hidden]]>><</link>>　
+				<<link [[孤儿院·贝利的告示|Orphanage Note Bailey]]>><</link>>　
+				<<link [[卧室·夜访者|Bedroom Night Visitor]]>><</link>>　
+				<<link [[卧室·夜访者（二）|Bedroom Night Visitor 2]]>><</link>>　
+				<<link [[卧室·夜访者（三）|Bedroom Night Visitor 3]]>><</link>>　
+				<<link [[孤儿院·和玖肆说话|Orphanage Talk Jiusi]]>><</link>>　
+				<<link [[孤儿院·撩玖肆|Orphanage Flirt Jiusi]]>><</link>>　
+				<<link [[埋尸·开始拖行（旧流程·已弃用）|Corpse Drag Start]]>><</link>>　
+				<<link [[埋尸·拖行（旧流程·已弃用）|Corpse Drag]]>><</link>>　
+				<<link [[埋尸·被人发现（旧流程·已弃用）|Corpse Drag Discovered]]>><</link>>　
+				<<link [[埋尸·欺骗路人（旧流程·已弃用）|Corpse Drag Deceive]]>><</link>>　
+				<<link [[埋尸·丢下逃跑（旧流程·已弃用）|Corpse Drag Abandon]]>><</link>>　
+				<<link [[埋尸·抵达（旧流程·已弃用）|Corpse Drag Arrive]]>><</link>>　
+				<<link [[埋尸·掩埋（旧流程·已弃用）|Corpse Bury]]>><</link>>　
+				<<link [[埋尸·被送进监狱（旧流程·已弃用）|Corpse Event Prison]]>><</link>>　
+				<<link [[埋尸·服刑结束（旧流程·已弃用）|Corpse Event Prison End]]>><</link>>　
+				<<link [[已故者·缺席|Dead NPC Absence]]>><</link>>　
+				<<link [[贝利·赌场开场|Bailey Casino Intro]]>><</link>>　
+				<<link [[贝利·三楼老板|Bailey Casino Boss]]>><</link>>　
+				<<link [[赌场里的陌生人|Casino NPC Event]]>><</link>>　
+				<<link [[玖肆·被发现跟踪|Jiusi Stalk Discovered]]>><</link>>　
+				<<link [[玖肆·告诉摩根|Jiusi Morgan Tell]]>><</link>>　
+				<<link [[玖肆·离开摩根|Jiusi Morgan Leave]]>><</link>>　
+				<<link [[玖肆·跟随摩根一|Jiusi Morgan Follow 1]]>><</link>>　
+				<<link [[玖肆·跟随摩根二|Jiusi Morgan Follow 2]]>><</link>>　
+				<<link [[医院·和摩根说话|Hospital Morgan Chat]]>><</link>>　
+				<<link [[数学课·阻止霸凌|Maths Bully Jiusi Stop]]>><</link>>　
+				<<link [[学校·乞丐·给钱|School Beggar Give]]>><</link>>　
+				<<link [[学校·乞丐·拒绝|School Beggar Refuse]]>><</link>>　
+				<<link [[魔书·调查|Magic Book Investigate]]>><</link>>　
+				<<link [[魔书·买回|Magic Book Buy Back]]>><</link>>　
+				<<link [[贝利在门口警告|FS Bailey Slave Warn]]>><</link>>　
+				<<link [[玖肆在床边警告|FS Jiusi Slave Warn]]>><</link>>　
+				<<link [[玖肆失望|FS Jiusi Disappointed]]>><</link>>　
+				<<link [[射击|FS Shoot]]>><</link>>　
+			<br>
+			<br></div></div><hr class="fs-console-hr">
+<</widget>>
+<<widget "fs_console_sec_5">>
+<div class="fs-console-group fs-console-sec" id="fs-cheat-group"><div class="fs-console-h">◆ 作弊功能</div><div class="settingsGrid fs-console-grid">
+				<div id="fs-cheat-box"></div>
+				<<run setTimeout(function(){ try { var e=document.getElementById('fs-cheat-box'); if(e) e.innerHTML=finalStar.cheatHtml(); } catch(err){} }, 0)>>
+			</div>
+			/* 数值与物品：从原分区整体搬到这里（设计上归到「作弊功能」大分类下）。
+			   新增感染 ±15 与饥饿 ±20 —— 感染走本轮补的 fs.infectAdd，饥饿走已存在的 fs.hungerAdd。
+			   调完就地重渲染控制台（openSettings + 延迟到 setTimeout，这是本项目固定写法）。 */
+			<div class="fs-info-body"><span class="fs-tag">◆ 数值与物品</span><br>
+				/* 原版 <<numberStepper>> 微调控件（用户选了"和原版作弊一样"）—— 契约已验证定死：
+				   写法 `<<numberStepper "标题" \`取值表达式\` { callback: v => {...} }, max: N>>`
+				   渲染出「−1 / +1 / 一键拉满」三个按钮，max 写在花括号外面（原版就是这么写的，
+				   验证三种写法都能渲染，这里跟原版保持一致）。
+				   回调一律用 finalStar 的 Add 系列做"差值设置"，这样夹紧/日志/联动都走同一套，不绕过它们。 */
+				<<numberStepper "感染" `finalStar.infect()` { callback: v => { finalStar.infectAdd(v - finalStar.infect()) } }, max: 100>>
+				<<numberStepper "饥饿" `finalStar.hunger()` { callback: v => { finalStar.hungerAdd(v - finalStar.hunger()) } }, max: 100>>
+				<<numberStepper "理智" `finalStar.sanity()` { callback: v => { finalStar.sanityAdd(v - finalStar.sanity()) } }, max: 100>>
+				<<numberStepper "疼痛" `V.pain` { callback: v => { V.pain = v } }, max: `V.painmax`>>
+				<<numberStepper "压力" `V.stress` { callback: v => { V.stress = v } }, max: `V.stressmax`>>
+				<<numberStepper "玖肆好感" `finalStar.jiusiLove()` { callback: v => { finalStar.consoleJiusi(v - finalStar.jiusiLove()) } }, max: 100>>
+				<br>
+				<span class="fs-sub">物品：</span>
+				<<link [[土豆 ×5|passage()]]>><<run setTimeout(function(){ finalStar.openSettings(); }, 0)>><<run finalStar.consoleGive("potato", 5)>><</link>>　
+				<<link [[蜂蜜 ×5|passage()]]>><<run setTimeout(function(){ finalStar.openSettings(); }, 0)>><<run finalStar.consoleGive("honey", 5)>><</link>>　
+				<<link [[一键全解锁食物|passage()]]>><<run setTimeout(function(){ finalStar.openSettings(); }, 0)>><<run finalStar.cheatFood(99)>><</link>>　
+			<br>
+			<div class="fs-sub">当前：理智 <<print finalStar.sanity()>>　感染 <<print finalStar.infect()>>　饥饿 <<print finalStar.hunger()>>　玖肆好感 <<print finalStar.jiusiLove()>></div>
+			<br></div><hr class="fs-console-hr">
+<</widget>>
+<<widget "fs_console_sec_6">>
+<div class="fs-console-group fs-console-sec" id="fs-go-group"><div class="fs-console-h">◆ 地点与剧情直达</div><div class="settingsGrid fs-console-grid">
+				<div id="fs-go-box"></div>
+				<<run setTimeout(function(){ try { var e=document.getElementById('fs-go-box'); if(e) e.innerHTML=finalStar.goHtml(); } catch(err){} }, 0)>>
+			</div></div><hr class="fs-console-hr">
+<</widget>>
+<<widget "fs_console_sec_7">>
+<div class="fs-console-group fs-console-sec"><div class="fs-console-h">◆ 角色专属事件</div>
+<div class="fs-sub">想见谁，就从这里直接过去。点一条就进入那一段。</div>
+<div class="fs-debug-filter"><input type="text" id="fs-char-search" placeholder="找人（例：凯拉 / 罗宾 / 绑架）"></div>
+<div id="fs-char-box" class="fs-debug-list"></div>
+				<<run setTimeout(function(){ try { var e=document.getElementById('fs-char-box'); if(e) e.innerHTML=finalStar.charEventsHtml(''); } catch(err){} }, 0)>>
+			</div><hr class="fs-console-hr">
+<</widget>>
+<<widget "fs_console_sec_8">>
+<div class="fs-console-group fs-console-sec"><div class="fs-console-h">◆ 长线剧情</div>
+<div class="fs-sub">长篇幅的整条线。想从头看某一条，点它。</div>
+<div class="fs-debug-filter"><input type="text" id="fs-story-search" placeholder="找剧情（例：海岛 / 博物馆 / 绑架）"></div>
+<div id="fs-story-box" class="fs-debug-list"></div>
+				<<run setTimeout(function(){ try { var e=document.getElementById('fs-story-box'); if(e) e.innerHTML=finalStar.storyArcHtml(''); } catch(err){} }, 0)>>
+			</div><hr class="fs-console-hr">
+<</widget>>
+<<widget "fs_console_sec_9">>
+<div class="fs-console-group fs-console-sec" id="fs-vanilla-cheats"><div class="fs-console-h">◆ 原版作弊</div>
+<div class="fs-sub">这里直接调用原版自己的作弊分区（Stats / Visual / NPCs / Teleport / Other），
+外观与数值逻辑与原版完全一致 —— 包括各角色的好感微调。</div>
+<div class="fs-debug-list">
+			<details class="fs-console-group" open><summary>角色属性 Stats</summary><div id="fs-vc-stats"></div></details>
+			<details class="fs-console-group"><summary>外观 Visual</summary><div id="fs-vc-visual"></div></details>
+			<details class="fs-console-group"><summary>角色关系与好感微调 NPCs</summary><div id="fs-vc-npcs"></div></details>
+			<details class="fs-console-group"><summary>传送 Teleport</summary><div id="fs-vc-teleport"></div></details>
+			<details class="fs-console-group"><summary>其它 Other</summary><div id="fs-vc-other"></div></details>
+			<details class="fs-console-group" open><summary>建筑解锁 Building Unlocks</summary><div id="fs-building-unlocks"></div></details>
+</div></div>
+			<<run setTimeout(function(){ try { finalStar.fillVanillaCheats(); } catch(err){ try{ finalStar.warn('原版作弊分区填充失败: '+err.message); }catch(e2){} } }, 0)>>
+			<<run setTimeout(function(){ try { finalStar.fillBuildingUnlocks(); } catch(err){ try{ finalStar.warn('建筑解锁填充失败: '+err.message); }catch(e2){} } }, 0)>>
+<hr class="fs-console-hr">
+<</widget>>
+<<widget "fs_console_sec_10">>
+/* 控制台第 11 个分区：响尾蛇「残缺版」。
+   只显示最近三条发帖记录，点「查看更多」会被乱码式挡下。
+   内容在 fs-rattlesnake.js 的 rsWeakPosts / rsWeakHtml / rsMorePosts ——
+   故意比手机 app 那份更残缺（名字被覆写成 ███、回复被截断、时戳对不上）。 */
+<div class="fs-console-group fs-console-sec"><div class="fs-console-h">◆ 响尾蛇</div>
+<div class="fs-sub">这台设备上只留下三条。往下翻不了。</div>
+<div id="fs-weak-posts" class="fs-debug-list"></div>
+			<<run setTimeout(function(){ try { var e=document.getElementById('fs-weak-posts'); if(e) e.innerHTML=finalStar.rsWeakHtml(); } catch(err){} }, 0)>>
+</div><hr class="fs-console-hr">
+<</widget>>
+<<widget "fs_console_sec_11">>
+/* 控制台第 12 个分区：长线剧情「莫伦斯」。
+   用户 ：三个结局要能在控制台查看，但**长线剧情的内容要解锁才能预览**；
+   另给「提前解锁全部」与「玖肆回归」两个作弊（C 结局的玩家不至于彻底失去这个角色）。
+   按钮一律走 finalStar.morCheat(...) —— 它执行完会重渲染本分区，不需要跳页面。 */
+<div class="fs-console-group fs-console-sec"><div class="fs-console-h">◆ 莫伦斯（长线剧情）</div>
+<div class="fs-sub"><<print finalStar.morStatusLine()>></div>
+<<if finalStar.morMsg>>
+	<br><div class="fs-sub"><span class="gold"><<print finalStar.morMsg>></span></div>
+<</if>>
+<br>
+<div class="fs-sub">结局一览：</div>
+<<if finalStar.mor().unlocked>>
+	<div class="fs-sub"><span class="gold">A · 兵将疾行</span>：回头 → 被她抱住 → 醒在孤儿院床，玖肆失踪 12 天；拒绝 → 玖肆留下断后（单人则先逃、跑到大厦由玖肆救下）→ 同样醒在孤儿院。</div>
+	<div class="fs-sub"><span class="gold">B · 爱</span>：苏梦棠好感 70% → 她给你纪念币 → 对峙时掏出 → 笙不瑜失去执念、奇迹透支而死 → 两个灵魂牵手离开。</div>
+	<div class="fs-sub"><span class="red">C · 崩坏</span>：商店买到巫毒娃娃 → 对峙时拿出 → 城市崩坏、玖肆彻底死亡 → 魔女把死亡报告交到你手里。</div>
+<<else>>
+	<div class="fs-sub"><span class="grey">A · ？？？　B · ？？？　C · ？？？</span></div>
+	<div class="fs-sub">（走完这条线就会解锁；也可以点下面的「提前解锁全部结局」。）</div>
+<</if>>
+<br>
+<div class="fs-console-grid">
+<button type="button" class="link-internal macro-button" onclick="finalStar.morCheat('unlock')">提前解锁全部结局</button>
+<button type="button" class="link-internal macro-button" onclick="finalStar.morCheat('revive')">玖肆回归</button>
+<button type="button" class="link-internal macro-button" onclick="finalStar.morCheat('coin')">给纪念币</button>
+<button type="button" class="link-internal macro-button" onclick="finalStar.morCheat('doll')">给巫毒娃娃</button>
+<button type="button" class="link-internal macro-button" onclick="finalStar.morCheat('reset')">重置长线剧情（含两人好感）</button>
+<button type="button" class="link-internal macro-button" onclick="finalStar.morCheat('aff_smt')">苏梦棠好感 +20</button>
+<button type="button" class="link-internal macro-button" onclick="finalStar.morCheat('aff_sby')">笙不瑜好感 +20</button>
+<button type="button" class="link-internal macro-button" onclick="finalStar.morCheat('skip5')">跳到第 5 天</button>
+	<br>
+	<button type="button" class="link-internal macro-button" onclick="finalStar.duelCheat('clear')">标记长线已通关</button>
+	<button type="button" class="link-internal macro-button" onclick="finalStar.duelCheat('book')">持魔书</button>
+	<button type="button" class="link-internal macro-button" onclick="finalStar.duelCheat('gun')">持手枪</button>
+	<button type="button" class="link-internal macro-button" onclick="finalStar.duelCheat('both')">魔书+手枪</button>
+	<button type="button" class="link-internal macro-button" onclick="finalStar.duelCheat('start')">开始遭遇战</button>
+	<button type="button" class="link-internal macro-button" onclick="finalStar.duelCheat('reset')">清空战斗状态</button>
+	<br>
+	<button type="button" class="link-internal macro-button" onclick="finalStar.morCheat('night')">时间 → 20:00</button>
+	<button type="button" class="link-internal macro-button" onclick="finalStar.morCheat('morning')">时间 → 07:00</button>
+<button type="button" class="link-internal macro-button" onclick="finalStar.morCheat('click')">一键标记双人路线</button>
+<button type="button" class="link-internal macro-button" onclick="finalStar.morCheat('reset')">重置长线剧情</button>
+</div>
+</div><hr class="fs-console-hr">
+<</widget>>
+
+<<widget "fs_console_sec_12">>
+<div class="fs-console-group fs-console-sec" id="fs-origin-group"><div class="fs-console-h">◆ 原创事件（全部）</div>
+<div class="fs-sub">本模组加的所有原创事件，按线分组。点一下直接跳过去 —— 用来逐条确认内容会不会报错。
+带状态的段落（遭遇战 / 赌桌 / 对峙 / 结局）跳进去可能缺前置，报错先记下段落名，再按正常流程复现。</div>
+<div class="fs-debug-filter"><input type="text" id="fs-origin-search" placeholder="找事件（例：莫伦斯 / 面包 / 奴隶 / 实验室）"></div>
+<div id="fs-origin-box" class="fs-debug-list"></div>
+<<run setTimeout(function(){ try { var e=document.getElementById('fs-origin-box'); if(e) e.innerHTML=finalStar.originHtml(''); } catch(err){} }, 0)>>
+</div><hr class="fs-console-hr">
+<</widget>>
+
+<<widget "fs_panel_console">>
+	<div class="fs-panel fs-console">
+		<h3><<icon "finalstar/ui-notice.png">> 控制台</h3>
+		<<if $fs_consoleOK isnot true>>
+			<div class="fs-info-body">
+				<span class="red">◆ ███ ██ 记录已被人翻动过 █████</span><br>
+				这不是给玩家准备的东西。里面是别人留下的抽屉：事件的直达入口、刻印遭遇、
+				以及直接改写数值的手段。<br>
+				继续往下翻，你会先看到本来应该晚一点才知道的事。<br>
+				<span class="fs-sub">（有一条记录被涂黑了。它没有说为什么。）</span>
+			</div>
+			<br>
+			<<link [[我不在意，让我进去|passage()]]>><<run setTimeout(function(){ finalStar.openSettings(); }, 0)>><<set $fs_consoleOK to true>><</link>>
+			<br>
+			<<link [[算了，我还是正常玩|passage()]]>><<run setTimeout(function(){ finalStar.openSettings(); }, 0)>><<set $fs_consoleOK to false>><</link>>
+		<<else>>
+			<<if finalStar.rsNeedGate()>>
+				/* 还没登录 → 先放响尾蛇系统的载入动画 / 登录界面。
+				   动画（滚动的模组源码 + 错位小字）只在第一次打开时播一次（V.fs_rsBooted 记住），
+				   之后（含点过「退出」）直接给登录界面。 */
+				/* ⚠️ <<run>> 必须写在 div 外面并用 setTimeout 延后：
+				   SugarCube 是先把内容拼成片段再插进 DOM，写在 div 内部的 <<run>> 执行时
+				   document.getElementById 还拿不到那个 div（返回 null）→ 内容填不进去而且不报错。
+				   这是本项目踩过的同一类坑（§4.4：passageinit 期间的动作要延后）。 */
+				<div id="fs-rs-stage-box"></div>
+				<<run setTimeout(function(){ try { var e=document.getElementById('fs-rs-stage-box'); if(e) e.innerHTML=finalStar.rsStageHtml(); finalStar.rsRelocateStage(); } catch(err){ try{finalStar.warn('响尾蛇舞台填充失败: '+err.message);}catch(e2){} } }, 0)>>
+			<<else>>
+			<div class="fs-info-body"><span class="fs-tag">◆ 刻印遭遇（自动装备魔法书 + 该刻印）</span><br>
+			<div id="fs-console-seals"></div>
+			<<run setTimeout(function(){ try { var e=document.getElementById('fs-console-seals'); if(e) e.innerHTML=finalStar.consoleSealHtml(); } catch(err){} }, 0)>>
+			</div><br>
+						<div id="fs-console-tabs" class="tab fs-console-tabs">
+			<button type="button" class="link-internal macro-button fs-tab fs-tab-on" data-fs-sec="0" onclick="finalStar.consoleTabPick(this)">◆ 遭遇事件（20）</button>
+			<button type="button" class="link-internal macro-button fs-tab" data-fs-sec="1" onclick="finalStar.consoleTabPick(this)">◆ 洞穴事件（14）</button>
+			<button type="button" class="link-internal macro-button fs-tab" data-fs-sec="2" onclick="finalStar.consoleTabPick(this)">◆ 赌场与银行（20）</button>
+			<button type="button" class="link-internal macro-button fs-tab" data-fs-sec="3" onclick="finalStar.consoleTabPick(this)">◆ 洗脑丸与奴隶（9）</button>
+			<button type="button" class="link-internal macro-button fs-tab" data-fs-sec="4" onclick="finalStar.consoleTabPick(this)">◆ 校园与其它原创（65）</button>
+			<button type="button" class="link-internal macro-button fs-tab" data-fs-sec="5" onclick="finalStar.consoleTabPick(this)">◆ 作弊功能</button>
+			<button type="button" class="link-internal macro-button fs-tab" data-fs-sec="6" onclick="finalStar.consoleTabPick(this)">◆ 地点与剧情直达</button>
+			<button type="button" class="link-internal macro-button fs-tab" data-fs-sec="7" onclick="finalStar.consoleTabPick(this)">◆ 角色专属事件</button>
+			<button type="button" class="link-internal macro-button fs-tab" data-fs-sec="8" onclick="finalStar.consoleTabPick(this)">◆ 长线剧情</button>
+			<button type="button" class="link-internal macro-button fs-tab" data-fs-sec="9" onclick="finalStar.consoleTabPick(this)">◆ 原版作弊</button>
+			<button type="button" class="link-internal macro-button fs-tab" data-fs-sec="10" onclick="finalStar.consoleTabPick(this)">◆ 响尾蛇</button>
+			<button type="button" class="link-internal macro-button fs-tab" data-fs-sec="11" onclick="finalStar.consoleTabPick(this)">◆ 莫伦斯</button>
+						<button type="button" class="link-internal macro-button fs-tab" data-fs-sec="12" onclick="finalStar.consoleTabPick(this)">◆ 原创事件（全部）</button>
+			</div>
+			<div id="fs-console-shown"><<fs_console_sec_0>></div>
+			<</if>>
+			<<link [[回到正常游玩|passage()]]>><<run setTimeout(function(){ finalStar.openSettings(); }, 0)>><<set $fs_consoleOK to false>><</link>>
+		<</if>>
+	</div>
+<</widget>>
+</div>
+
+/* ===== 布告板内容（并进「游玩须知」里，不再是独立页签）=====
+   用户澄清：「把布告板的内容挪到游玩须知里面」—— 不是排到它前面、更不是新建页签。
+   所以这里做成一个片段 widget（不带自己的 fs-panel 外框与标题），
+   由 fs_panel_notice 直接调用，拼在游玩须知的正文下面。
+   内容就是原先塞在「设置」里的「功能开关」网格（搬过来时把「炼金大能」从「不死族」那格里拆出来理平了）。 */
+<<widget "fs_panel_board">>
+		<div class="settingsHeader options">功能开关</div>
+		<div class="fs-switch-grid">
+			<div class="fs-switch-item">
+				<<icon "finalstar/ui-notice.png">>
+				<label><<checkbox "$fs_noCorpseDrag" false true autocheck>> 杀人不埋尸</label>
+				<mouse class="tooltip linkBlue">(?)<span>开启后，杀死遭遇战敌人与已命名角色都无需拖尸掩埋，警方也不会发现尸体。</span></mouse>
+			</div>
+			<div class="fs-switch-item">
+				<<icon "casino/casino-sign.png">>
+				<label><<checkbox "$fs_freeCasino" false true autocheck>> 自由进出赌场</label>
+				<mouse class="tooltip linkBlue">(?)<span>开启后取消赌场验资环节（一楼 £500、二楼 £1500 的要求都将失效）。</span></mouse>
+			</div>
+			<div class="fs-switch-item">
+				<<icon "finalstar/ui-overview.png">>
+				<label><<checkbox "$fs_freeEncounter" false true autocheck>> 自由选择遭遇事件</label>
+				<mouse class="tooltip linkBlue">(?)<span>关闭时：原创遭遇事件像原版一样<span class="gold">直接发生</span>（走在路上被拦下、校门口遇到霸凌这类被动遭遇）；开启后：先显示按钮，由你选择是否进入。</span></mouse>
+			</div>
+			<div class="fs-switch-item">
+				<<icon "casino/chip-gold.png">>
+				<label><<checkbox "$fs_casinoMaster" false true autocheck>> 赌场我做主</label>
+				<mouse class="tooltip linkBlue">(?)<span>开启后大幅调高赌场胜算，庄家再也赢不了你。</span></mouse>
+			</div>
+			<div class="fs-switch-item">
+				<<icon "finalstar/skill-heal.png">>
+				<label><<checkbox "$fs_undying" false true autocheck>> 不死族</label>
+				<mouse class="tooltip linkBlue">(?)<span>开启后：地下洞穴的疼痛达到 100 时不会导致失败，战斗按钮始终保留。（原先这里还写了「战败不会被接走」，但那条从未实现，已从说明里撤掉。）</span></mouse>
+			</div>
+			<div class="fs-switch-item">
+				<<icon "finalstar/ui-ward.png">>
+				<label><<checkbox "$fs_duelOff" false true autocheck>> 妖魔退散</label>
+				<mouse class="tooltip linkBlue">(?)<span>开启后：长线通关之后小镇上刷新的<span class="gold">魔书遭遇战全部隐藏</span>，不会再冒出来。<br>关掉就恢复。（控制台里的测试入口不受影响。）</span></mouse>
+			</div>
+			<div class="fs-switch-item">
+				<<icon "finalstar/seal-alchemy.png">>
+				<label><<checkbox "$fs_alchemyMaster" false true autocheck>> 炼金大能</label>
+				<mouse class="tooltip linkBlue">(?)<span>开启后：炼金刻印<span class="gold">必定触发</span> —— 收到钱时必定<span class="gold">双倍</span>，花钱时必定<span class="gold">免单</span>（本次消费不扣钱）。</span></mouse>
+			</div>
+			<div class="fs-switch-item">
+				<<icon "finalstar/ui-notice.png">>
+				<label><<checkbox "$fs_jiusiStoryGuard" false true autocheck>> 剧情战斗不救场</label>
+				<mouse class="tooltip linkBlue">(?)<span>开启后：长线剧情的战斗里<span class="gold">玖肆不会介入</span>，免得她把剧情战斗直接秒了（象牙幽灵分裂线、麋鹿庄园、各角色专属剧情线等，名单共 889 段）。关掉则回到旧行为——任何遭遇战她都可能来救场。</span></mouse>
+			</div>
+		</div>
+		<br>
+<</widget>>
+
+/* ===== 游玩须知 =====
+   ⚠️ 这个 widget 必须留在 `:: FinalStar Settings [widget]` 段落里面。
+   它原先被放在 `:: FS Console Seal` 段落头之后，而 Twee 里 `:: 段落名` 会切分段落 ——
+   切分之后的内容不再属于 `[widget]` 段落，里面的 widget 定义根本不会注册，
+   于是点「游玩须知」会报 "macro fs_panel_notice does not exist"（用户截图报的这个；此处故意不写尖括号形式，
+   否则 coderror 会把它当成未闭合的宏 —— 这个坑本项目踩过好几次了）。
+   上面那颗「内容速览」(181行) 与「未来更新」(242行) 都在切分点之前，所以一直是好的 —— 只有它坏。
+   以后往这个文件加新段落时，一律加在文件最末尾，别插在 widget 定义中间。 */
+<<widget "fs_panel_notice">>
+	<div class="fs-panel">
+		<h3><<icon "finalstar/ui-notice.png">> 游玩须知</h3>
+		<br>
+		<div class="fs-info-body">
+			<span class="fs-tag">◈ 建议使用新存档游玩本模组</span>，或提前备份安装模组前的存档。
+			<br>
+			后续版本会继续往存档中写入新的数据；把旧存档直接带到新版本，可能出现报错。
+			<br><br>
+			<span class="fs-tag">◈ 遇到 bug 请向作者反馈</span>，并附上报错文本与当时的操作，作者会优先处理恶性 bug。
+			<br><br>
+			<span class="fs-tag">◈ 存档异常数据清理</span>：若遇到界面报错（例如社交面板打不开），
+			可前往<span class="gold">孤儿院大厅</span>点击「清理存档异常数据」进行修复。
+		</div>
+		<br>
+		/* 功能开关已按用户澄清搬回设置页（见 fs_panel_settings）。这里不再调用 ——
+		   用户原话：「功能开关就是在设置里面」。布告板那部分碎碎念本来就在这个页面。 */
+	</div>
+<</widget>>
+
+:: FS Console Seal
+<<set _link to true>>
+<<set $outside to 0>><<effects>>
+你从控制台直接进入了一场遭遇战——魔书已经在你手里，刻印也已经刻好。
+<br><br>
+<<link [[继续|Cave Fight]]>><</link>>
+
+/* ============================================================
+   孤儿院大厅「清理存档异常数据」的实际段落。
+   上面那段游玩须知里一直写着这个入口，但功能从来没有实现过 —— 现在真的做出来。
+   真正的修复逻辑在 fs-jiusi.js 的 fs.cleanSaveData()，这里只负责显示与跳转。
+   ============================================================ */
+:: FS Clean Save
+<<set _link to true>>
+<<set $outside to 0>>
+你在大厅角落里翻了翻。那里堆着些没人认领的杂物，落着一层灰。
+<br><br>
+<span class="fs-sub">「清理存档异常数据」会把模组写进存档的这些数据检查一遍：缺的字段补上、坏掉的数值修好、
+旧版本留下的字段迁移过来。它<span class="gold">不会动你的钱、属性或剧情进度</span>。</span>
+<br><br>
+<<set _r to finalStar.cleanSaveData()>>
+<<if _r.ok>>
+	<<if _r.fixed.length>>
+		<span class="green">清理完成。</span><<print _r.msg>>
+	<<else>>
+		<<print _r.msg>>
+	<</if>>
+	<br><br>
+	<span class="fs-sub">当前玖肆好感：<<print _r.love>>（原版好感 <<print (_r.base === null ? "尚未登记" : _r.base)>>）</span>
+<<else>>
+	<span class="red">清理失败：</span><<print _r.msg>>
+<</if>>
+<br><br>
+<<link [[离开|Orphanage]]>><</link>>
+
+/* ================= 天赋树 ================= */
+
+:: FS Talent
+<<set _link to true>>
+<<set $fs_talentTab to ($fs_talentTab or "combat")>>
+<<set _t to finalStar.talentData()>>
+<div class="tab" id="fs-talent-tabs">
+	<button type="button" onclick="finalStar.talentTab('combat')">战斗</button>
+	<button type="button" onclick="finalStar.talentTab('charm')">魅惑</button>
+	<button type="button" onclick="finalStar.talentTab('daily')">日常</button>
+	<button type="button" onclick="finalStar.talentTab('neutral')">中立</button>
+</div>
+<<script>>
+	(function () {
+		var apply = function () {
+			try {
+				var el = document.getElementById('fs-talent-tabs');
+				if (!el) return;
+				var idx = { combat: 0, charm: 1, daily: 2, neutral: 3 }[V.fs_talentTab] || 0;
+				var b = el.querySelectorAll('button')[idx];
+				if (b) b.classList.add('tab-selected');
+			} catch (e) { }
+		};
+		setTimeout(apply, 0);
+	})();
+<</script>>
+<div class="fs-panel">
+	<div class="fs-talent-head">
+		<div class="fs-talent-title"><<icon "finalstar/talent-star.png" "nowhitespace">> 天赋</div>
+		<div class="fs-talent-stats">
+			<div><span class="fs-stat-k">战斗点</span><span class="fs-stat-v"><<print _t.combat>></span></div>
+			<div><span class="fs-stat-k">魅惑点</span><span class="fs-stat-v"><<print _t.charm>></span></div>
+			<div><span class="fs-stat-k">今日战斗</span><span class="fs-stat-v"><<print _t.today.combat>>/5</span></div>
+			<div><span class="fs-stat-k">今日魅惑</span><span class="fs-stat-v"><<print _t.today.charm>>/5</span></div>
+		</div>
+	</div>
+	<div class="fs-sub">解锁的被动立即生效；退回只退技能，不返点数。战斗点来自原创卡牌战，魅惑点来自原版遭遇里敌方高潮。</div>
+	<br>
+	<<set _msg to $fs_talentMsg>>
+	<<if _msg isnot "" and _msg isnot undefined>><span class="red"><<print _msg>></span><br><br><</if>>
+	<<set $fs_talentMsg to "">>
+<div class="fs-talent-grid">
+<<for _x range finalStar.talents>>
+	<<if _x.tree is $fs_talentTab>>
+		<<capture _x>>
+			<<set _st to finalStar.talentCanUnlock(_x.id)>>
+			<<set _iconPath to "finalstar/talent-" + _x.icon + ".png">>
+			<div class="fs-talent">
+				<div class="fs-talent-ico"><<icon _iconPath "nowhitespace">></div>
+				<div class="fs-talent-name"><<print _x.name>>　<span class="fs-sub"><<print _x.cost>> 点</span></div>
+				<div class="fs-talent-desc"><<print _x.desc>></div>
+				<div class="fs-talent-actions">
+					<<if _st is "owned">><<link [[退回（不返点）|FS Talent]]>><<run finalStar.talentRefund(_x.id)>><<goto "FS Talent">><</link>>
+					<<else>><<link [[解锁|FS Talent]]>><<set _r to finalStar.talentUnlock(_x.id)>><<set $fs_talentMsg to (_r is "ok" ? "" : (_r is "pre" ? "前置天赋没点。" : (_r is "points" ? "点数不够。" : (_r is "cond" ? "条件未满足。" : "不能解锁。"))))>><<goto "FS Talent">><</link>><</if>>
+				</div>
+			</div>
+		<</capture>>
+	<</if>>
+<</for>>
+</div>
+</div>
+<br>
+<<link [[返回|Bedroom]]>><</link>>

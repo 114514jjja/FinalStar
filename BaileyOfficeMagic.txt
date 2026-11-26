@@ -1,0 +1,21 @@
+	<<set $daily.baileyVisit++>>
+	<br><br>
+<</if>>
+<<if $magicBookLost is 1 and $magicBook isnot 1>>
+	<<if Time.hour gte 7 and Time.hour lte 9>>
+		<<npc Bailey>><<person1>>
+		"又来了？"贝利上下打量你，忽然眯起眼，"……你那本破书，丢了？"
+		<br><br>
+		你还没来得及开口，他已经从抽屉里拎出一本旧书，扔在桌面上。书页边缘流淌着稀薄的金色流沙。
+		<br><br>
+		"我早就说了，别把值钱的东西带到学校去。"他伸出一只手，"九百，一个子儿都不能少。爱要不要。"
+		<br><br>
+		<<if $money gte 90000>>
+			<<link [[花 900 元买回魔书|Magic Book Buy Back]]>><<set $money -= 90000>><<set $magicBook to 1>><<set $magicBookLost to 0>><</link>>
+			<br>
+		<<else>>
+			<span class="grey">你掏了掏口袋——连 900 元都凑不齐。贝利嗤笑一声，把书收了回去。</span>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

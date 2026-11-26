@@ -1,0 +1,23 @@
+<<schoolperiodtext>>
+<<if $jiusiMeet is 1 and $beggarEventDone isnot 1 and $beggarEventTriggered isnot 1 and Time.schoolDay and Time.hour gte 7 and Time.hour lte 16 and $exposed lte 0>>
+	<<set $beggarEventTriggered to 1>>
+	<<if $fs_freeEncounter is true>>
+	<<link [[你注意到校门口跌坐着一个人|School Beggar Event]]>><</link>>
+	<br>
+	<<else>>
+	<<goto "School Beggar Event">>
+	<</if>>
+<</if>>
+<<if $daily.schoolBullyRolled isnot 1>>
+	<<set $daily.schoolBullyRolled to 1>>
+	<<set $schoolBullyRoll to random(1, 100)>>
+<</if>>
+<<if $daily.schoolBullyEvent isnot 1 and $schoolstate is "morning" and $schoolBullyRoll lte 30 and $exposed lte 0>>
+	<<if $fs_freeEncounter is true>>
+	<<link [[你注意到几个人影正朝你围过来|School Bully Event]]>><<set $daily.schoolBullyEvent to 1>><</link>>
+	<br>
+	<<else>>
+	<<set $daily.schoolBullyEvent to 1>>
+	<<goto "School Bully Event">>
+	<</if>>
+<</if>>

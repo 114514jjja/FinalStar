@@ -1,0 +1,194 @@
+:: FinalStar School [widget]
+/* ============================================================
+   终星 FinalStar —— 校园线（规划书 110）
+   玖肆阻止数学课霸凌 / 送信陪同（遭遇战立刻结束）
+   ============================================================ */
+
+/* ===== 玖肆阻止数学课霸凌（在课程事件池中内联出现，不显示按钮） ===== */
+<<widget "fs_maths_jiusi_stop">>
+	一只手从你身后伸过来，眼看就要拽住你的衣领。
+	<br><br>
+	一道破风声响起——一枚橡皮精准地砸在那人手背上。
+	<br><br>
+	"手拿开。"<span class="teal">玖肆</span>不知什么时候站了起来，手里转着第二枚橡皮，语气平淡得像在谈论天气，"上课呢。"
+	<br><br>
+	那人回头瞪她，对上她的眼神之后又把话咽了回去。旁边想递纸团的手也悄悄缩了回去。有人小声嘀咕："……转学生？什么来头……"
+	<br><br>
+	玖肆坐回去，头也不抬地翻了一页书，仿佛什么都没发生过。
+	<br><br>
+	<<set $stress to Math.max($stress - 15, 0)>><<set $trauma to Math.max($trauma - 10, 0)>><<npcincr 玖肆 love 1>>
+	<<lstress>>　<<ltrauma>>　<<glove>>
+	<br><br>
+	<<link [[继续上课|Maths Lesson]]>><<endevent>><</link>>
+<</widget>>
+
+/* ===== 送信：玖肆陪同 ===== */
+<<widget "fs_maths_note_jiusi">>
+	<<if $jiusiMeet isnot 1 or $jiusiProtect isnot 1>>
+		/* 没见过玖肆（或还没被她「保护」）→ 不许出现她在场面的版本，退回原版单人送信。
+		   这是验证结果报的 bug 的兜底：只靠段落级补丁的 $jiusiProtect 判断，
+		   某些存档会因为标记残留而让她在没登场的情况下冒出来。 */
+		<<set $fs_noteWithJiusi to 0>>
+		<<npc River>><<person1>>
+		River 站在你的桌边。"我需要你替我送一封信——送给校长。"<<He>>把一个封好的信封递给你。
+		<br><br>
+		你把信封收进怀里，独自出了教室。
+		<br><br>
+		<<link [[去送信|Maths Note]]>><</link>>
+	<<else>>
+	<<run finalStar.noteWithJiusi()>>
+	<<npc River>><<person1>>
+	River 站在你的桌边。"我需要你替我送一封信——送给校长。"<<He>>把一个封好的信封递给你。
+	<br><br>
+	你刚站起来，旁边的人也跟着站了起来。
+	<br><br>
+	"我正好也要去那边。"<span class="teal">玖肆</span>把书合上，顺手从你手里抽走信封，"走吧，两个人快一点。"
+	<br><br>
+	River 皱了皱眉，但没说什么。
+	<br><br>
+	<<link [[和玖肆一起去送信|FS Maths Note Jiusi]]>><</link>>
+	<br>
+	<<link [[自己一个人去|Maths Note]]>><<set $fs_noteWithJiusi to 0>><</link>>
+	<br>
+	/* 新增：偷偷拆信。
+	   ⚠️ 注释里不要写出那个 if 宏的字面量（尖括号形式）—— coderror 会当成"宏未闭合"报出来，
+	   这个坑本项目踩过一次了（见交接文档 §4.4 / FinalStarFood.twee 的同类注释）。
+	   原版对应分支（Maths Note 里 $phase 为 1 的那一支）做的事只有一件：
+	   把 $headpasswordknown 置为 1 —— 而它正是
+	   「办公室没人时能 Break into computer」的开关（已从游戏包原文确认）。
+	   所以这里照抄这一个标记，后续进办公室开电脑的流程完整可用；
+	   差别是不跑"回去路上被堵"那条麻烦分支、也不递增 $mathsnote（用户要的"不增加"）。
+	   —— 用户原话：「直接把原版的密码克隆过来，后续依然能完整触发进入办公室打开电脑」。 */
+	<<link [[偷偷拆信|FS Maths Note Peek]]>><<set $fs_noteWithJiusi to 0>><</link>>
+	<</if>>
+<</widget>>
+
+/* ===== 偷偷拆信：玖肆替你扛下课后留堂 ===== */
+:: FS Maths Note Peek
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+走廊拐角有一段没有窗。你落后半步，把信封翻过来——封蜡的边缘翘起一个小角。
+<br><br>
+你听见自己的心跳。手指压上去，蜡裂开的声音比想象中轻。
+<br><br>
+里面是一张便签，写着校长的电脑用户名和密码。你把它记住了。
+<br><br>
+<<set $headpasswordknown to 1>>
+<span class="teal">你获得了校长电脑的账号与密码。</span>
+<br><br>
+"你在干什么。"
+<br><br>
+<span class="teal">玖肆</span>不知什么时候站在你身后，声音不大，但走廊尽头都听得见。
+<br><br>
+你没来得及把信封藏起来。她看了一眼那个裂开的封蜡，又看了一眼你。
+<br><br>
+"被人看见就是你的事了。"她伸手把信封拿过去，翻了两下，塞进自己校服口袋，"现在是我拆的。"
+<br><br>
+你想说什么。
+<br><br>
+"闭嘴。"她打断你，"上课铃要响了。"
+<br><br>
+<<if $NPCNameList.includes("玖肆")>>
+	<<npcincr 玖肆 love 2>>
+<</if>>
+<<set $stress to Math.max($stress - 5, 0)>>
+<<lstress>>　<<glove>>
+<br><br>
+你把信送到办公室门口的时候，收件盘还在原来的位置。信封是玖肆替你放进去的，封蜡那面朝下。
+<br><br>
+放学的铃响之后，走廊另一头的办公室门开着。你从门口经过时看见她坐在外面的长椅上，
+背挺得很直，校服领口一丝不乱。她没看你，只在你走过时说了一句：
+<br><br>
+"明天别迟到。"
+<br><br>
+<<set $fs_headPunishTaken to 1>>
+/* 用户要的"当天下午校长办公室一个人都没有"：
+   这一下午办公室锁门、敲门没反应、保安罕见地站在门口 —— 玩家进不去。
+   入口链接保留，点了显示那段文本（做法见 fs-school.js 的锁门钩子）。 */
+<<set $fs_headOfficeLocked to 1>>
+<span class="fs-sub">（这一下午，校长办公室的门锁着。）</span>
+<br><br>
+<<link [[回到教室|Maths Lesson]]>><<endevent>><</link>>
+
+/* ===== 那一天下午的校长办公室：进不去 =====
+   由 fs-school.js 的段落层钩子拦进来（当前段落是 Head's Office 且 $fs_headOfficeLocked 为 1）。
+   入口链接保留（玩家仍然会走到这里），点了就显示下面这段。 */
+:: FS Head Office Locked
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+门是锁着的。
+<br><br>
+里面没有开灯——从门缝底下透出来的那一线光是走廊自己的。
+<br><br>
+你敲了两下。没有反应。你又敲了两下，重一点。
+<br><br>
+安静得能听见楼上教室拖椅子的声音。没有人来开门。
+<br><br>
+门边站着一个保安。你以前从没在这条走廊上见过保安。
+<br><br>
+他没有看你，也没有问你要做什么，只是站在那里，两手交在身前，
+像一尊刚搬到这儿的摆设。你往前走一步，他的视线就跟着动了一下——
+然后又移回对面的墙上。
+<br><br>
+<span class="fs-sub">（今天下午，这扇门不会开。）</span>
+<br><br>
+<<link [[离开走廊|Hallways]]>><<endevent>><</link>>
+
+:: FS Maths Note Jiusi
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+你和玖肆一前一后穿过走廊。她走得很稳，脚步声几乎听不见，信封被她夹在指间，像夹着一张无关紧要的纸。
+<br><br>
+<<set _talk to random(1, 4)>>
+<<switch _talk>>
+	<<case 1>>
+		"你最近睡得好吗。"她忽然问。
+		<br><br>
+		你愣了一下，说还行。
+		<br><br>
+		"撒谎的样子挺熟练的。"她没有回头，"算了。"
+	<<case 2>>
+		"这封信我摸过了。"她说，"里面就一张成绩单。River 让你跑这一趟，是想看你会不会拆。"
+		<br><br>
+		你没说话。她把信封举起来对着光看了一眼，又放下。
+		<br><br>
+		"换我，我会拆。"
+	<<case 3>>
+		走廊拐角的公告栏前站着几个人，看见你们过来，主动让开了。
+		<br><br>
+		你注意到他们让路的对象是玖肆，不是你。
+	<<case 4>>
+		"别走神。"她忽然放慢脚步与你并肩，"这条走廊上有人专门等着看别人出丑。"
+		<br><br>
+		你回头看了一眼。那几个人已经转过拐角，不见了。
+<</switch>>
+<br><br>
+<<set _trouble to random(1, 100)>>
+<<if _trouble lte 45>>
+	拐过最后一个弯的时候，前面的门忽然被推开，几个人堵住了去路。
+	<br><br>
+	"哟，"为首的那个笑了，"这不是——"
+	<br><br>
+	话没说完，玖肆往前跨了半步。她什么也没做：没有抬手，没有说话，只是站在那里看着他。
+	<br><br>
+	那半秒里，走廊安静得能听见日光灯管的电流声。
+	<br><br>
+	"……没事。"为首的那个先移开了视线，侧身让开了路，"走吧。"
+	<br><br>
+	<<run finalStar.endEncounterByJiusi()>>
+	<span class="teal">玖肆没有回头，把信封往你手里一塞："拿着，到了。"</span>
+	<br><br>
+	<span class="fs-sub">（遭遇战被立刻结束——玖肆在场。）</span>
+	<br><br>
+<<else>>
+	一路无事。走廊尽头的门开着一条缝，里面的灯亮着。
+<</if>>
+你把信封放在校长办公室的收件盘里。玖肆靠在门边等你，见你出来就直起身。
+<br><br>
+"回去吧。"她说，"下一节是数学。"
+<br><br>
+<<set $stress to Math.max($stress - 10, 0)>><<npcincr 玖肆 love 1>>
+<<lstress>>　<<glove>>
+<br><br>
+<<set $fs_noteWithJiusi to 0>>
+<<link [[回到教室|Maths Lesson]]>><<endevent>><</link>>

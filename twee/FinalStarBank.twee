@@ -1,0 +1,213 @@
+:: FinalStar Bank [widget]
+/* ============================================================
+   终星 FinalStar —— 银行扩展段落
+   规划书：104 代理缴费 / 105 银行扣款 / 106 每周利息 / 107 假身份证
+   ============================================================ */
+
+:: Bank Autopay
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<if $id isnot 1>>
+	"代理缴费？"柜台后的职员抬起头，礼貌地摇了摇头。
+	<br><br>
+	"这项业务需要<span class="gold">有效的身份证件</span>。我们没办法给没有身份的人开代理账户——这是规定。"
+	<br><br>
+	他把表格收了回去。
+	<br><br>
+	<span class="grey">（你需要先去弄一张假身份证。妓院的那位布莱尔先生提供这种服务——当然，价格不便宜。）</span>
+	<br><br>
+	<<link [[回到大厅|Bank Hall]]>><</link>>
+<<elseif $fs_autopay is true>>
+	"您的代理缴费业务已经在运行了。"职员翻开一本册子，"每周会自动从您的账户向<span class="gold">贝利先生</span>的账户划转当期租金。"
+	<br><br>
+	<span class="teal">卡内余额：<<print formatMoney($bankBalance || 0)>></span>
+	<br>
+	<span class="grey">余额不足时划转会失败，并留下记录——贝利先生会知道的。</span>
+	<br><br>
+	<<if $fs_autopayPaidWeek is 1>>
+		<span class="green">本周已划转 <<print formatMoney($fs_autopayLastPaid || 0)>>。</span>
+		<br><br>
+	<</if>>
+	<<link [[设置交款账户|Bank Autopay Setup]]>><</link>>
+	<br>
+	<<link [[取消代理缴费|Bank Autopay Cancel]]>><</link>>
+	<br>
+	<<link [[回到大厅|Bank Hall]]>><</link>>
+<<else>>
+	"您是要办代理缴费？"职员从抽屉里取出一张表格。
+	<br><br>
+	"简单说，就是您跟我们签一份授权，每周由我们替您把该付的钱转到指定账户。您不用亲自跑，也不用担心钱放在钱包里被人看见。"
+	<br><br>
+	他顿了顿，像是在斟酌措辞。
+	<br><br>
+	"不过有一点得先说清楚：<span class="red">我们知道您把钱交给谁，对方也会知道这笔钱是从银行走的。</span>如果这是您想要的效果，那我们继续。"
+	<br><br>
+	<<link [[设置交款账户|Bank Autopay Setup]]>><</link>>
+	<br>
+	<<link [[算了|Bank Hall]]>><</link>>
+<</if>>
+
+:: Bank Autopay Setup
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+职员把表格转过来，笔尖点在"收款人"那一栏。
+<br><br>
+"请确认交款人——也就是收款方。"
+<br><br>
+<span class="grey">（目前银行只受理一位：贝利。）</span>
+<br><br>
+<<link [[贝利（孤儿院的房东）|Bank Autopay Do]]>><</link>>
+<br>
+<<link [[再想想|Bank Autopay]]>><</link>>
+
+:: Bank Autopay Do
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<run finalStar.enableAutopay()>>
+职员熟练地点开一个账户，屏幕上跳出一串数字。他的手指在键盘上停了一下。
+<br><br>
+"……哦，这个账户。"他说，"您不是第一个这么做的。"
+<br><br>
+他没有多解释，只是把授权书推到你面前，指了指签名的地方。
+<br><br>
+你签了字。
+<br><br>
+"好了。"他把副本递给你，"以后每周会准时向这个账户转钱，金额我们会去跟他确认，不用您操心。"
+<br><br>
+他顿了顿，补了一句。
+<br><br>
+"另外——您不需要担心。我们正规的银行，<span class="teal">不会透露存款人具体的存款</span>。"
+<br><br>
+<span class="green">代理缴费已开通：每周自动从银行卡向贝利缴纳当期租金。</span>
+<br><br>
+<<link [[回到大厅|Bank Hall]]>><</link>>
+
+:: Bank Autopay Cancel
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<run finalStar.disableAutopay()>>
+"取消也可以。"职员把授权书抽走，盖了一个作废章，"只是下次您就得自己想办法了。"
+<br><br>
+<span class="blue">代理缴费已取消。</span>
+<br><br>
+<<link [[回到大厅|Bank Hall]]>><</link>>
+
+:: Bailey Return Notice
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<if $fs_baileyReturnNotice is 1>>
+	<<set $fs_baileyReturnNotice to 0>>
+	你刚推开孤儿院的门，就看见了他。
+	<br><br>
+	<span class="red">贝利</span>站在大厅中央，手里捏着一张报纸，像是从来没离开过。他抬起头，目光落在你身上。
+	<br><br>
+	"怎么，"他慢慢开口，"看见我回来，很惊讶？"
+	<br><br>
+	他把报纸折起来，一步一步走到你面前。
+	<br><br>
+	"我这条命值多少钱，你大概没算过。不过没关系——我算过了。"
+	<br><br>
+	"下次再动这种心思，我会让你知道什么叫<span class="red">代价</span>。"
+	<br><br>
+	他转身走进自己的办公室，门在你面前轻轻合上。
+	<br><br>
+	<span class="red">你隐约觉得，接下来这段时间最好小心一点。</span>
+	<br><br>
+<<elseif $fs_baileyWarned is 1 and $fs_baileyWarnShown isnot 1>>
+	<<set $fs_baileyWarnShown to 1>>
+	你经过贝利的办公室，门开着一条缝。他的声音从里面传出来，平静得不像话。
+	<br><br>
+	"对了。"他说，像是自言自语，"下个礼拜的租金——<span class="red">翻倍</span>。"
+	<br><br>
+	"你可以试试再对我开枪。反正你也没有第二把枪了。"
+	<br><br>
+	<span class="grey">你回到房间，翻开抽屉——放在最里面的那把枪不见了。</span>
+	<br><br>
+	<<if $fs_pistolStolen is 1>>
+		<<set $fs_pistolStolen to 2>>
+		<<set $fs_pistolStolenSeen to 1>>
+		<span class="red">手枪被偷了，连同所有子弹。</span>
+		<br><br>
+	<</if>>
+<<else>>
+	大厅里和平时没什么两样。
+	<br><br>
+<</if>>
+<<link [[继续|Orphanage]]>><</link>>
+
+/* ============================================================
+   105 修正：开通代理缴费且卡里够钱时，贝利根本不用上门（不再走原版收租流程）
+   ============================================================ */
+:: FS Rent Autopay Done
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<set $renttime to 7>><<set $rentday to Time.weekDay>>
+<<set $baileydefeatedchain to 0>><<set $baileyRefusedToPay to 0>>
+<<set $baileypaychain to ($baileypaychain or 0) + 1>>
+<<unset $bailey_encroach>>
+<<npc Bailey>><<person1>>
+他站在门口，手里捏着一个牛皮纸信封——边角已经被撕开，露出里面的存折。
+<br><br>
+"这周不用你掏。"他把信封抬了抬，"银行直接划过来的，比你还准时。"
+<br><br>
+他盯着你看了几秒，那种打量的眼神第一次没有落回你的口袋。
+<br><br>
+"你倒是学会用别人的手交钱了。"
+<br><br>
+他转身往外走，走到一半又停下，没有回头。
+<br><br>
+"别以为这样就完了。下礼拜照旧。"
+<br><br>
+<span class="teal">本周租金已由银行代理缴清（<<print formatMoney($fs_autopayLastPaid || 0)>>），卡内余额 <<print formatMoney($bankBalance || 0)>>。</span>
+<br><br>
+<<endevent>>
+<<link [[继续|Bedroom]]>><</link>>
+
+/* ============================================================
+   105+ 新选项：让贝利看看新送来的信封（当面用银行存折结清 / 钱不够则被拆穿）
+   ============================================================ */
+:: FS Rent Envelope
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<set _due to finalStar.rentDueAmount()>>
+<<set _res to finalStar.rentPayByCard(_due)>>
+他站在门口，等着你把钱掏出来。你摸到口袋里那个刚送来的信封——银行的火漆印在灯下泛着暗红。
+<br><br>
+<<if _res.ok>>
+	你把信封抽出来递过去。他皱着眉接住，抽出里面的存折，目光停在某一行的数字上。
+	<br><br>
+	停了很久。
+	<br><br>
+	"……"他抬头看你，第一次没有马上开口。
+	<br><br>
+	他把存折翻过去，又翻回来，像是在确认那笔划款不是打印错误。然后他看了一眼你的脸，又看回纸面。
+	<br><br>
+	<span class="gold">"钱到账了。"</span>他把存折塞回信封，收进外套内袋，"这周的事，一笔勾销。"
+	<br><br>
+	走到门口时他停了一下。
+	<br><br>
+	"下次别让我白跑一趟。"
+	<br><br>
+	<span class="teal">本周租金已从银行卡划扣 <<print formatMoney(_res.due)>>，卡内余额 <<print formatMoney(_res.balance)>>。</span>
+	<br><br>
+	<<set $renttime to 7>><<set $rentday to Time.weekDay>>
+	<<set $baileydefeatedchain to 0>><<set $baileyRefusedToPay to 0>>
+	<<set $baileypaychain to ($baileypaychain or 0) + 1>>
+	<<unset $bailey_encroach>>
+	<<endevent>>
+	<<link [[继续|Bedroom]]>><</link>>
+<<else>>
+	你把信封递过去。他一把抓过来，抖开，盯着那张存折看了几秒——眉头慢慢皱起来。
+	<br><br>
+	"这是什么？"他把存折翻过来给你看，上面的数字一动不动，"空的。"
+	<br><br>
+	你这才想起来——你开了户、办了代缴，却<span class="red">从来没往里面存过钱</span>。你以为它会自己满起来。
+	<br><br>
+	他把信封随手丢回你怀里，脸上是那种介于疑惑和不耐烦之间的神情。
+	<br><br>
+	"你耍我？"
+	<br><br>
+	<span class="teal">卡内余额 <<print formatMoney(_res.balance)>>，这一周的钱一分也没扣。</span>
+	<br><br>
+	<<if $money gte _due>>
+		<<link [[掏出钱包付钱|Rent Pay]]>><<set $phase to 0>><</link>>
+		<br>
+	<</if>>
+	<<link [[拒绝|Rent Refuse]]>><<def 1>><</link>>
+	<br>
+<</if>>

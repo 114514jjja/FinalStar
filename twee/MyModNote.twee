@@ -1,0 +1,2721 @@
+:: Orphanage Mysterious Note
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<if $mysteriousNoteRead is 1>>
+	布告板上，一张便签纸被细心地钉在原来的位置旁边。笔迹工整，收笔处画了一个小小的响尾蛇符号。
+	<br><br>
+	<i>"写给你——那个拿了枪的家伙：
+	<br><br>
+	每周一晚上我都会在孤儿院附近，想说话就来大厅找我。
+	<br>
+	子弹用完了？如果你能让我信任你，周一我给你补上。
+	<br>
+	周一晚上要是遇上麻烦，喊我一声。
+	<br>
+	多瑙河街新开了家赌场：能换筹码、借钱、押注、陪酒，累了有椅子，还有换衣间。
+	<br>
+	粉色药片……我提醒过你了吧。吃了就吃了。
+	<br><br>
+	——玖肆（响尾蛇）"</i>
+	<br><br>
+	<span class="blue">便签下面还钉着一层旧纸片——大多是孤儿院里的人随手贴的。笔迹歪歪扭扭，纸角卷了边，</span>
+	<span class="blue">有几张明显换过好几轮了。</span>
+	<br><br>
+	<span class="purple"><b>〖布告板〗</b></span>
+	<br>
+	· ₋ <b>「谁拿了我晾在二楼的那只袜子。只有一只。」</b>——下面被人用另一种笔加了三个感叹号。
+	<br>
+	· ₋ 「厨房后面那只橘猫今天又来了。别喂它，喂了它就不走了。」——下面补了一行小字：「已经喂了。」
+	<br>
+	· ₋ 「值夜的人注意：三点以后别去地下室。不是有鬼，是贝利在数账。被他撞见要挨骂。」
+	<br>
+	· ₋ 「捡到一枚纽扣，银的，像是外套上的。放在大厅抽屉里。」——下面有人写：「那是我的，谢谢。」
+	<br>
+	· ₋ 「有人看见上周那个穿雨衣的男人了吗。」——没有回答。那一行被人用铅笔轻轻划掉了。
+	<br>
+	· ₋ 「食堂的土豆能不能换个做法。」——下面一行：「不能。」
+	<br>
+	· ₋ 「谁把我的鞋挪到门口了，我半夜起来找了好久。」——下面一行：「对不起，我以为那是我的。」
+	<br>
+	· ₋ <span class="teal">「周一晚上别乱跑。要跑也行，喊一声。」</span>——笔迹工整，收笔处有一个小小的响尾蛇符号。
+	<br>
+	· ₋ <span class="teal">「枪不是护身符。用了它，就得处理后果。」</span>
+	<br>
+	· ₋ <span class="teal">「有人问我为什么总在半夜待在外面。我说我在数星星。」</span>——下面没人接话。
+	<br>
+	· ₋ <span class="teal">「别在换衣间提我的名字。」</span>
+	<br><br>
+	<span class="fs-sub">（最底下压着一张对折的纸，展开是空的——只有折痕，像是写过又被擦掉了。）</span>
+	<br><br>
+	<<link [[继续|Orphanage]]>><<endevent>><</link>>
+<<else>>
+	<<set $mysteriousNoteRead to 1>>
+	布告板上钉着一张纸。纸页已经泛黄，但你能辨认出两行字迹工整的手写字：
+	<br><br>
+	"<i>……别忘了喂猫……永远不要相信穿雨衣的男人……</i>"
+	<br><br>
+	其余部分已经模糊不清。真奇怪。你不确定是谁把它贴在这里，又是为什么。
+	<br><br>
+	<span class="gold">不知为何，你感觉自己似乎变聪明了一点点。</span>
+	<br><br>
+	<<if $noteHidden isnot 1 and $noteGivenBailey isnot 1>>
+		<<link [[把纸条藏起来 (0:05)|Orphanage Note Hidden]]>><<pass 5>><<set $noteHidden to 1>><</link>>
+		<br>
+		<<link [[把纸条交给贝利|Orphanage Note Bailey]]>><<set $noteGivenBailey to 1>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Orphanage]]>><<endevent>><</link>>
+	<</if>>
+<</if>>
+
+:: Orphanage Note Hidden
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+你小心地把纸条从布告板上揭下来，叠好，藏进贴身的口袋里。
+<br><br>
+<span class="blue">你有一种预感——今晚，会有人来找你。</span>
+<br><br>
+<span class="purple">今晚最好别在外面逗留太久。</span>
+<br><br>
+
+<<link [[继续|Orphanage]]>><<endevent>><</link>>
+
+:: Orphanage Note Bailey
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<npc Bailey>><<person1>>
+
+你拿着纸条走向贝利的办公室。贝利从文件堆里抬起头，接过纸条。
+<br><br>
+贝利看着这张纸条，摸索着下巴，抬头看你一眼，没说什么。
+<br><br>
+<span class="red"><<if C.npc.Bailey.pronoun is "m">>他<<elseif C.npc.Bailey.pronoun is "f">>她<<else>>他<</if>>的眼神让人脊背发凉。你从来没有见过贝利这么认真。</span>
+<br><br>
+<<if $baileyCasinoIntro isnot 1>>
+	"……响尾蛇。"贝利把纸条折好塞进口袋，站起身，"跟我走一趟。"
+	<br><br>
+	<span class="blue">贝利大步朝门口走去，回头看你一眼——那眼神不像商量，倒像通知。</span>
+	<br><br>
+	<<link [[跟上贝利|Bailey Casino Intro]]>><<set $baileyCasinoIntro to 1>><</link>>
+<<else>>
+	贝利把纸条锁进抽屉，重新坐回椅子里。"这事还没完。"他挥了挥手，"先出去吧。"
+	<br><br>
+	<<link [[继续|Orphanage]]>><<endevent>><</link>>
+<</if>>
+
+:: Bedroom Night Visitor
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<set $jiusiMeet to 1>>
+<<set $pistolOwned to 1>>
+<<set $pistolAmmo to 3>>
+
+<<script>>
+if (window.jiusiEnsure) window.jiusiEnsure();
+var _ji = V.NPCNameList.indexOf("玖肆");
+if (_ji !== -1 && V.NPCName[_ji]) V.NPCName[_ji].love += 1;
+<</script>>
+
+深夜，你被一阵轻微的响动惊醒。还没来得及反应，一个身影已经从窗口无声地翻进了你的房间。
+
+一个女孩站在月光下。她穿着黑色外套与黑色短裙，白色长发在月光里泛着微光，一双蓝眼睛在黑暗中格外明亮。她看起来并不比你大多少。
+
+"别喊。"她压低声音，"我叫<span class="green">玖肆</span>。你通过了考验。"
+
+说着，她把一个硬邦邦的东西塞进你怀里。
+
+<span class="gold">你手上赫然是一把制式手枪。</span>
+<br><br>
+
+<<link [[继续|Bedroom Night Visitor 2]]>><</link>>
+
+:: Bedroom Night Visitor 2
+<<effects>>
+
+"这把枪里有三发子弹，"玖肆说，"省着点用。"
+
+她顿了顿，目光在你脸上停了一瞬。
+
+"我是响尾蛇派过来的探员。以前……我也是这所孤儿院的孤儿。"
+
+你这才发现，面前的人其实和你一样高。
+<br><br>
+
+<<link [[继续|Bedroom Night Visitor 3]]>><</link>>
+
+:: Bedroom Night Visitor 3
+<<effects>>
+<<set $jiusiProtect to 1>>
+
+"每个周一晚上，我都会出现在这所孤儿院，暗中保护你的安全。"玖肆说，"一直待到周二早上六点。你只管过好你自己的日子。"
+
+话音落下，她朝窗口退了两步。
+
+"那么，下周见。"
+
+她身形一闪，消失在夜色里，仿佛从未来过。只有怀里那把沉甸甸的手枪，证明刚才发生的一切是真实的。
+<br><br>
+
+<span class="gold">制式手枪（3/3 发子弹）——已获得。</span>
+<br><br>
+
+<<link [[继续|Bedroom]]>><<endevent>><</link>>
+
+:: Orphanage Talk Jiusi
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<npc 玖肆>><<person1>>
+
+你和玖肆聊天。
+
+<<set _jiusiTalkNum to random(1, 5)>>
+<<switch _jiusiTalkNum>>
+	<<case 1>>
+		"这里还是老样子。"玖肆扫了一眼大厅，"灰扑扑的，吵吵闹闹。倒是你，看着比上次精神了点。"
+	<<case 2>>
+		玖肆从口袋里摸出一颗糖，丢给你。"巡夜顺的。别声张，贝利会数糖罐。"
+	<<case 3>>
+		"听说你今天又溜出去了？"玖肆挑眉，"有胆量。我以前也老这么干。"
+	<<case 4>>
+		玖肆望着窗外。"雨停之前我都会在附近待着。你要是半夜听见动静，别慌，是我。"
+	<<case 5>>
+		"你吃过晚饭了吗？"玖肆问，"别学我以前那样，饿着肚子睡觉容易做噩梦。"
+<</switch>>
+<br><br>
+她说着，目光在你脸上停了一瞬，像是在确认什么。<<stress -5>><<lstress>>　<<trauma -5>><<ltrauma>>　<<npcincr 玖肆 love 1>><<glove>>　
+<br><br>
+
+<<link [[聊天 (0:15)|Orphanage Talk Jiusi]]>><<pass 15>><</link>><<lstress>>　<<ltrauma>><<glove>>　
+<br>
+<<if $NPCName[$NPCNameList.indexOf("玖肆")].love gte 10 and $daily.jiusiFlirt isnot 1>>
+	<<link [[调情 (0:15)|Orphanage Flirt Jiusi]]>><<pass 15>><</link>><<lstress>>　<<glove>>　<<garousal>>　
+	<br>
+<</if>>
+/* 好感 50% 时，聊天会多出一段：玖肆把那把钥匙交给你（新内容「实验室」的起点）。
+   条件与判定都放在 JS 里（fs.labCanGetKey / fs.giveLabKey），段落只负责显示与跳转。 */
+<<if finalStar.labCanGetKey()>>
+	她忽然停下话头，从外套内袋里摸出一把钥匙，放在桌上。
+	<br><br>
+	<span class="gold">"这个给你。"</span>
+	<br><br>
+	<<link [[收下那把钥匙|Orphanage Talk Jiusi Key]]>><</link>>
+	<br>
+<</if>>
+<<if Time.weekDay is 2 and C.npc.Morgan.init is 1 and $morganMissing isnot 1 and $morganLineDone isnot 1>>
+	<<link [[和玖肆提起摩根|Jiusi Morgan Tell]]>><</link>>
+	<br>
+<</if>>
+<<if $NPCName[$NPCNameList.indexOf("玖肆")].love gte 50 and $jiusiSchoolEnrolled isnot 1>>
+	她忽然清了清嗓子，别开视线："对了……下礼拜开始，我要去学校当个旁听生。"她飞快地补了一句，"不是因为你。最近有人盯上学校那帮倒腾药丸的，我去看看。"
+	<br><br>
+	<span class="gold">玖肆的好感够高了——她会在数学课上出现，没人能在那里欺负你。</span>
+	<<set $jiusiSchoolEnrolled to 1>>
+	<br><br>
+<</if>>
+<<if $NPCName[$NPCNameList.indexOf("玖肆")].love gte 100 and $jiusiEscapeTalk isnot 1>>
+	<<set $jiusiEscapeTalk to 1>>
+	<br><br>
+	大厅的挂钟敲过十一下，走廊尽头没了动静。玖肆靠在楼梯扶手边，从口袋里摸出半块硬糖递给你。
+	<br><br>
+	"贝利今晚不查房。数过钱，锁门睡了。"
+	<br><br>
+	她看着你把糖剥开，声音压得很平："下周的数，我替你垫了一半。你不用再去接那些夜里的零活。"
+	<br><br>
+	你刚想开口，她抬手按住你的袖口，指尖有点凉。
+	<br><br>
+	"别谢。听我说完。"她顿了一下，像是在说明天的天气，"这地方待不久了，镇上也是。再交下去，骨头都会被他榨干。"
+	<br><br>
+	"我在外头攒了点路费，也摸清了一条不绕主街的道。等攒够，我走。你跟我一起。"
+	<br><br>
+	她盯着你的眼睛，认真确认你的反应："东西不用带，人出来就行。你只要点头，剩下的我来办。"
+	<br><br>
+	"赌场那边有个穿兔女郎装的，人还算可靠。真有难处，可以找她。"
+	<br><br>
+	见你怔住，她松开手，偏过头望向窗外的夜色，语气又恢复成平时那样："不急着今晚答复。糖吃完了就去睡，明早还得干活。"
+	<br><br>
+<</if>>
+<<link [[离开|Orphanage]]>><<endevent>><</link>>
+
+:: Orphanage Flirt Jiusi
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<npc 玖肆>><<person1>>
+
+<<set _jiusiFlirtNum to random(1, 5)>>
+<<switch _jiusiFlirtNum>>
+	<<case 1>>
+		"你今天……看起来不错。"玖肆耳尖微红，别开视线。
+	<<case 2>>
+		你凑近一步，玖肆没有躲开，只是低头拨弄衣角。
+	<<case 3>>
+		"再看，我可要收费了。"玖肆嘴上这么说，脚却没往后挪。
+	<<case 4>>
+		你伸手拂过她鬓角的白发，玖肆僵了一下，却没有退开。
+	<<case 5>>
+		"想约我？"玖肆抿了抿嘴，"……等哪天吧。我可记着你的账。"
+<</switch>>
+<br><br>
+她垂下眼帘，睫毛轻颤，半晌才找回自己的声音。<<set $daily.jiusiFlirt to 1>><<npcincr 玖肆 love 1>><<npcincr 玖肆 lust 1>><<glove>>　<<glust>>
+<br><br>
+
+<<link [[继续聊天 (0:15)|Orphanage Talk Jiusi]]>><<pass 15>><</link>><<lstress>>　<<ltrauma>><<glove>>　
+<br>
+<<link [[离开|Orphanage]]>><<endevent>><</link>>
+
+:: Casino Jiusi
+<<if $casinoChips is undefined>><<set $casinoChips to 0>><</if>>
+<<if $betAmount is undefined>><<set $betAmount to 100>><</if>>
+<<if $casinoFirstBet is undefined>><<set $casinoFirstBet to 0>><</if>>
+<<if $casinoDebt is undefined>><<set $casinoDebt to 0>><</if>>
+<<set $outside to 1>><<set $location to "town">><<set $bus to "danube">><<effects>>
+
+<<if $money lt 50000 and $fs_freeCasino isnot true>>
+	你推开那扇黄铜镶边的厚门，一只戴着白手套的手却拦住了你。
+	<br><br>
+	穿着黑色西装的看门人上下打量着你："抱歉，本赌场<strong>验资入场</strong>——身上没有 <span class="gold">£500</span> 的客人，恕不接待。"
+	<br><br>
+	<span class="teal">他顿了顿，补了一句，带着一丝怜悯："旁边的小酒馆还不错。等你攒够钱，我们欢迎你来。"</span>
+	<br><br>
+	<span class="grey">你看了看自己的钱包：<<print formatMoney($money)>>。离 £500 还差得远。</span>
+	<br><br>
+	<<link [[离开|Danube Street]]>><<endevent>><</link>>
+<<else>>
+	你推开那扇黄铜镶边的厚门，一股混着香水、雪茄与酒精的气息扑面而来。
+
+	赌场的穹顶垂着水晶吊灯，光落在大理石地面上，碎成一片流动的金色。轮盘转动的轻响、骰子碰撞的清脆声、人群压低的笑语，在暖黄的灯光里交织成一种近乎迷幻的喧嚣。
+
+	一个兔女郎托着酒盘从你身边走过。她穿着紧身的黑色连体衣，头顶那对长耳朵在灯光下微微晃动，裙摆下的吊带袜边缘在她迈步时一闪而过。她朝你眨了眨眼，嘴角噙着职业化的微笑，很快消失在牌桌之间。
+
+	赌池边，另一位兔女郎正弯下腰为客人斟酒。她雪白的脖颈与肩胛在灯光下泛着细腻的光泽，你隐约看见她后腰别着一把小小的折扇——那是赌场工作人员的标记。
+
+	你站在门口，看着这一切。金钱、欲望与运气，在这座赌场里静静流淌。
+	<br><br>
+	<<link [[继续|Casino Jiusi Lobby]]>><<pass 1>><</link>>
+<</if>>
+
+:: Casino Jiusi Lobby
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<if $casinoDebt is undefined>><<set $casinoDebt to 0>><</if>>
+<<if $casinoChips is undefined>><<set $casinoChips to 0>><</if>>
+<<if $betAmount is undefined>><<set $betAmount to 100>><</if>>
+<<if $casinoFirstBet is undefined>><<set $casinoFirstBet to 0>><</if>>
+
+/* ⚠️  问题记录：在柜台换筹码、或刚进赌场的那一刻，压力满了也不晕、性奋满了也不高潮，
+   而且「事件触发不清晰」。根因是这个位置原来只有一段文字 + 一个「继续」链接，**不阻断段落** ——
+   下面的兑换筹码/借钱照样能点，判定也只认 `$stress`（不看性奋、不看疲劳）。
+   现在改成和赌桌一致的硬门：先判定，命中就直接 <<goto>>，段落立刻中断。
+   于是「进赌场」「换筹码」「还钱」「从里面回大厅」任何一条路进大厅都会触发。 */
+<<if finalStar.casinoFaintCheck()>>
+	<<goto "FS Casino Faint">>
+<<elseif finalStar.casinoOrgasmCheck()>>
+	<<goto "FS Casino Orgasm">>
+<</if>>
+
+赌场大厅里人来人往，筹码碰撞出清脆的声响。你走向柜台，一位兔女郎朝你露出微笑。
+
+"欢迎光临，需要换点筹码吗？"
+<br><br>
+
+<span class="gold">你手里的筹码：<<print $casinoChips / 100>> 枚（<<print formatMoney($casinoChips)>>）</span>
+<br>
+<span class="teal">钱包：<<print formatMoney($money)>></span>
+<<if $casinoDebt gt 0>>
+	<br>
+	<span class="red">欠款：<<print formatMoney($casinoDebt)>></span>
+<</if>>
+<br><br>
+
+用钱兑换筹码（1 筹码 = £1）：
+<br>
+<<if $money gte 500>><<link [[换 £5（5 筹码）|Casino Jiusi Lobby]]>><<set $money -= 500>><<set $casinoChips += 500>><</link>><<else>><span class="grey">钱不够</span><</if>>
+<<if $money gte 1000>><<link [[换 £10（10 筹码）|Casino Jiusi Lobby]]>><<set $money -= 1000>><<set $casinoChips += 1000>><</link>><<else>><span class="grey">钱不够</span><</if>>
+<<if $money gte 5000>><<link [[换 £50（50 筹码）|Casino Jiusi Lobby]]>><<set $money -= 5000>><<set $casinoChips += 5000>><</link>><<else>><span class="grey">钱不够</span><</if>>
+<br><br>
+
+借钱换筹码：
+<br>
+<<link [[借 £10（10 筹码）|Casino Jiusi Lobby]]>><<set $casinoDebt += 1000>><<set $casinoChips += 1000>><</link>>
+<<link [[借 £50（50 筹码）|Casino Jiusi Lobby]]>><<set $casinoDebt += 5000>><<set $casinoChips += 5000>><</link>>
+<<link [[借 £100（100 筹码）|Casino Jiusi Lobby]]>><<set $casinoDebt += 10000>><<set $casinoChips += 10000>><</link>>
+<br><br>
+
+<<link [[把所有筹码兑换成钱|Casino Jiusi Lobby]]>><<set $money += $casinoChips>><<set $casinoChips to 0>><</link>>
+<br>
+<<if $casinoDebt gt 0>>
+	<<if $money gte $casinoDebt>>
+		<<link [[用钱还清欠款|Casino Jiusi Lobby]]>><<set $money -= $casinoDebt>><<set $casinoDebt to 0>><</link>>
+	<<else>>
+		<span class="red">你身上的钱不够还清欠款。</span>
+	<</if>>
+	<br>
+<</if>>
+<<link [[前往赌桌|Casino Jiusi Table]]>><</link>>
+<br>
+<<link [[在椅子上休息 (0:30)|Casino Jiusi Rest]]>><<pass 30>><</link>>
+<br>
+<<link [[换衣间|Casino Jiusi Dressing]]>><</link>>
+<br>
+<<if $money lt 150000 and $fs_freeCasino isnot true>>
+	<span class="grey">通往二楼的楼梯口站着一名打手："二楼高台，验资 <span class="gold">£1500</span>。"你数了数口袋里的钱，不够。</span>
+<<else>>
+	<<link [[上二楼|Casino Jiusi Second Floor]]>><</link>>
+<</if>>
+<br>
+<<link [[陪酒 (0:15)|Casino Jiusi Drink]]>><<pass 15>><</link>>
+<br>
+<<if $casinoJobUnlocked is 1>>
+	<<icon "casino/bunny.png">><<link [[上班 (1:00)|Casino Job]]>><<pass 60>><</link>>
+	<br>
+<</if>>
+<<if $daily.casinoNPCEvent isnot 1 and Time.weekDay isnot 2>>
+	<<icon "casino/card.png">><<link [[你注意到一个熟悉的身影|Casino NPC Event]]>><<pass 5>><<set $daily.casinoNPCEvent to 1>><</link>>
+	<br>
+<</if>>
+<<if $casinoDebt is 0>>
+	<<link [[离开赌场|Danube Street]]>><<pass 1>><</link>>
+<<else>>
+	<span class="red">门口的打手拦住你："先把欠的钱还清再说。"</span>
+<</if>>
+
+:: Casino Jiusi Table
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<if finalStar.casinoFaintCheck()>><<goto "FS Casino Faint">><<elseif finalStar.casinoOrgasmCheck()>><<goto "FS Casino Orgasm">><</if>>
+<<if $casinoTableAttention is undefined>><<set $casinoTableAttention to 0>><</if>>
+<<if $casinoTableInterest is undefined>><<set $casinoTableInterest to 0>><</if>>
+<<if $casinoTableRounds is undefined>><<set $casinoTableRounds to 0>><</if>>
+<<if $casinoBetDay isnot (Time.year + "-" + Time.month + "-" + Time.monthDay)>>
+	<<if Time.hour gte 8>>
+		<<set $casinoBetsToday to 0>>
+		<<set $casinoBetDay to (Time.year + "-" + Time.month + "-" + Time.monthDay)>>
+	<</if>>
+<</if>>
+<<if finalStar.casinoFaintCheck()>>
+	<<goto "FS Casino Faint">>
+<<elseif finalStar.casinoOrgasmCheck()>>
+	<<goto "FS Casino Orgasm">>
+<</if>>
+<<icon "casino/card.png">>你走向大厅中央的赌桌，荷官正等着你。
+<br><br>
+<span class="gold">你手里的筹码：<<print $casinoChips / 100>> 枚</span>
+<<if $casinoBetsToday gt 0>>
+	<br>
+	<span class="grey">今天已经赌了 <<print $casinoBetsToday>> 次——荷官的目光似乎越来越敏锐了。</span>
+<<else>>
+	<br>
+	<span class="teal">今天还没有下过注。好运也许还在前面等你。</span>
+<</if>>
+<br><br>
+<span class="teal">坐在赌桌上的人们「<<if $casinoTableAttention lt 20>><span class="red">认真专注</span><<elseif $casinoTableAttention lt 40>><span class="red">全神贯注</span><<elseif $casinoTableAttention lt 60>><span class="purple">心不在焉</span><<elseif $casinoTableAttention lt 80>><span class="blue">昏昏欲睡</span><<else>><span class="blue">眼神涣散</span><</if>>」且「<<if $casinoTableInterest lt 20>><span class="blue">情绪平稳</span><<elseif $casinoTableInterest lt 40>><span class="teal">平心静气</span><<elseif $casinoTableInterest lt 60>><span class="purple">兴高采烈</span><<elseif $casinoTableInterest lt 80>><span class="pink">越赌越欢</span><<else>><span class="red">冲昏头脑</span><</if>>」。</span>
+<br><br>
+<<set _bystander to random(1, 12)>>
+<<switch _bystander>>
+	<<case 1>>一个穿着富贵的人注意到了你，他大笑着朝旁边的人说："哪来的臭乞丐，滚一边去！"
+	<<case 2>>一个秃顶的胖商人把雪茄在烟灰缸里按熄，眯起眼睛："新人？先别急着下注，看两局。"
+	<<case 3>>戴面具的常客往你这边凑了凑，压低声音："这里的荷官手很稳。跟着老手押，亏不了。"
+	<<case 4>>一位穿晚礼服的女士冷眼扫过你："她是走错门了吧？赌场可不是你这种人来的地方。"
+	<<case 5>>醉醺醺的老头拍着桌子大喊："老子今晚手气来了！全押！全押！"
+	<<case 6>>兔女郎托着酒盘走过，在你身边停了一下，低声说："老板今晚心情好，赢面大。"
+	<<case 7>>一对情侣在窃窃私语——女方不满地掐了男方一把："又输！都说了不要跟牌！"
+	<<case 8>>一个老练的赌徒注意到你，"哟，生面孔。"他咧嘴一笑，"带够钱了吗？这儿可不管眼泪。"
+	<<case 9>>侍应生端着香槟经过，差点被你的椅背绊倒："抱、抱歉！"
+	<<case 10>>有人在下注区高喊："买定离手——！"紧接着是一片哄笑与懊恼的叹息。
+	<<case 11>>角落里的女人低声嘀咕："赌桌不养闲人。要么下注，要么滚。"
+	<<case 12>>一个年轻人盯着你看了半天，突然问："你是……那个孤儿院的小鬼？来这儿可没人会护着你。"
+<</switch>>
+<br><br>
+压筹码：
+<br>
+<<if $casinoChips gte 100>><<link [[压 1 筹码（£1）|Casino Jiusi Table Bet]]>><<set $betAmount to 100>><</link>> | <span class="teal">高胜率</span><</if>>
+<<if $casinoChips gte 500>><<link [[压 5 筹码（£5）|Casino Jiusi Table Bet]]>><<set $betAmount to 500>><</link>> | <span class="teal">较高胜率</span><</if>>
+<<if $casinoChips gte 1000>><<link [[压 10 筹码（£10）|Casino Jiusi Table Bet]]>><<set $betAmount to 1000>><</link>> | <span class="purple">中等胜率</span><</if>>
+<<if $casinoChips gte 5000>><<link [[压 50 筹码（£50）|Casino Jiusi Table Bet]]>><<set $betAmount to 5000>><</link>> | <span class="red">低胜率</span> <span class="gold">高回报</span><</if>>
+<br>
+<span class="red">作弊</span>：
+<br>
+<<if $casinoChips gte 100>><<link [[作弊偷看 £1 牌|Casino Jiusi Table Cheat]]>><<set $betAmount to 100>><</link>> <</if>>
+<<if $casinoChips gte 500>><<link [[作弊偷看 £5 牌|Casino Jiusi Table Cheat]]>><<set $betAmount to 500>><</link>> <</if>>
+<<if $casinoChips gte 1000>><<link [[作弊偷看 £10 牌|Casino Jiusi Table Cheat]]>><<set $betAmount to 1000>><</link>> <</if>>
+<<if $casinoChips gte 5000>><<link [[作弊偷看 £50 牌|Casino Jiusi Table Cheat]]>><<set $betAmount to 5000>><</link>> <</if>>
+<br><br>
+<<link [[继续 (0:01)|Casino Jiusi Table]]>><<pass 1>><</link>>
+<br>
+<<link [[停止下注，回到大厅|Casino Jiusi Lobby]]>><</link>>
+
+:: Casino Jiusi Table Bet
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+荷官将骰子放进骰盅，轻轻摇动。周围的目光都聚了过来。
+<br><br>
+<<set _winChance to 25>>
+<<if $casinoFirstBet isnot 1>>
+	<<set $casinoFirstBet to 1>>
+	<<set _winChance to 90>>
+<<elseif $betAmount is 100>>
+	<<set _winChance to 95>>
+<<elseif $betAmount is 500>>
+	<<set _winChance to 80>>
+<<elseif $betAmount is 1000>>
+	<<set _winChance to 65>>
+<<elseif $betAmount is 5000>>
+	<<set _winChance to 40>>
+<</if>>
+<<set _winChance += Math.floor($casinoTableInterest / 8)>>
+<<set _winChance to Math.floor(_winChance / 2)>>
+<<set $casinoBetsToday to ($casinoBetsToday || 0) + 1>>
+<<set _winChance -= Math.min(($casinoBetsToday - 1) * 5, 45)>>
+/* 「赌场我做主」开关：放在这里而不是改上面的概率表 —— 上面那套加成/对折/当日次数惩罚
+   在两处赌桌各写了一份，在这里统一盖成 100 最省事也最不容易漏。 */
+<<if $fs_casinoMaster is true>><<set _winChance to 100>><</if>>
+<<set _roll to random(1, 100)>>
+<<if _roll lte _winChance>>
+	<<set _gain to Math.floor($betAmount * (1 + $casinoTableInterest / 100))>>
+	<<set $casinoChips += _gain>>
+	<span class="gold">骰子停下。荷官将一叠筹码推到你面前——你赢了！</span>
+	<br>
+	<span class="green">筹码 +<<print _gain / 100>> 枚</span>
+<<else>>
+	<<set $casinoChips -= $betAmount>>
+	<span class="red">骰子停下。荷官面无表情地收走了你的筹码——你输了。</span>
+	<br>
+	<span class="red">筹码 -<<print $betAmount / 100>> 枚</span>
+<</if>>
+<<set $casinoTableRounds += 1>>
+<<set $casinoTableAttention to Math.min($casinoTableAttention + 25, 100)>>
+<<set $casinoTableInterest to Math.min($casinoTableInterest + (($betAmount is 100) ? 4 : (($betAmount is 500) ? 6 : (($betAmount is 1000) ? 8 : 12))), 100)>>
+<br><br>
+<<link [[继续|Casino Jiusi Table]]>><<pass 1>><</link>>
+
+:: Casino Jiusi Table Cheat
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<set $casinoBetsToday to ($casinoBetsToday || 0) + 1>>
+你装作捡散落的筹码，指尖借着昏暗的灯光，悄悄拨开了荷官身前的一张牌——
+<br><br>
+<<set _catchChance to 100 - Math.floor($casinoTableAttention / 2)>>
+<<set _roll to random(1, 100)>>
+<<if _roll lte _catchChance>>
+	<<set _cheatFailText to random(1, 3)>>
+	<<switch _cheatFailText>>
+		<<case 1>>
+			<span class="red">其中一个赌桌上的男人拍了拍你的手，全场的目光聚集在了你身上。"小姑娘，手挺快啊？"</span>
+		<<case 2>>
+			<span class="red">荷官一把按住你的手腕，冷笑："耍花样？你当我是瞎子？"</span>
+		<<case 3>>
+			<span class="red">对面的富婆尖叫起来："她偷看牌！她偷看牌！保安！保安！！"</span>
+	<</switch>>
+	<br><br>
+	<span class="red">你被两名打手架住。包厢的门在你身后合拢——你的筹码被全部没收，还倒欠了赌场 <span class="gold">500 筹码</span>。</span>
+	<<set $casinoChips to 0>>
+	<<set $casinoDebt += 50000>>
+	<<set $casinoTableRounds to 0>>
+	<<set $casinoTableAttention to 0>>
+	<<set $casinoTableInterest to 0>>
+	<<link [[灰溜溜地离开|Danube Street]]>><<pass 1>><<endevent>><</link>>
+<<else>>
+	<<set _cheatWinText to random(1, 3)>>
+	<<switch _cheatWinText>>
+		<<case 1>>
+			<span class="teal">你偷瞄到了荷官两张牌，也许这是一个机会。你押了下去，全桌哗然——你赢了。</span>
+		<<case 2>>
+			<span class="teal">牌面在你眼底一闪而过。你不动声色地改了主意，把筹码压向胜者——收钱时，没人注意到你嘴角的弧度。</span>
+		<<case 3>>
+			<span class="teal">你借着对面客人举杯的掩护看清楚了底牌。荷官困惑地看看你，又看看牌——这一把，又是你赢。</span>
+	<</switch>>
+	<<set _gain to $betAmount * 2>>
+	<<set $casinoChips += _gain>>
+	<<set $casinoTableRounds += 1>>
+	<<set $casinoTableAttention to Math.min($casinoTableAttention + 25, 100)>>
+	<<set $casinoTableInterest to Math.min($casinoTableInterest + (($betAmount is 100) ? 8 : (($betAmount is 500) ? 12 : (($betAmount is 1000) ? 16 : 20))), 100)>>
+	<span class="green">筹码 +<<print _gain / 100>> 枚</span>
+	<br><br>
+	<<link [[继续|Casino Jiusi Table]]>><<pass 1>><</link>>
+<</if>>
+
+:: Casino Jiusi Rest
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+你走到赌场角落的皮质扶手椅旁，陷进柔软的坐垫。嘈杂声仿佛远了一些，你合上眼，短暂地打了个盹。<<tiredness -5>><<stress -10>><<ltiredness>>　<<lstress>>
+<br><br>
+<<link [[继续|Casino Jiusi Lobby]]>><</link>>
+
+:: Casino Jiusi Dressing
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<if $casinoBunnyVisits is undefined>><<set $casinoBunnyVisits to 0>><</if>>
+<<set $casinoBunnyVisits += 1>>
+
+/* fs_bunnyReferralLink：无论她在不在，都提供保举入口（她在则当面说，不在则留字条） */
+<<link [[请求保举名额|Casino Jiusi Referral]]>><</link>>
+<br><br>
+
+<<if $casinoBunnyGone is 1>>
+	你推开换衣间的门。
+	<br><br>
+	<span class="grey">这里暂时空无一人。</span>
+	<br><br>
+	<br><br>
+	<<link [[回到大厅|Casino Jiusi Lobby]]>><</link>>
+<<else>>
+	<<switch $casinoBunnyVisits>>
+	<<case 1>>
+		你走进换衣间，发现那个和你差不多大的兔女郎正靠在墙边，低垂着头。
+		<br><br>
+		她抬起头，眼神里透着掩不住的疲惫，脸颊略显潮红，像是刚受了什么委屈。
+		<br><br>
+		她没说话，哆嗦着手从围裙口袋里摸出几张钞票，塞进你手里，指尖还在轻轻发颤。
+		<br><br>
+		"……拿着，快走吧。"
+		<br><br>
+		你明显能感觉到，她吃了不少委屈。
+		<br><br>
+		<<set $money += 500>>
+		<span class="gold">你获得了 £5。</span>
+		<br><br>
+		<<link [[离开|Casino Jiusi Lobby]]>><</link>>
+	<<case 2>>
+		你走进换衣间。兔女郎这次没有急着给你钱，而是靠在墙边，细细打量着你。
+		<br><br>
+		"你最近……是不是有点不一样了？"她压低声音，"我看你总是一个人来赌场，也不太像来赌钱的。"
+		<br><br>
+		"你到底是来干嘛的？"
+		<br><br>
+		<<link [[继续|Casino Jiusi Bunny Chat]]>><</link>>
+	<<case 3>>
+		你走进换衣间。兔女郎往门外张望了一眼，确认没人，才凑近你。
+		<br><br>
+		"跟你说个事，"她声音很轻，"这赌场的老板……不干净。好多姑娘都是被扣在这里的。"
+		<br><br>
+		"你看着不像那种人。别陷太深。"
+		<br><br>
+		<<link [[继续|Casino Jiusi Bunny Chat]]>><</link>>
+	<<case 4>>
+		你走进换衣间。兔女郎坐在角落的凳子上，晃着脚。
+		<br><br>
+		"你知道吗，我以前也想过逃。"她望着天花板，"但是逃出去的人，没一个回来的。"
+		<br><br>
+		"你……最好小心点。"
+		<br><br>
+		<<link [[继续|Casino Jiusi Bunny Chat]]>><</link>>
+	<<default>>
+		你走进换衣间。兔女郎看见你，苦笑着摊开双手。
+		<br><br>
+		"我……一分钱也没有了，"她说，"真的，全被他们榨干了。"
+		<br><br>
+		<<link [[继续|Casino Jiusi Bunny Secret]]>><</link>>
+<</switch>>
+<</if>>
+
+:: Casino Jiusi Bunny Chat
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+她盯着你看了好一会儿，忽然笑了笑。
+<br><br>
+"不过没关系，"她轻声说，"你身上藏着很多秘密，我看得出来。我们每个人都会有的。"
+<br><br>
+"这鬼地方，总要有人走出去的。"
+<br><br>
+<<link [[离开|Casino Jiusi Lobby]]>><</link>>
+
+:: Casino Jiusi Bunny Secret
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+你看着她摊开的手，一时不知该说什么。
+<br><br>
+兔女郎却忽然眨了眨眼，压低声音："我知道你身上有很多秘密。"
+<br><br>
+"不过没关系。"她伸出手，轻轻拍了拍你的肩膀，"我们会帮助你，逃离这个鬼地方的。"
+<br><br>
+"记住，别放弃。"
+<br><br>
+<<link [[离开|Casino Jiusi Lobby]]>><</link>>
+
+:: Casino Jiusi Drink
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+你托起酒盘，穿梭在牌桌与人群之间。
+
+<<set _drinkNum to random(1, 4)>>
+<<switch _drinkNum>>
+	<<case 1>>
+		一位西装革履的男人接过酒杯，指尖却顺势在你手腕上滑了一下。你还没来得及反应，一只手已经隔着裙摆掐了你屁股一把。
+		<br><br>
+		"晚上好，甜心。"他低笑着，眼神在你身上流连。
+	<<case 2>>
+		你把香槟递给一位女客，她接过杯子时凑近你耳边，呼出的气息温热。"领口开得这么低，是故意让人看的？"她说完，轻笑着拍了拍你的腰。
+	<<case 3>>
+		经过牌桌时，有人一把拉住你的裙摆边缘。你回头，一个戴面具的男人松了手，却朝你眨了眨眼："再送一轮，坐在我腿上喝？"
+	<<case 4>>
+		你弯腰放下酒瓶时，一只手从后面覆上你的臀部，不轻不重地捏了一下。你直起身，对方若无其事地朝你举杯。
+<</switch>>
+<br><br>
+<<set _arousalGain to 800>>
+<<if $backgroundTraits.includes("媚药改造")>><<set _arousalGain *= 2>><</if>>
+<<arousal _arousalGain>>
+<<stress 8>>
+<<set $money += 500>>
+<<garousal>>　 <<gstress>> <span class="gold">小费 +£5</span>
+<br><br>
+
+<<if $stress gte $stressmax>>
+	沉重的压力让你眼前发黑，你摇摇晃晃地倒在了大厅中央。
+	<br><br>
+	<<link [[继续|Casino Jiusi Pass Out]]>><</link>>
+<<else>>
+	<<set _drinkDanger to random(1, 5)>>
+	<<if _drinkDanger is 1>>
+		酒过三巡，一个醉醺醺的男人凑过来，一把拽住你的手腕，把你拖进后面的房间，反手锁上了门。
+		<br><br>
+		<<link [[继续|Casino Jiusi Orgy 1]]>><</link>>
+	<<else>>
+		<<link [[继续|Casino Jiusi Lobby]]>><</link>>
+	<</if>>
+<</if>>
+
+:: Casino Jiusi Orgy 1
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+昏暗的房间里，几个人影把你按在沙发上。你的双手被按住，裙摆被撩到腰间，布料摩擦着你发烫的皮肤。
+<br><br>
+一只手游走在你身上，指尖碾过你的敏感处。你咬着嘴唇，身体不受控制地轻颤，很快迎来了第一次高潮。<<set _arousalGain to 4000>><<if $backgroundTraits.includes("媚药改造")>><<set _arousalGain *= 2>><</if>><<arousal _arousalGain>> <<garousal>>　
+<br><br>
+<<link [[继续|Casino Jiusi Orgy 2]]>><</link>>
+
+:: Casino Jiusi Orgy 2
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+你还没缓过气，另一只手又缠了上来，继续在你身上游走。指尖碾过你的敏感处，你被迫迎来了第二次高潮，弓起身子，喉咙里漏出压抑的喘息。<<set _arousalGain to 4000>><<if $backgroundTraits.includes("媚药改造")>><<set _arousalGain *= 2>><</if>><<arousal _arousalGain>> <<garousal>>　
+<br><br>
+<<link [[继续|Casino Jiusi Orgy 3]]>><</link>>
+
+:: Casino Jiusi Orgy 3
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+第三次高潮紧随其后，你瘫软在沙发里，只剩下细微的颤抖，意识都有些模糊。
+<br><br>
+<<if finalStar.canTakeAphrodisiac()>>
+	一个人影凑近，指尖捏着一枚粉色药片，递到你嘴边。
+	<br><br>
+	"吃了它，你会更舒服的。"
+<<else>>
+	又一个人影凑近，指尖捏着一枚粉色药片，递到你嘴边。你认得这枚药片——你的身体已经记得它是什么味道了。
+	<br><br>
+	<span class="grey">（你已经吃过两次了。再吃下去，你的身体会先一步替你做决定。）</span>
+<</if>>
+<br><br>
+<<set _arousalGain to 4000>>
+<<if $backgroundTraits.includes("媚药改造")>><<set _arousalGain *= 2>><</if>>
+<<arousal _arousalGain>>
+<<garousal>>　
+<br><br>
+<<link [[吃下药片|Casino Jiusi Pill]]>><</link>>
+<br>
+<<link [[拒绝|Casino Jiusi Lobby]]>><<pass 5>><</link>>
+
+:: Casino Jiusi Pill
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+你张开嘴，那枚粉色药片被塞了进来，在舌根融化。一股温热从胃里升起，蔓延到四肢百骸。
+<br><br>
+<span class="pink">你获得了特质「媚药改造」——不知为何你变得越来越难以忍耐了。</span>
+<br><br>
+<<set $backgroundTraits.pushUnique("媚药改造")>>
+<<set $backgroundTraits.pushUnique("lustful")>>
+<<set _aph to finalStar.takeAphrodisiac()>>
+<span class="red">你的性奋上限被压低了（×0.8，永久）。</span>
+<span class="fs-sub">上限：<<print _aph.before>> → <span class="red"><<print _aph.after>></span>（第 <<print _aph.count>> 次服用）</span>
+<br>
+<span class="pink">你立刻获得了一个淫荡特质。</span>
+<br><br>
+<<link [[继续|Casino Jiusi Lobby]]>><<pass 5>><</link>>
+
+:: Casino Jiusi Pass Out
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+等你恢复意识，你发现自己被绑在一台老虎机上，四肢被丝带固定在两侧，胸口正抵着老虎机的玻璃面板。
+<br><br>
+一个人路过，在你胸缝里塞了一枚筹码，顺手捏了一把。你忍不住轻哼出声。<<set _arousalGain to 2000>><<if $backgroundTraits.includes("媚药改造")>><<set _arousalGain *= 2>><</if>><<arousal _arousalGain>> <<garousal>>　
+<br><br>
+<<link [[继续|Casino Jiusi Pass Out 2]]>><</link>>
+
+:: Casino Jiusi Pass Out 2
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+又一个人走了过来，指尖顺着你的胸口滑下，不紧不慢地玩弄着你，直到你被迫攀上高潮。<<set _arousalGain to 4000>><<if $backgroundTraits.includes("媚药改造")>><<set _arousalGain *= 2>><</if>><<arousal _arousalGain>> <<garousal>>　
+<br><br>
+<<link [[继续|Casino Jiusi Pass Out 3]]>><</link>>
+
+:: Casino Jiusi Pass Out 3
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+高潮的余韵还没散去，第三个人又凑了过来。他变本加厉地玩弄着你，你又被迫迎来一次颤抖的高潮。<<set _arousalGain to 4000>><<if $backgroundTraits.includes("媚药改造")>><<set _arousalGain *= 2>><</if>><<arousal _arousalGain>> <<garousal>>　
+<br><br>
+<<link [[继续|Casino Jiusi Pass Out 4]]>><</link>>
+
+:: Casino Jiusi Pass Out 4
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+正当你意识模糊之际，一位兔女郎拨开人群走了过来。她皱着眉，三两下解开了你身上的丝带。
+<br><br>
+"怎么晕在这儿了……跟我走。"
+<br><br>
+她扶着你站起来。你低头，发现自己胸口里卡着几枚筹码——是刚才那些路过的人塞进去的。你伸手掏出，正好两枚。<<set $casinoChips += 200>><<set $stress to Math.floor(($stress || 0) * 0.5)>> <span class="gold">你从胸口掏出 2 枚筹码（£2）</span><<lstress>>
+<br><br>
+/* ⚠️ 回到大厅前必须把性奋压下来：这一串「昏倒」段落每一步都在**加性奋**
+   （+2000 / +4000 / +4000），而大厅现在是一进去就硬判定（casinoFaintCheck / casinoOrgasmCheck）。
+   不压的话玩家会在「大厅 → 昏倒」之间无限循环。 */
+<<set $arousal to Math.min($arousal, Math.floor($arousalmax * 0.25))>>
+<<link [[继续|Casino Jiusi Lobby]]>><<pass 10>><</link>>
+
+:: Casino Jiusi Second Floor
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<if $casino2Attention is undefined>><<set $casino2Attention to 0>><</if>>
+<<if $casino2Interest is undefined>><<set $casino2Interest to 0>><</if>>
+<<if $casino2Rounds is undefined>><<set $casino2Rounds to 0>><</if>>
+你顺着旋转楼梯走上二楼。这里比一楼安静许多，只有一张长桌，桌上铺着深绿色的绒布。
+<br><br>
+一个身着马甲、戴着白手套的荷官站在桌后，朝你点头致意：
+<br><br>
+"高台，玩的比楼下大。规矩一样——压、赢、输。也可以……不小心多看两眼牌，只要别让桌上的客人看见。"
+<br><br>
+<span class="gold">你手里的筹码：<<print $casinoChips / 100>> 枚</span>
+<<if $casinoDebt gt 0>>
+	<br>
+	<span class="red">欠款：<<print formatMoney($casinoDebt)>></span>
+<</if>>
+<br><br>
+<<link [[走向高台赌桌|Casino Jiusi Second Floor Table]]>><</link>>
+<br>
+<<if finalStar.pillFloorOpen()>>
+	<<link [[走上三楼|Casino Jiusi Third Floor]]>><</link>>
+<<else>>
+	<<link [[通往三楼的楼梯|Casino Jiusi Third Stairs]]>><</link>> <<if finalStar.pillWorkDays() gt 0>>（打工 <<print finalStar.pillWorkDays()>>/7）<</if>>
+<</if>>
+<br>
+<<link [[回到一楼|Casino Jiusi Lobby]]>><</link>>
+
+:: Casino Jiusi Second Floor Table
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<if finalStar.casinoFaintCheck()>><<goto "FS Casino Faint">><<elseif finalStar.casinoOrgasmCheck()>><<goto "FS Casino Orgasm">><</if>>
+<<if $casinoBetDay isnot (Time.year + "-" + Time.month + "-" + Time.monthDay)>>
+	<<if Time.hour gte 8>>
+		<<set $casinoBetsToday to 0>>
+		<<set $casinoBetDay to (Time.year + "-" + Time.month + "-" + Time.monthDay)>>
+	<</if>>
+<</if>>
+<<if finalStar.casinoFaintCheck()>>
+	<<goto "FS Casino Faint">>
+<<elseif finalStar.casinoOrgasmCheck()>>
+	<<goto "FS Casino Orgasm">>
+<</if>>
+<<icon "casino/dice.png">>你在高台赌桌边坐下。这里的客人出手阔绰，荷官的手也稳得多。
+<br><br>
+<span class="teal">坐在赌桌上的人们「<<if $casino2Attention lt 20>><span class="red">认真专注</span><<elseif $casino2Attention lt 40>><span class="red">全神贯注</span><<elseif $casino2Attention lt 60>><span class="purple">心不在焉</span><<elseif $casino2Attention lt 80>><span class="blue">昏昏欲睡</span><<else>><span class="blue">眼神涣散</span><</if>>」且「<<if $casino2Interest lt 20>><span class="blue">情绪平稳</span><<elseif $casino2Interest lt 40>><span class="teal">平心静气</span><<elseif $casino2Interest lt 60>><span class="purple">兴高采烈</span><<elseif $casino2Interest lt 80>><span class="pink">越赌越欢</span><<else>><span class="red">冲昏头脑</span><</if>>」。</span>
+<br><br>
+<<set _bystander2 to random(1, 6)>>
+<<switch _bystander2>>
+	<<case 1>>一个戴金丝眼镜的老人眯着眼看牌，头也不抬："高台不欢迎毛手毛脚的人。"
+	<<case 2>>穿貂皮的贵妇啜了一口香槟，嗤笑："新人？你带的钱够输几轮？"
+	<<case 3>>两个西装男人低声交谈，其中一人朝你这边扫了一眼："贝利手底下的人？有意思。"
+	<<case 4>>侍应生端着银盘经过，轻轻提醒："先生小姐们，今晚老板心情不错。"
+	<<case 5>>一个年轻人盯着牌桌，喃喃自语："二百块……就二百块……再押二百块就回本了。"
+	<<case 6>>大腹便便的商人晃着酒杯大笑："输赢都是乐子！小姑娘，别绷着脸！"
+<</switch>>
+<br><br>
+压筹码：
+<br>
+<<link [[压 100 筹码|Casino Jiusi Second Floor Bet]]>><<set $betAmount to 10000>><</link>>
+<<if $casinoChips lt 10000>><span class="red">筹码不够</span><</if>>
+<br>
+<<link [[压 300 筹码|Casino Jiusi Second Floor Bet]]>><<set $betAmount to 30000>><</link>>
+<<if $casinoChips lt 30000>><span class="red">筹码不够</span><</if>>
+<br>
+<<link [[压 500 筹码|Casino Jiusi Second Floor Bet]]>><<set $betAmount to 50000>><</link>>
+<<if $casinoChips lt 50000>><span class="red">筹码不够</span><</if>>
+<br>
+<<link [[压 1000 筹码|Casino Jiusi Second Floor Bet]]>><<set $betAmount to 100000>><</link>>
+<<if $casinoChips lt 100000>><span class="red">筹码不够</span><</if>>
+<br>
+<span class="red">作弊</span>：
+<br>
+<<link [[作弊偷看 100 筹码的牌|Casino Jiusi Second Floor Cheat]]>><<set $betAmount to 10000>><</link>>
+<br>
+<<link [[作弊偷看 300 筹码的牌|Casino Jiusi Second Floor Cheat]]>><<set $betAmount to 30000>><</link>>
+<br>
+<<link [[作弊偷看 500 筹码的牌|Casino Jiusi Second Floor Cheat]]>><<set $betAmount to 50000>><</link>>
+<br>
+<<link [[作弊偷看 1000 筹码的牌|Casino Jiusi Second Floor Cheat]]>><<set $betAmount to 100000>><</link>>
+<br><br>
+<<link [[继续 (0:01)|Casino Jiusi Second Floor Table]]>><<pass 1>><</link>>
+<br>
+<<link [[停止下注，回到一楼|Casino Jiusi Lobby]]>><</link>>
+
+:: Casino Jiusi Second Floor Bet
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+荷官将骰子放进骰盅，周围的呼吸都屏住了。
+<br><br>
+<<if $betAmount gt $casinoChips>>
+	旁边一位客人轻轻碰了碰你的手臂，压低声音："你手里的筹码可不够这个数。要是输了，你可就欠下赌场了。"
+	<br><br>
+	荷官没有阻止，只是平静地看着你："要押吗？"
+	<br><br>
+	<<link [[还是押了|Casino Jiusi Second Floor Bet Go]]>><</link>>
+	<br>
+	<<link [[算了|Casino Jiusi Second Floor Table]]>><</link>>
+<</if>>
+<<if $betAmount lte $casinoChips>>
+	<<link [[开骰|Casino Jiusi Second Floor Bet Go]]>><</link>>
+<</if>>
+
+:: Casino Jiusi Second Floor Bet Go
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<set _winChance to 20>>
+<<if $casinoFirstBet isnot 1>>
+	<<set $casinoFirstBet to 1>>
+	<<set _winChance to 85>>
+<<elseif $betAmount is 10000>>
+	<<set _winChance to 90>>
+<<elseif $betAmount is 30000>>
+	<<set _winChance to 75>>
+<<elseif $betAmount is 50000>>
+	<<set _winChance to 60>>
+<<elseif $betAmount is 100000>>
+	<<set _winChance to 40>>
+<</if>>
+<<set _winChance += Math.floor($casino2Interest / 8)>>
+<<set _winChance to Math.floor(_winChance / 2)>>
+<<set $casinoBetsToday to ($casinoBetsToday || 0) + 1>>
+<<set _winChance -= Math.min(($casinoBetsToday - 1) * 5, 45)>>
+/* 「赌场我做主」开关：放在这里而不是改上面的概率表 —— 上面那套加成/对折/当日次数惩罚
+   在两处赌桌各写了一份，在这里统一盖成 100 最省事也最不容易漏。 */
+<<if $fs_casinoMaster is true>><<set _winChance to 100>><</if>>
+<<set _roll to random(1, 100)>>
+<<if _roll lte _winChance>>
+	<<set _gain to Math.floor($betAmount * (1 + $casino2Interest / 100))>>
+	<<set $casinoChips += _gain>>
+	<span class="gold">骰子停下。荷官推来一叠筹码——你赢了！</span>
+	<br>
+	<span class="green">筹码 +<<print _gain / 100>> 枚</span>
+<<else>>
+	<<set $casinoChips -= $betAmount>>
+	<span class="red">骰子停下。荷官面无表情地收走了你的筹码——你输了。</span>
+	<br>
+	<span class="red">筹码 -<<print $betAmount / 100>> 枚</span>
+<</if>>
+<<set $casino2Rounds += 1>>
+<<set $casino2Attention to Math.min($casino2Attention + 25, 100)>>
+<<set $casino2Interest to Math.min($casino2Interest + (($betAmount is 10000) ? 5 : (($betAmount is 30000) ? 7 : (($betAmount is 50000) ? 9 : 14))), 100)>>
+<br><br>
+<<link [[继续|Casino Jiusi Second Floor Table]]>><<pass 1>><</link>>
+
+:: Casino Jiusi Second Floor Cheat
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<set $casinoBetsToday to ($casinoBetsToday || 0) + 1>>
+你借着酒意伸手去够骰盅，指尖一错，碰到了荷官的底牌——
+<br><br>
+<<set _catchChance2 to 100 - Math.floor($casino2Attention / 2)>>
+<<set _roll to random(1, 100)>>
+<<if _roll lte _catchChance2>>
+	<<set _cheatFailText to random(1, 3)>>
+	<<switch _cheatFailText>>
+		<<case 1>>
+			<span class="red">其中一个赌桌上的男人拍了拍你的手，全场的目光聚集在了你身上。"小姑娘，手挺快啊？"</span>
+		<<case 2>>
+			<span class="red">荷官一把按住你的手腕，冷笑："耍花样？你当我是瞎子？"</span>
+		<<case 3>>
+			<span class="red">对面的贵妇尖叫起来："她偷看牌！她偷看牌！保安！保安！！"</span>
+	<</switch>>
+	<br><br>
+	<span class="red">你被两名打手架住。你在大厅的筹码全部没收充公，还倒欠了赌场 <span class="gold">500 筹码</span>。</span>
+	<<set $casinoChips to 0>>
+	<<set $casinoDebt += 50000>>
+	<<set $casino2Rounds to 0>>
+	<<set $casino2Attention to 0>>
+	<<set $casino2Interest to 0>>
+	<<link [[灰溜溜地离开|Danube Street]]>><<pass 1>><<endevent>><</link>>
+<<else>>
+	<<set _cheatWinText to random(1, 3)>>
+	<<switch _cheatWinText>>
+		<<case 1>>
+			<span class="teal">你偷瞄到了荷官两张牌，也许这是一个机会。全桌哗然——你赢了。</span>
+		<<case 2>>
+			<span class="teal">牌面在你眼底一闪而过。你不动声色地改了主意，把筹码压向胜者——收钱时，没人注意到你嘴角的弧度。</span>
+		<<case 3>>
+			<span class="teal">你借着对面客人举杯的掩护看清楚了底牌。荷官困惑地看看你，又看看牌——这一把，又是你赢。</span>
+	<</switch>>
+	<<set _gain to $betAmount * 2>>
+	<<set $casinoChips += _gain>>
+	<<set $casino2Rounds += 1>>
+	<<set $casino2Attention to Math.min($casino2Attention + 25, 100)>>
+	<<set $casino2Interest to Math.min($casino2Interest + (($betAmount is 10000) ? 8 : (($betAmount is 30000) ? 12 : (($betAmount is 50000) ? 16 : 20))), 100)>>
+	<span class="green">筹码 +<<print _gain / 100>> 枚</span>
+	<br><br>
+	<<link [[继续|Casino Jiusi Second Floor Table]]>><<pass 1>><</link>>
+<</if>>
+
+:: Corpse Drag Start
+<<set $outside to 1>><<set $location to "town">>
+<<set $combat to 0>><<set $rapeavoid to 1>><<set $sexavoid to 1>>
+<<set _deadName to $pistolKillName>>
+<<if _deadName is undefined>><<set _deadName to "那个人">><</if>>
+<<set $corpseDragSteps to 8>>
+<span class="red">枪声的余音还在耳边嗡鸣。你低下头——<<print _deadName>>倒在血泊里，一动不动。你杀了人。</span>
+<br><br>
+<<set _deadIdx to $NPCNameList.indexOf(_deadName)>>
+<<if _deadIdx isnot -1 and $NPCName[_deadIdx] and $NPCName[_deadIdx].init is 1>>
+	<<set _deadLove to $NPCName[_deadIdx].love || 0>>
+	<<set _deadTrust to $NPCName[_deadIdx].trust || 0>>
+	<<if _deadLove gte 30 or _deadTrust gte 30>>
+		<<set _memoryNum to random(1, 4)>>
+		<<switch _memoryNum>>
+			<<case 1>>
+				<span class="purple">某个瞬间，你忽然想起——ta也曾对你笑过。没有防备，没有算计，就只是笑。你扣下扳机的那一秒，这些全被抹平了。</span>
+			<<case 2>>
+				<span class="purple">记忆不受控制地涌上来：ta递给你东西时指尖的温度、ta喊你名字时的语气、ta背过身去时衣角扬起的弧度。现在，这些都属于一具正在变冷的尸体。</span>
+			<<case 3>>
+				<span class="purple">你想起ta最后一次看向你的眼神。当时你以为还有下一次，还有机会把没说完的话说完。没有了。</span>
+			<<case 4>>
+				<span class="purple">奇怪，你竟能记起ta的那么多细节——ta的习惯、ta的小动作、ta偶尔流露出的脆弱。你从没想过，记住这些的代价，是亲手终结它们。</span>
+		<</switch>>
+		<br><br>
+	<<elseif _deadLove gt 0 or _deadTrust gt 0>>
+		<span class="purple">你记起ta偶尔看向你的目光——算不上友善，却也不算陌生。如今那双眼睛再也不会看向任何人了。</span>
+		<br><br>
+	<</if>>
+	<<set $stress += 40>><<set $trauma += 40>><<gtrauma>>　<<gstress>>
+	<br><br>
+<</if>>
+你的心脏几乎要跳出胸腔。不能留在这里。必须处理掉这具尸体。
+<br><br>
+孤儿院后面的花园……那里有一片松软的花圃。你弯下腰，抓住尸体的手腕，把它朝孤儿院的方向拖去。尸体很沉，每拖一步，你都觉得暗处有一双眼睛在盯着你。
+<br><br>
+<span class="gold">拖着尸体前往孤儿院的花园。每 3 分钟，有 20% 的概率被人发现。</span>
+<br><br>
+<<link [[继续拖行 (0:03)|Corpse Drag]]>><<pass 3>><</link>>
+<br>
+<<link [[把尸体丢下，转身逃跑|Corpse Drag Abandon]]>><</link>>
+
+:: Corpse Drag
+<<set $outside to 1>><<set $location to "town">>
+<<set $corpseDragSteps -= 1>>
+<<if $corpseDragSteps lte 0>>
+	你终于看到了孤儿院的围墙。花园就在后面。
+	<br><br>
+	<<link [[翻墙进入花园|Corpse Drag Arrive]]>><</link>>
+<<else>>
+	<<set _dragFlavor to random(1, 4)>>
+	<<switch _dragFlavor>>
+		<<case 1>>
+			尸体的鞋跟刮过地面，发出刺耳的声响。你咬紧牙关，加快了脚步。
+		<<case 2>>
+			路边一只野猫炸起尾巴，死死盯着你。你屏住呼吸，等它跑开才继续前进。
+		<<case 3>>
+			你的手指被尸体的衣料磨得生疼，血水顺着你的手腕往下淌。
+		<<case 4>>
+			远处传来警笛声。你僵在原地，直到警笛声渐渐远去，才重新迈开步子。
+	<</switch>>
+	<br><br>
+	<<set _roll to random(1, 100)>>
+	<<if _roll lte 20>>
+		<span class="red">有人发现了你！</span>
+		<br><br>
+		<<link [[……|Corpse Drag Discovered]]>><</link>>
+	<<else>>
+		<span class="green">没有人注意到你。你继续拖着尸体前行。</span>
+		<br><br>
+		<<link [[继续拖行 (0:03)|Corpse Drag]]>><<pass 3>><</link>>
+	<</if>>
+<</if>>
+
+:: Corpse Drag Discovered
+<<set $outside to 1>><<set $location to "town">>
+<<set _deadName to $pistolKillName>>
+<<if _deadName is undefined>><<set _deadName to "那个人">><</if>>
+"喂——！你在干什么？！"一个声音在你身后炸响。
+<br><br>
+你猛地回头。一个路人瞪大了眼睛，视线在你和地上的尸体之间来回跳动："那是……那是尸体？！"
+<br><br>
+他冲上来一把拽住你的衣领。你必须立刻做出反应。
+<br><br>
+<span class="gold">检定：体能（<<print Math.floor($physique / 10)>>% 成功率）</span>
+<br>
+<<set _physRoll to random(1, 100)>>
+<<set _physChance to Math.min(Math.floor($physique / 10), 95)>>
+<<if _physRoll lte _physChance>>
+	你猛地发力，一把挣开他的手，顺势把他推了个趔趄。趁着对方还没站稳，你拖着尸体跌跌撞撞地冲进了小巷。
+	<<set $stress += 30>><<pain 5>>
+	<span class="green">你挣脱了对方。</span> <<gstress>> <<gpain>>
+	<br><br>
+	<<link [[继续拖行 (0:03)|Corpse Drag]]>><<pass 3>><</link>>
+<<else>>
+	你被死死按在地上，脸贴着冰冷的石板。尸体就在几步之外，暴露在路灯下。
+	<br><br>
+	"别动！快叫警察！"
+	<br><br>
+	<span class="gold">检定：诡术（<<print Math.floor($skulduggery / 10)>>% 成功率）</span>
+	<br>
+	<<set _skulRoll to random(1, 100)>>
+	<<set _skulChance to Math.min(Math.floor($skulduggery / 10), 95)>>
+	<<if _skulRoll lte _skulChance>>
+		<<link [[欺骗对方|Corpse Drag Deceive]]>><</link>>
+	<<else>>
+		<<link [[无法反抗|Corpse Event Prison]]>><</link>>
+	<</if>>
+<</if>>
+
+:: Corpse Drag Deceive
+<<set $outside to 1>><<set $location to "town">>
+"嘘——嘘！别喊！"你拼命挤出笑容，声音抖得不成样子，"这是我……我妹妹！她喝多了，我正送她回家！"
+<br><br>
+对方狐疑地打量着你，又低头看了看地上那具"醉得不省人事"的尸体。
+<br><br>
+"……真的？"
+<br><br>
+"真的！你看她这身打扮，就是喝大了的样子！"你的手心全是冷汗，"求你了，别喊警察，我这就带她回去……"
+<br><br>
+他绕着尸体转了一圈，又盯着你的脸看了好一会儿。最终，他嫌恶地摆了摆手："……赶紧走。晦气东西。"
+<br><br>
+你连连点头，拖着尸体迅速离开。直到拐进小巷，你才敢大口喘气。
+<br><br>
+<span class="green">你成功欺骗了对方——没有人发现你身上有尸体。</span>
+<<set $stress += 30>><<set $skulduggery to Math.min($skulduggery + 5, 1000)>>
+<<gstress>> <span class="gold">诡术 +5</span>
+<br><br>
+<<link [[继续拖行 (0:03)|Corpse Drag]]>><<pass 3>><</link>>
+
+:: Corpse Drag Abandon
+<<set $outside to 1>><<set $location to "town">>
+你松开了手。尸体"砰"的一声砸在地上，摊成扭曲的一团。
+<br><br>
+你转身就跑，头也不敢回。风里传来乌鸦的叫声，像是在嘲笑你的懦弱。
+<br><br>
+<span class="red">你知道，天亮之前，这具尸体就会被人发现。而你枪口上的硝烟味，会成为指向你的证据。</span>
+<<crimeUp 3000 "assault">>
+<<set $stress += 100>><<set $trauma += 100>>
+<<gdelinquency>> <<gstress>> <<gtrauma>>
+<br><br>
+你一路狂奔回孤儿院，把自己锁进房间，蜷缩在被子里发抖。
+<br><br>
+<<unset $pistolKillName>>
+<<set $location to "home">><<set $outside to 0>>
+<<link [[继续|Orphanage]]>><<endevent>><</link>>
+
+:: Corpse Drag Arrive
+<<set $outside to 1>><<set $location to "home">>
+你翻过孤儿院花园的矮墙，落在松软的花圃上。月光下，泥土散发着潮湿的气息。
+<br><br>
+你拖着的尸体在草地上留下一道深色的痕迹。必须尽快埋掉它。
+<br><br>
+<span class="gold">在花园中掩埋尸体需要 1 小时。</span>
+<br><br>
+<<link [[开始挖坑 (1:00)|Corpse Bury]]>><<pass 1 hour>><</link>>
+
+:: Corpse Bury
+<<set $outside to 1>><<set $location to "home">>
+你用双手刨开潮湿的泥土。指甲断裂，指尖渗出血丝，但你不敢停下。
+<br><br>
+一小时后，土坑终于够深了。你把尸体推进坑里，用泥土将它盖住，最后把花圃表面重新抚平，又扯来几丛杂草盖在上面。
+<br><br>
+你跪在埋尸处，大口喘着气。风从花园里吹过，带走了最后一丝血腥味。
+<br><br>
+<span class="green">尸体被掩埋了。你身上不再有尸体。</span>
+<<set $corpseBuried to 1>>
+<<set $stress += 50>><<set $trauma += 50>>
+<<gstress>> <<gtrauma>>
+<br><br>
+<<unset $pistolKillName>>
+<<link [[回到孤儿院|Orphanage]]>><<endevent>><</link>>
+
+:: Corpse Event Prison
+<<set $outside to 1>><<set $location to "town">>
+<<set _deadName to $pistolKillName>>
+<<if _deadName is undefined>><<set _deadName to "那个人">><</if>>
+警察来得比你想的还快。你被按倒在警车引擎盖上，双手铐在背后。路灯下，那具尸体被盖上了白布。
+<br><br>
+审讯室里，警官把现场照片拍在你面前："谋杀。证据确凿。"
+<br><br>
+"……这是死罪。"他的声音毫无感情。
+<br><br>
+然而他顿了顿，翻开一份文件，皱起了眉："不过——有人替你担保。你免于死罪。"
+<br><br>
+<span class="red">"改判：有期徒刑 30 天。"</span>
+<br><br>
+你不知道是谁保下了你的命。也许是那个总在雨夜出现的女人，也许是别的什么人。但你明白，这件事不会就此结束。
+<br><br>
+<<badEndTracking "Prison" { reason: "corpseDragMurder" }>>
+<<crimeUp 5000 "assault">>
+<<set $stress += 300>><<set $trauma += 150>>
+<<set $pistolOwned to 0>><<set $pistolAmmo to 0>>
+<<set $corpseBuried to 1>>
+<<gdelinquency>> <<gstress>> <<gtrauma>> <span class="grey">手枪被警方没收。</span>
+<br><br>
+<<link [[服刑 (30 天)|Corpse Event Prison End]]>><<pass 30 day>><</link>>
+
+:: Corpse Event Prison End
+<<set $outside to 0>><<set $location to "home">>
+三十天后，你被放出监狱。阳光刺得你睁不开眼。你瘦了一圈，身上的衣服散发着霉味。
+<br><br>
+那具尸体早已被警方收殓安葬。你身上不再有尸体——但你知道，有些东西永远洗不掉了。
+<br><br>
+<<badEndTrackingEnd "Prison" { reason: "released" }>>
+<<unset $pistolKillName>>
+<<link [[回到孤儿院|Orphanage]]>><<endevent>><</link>>
+
+:: Dead NPC Absence
+<<set $outside to 1>><<set $location to "town">>
+<<set _deadName to $deadNPCName>>
+<<if _deadName is undefined>><<set _deadName to "那个人">><</if>>
+<span class="grey">风吹过空荡荡的街道。你已经亲手杀死了 <<print _deadName>>，并把它埋在了孤儿院的花园里——ta再也不会出现在你的生活里了。</span>
+<br><br>
+你心神不宁，决定先回孤儿院缓缓。
+<br><br>
+<<set $outside to 0>><<set $location to "home">>
+<<unset $deadNPCName>>
+<<link [[返回孤儿院|Orphanage]]>><<endevent>><</link>>
+
+:: Bailey Casino Intro
+<<set $outside to 1>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<npc Bailey>><<person1>>
+贝利走得不快，但你不落后半步都难。他带着你穿过多瑙河街，在那扇黄铜镶边的厚门前停下。
+<br><br>
+看门人刚要伸手，看见贝利的脸，立刻收手退开："贝利先生！您请，这位姑娘请。"
+<br><br>
+<span class="teal">你愣了一瞬——验资就这样……过了？</span>贝利头也不回："他认得我。这儿的老板，欠我一个人情。"
+<br><br>
+<<set $baileyVip to 1>>
+<<link [[跟着贝利进去（遇过了所有验资）|Bailey Casino Boss]]>><<pass 1>><</link>>
+
+:: Bailey Casino Boss
+<<set $outside to 1>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<npc Bailey>><<person1>>
+老板的办公室在二楼尽头的雕花木门后。他年过五十，西装笔挺，笑起来像只老狐狸。
+<br><br>
+"稀客。"他朝贝利点点头，目光落到你身上，"这就是……你信里那个小家伙？"
+<br><br>
+贝利把纸条放在桌上，不咸不淡地说："给她一个机会。她欠的东西，在我这儿还没算完。"
+<br><br>
+老板哈哈大笑，翻开账本："小姑娘，你在我这儿欠了多少？"
+<<if $casinoDebt gt 0>>
+	他拨了拨算盘，忽然把笔一搁："有意思。看贝利的面子——你这笔债，我替你免了 <span class="gold">三分之一</span>。"
+	<br><br>
+	<span class="teal">他只是笑了笑："玩笑归玩笑，钱是真的给你抹了。"</span>
+	<<set $casinoDebt -= Math.floor($casinoDebt / 3)>>
+	<br>
+	<span class="green">欠款减少：还剩 <<print formatMoney($casinoDebt)>>。</span>
+<<else>>
+	"你居然不欠钱？"老板挑眉，"那更好——省得我装大方。"
+<</if>>
+<br><br>
+"贝利的面子要给足。"老板上下打量你，"赌场缺个手脚干净、嘴又严的人。工资 <span class="gold">5 到 20 元</span> 一天，看表现。做不做？"
+<br><br>
+<<set $baileyVip to 1>><<link [[接受工作（解锁赌场上班）|Casino Job Accept]]>><<set $casinoJobUnlocked to 1>><</link>>
+<br>
+<<link [[说考虑一下|Casino Jiusi Lobby]]>><<pass 1>><</link>>
+
+:: Casino Job Accept
+<<run finalStar.pillWorkDay()>>
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+"好。"老板把一枚黄铜胸针推到你面前，"戴上它。每天来大厅找兔女郎领活，日结。"
+<br><br>
+<span class="gold">你获得了一份体面的工作：赌场侍应/兑码员（工资 5~20 元/天）。</span>
+<br><br>
+<<link [[今天就开始上班 (2:00)|Casino Job First]]>><<pass 2 hour>><<set $casinoJobFirst to 1>><</link>>
+<br>
+<<link [[改天再说|Casino Jiusi Lobby]]>><<pass 1>><</link>>
+
+:: Casino Job First
+<<run finalStar.pillWorkDay()>>
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+第一天上班，兔女郎领着你熟悉柜台。一切正常……直到傍晚交班，你推开换衣间的小门。
+<br><br>
+"……抱歉了。"一个压低的女声在你身后响起。
+<br><br>
+你猛地回头——<span class="red">换衣间的兔子小姐</span>反手锁上了门，手里握着一柄细长的裁纸刀。
+<br><br>
+<span class="red"><b>她似乎是认真的，真的想杀了你！</b></span>
+<br><br>
+她把刀尖对准你，声音抖得不成样子："别怪我。我本来就是响尾蛇的人——玖肆手底下的。"她抽了一下鼻子，"可你把她卖了！我被查出是响尾蛇的探子，今晚就要把我交出去。我活不成，你也别想好过！"
+<br><br>
+"反正……组织也不会为一个棋子出头。"她抽了一下鼻子，"你的下场会和我一样，到最后也会烂在地里"
+<br><br>
+<<set $pain to 1000>>
+<<set $stress += 200>>
+<<gpain>> <<gstress>>
+
+她朝你扑了过来。你必须挣扎！
+<br><br>
+<<link [[挣扎 (1/3)|Casino Job Struggle 1]]>><<set $casinoStruggle to 0>><</link>>
+
+:: Casino Job Struggle 1
+<<run finalStar.pillWorkDay()>>
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+你侧身避开刀锋，手臂被划出一道血口。你抓住她的手腕，两人在狭窄的换衣间里扭打成一团。
+<br><br>
+"你有没有想过为什么玖肆会找你"她喘着气，"响尾蛇……组织迟早会把这个镇子渗透成筛子，——现在你明白了吗！""你这口气，就当是替她受的。你活该。"
+<br><br>
+<<pain 150>>
+<<gpain>>
+<br><br>
+<<link [[继续挣扎 (2/3)|Casino Job Struggle 2]]>><<set $casinoStruggle to 1>><</link>>
+
+:: Casino Job Struggle 2
+<<run finalStar.pillWorkDay()>>
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+你拼尽全力把她的手臂拧向背后。刀"叮"的一声掉在地上，她踉跄着撞翻了衣架。
+<br><br>
+她红了眼眶："……我本来不想杀你的。"她红着眼眶，"玖肆请让我继续盯着你，可老板说杀了你，他就可以送我离开……那本账本，能保我的命。你懂吗？你懂个屁。"
+<br><br>
+门被砸响了——外面的人听见了动静。
+<br><br>
+<<set $stress += 100>>
+<<gstress>>
+<br><br>
+<<link [[最后一搏 (3/3)|Casino Job Struggle 3]]>><<set $casinoStruggle to 2>><</link>>
+
+:: Casino Job Struggle 3
+<<run finalStar.pillWorkDay()>>
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+你一脚把刀踢到角落，死死按住她，直到门被撞开——保安冲了进来，把你们分开。
+<br><br>
+<span class="gold">三次挣扎后，刺杀必定失败。这是无法反抗的结局，她瘫在地上，喘着气，再没有反抗。</span>
+<br><br>
+"抓走。"老板的声音从门外传来，冰冷，"送到后巷去。响尾蛇的探子，谁想讨赏，就拿她的人头去。"
+<br><br>
+兔子小姐被押送出去。她经过你身边时，低声说了句："……对不起。"
+<br><br>
+<<set $casinoBunnyGone to 1>>
+<<set $stress += 50>>
+<b>此后，换衣间里不会再出现兔子小姐——那里只会显示"这里暂时空无一人"。</b>
+<br><br>
+<<link [[回到大厅|Casino Jiusi Lobby]]>><<pass 1>><</link>>
+
+:: Casino Job
+<<run finalStar.pillWorkDay()>>
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+你戴上铜牌，在赌场里忙了一班——擦牌桌、兑筹码、给客人端酒。累是累了点，工钱日结。
+<br><br>
+<<set _wage to random(500, 2000)>>
+<<set _fsTalentWage to false>>
+<<if finalStar.talentHas('d1')>><<set _wage to _wage + 1000>><<set _fsTalentWage to true>><</if>>
+<<set $money += _wage>>
+<<set $stress += 20>><<set $fatigue += 15>>
+<span class="gold">工资 +<<print formatMoney(_wage)>>（5~20 元）<<if _fsTalentWage>>　<span class="green">打工达人 +£10</span><</if>></span> <<gstress>> <<gtiredness>>
+<br><br>
+<<link [[继续|Casino Jiusi Lobby]]>><<pass 1>><</link>>
+
+:: Casino NPC Event
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<if $casinoNPCEvents is undefined>><<set $casinoNPCEvents to {}>><</if>>
+<<set _npcName to undefined>>
+<<set _npcPool to []>>
+<<if C.npc.Bailey.init is 1 and C.npc.Bailey.state isnot "dead" and C.npc.Bailey.state isnot "missing">><<set _npcPool.push("Bailey")>><</if>>
+<<if C.npc.Whitney.init is 1 and C.npc.Whitney.state isnot "dead">><<set _npcPool.push("Whitney")>><</if>>
+<<if C.npc.Kylar.init is 1 and C.npc.Kylar.state isnot "dead">><<set _npcPool.push("Kylar")>><</if>>
+<<if C.npc.Avery.init is 1 and C.npc.Avery.state isnot "dead" and C.npc.Avery.state isnot "dismissed">><<set _npcPool.push("Avery")>><</if>>
+<<if C.npc.Landry.init is 1 and C.npc.Landry.state isnot "dead">><<set _npcPool.push("Landry")>><</if>>
+<<if C.npc.Briar.init is 1 and C.npc.Briar.state isnot "dead">><<set _npcPool.push("Briar")>><</if>>
+<<if _npcPool.length is 0>>
+	你在大厅里扫了一圈——都是生面孔。没什么人在意你。
+	<br><br>
+	<<link [[回到大厅|Casino Jiusi Lobby]]>><<pass 1>><</link>>
+<<else>>
+	<<set _npcIdx to random(0, _npcPool.length - 1)>><<set _npcName to _npcPool[_npcIdx]>>
+	<<set _npcVar to _npcName>>
+	<<switch _npcName>>
+		<<case "Bailey">>
+			<<set _npcEvent to _npcVar>>
+			<<switch (($casinoNPCEvents[_npcName] || 0) % 3)>>
+				<<case 0>>
+					你看见贝利坐在高脚凳上，手里转着一枚金色的筹码。他瞥见了你，招了招手。
+					<br><br>
+					"盯着我干什么？"他似笑非笑，"赌场可不欠你什么。过来，帮我记着这局押了多少——赢了我分你两成。"
+					贝利果然赢了。他把一枚筹码抛给你。<span class="gold">你获得 1 筹码。</span>
+					<<set $casinoChips += 100>><<npcincr Bailey love 1>>
+				<<case 1>>
+					你路过角落时，贝利正在跟一个西装男人低声说话。男人塞给他一个信封，贝利面无表情收下。
+					<br><br>
+					他余光扫到你，眉头都没动一下："看见什么了？"他顿了顿，"最好什么都没看见。"
+					<<set $stress += 20>><<npcincr Bailey love 1>>
+				<<default>>
+					贝利难得输了不少，坐在桌边捏着眉心。他抬头看到你："……别声张。这件事传出去，有你好看的。"
+					<br><br>
+					"不过，"他冷哼着补了一句，"你倒是给我带了点运气。"他把一枚筹码推给你。
+					<<set $casinoChips += 100>><<npcincr Bailey love 1>>
+			<</switch>>
+		<<case "Whitney">>
+			<<switch (($casinoNPCEvents[_npcName] || 0) % 3)>>
+				<<case 0>>
+					惠特尼叼着烟，混在一群小混混中间，看见你挑了下眉："哟，冤家路窄？这地方你也能来？"
+					<br><br>
+					她把一枚偷来的筹码抛给你："赏你了。别跟人说见过我。"
+					<<set $casinoChips += 100>><<npcincr Whitney love 1>>
+				<<case 1>>
+					你听见身后有人吹口哨。回头，惠特尼斜靠着椅子，脚搁在赌桌上："我可盯着你呢。赢多赢少，回头都得给我吐出来。"
+					<br><br>
+					她说着，却只是轻佻地拍了拍你的头，没动你的钱。<span class="teal">——至少今天没动。</span>
+					<<npcincr Whitney love 1>><<set $stress += 10>>
+				<<default>>
+					惠特尼今天被个壮汉追着骂，灰头土脸地躲到你身后："挡一下！回头请你喝……算了，当我没说。"
+					<br><br>
+					她装模作样地整了整衣领，大摇大摆走了。走出去三步又回头："真谢了。"
+					<<npcincr Whitney love 1>>
+			<</switch>>
+		<<case "Kylar">>
+			<<switch (($casinoNPCEvents[_npcName] || 0) % 3)>>
+				<<case 0>>
+					你在牌桌间瞥见一个熟悉的背影——凯拉尔戴着兜帽，隔着一桌人盯着你。
+					<br><br>
+					四目相对，她别过脸，装作在看赌局。可指尖一直在转一枚筹码，转得心不在焉。
+					<<set $stress += 10>><<npcincr Kylar love 1>>
+				<<case 1>>
+					凯拉尔端着酒杯挤到你身边，声音压得很低："这里鱼龙混杂，你一个人？"
+					<br><br>
+					"……输了多少？"她盯着你的手，"下次别来这种地方。要玩，去找我就好。"说完她红着耳朵走了。
+					<<npcincr Kylar love 1>><<npcincr Kylar lust 1>>
+				<<default>>
+					你赢了把大的，凯拉尔忽然从人群里冒出来，把你的筹码推回你手里："收好。"
+					<br><br>
+					"太招摇，会出事。"她说完就消失在人群里，像从没来过。
+					<<npcincr Kylar love 1>>
+			<</switch>>
+		<<case "Avery">>
+			<<switch (($casinoNPCEvents[_npcName] || 0) % 3)>>
+				<<case 0>>
+					艾弗里西装革履地坐在贵宾区，面前摆着香槟。他看到你，略一点头："过来坐。"
+					<br><br>
+					"输赢不重要。"他把一枚高面值筹码推到你面前，"重要的是学会收手。"
+					<<set $casinoChips += 1000>><<npcincr Avery love 1>>
+				<<case 1>>
+					艾弗里正在为某笔生意和人谈笑。中场休息，他俯身在你耳边说："别让人知道我们认识——今天的事，是我欠你的。"
+					<br><br>
+					之后他让人塞给你一张纸条和一叠筹码。
+					<<set $casinoChips += 500>><<npcincr Avery love 1>>
+				<<default>>
+					艾弗里罕见地输红了眼。他瞥见你，强撑风度："玩点大的才有意思，你觉得呢？"
+					<br><br>
+					你顺着他说了几句，他心情好了不少，赏了你一枚筹码。
+					<<set $casinoChips += 100>><<npcincr Avery love 1>>
+			<</switch>>
+		<<case "Landry">>
+			<<switch (($casinoNPCEvents[_npcName] || 0) % 3)>>
+				<<case 0>>
+					你在大厅后门看见兰德里——他正把一个鼓鼓的包裹交给一个水手。他冲你吹了个口哨："别说出去，回头请你喝酒。"
+					<<npcincr Landry love 1>><<set $stress += 10>>
+				<<case 1>>
+					兰德里输得底裤快当了，抬眼看见你，压低嗓子："借我两百？三倍还你。"
+					<br><br>
+					"骗你的。"他咧嘴一笑，"借我一百，我翻倍还你。"
+					<<if $money gte 10000>>
+						<<set $money -= 10000>>
+						<<set $money += 20000>>
+						他果然还了你双倍。<span class="gold">+<<print formatMoney(10000)>></span>
+					<<else>>
+						你摊手表示没钱。他啧了一声，装作没你这回事。
+					<</if>>
+					<<npcincr Landry love 1>>
+				<<default>>
+					兰德里正跟两个打手谈收账的生意，余光扫到你，立刻换上一副憨厚笑脸："小财神！改天请你喝一杯。"
+					<<npcincr Landry love 1>>
+			<</switch>>
+		<<case "Briar">>
+			<<switch (($casinoNPCEvents[_npcName] || 0) % 3)>>
+				<<case 0>>
+					布莱尔披着皮草，正跟老板聊生意。看到你，她眼前一亮："哟，孤儿的那个小甜心？来，姐姐教你两手。"
+					<br><br>
+					她随手替你押了一注，居然赢了。<span class="gold">你白赚 5 筹码。</span>
+					<<set $casinoChips += 500>><<npcincr Briar love 1>>
+				<<case 1>>
+					布莱尔带着一群舞者来捧场。她搂住你的肩："我那边缺个端茶倒水的。在这赌，不如去我那跳。"
+					<br><br>
+					你推辞了。她也不恼，笑嘻嘻走了。
+					<<npcincr Briar love 1>>
+				<<default>>
+					布莱尔打牌输了，拍桌而起："再来！今天不赢回来我不走！"
+					<br><br>
+					她看见你，忽然冷静下来，冲你眨眨眼："看什么看？回去别跟人说——尤其别告诉贝利。"
+					<<npcincr Briar love 1>>
+			<</switch>>
+	<</switch>>
+	<br><br>
+	<<set _casinoNPCEvents = $casinoNPCEvents || {}>>
+	<<set _casinoNPCEvents[_npcName] to (($casinoNPCEvents[_npcName] || 0) + 1)>>
+	<<set $casinoNPCEvents to _casinoNPCEvents>>
+	<<link [[回到大厅|Casino Jiusi Lobby]]>><<pass 1>><</link>>
+<</if>>
+
+:: Jiusi Stalk Discovered
+<<set $outside to 0>><<set $location to "home">><<effects>>
+你正要走进孤儿院大门，忽然停住脚步。
+<br><br>
+身后的人影来不及闪躲——一头白色长发在路灯下亮得刺眼。
+<br><br>
+"……你发现了啊。"玖肆收起尴尬的表情，清了清嗓子，声音比上次软了不少，"周一嘛，接了你一单委托……顺路看看你活着没有。"
+<br><br>
+你直直看着她。她的耳朵以肉眼可见的速度红了起来。
+<br><br>
+"总之——"她向后退了一步，干巴巴地打了个招呼，"……晚上好。下次别回头。"说完转身快步消失在街角。
+<br><br>
+<span class="teal">周一剩下的时间，玖肆都跟在你身后——不近不远。你尖叫，就会有人赶来。</span>
+<br><br>
+<<set $jiusiStalk to 1>>
+<<unset $jiusiStalkNotice>>
+<<link [[进门|Orphanage]]>><<endevent>><</link>>
+
+:: Jiusi Morgan Tell
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<npc 玖肆>><<person1>>
+你犹豫了一下，还是开了口："你知道……下水道里那位老人吗？摩根。"
+<br><br>
+玖肆指尖一顿，脸上轻松的神色一点一点淡了下去。
+<br><br>
+"……知道。"她沉默了很久，"你跟他，关系不错？"
+<br><br>
+你没说话。她看了你一眼，忽然站起来，往门口走去："今天先聊到这。我出去透口气。"
+<br><br>
+她走到门口，停了一下："别跟来。"
+<br><br>
+<<link [[留在原地|Jiusi Morgan Leave]]>><</link>>
+<br>
+<<link [[悄悄跟上|Jiusi Morgan Follow 1]]>><</link>>
+
+:: Jiusi Morgan Leave
+<<set $outside to 0>><<set $location to "home">><<effects>>
+你坐在大厅里，等了一刻钟。玖肆没有回来。
+<br><br>
+第二天起，下水道里那位老人<strong>再也没有出现过</strong>。有人去翻过他的窝——只剩下一床发霉的被子和半盒还没来得及吃的小老鼠。
+<br><br>
+<span class="red">摩根——失踪。</span>
+<<set $morganMissing to 1>>
+<<set C.npc.Morgan.state to "missing">>
+<<set $morganLineDone to 1>>
+<<link [[继续|Orphanage]]>><<endevent>><</link>>
+
+:: Jiusi Morgan Follow 1
+<<set $outside to 0>><<set $location to "home">><<effects>>
+你远远地缀在玖肆身后。她没有去街市，而是走进了下水道——然后你在拐角处听到了争吵声。
+<br><br>
+"……够了！"是一个苍老的声音，"我知道我丢了人，用不着你个小丫头片子来数落！"
+<br><br>
+"你女儿。"玖肆的声音很轻，却字字清晰，"你找了四年。你明明打听到她最后在码头露过面，却缩在下水道里，连去看一眼都不敢。"
+<br><br>
+"我、我那是……"老人的声音一下子哽住了。
+<br><br>
+"她离家那天，你说了什么？"玖肆问，"'走了就别回来'——你自己说的。"
+<br><br>
+长久的沉默。然后，摩根的声音忽然软了下来，带着颤："……我后悔了。我一直后悔。我对她太苛刻了——那是我的错。我、我现在清醒了，真的清醒了。"
+<br><br>
+一阵窸窣声。你听见摩根站起来，跟着玖肆走出了下水道。
+<br><br>
+<span class="gold">你悄悄跟在后面（需要 3 分钟）。</span>
+<br><br>
+<<link [[继续跟随 (3:00)|Jiusi Morgan Follow 2]]>><<pass 3>><</link>>
+
+:: Jiusi Morgan Follow 2
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+玖肆把摩根安置进了医院的一间病房里。护士们换好被褥，老人靠在床头，终于露出了一个疲惫的笑。
+<br><br>
+你正要转身，走廊那头传来玖肆的声音——不冷不热，却戳得人一激灵：
+<br><br>
+"……看够了吗？"
+<br><br>
+你僵在原地。她靠在墙边，抱着手臂，平静地看着你："你以为我没发现你？"
+<br><br>
+她叹了口气，走进病房对面的长椅坐下，示意你坐过去。
+<br><br>
+"摩根——不折不扣的疯子。"她望着病房的门，"我没有父亲。至少，从我妈走的那天起，就没有了。"
+	<br><br>
+	"但他有。"玖肆的声音低下去，"他以前是镇上有名的假老钱，老婆死了以后，他把女儿当命根子。后来他喝多了，把女儿也弄丢了——有人说她死了，有人说她跟人跑了。他找了几年，没找到。再往后，就住进了下水道。
+	<br><br>
+	"我在响尾蛇接的活儿里查过他的底。一查，就再也没法当没看见。他身上那股味——是你闻一次就再也不会忘的那种。可你要是真看见他在那儿发抖，就会觉得……他也就是个被日子丢下的人。"
+	<br><br>
+	她垂下眼睛："我帮不了他找回女儿。但至少能把他弄出来，让他活着。这事儿跟我没关系，跟响尾蛇也没关系——是我自己的事。"
+	<br><br>
+	她笑了，笑得有点苦："别可怜我。我就是……看不得这种人。好像他活得好一点，世上就少一个我这样的。"
+	<br><br>
+	<span class="gold">摩根被安顿在医院病房——他成了你生活里的一份子。</span>
+	<<set $morganHospital to 1>>
+	<<set C.npc.Morgan.state to "active">>
+	<<set C.npc.Morgan.init to 1>>
+	<<if C.npc.Morgan.spirit is undefined>><<set C.npc.Morgan.spirit to 30>><</if>>
+	<<if C.npc.Morgan.knot is undefined>><<set C.npc.Morgan.knot to 70>><</if>>
+<<link [[离开医院|Hospital Foyer]]>><<endevent>><</link>>
+
+:: Hospital Morgan Chat
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+<<if $morganHospital isnot 1>>
+	你走到病房区，护士困惑地挡住你："你要找谁？"
+	<br><br>
+	<<link [[离开|Hospital Foyer]]>><<endevent>><</link>>
+<<elseif Time.hour lt 8 or Time.hour gt 19>>
+	病房已经熄了灯。护士轻声说："探视时间是早上 8 点到晚上 7 点。"
+	<br><br>
+	<<link [[离开|Hospital Foyer]]>><<endevent>><</link>>
+<<else>>
+	你推开病房的门。摩根正靠在床头，看着窗外发愣。见你进来，他的眼睛亮了一下："……来啦？"
+	<br><br>
+	<<set _morganChat to random(1, 14)>>
+	<<switch _morganChat>>
+		<<case 1>>
+			"我梦到她了。"他轻声说，声音发哑，"还是那年夏天的样子。醒来就想，当年要是没把她气走……"他摇摇头，"不说这个了。陪老头聊聊天吧。"
+		<<case 2>>
+			"这病房的饭难吃得很。"他苦着脸，"我当年在下水道，隔三差五还能给自己加个肉罐头。"
+		<<case 3>>
+			"玖肆那丫头，昨天又来看我了。她给我带了条毯子。"他摩挲着毯角，"……她肯来，我就知足了。"
+		<<case 4>>
+			"我这辈子啊，唯一看错的就是对自己闺女。"他把脸埋进手里，"你说，要是她妈还在，得多心疼我啊。"
+		<<case 5>>
+			"年轻的时候，我手可巧了。谁家要打个柜子，第一个找我。"他突然笑了，"改天好了，我给你打个梳妆台。"
+		<<case 6>>
+			"我听说你在孤儿院过得不痛快？"他认真地看过来，"别学我。什么都硬扛着，迟早把身体熬垮。"
+		<<case 7>>
+			"下雨天还是怕。这么多年了。"他望着窗外，"一听见雨声，就想起那些个蜷在洞里的日子。"
+		<<case 8>>
+			"我偷偷攒了点钱，不多。"他神秘地压低声音，"想着以后……给玖肆添点嫁妆。她嘴上不说，心里肯定嫌我多事。"
+		<<case 9>>
+			"这一层有个护士，特别好。就是天天念叨我该晒太阳。"他很无奈，"我是该走走了……等我腿脚好些。"
+		<<case 10>>
+			"你来看我，我很高兴。"他说，"真的。你是个好孩子。"
+		<<case 11>>
+			<strong>他突然坐直了身体，眼睛前所未有地清澈：</strong>"……孩子，这些年，我对她不好，对自己更不好。你来看我，还听我说这些陈谷子烂芝麻——"他颤着声音，"对不起，真的对不起。让你费心了。"
+			<<set $morganApologyDone to 1>>
+		<<case 12>>
+			"我欠玖肆的，这辈子还不清了。"他望着窗外，好一会儿，忽然说，"但我想从现在开始，能还多少，还多少。"
+			<<set $morganApology2Done to 1>>
+		<<case 13>>
+			他正说到一半，忽然停住了，望着窗外灰蒙蒙的天，声音低下去："……下雨了。她走的那天，也下着这么大的雨。我没去送她。"他不再说话，手指却攥紧了被角。
+			<<set $morganSpiritDown to 1>>
+		<<case 14>>
+			"你说……她会不会怨我？"他忽然问你，眼眶发红，"要是我当初不那么拧，她是不是就不会走？"他苦笑了一下，"算了，别理我。人老了，就爱翻旧账。"
+			<<set $morganSpiritDown to 1>>
+	<</switch>>
+	<br><br>
+	<<if _morganChat is 11>>
+		<span class="green">摩根对你道了歉——他的眼神是清醒的。</span>
+		<<set C.npc.Morgan.spirit to Math.min(C.npc.Morgan.spirit + 15, 100)>>
+		<<set C.npc.Morgan.knot to Math.max(C.npc.Morgan.knot - 10, 0)>>
+		<<stress -10>><<lstress>>　<<trauma -5>><<ltrauma>>　 <span class="green">精神 +15</span> <span class="green">心结 -10</span>
+	<<elseif _morganChat is 12>>
+		<<set C.npc.Morgan.spirit to Math.min(C.npc.Morgan.spirit + 10, 100)>>
+		<<set C.npc.Morgan.knot to Math.max(C.npc.Morgan.knot - 15, 0)>>
+		<<stress -10>><<lstress>>　<<trauma -5>><<ltrauma>>　 <span class="green">精神 +10</span> <span class="green">心结 -15</span>
+	<<elseif _morganChat is 13 or _morganChat is 14>>
+		<<set C.npc.Morgan.spirit to Math.max(C.npc.Morgan.spirit - 10, 0)>>
+		<<set C.npc.Morgan.knot to Math.min(C.npc.Morgan.knot + 10, 100)>>
+		<<stress -5>><<lstress>>　<<trauma -5>><<ltrauma>>　 <span class="red">精神 -10</span> <span class="red">心结 +10</span>
+	<<else>>
+		<<if _morganChat is 1 or _morganChat is 3 or _morganChat is 5 or _morganChat is 8 or _morganChat is 10>>
+			<<set C.npc.Morgan.spirit to Math.min(C.npc.Morgan.spirit + 8, 100)>>
+			<<stress -15>><<lstress>>　<<trauma -10>><<ltrauma>>　 <span class="green">精神 +8</span>
+		<<else>>
+			<<set C.npc.Morgan.spirit to Math.min(C.npc.Morgan.spirit + 5, 100)>>
+			<<set C.npc.Morgan.knot to Math.max(C.npc.Morgan.knot - 5, 0)>>
+			<<stress -10>><<lstress>>　<<trauma -5>><<ltrauma>>　 <span class="green">精神 +5</span> <span class="green">心结 -5</span>
+		<</if>>
+	<</if>>
+	<br><br>
+	<<link [[继续陪他聊 (0:30)|Hospital Morgan Chat]]>><<pass 30>><</link>>
+	<br>
+	<<link [[离开|Hospital Foyer]]>><<endevent>><</link>>
+<</if>>
+
+:: Bank Hall
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<if Time.hour lt 9 or Time.hour gte 19>>
+	银行大门紧闭，铁栅栏从里面锁得死死的。
+	<br><br>
+	<span class="grey">你试着撬锁——这是双层防撬设计，纹丝不动。这扇门只能等天亮再来。</span>
+	<br><br>
+	<<link [[离开|Danube Street]]>><<endevent>><</link>>
+<<else>>
+<<if finalStar.bankFaintCheck()>><<goto "Bank Faint">><</if>>
+	你推开银行的玻璃门。大理石地面映着吊灯的光，柜台后的职员低头忙碌，角落里的自动存款机轻声嗡鸣。
+	<br><br>
+	<<if $daily.bankVisited isnot 1>>
+		<<set $daily.bankVisited to 1>>
+		<<if $weekly.bankVisits is undefined>><<set $weekly.bankVisits to 0>><</if>>
+		<<set $weekly.bankVisits += 1>>
+		<<if $weekly.bankVisits is 1>>
+			<span class="blue">你第一次走进这里，柜台后的职员朝你礼貌地点了点头。</span>
+			<br><br>
+		<<elseif $weekly.bankVisits gte 3>>
+			<span class="blue">柜台后的职员多看了你一眼——你最近来得有点勤。</span>
+			<br><br>
+		<</if>>
+	<</if>>
+	/* 银行的三条通知（利息入账 / 代理缴款已划出 / 缴款失败）。
+	   原来它们住在一个**没有任何入口**的旧段落「Bank Autopay Notice」里 ——
+	   钱照样每周被划走、利息照样入账，但玩家永远看不到任何提示。
+	   这里搬进真正的银行大厅，进店时职员口头告知。每个标记读完即清零，不会重复播报。 */
+	<<if $fs_bankInterestNotice>>
+		"上周的存款利息已经入账了："他推过来一张单据，"<span class="gold">+<<print formatMoney($fs_bankInterestNotice)>></span>。"
+		<br><br>
+		<<set $fs_bankInterestNotice to 0>>
+	<</if>>
+	<<if $fs_autopayNotice>>
+		"另外，本周的代理缴款已经划出去了：<span class="gold"><<print formatMoney($fs_autopayNotice)>></span>。"
+		<br><br>
+		<<set $fs_autopayNotice to 0>>
+	<</if>>
+	<<if $fs_autopayFailNotice>>
+		<span class="red">"……不过，本周的代理缴款失败了。您卡里的钱不够。"</span>
+		<br><br>
+		"对方已经收到了失败通知。他会怎么想，就不是我们能管的了。"
+		<br><br>
+		<<set $fs_autopayFailNotice to 0>>
+	<</if>>
+	<span class="gold">你的钱包：<<print formatMoney($money)>></span>
+	<<if $bankCard is 1>>
+		<br>
+		<span class="teal">你的银行卡：已开户。卡内余额 <<print formatMoney($bankBalance || 0)>>——贝利看不到这笔钱。</span>
+	<</if>>
+	<br><br>
+	<<link [[营业处|Bank Hall Counter]]>><</link>>
+	<br>
+	<<link [[自动存款机|Bank Hall ATM]]>><</link>>
+	<br>
+	<<link [[人工办理窗口|Bank Hall Clerk]]>><</link>>
+	<br>
+	<<link [[离开银行|Danube Street]]>><<endevent>><</link>>
+<</if>>
+
+:: Bank Faint
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<set $daily.fsBankFaint to 1>>
+最后一位客户离开之后，大厅忽然安静得过分。你站在柜台前，忽然觉得灯太亮、地砖的花纹在眼前缓慢地漂移。
+<br><br>
+膝盖先软了下去。你扶住柜台边缘，指尖却使不上力。
+<br><br>
+<span class="gold">"——先生／女士？"</span>
+<br><br>
+柜台后那唯一的职员绕过柜台快步过来，动作不算快，但很稳。他把一把椅子推到你身后，让你坐下。
+<br><br>
+再抬头时，他正把一只纸杯放在你手边的台面上，杯壁冒着一点热气。
+<br><br>
+<span class="teal">"温水。慢慢喝。"</span>他说，语气平平的，像在处理一件很普通的业务，"今天人不多，您可以坐一会儿。"
+<br><br>
+你没有说话。杯子很烫，热气糊在脸上，反而让人清醒了一点。
+<br><br>
+"办业务的人常常这样。"他回到柜台后面，把笔摆正，"钱的事不会跑，身体会。"
+<br><br>
+<span class="grey">他没有再看你，低头继续整理单据，像是把刚才那几分钟当作没发生过。</span>
+<br><br>
+<<set $stress to Math.max(0, $stress - 1500)>>
+<<set $tiredness to Math.max(0, $tiredness - 800)>>
+<span class="green">你喝完了那杯水。紧绷着的东西松开了一点。</span>
+<br><br>
+<<if $fs_bankWarmWater isnot 1>><<set $fs_bankWarmWater to 1>><<set $fs_bankWaterCount to 1>><<else>><<set $fs_bankWaterCount to ($fs_bankWaterCount || 1) + 1>><</if>>
+<<if $fs_bankWaterCount gte 3>>
+<span class="teal">临走时你听见他在身后补了一句："下次先吃点东西再来。"</span>
+<br><br>
+<</if>>
+<<link [[继续办理业务|Bank Hall]]>><</link>>
+<br>
+<<link [[先出去走走|Danube Street]]>><<endevent>><</link>>
+
+:: Bank Hall Counter
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<if $bankCard is 1>>
+	柜台后的职员露出职业化的微笑："您好，您已经办理过银行卡了。每位客户限办一张。"
+	<br>
+	<<if $id is 1>>
+		<<if $fs_autopay is true>>
+			<span class="teal">（您的代理缴费正在运行中。）</span>
+			<br>
+			<<link [[代理缴费|Bank Autopay]]>><</link>>
+		<</if>>
+		<<if $fs_autopay isnot true>>
+			<<link [[代理缴费|Bank Autopay]]>><</link>>
+		<</if>>
+	<</if>>
+	<br><br>
+	<<link [[回到大厅|Bank Hall]]>><</link>>
+<<else>>
+	柜台后的职员抬起头："您好，办理银行卡需要收取 <span class="gold">10 元</span> 工本费，需要办理吗？"
+	<br><br>
+	<span class="teal">有了卡，你就能把现金存进银行——卡里的钱，贝利收租时看不见。</span>
+	<br><br>
+	<<if $id isnot 1>>
+		<span class="grey">"办卡需要有效的身份证件。"职员礼貌地看了看你，"……您没有？那我没办法为您办理。"</span>
+		<br>
+		<span class="blue">（妓院的那位布莱尔先生能弄到假身份证——当然，价格不便宜。）</span>
+		<br>
+	<<elseif $money gte 1000>>
+		<<link [[办理银行卡|Bank Hall Counter Do]]>><<set $money -= 1000>><<set $bankCard to 1>><</link>>
+		<br>
+	<<else>>
+		<span class="grey">你掏了掏口袋——连 10 元工本费都凑不齐。</span>
+		<br>
+	<</if>>
+	<<if $id is 1>>
+		<<link [[代理缴费|Bank Autopay]]>><</link>>
+		<br>
+	<</if>>
+	<<link [[回到大厅|Bank Hall]]>><</link>>
+<</if>>
+
+:: Bank Hall Counter Do
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+职员麻利地填好表格，把一张崭新的银行卡推到你面前："请收好，初始余额为零。存款取款都可以在旁边的自动存款机办理。"
+<br><br>
+<span class="gold">你获得了一张银行卡——你人生中的第一张卡。</span>
+<br><br>
+<<link [[回到大厅|Bank Hall]]>><</link>>
+
+:: Bank Hall ATM
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<if $bankCard isnot 1>>
+	自动存款机的屏幕亮着，插卡口却被一块挡板盖住了——你需要一张银行卡才能使用。
+	<br><br>
+	<<link [[回到大厅|Bank Hall]]>><</link>>
+<<else>>
+	你走到自动存款机前，插入银行卡。屏幕跳出两行字：
+	<br><br>
+	<span class="gold">卡内余额：<<print formatMoney($bankBalance || 0)>></span>
+	<br>
+	<span class="teal">钱包：<<print formatMoney($money)>></span>
+	<br><br>
+	<span class="grey">这台机器每次只能存取 £500。</span>
+	<br><br>
+	/* 问题记录「存到一定量就不能继续存」：原来这里有个 `$bankBalance lt 990000`（£9,900）的隐藏上限，
+	   卡里超过 £9,900 之后存款链接直接消失，看起来像卡死。原版没有这种上限，去掉。 */
+	<<if $money gte 50000>>
+		<<link [[存入 £500|Bank Hall ATM Deposit]]>><<set $money -= 50000>><<set $bankBalance to ($bankBalance || 0) + 50000>><</link>>
+		<br>
+	<<else>>
+		<span class="grey">钱包里的钱不够存 £500。</span>
+		<br>
+	<</if>>
+	<<if ($bankBalance || 0) gte 50000>>
+		<<link [[取出 £500|Bank Hall ATM Withdraw]]>><<set $money += 50000>><<set $bankBalance to ($bankBalance || 0) - 50000>><</link>>
+		<br>
+	<<elseif ($bankBalance || 0) gt 0>>
+		<span class="grey">卡内余额不足 £500。</span>
+		<br>
+	<</if>>
+	<<link [[回到大厅|Bank Hall]]>><</link>>
+<</if>>
+
+:: Bank Hall ATM Deposit
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+机器吞入一叠钞票，咔嗒咔嗒地清点起来。
+<br><br>
+<span class="gold">存入 £500。</span> <span class="teal">钱包 -500 元</span> <span class="lblue">卡内余额 +500 元</span>
+<br><br>
+<span class="blue">这笔钱从你的钱包里消失了——贝利收租时，看不见它。</span>
+<br><br>
+<<link [[继续使用自动存款机|Bank Hall ATM]]>><</link>>
+<br>
+<<link [[回到大厅|Bank Hall]]>><</link>>
+
+:: Bank Hall ATM Withdraw
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+机器吐出一叠钞票。
+<br><br>
+<span class="gold">取出 £500。</span> <span class="teal">钱包 +500 元</span> <span class="lblue">卡内余额 -500 元</span>
+<br><br>
+<<link [[继续使用自动存款机|Bank Hall ATM]]>><</link>>
+<br>
+<<link [[回到大厅|Bank Hall]]>><</link>>
+
+:: Bank Hall Clerk
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+你走到人工办理窗口前。窗口里的转椅空着，桌面上立着一块牌子：
+<br><br>
+<span class="grey">"本窗口暂时无人值守，请使用自动存款机或营业处办理业务。"</span>
+<br><br>
+<span class="blue">说起来……这个窗口好像从来没有人在过。</span>
+<br><br>
+<<link [[回到大厅|Bank Hall]]>><</link>>
+
+:: School Bully Event
+<<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
+<<set _bullyEventNum to random(1, 10)>>
+<<switch _bullyEventNum>>
+	<<case 1>>
+		几个人影把你围住，不由分说架起你的胳膊，一路拖进了厕所。你被按在水池边，后脑勺一沉——冰冷的水灌进口鼻，你呛得拼命挣扎。
+		<br><br>
+		<span class="gold">检定：体能</span>
+		<<set _physRoll to random(1, 100)>><<set _physChance to Math.min(Math.floor($physique / 10), 90)>>
+		<<if _physRoll lte _physChance>>
+			你猛地挣开，反手把最近的那个人推进水池里。趁着他们愣神，你冲出了厕所。
+			<<set $stress += 30>><<pain 20>> <<gstress>> <<gpain>>
+		<<else>>
+			你被按着呛了好几口水，直到他们笑够了才松手。你扶着墙咳了半天，浑身湿透。
+			<<set $stress += 60>><<set $trauma += 30>><<pain 30>> <<gstress>> <<gtrauma>> <<gpain>>
+		<</if>>
+	<<case 2>>
+		几个学生堵住你的去路，吹着口哨起哄："学两声狗叫听听！汪汪！"
+		<br><br>
+		<<set _coolRoll to random(1, 100)>><<set _coolChance to Math.min(Math.floor($cool / 10), 90)>>
+		<<if _coolRoll lte _coolChance>>
+			你面无表情地看着他们，眼神冷得像冰。起哄声渐渐小了下去，他们讪讪地让开了路。
+			<<set $stress += 20>><<status 5>><<gcool>> <<gstress>>
+		<<else>>
+			在哄笑声中，你屈辱地弯下腰，学了两声狗叫。有人掏出手机拍了下来。
+			<<set $stress += 50>><<set $trauma += 25>><<status -10>><<lcool>> <<gstress>> <<gtrauma>>
+		<</if>>
+	<<case 3>>
+		几个人把你围在墙角，其中一个打量着你手里拿的东西，突然一把抢了过去："借我玩玩呗？"
+		<br><br>
+		/* 这一段原来只看主手（$worn.handheld）。下面把「另一只手」也纳入：
+		   先把「到底要抢哪只手上的东西」解析成一个名字，取名与清空都跟着它走。
+		   （原先对应两条补丁想做的事，但补丁挂在模组自有段落上、锚点还差了缩进，一直没生效。） */
+		<<set _fs_hand1 to ($worn.handheld and $worn.handheld.name isnot "naked" ? $worn.handheld.name : "")>>
+		<<set _fs_hand2 to ($worn.handheld2 and $worn.handheld2.name isnot "naked" ? $worn.handheld2.name : "")>>
+		<<set _fs_handName to (_fs_hand1 isnot "" ? _fs_hand1 : _fs_hand2)>>
+		<<if _fs_handName isnot "" and $schoolBullyItemLost isnot 1>>
+			<span class="red">他看了看你的 <span class="gold"><<print _fs_handName>></span>，吹了声口哨："归我了。"</span>
+			<<set _lostItemName to _fs_handName>>
+			<<if _lostItemName is "魔法书">>
+				<<set $magicBook to 0>>
+				<<set $magicBookLost to 1>>
+			<</if>>
+			<<if _lostItemName is "制式手枪">><<set $pistolOwned to 0>><<set $pistolAmmo to 0>><<set $fs_pistolAutoHeld to 0>><</if>>
+			/* 从**实际被抢的那只手**上清空（另一只手用该槽自己的空档位，取不到再退回主手的） */
+			<<if _fs_hand1 isnot "">>
+				<<set $worn.handheld to clone(setup.clothes.handheld[0])>>
+			<<else>>
+				<<set $worn.handheld2 to clone(setup.clothes.handheld2 ? setup.clothes.handheld2[0] : setup.clothes.handheld[0])>>
+			<</if>>
+			<<set $schoolBullyItemLost to 1>>
+			<br><br>
+			你的 <span class="gold"><<print _lostItemName>></span> 被抢走了。他们怪笑着跑远，你追之不及。
+			<<if _lostItemName is "魔法书">>
+				<br>
+				<span class="red">糟糕——那是你的魔书！它被抢走了。如果找不回来，也许可以去贝利的办公室……花 900 元赎一本回来。</span>
+			<</if>>
+			<<set $stress += 60>><<set $trauma += 30>> <<gstress>> <<gtrauma>>
+		<<elseif _fs_handName isnot "">>
+			他抢过你的东西看了一眼，又嫌弃地丢了回来："什么破烂。"他啐了一口，带着人走了。
+			<<set $stress += 30>> <<gstress>>
+		<<else>>
+			他上下打量了你一番，发现你两手空空，嗤笑一声："穷鬼。"带着人走了。
+			<<set $stress += 20>> <<gstress>>
+		<</if>>
+	<<case 4>>
+		你的作业本被人从手里抽走，在几个人的手里传来传去。最后它被揉成一团，扔进了垃圾桶。
+		<br><br>
+		<span class="gold">检定：诡术</span>
+		<<set _skulRoll to random(1, 100)>><<set _skulChance to Math.min(Math.floor($skulduggery / 10), 90)>>
+		<<if _skulRoll lte _skulChance>>
+			你趁他们不注意，把作业本从垃圾桶里捞了回来，拍掉灰塞进书包。他们甚至没发现。
+			<<set $stress += 20>><<set $skulduggery to Math.min($skulduggery + 5, 1000)>> <<gstress>> <span class="gold">诡术 +5</span>
+		<<else>>
+			作业本已经泡进了脏水里，字迹糊成一团。老师会怎么想，你不敢想。
+			<<set $stress += 50>><<set $trauma += 20>> <<gstress>> <<gtrauma>>
+		<</if>>
+	<<case 5>>
+		有人从背后狠狠推了你一把。你踉跄着扑倒在地，膝盖磕在水泥地上，火辣辣地疼。
+		<br><br>
+		身后传来哄笑声。等你爬起来，他们已经走远了。
+		<<set $stress += 40>><<pain 40>> <<gstress>> <<gpain>>
+	<<case 6>>
+		几个人把你堵在储物柜前，为首的伸出一只手："过路费。不给就别想进教室。"
+		<br><br>
+		<<if $money gte 1000>>
+			<<set _paid to Math.min($money, 2000)>><<set $money -= _paid>>
+			你咬着牙，把 <span class="gold"><<print formatMoney(_paid)>></span> 塞进他手里。他掂了掂，满意地让开了路。
+			<<set $stress += 40>><<set $trauma += 20>> <<gstress>> <<gtrauma>> <span class="red">-<<print formatMoney(_paid)>></span>
+		<<else>>
+			"穷光蛋？"他上下打量你，嫌恶地摆摆手，"滚吧，别挡道。"
+			<<set $stress += 25>> <<gstress>>
+		<</if>>
+	<<case 7>>
+		一桶水从二楼泼下来，你从头到脚淋了个透。水珠顺着发梢滴落，周围响起幸灾乐祸的笑声。
+		<br><br>
+		<<set $exposed to Math.max($exposed + 10, 0)>><<set $stress += 40>> <<gstress>> <span class="red">暴露 +10</span>
+	<<case 8>>
+		午饭时间，几个人围住了你。为首的一把抢过你的午餐盒，当着你面掀开："看看今天吃什么好东西——哦，就这？"
+		<br><br>
+		他把午餐倒在地上，踩了两脚，扬长而去。你蹲下来，看着地上的食物，什么也没说。
+		<<set $stress += 50>><<set $trauma += 25>> <<gstress>> <<gtrauma>>
+	<<case 9>>
+		你被人从背后按住，一支马克笔在脸上画来画去。等他们笑着跑开，你才在玻璃窗的反光里看到——自己脸上多了两撇歪歪扭扭的胡子。
+		<br><br>
+		<<set $stress += 35>><<status -10>><<lcool>> <<gstress>>
+	<<case 10>>
+		你还没反应过来，就被几个人合力塞进了储物柜。柜门砰地关上，眼前一片漆黑。
+		<br><br>
+		<span class="gold">检定：体能</span>
+		<<set _physRoll to random(1, 100)>><<set _physChance to Math.min(Math.floor($physique / 10), 90)>>
+		<<if _physRoll lte _physChance>>
+			你用力一撞，柜门弹开。你跌跌撞撞地爬出来，大口喘着气。
+			<<set $stress += 40>><<pain 20>> <<gstress>> <<gpain>>
+		<<else>>
+			你在黑暗里蜷缩着，听着脚步声远去。不知道过了多久，才有人打开柜门，投来惊讶的目光。
+			<<set $stress += 70>><<set $trauma += 35>> <<gstress>> <<gtrauma>>
+		<</if>>
+<</switch>>
+<br><br>
+<<link [[继续|School Front Courtyard]]>><<endevent>><</link>>
+
+:: Maths Bully Jiusi Stop
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+一只手从你身后伸过来，猛地拽住了你的衣领："喂，借点钱花花？"
+<br><br>
+你还没来得及反应，一道破风声响起——一枚橡皮精准地砸在那人后脑勺上。
+<br><br>
+"手拿开。"玖肆不知什么时候站了起来，手里转着第二枚橡皮，语气平淡得像在谈论天气，"还有意见？"
+<br><br>
+那几个人看看她，又看看她的校牌，终究没敢发作，灰溜溜地缩回了座位。有人小声嘀咕："……转学生？什么来头……"
+<br><br>
+玖肆坐回去，头也不抬地翻了一页书，仿佛什么都没发生过。
+<br><br>
+<<set $stress to Math.max($stress - 15, 0)>><<set $trauma to Math.max($trauma - 10, 0)>><<npcincr 玖肆 love 1>><<lstress>>　<<ltrauma>>　<<glove>>
+<br><br>
+<<link [[继续上课|Maths Lesson]]>><<endevent>><</link>>
+
+:: School Beggar Event
+<<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
+校门口，一个乞丐装扮的人跌坐在地上。他浑身脏兮兮的，像是刚从垃圾堆里爬出来——但你注意到，他手臂上纹着一个黑蛇的图案。
+<br><br>
+他抬起头，浑浊的眼睛对上你，随即挤出一个讨好的笑："好心人，行行好……给点钱吧。"
+<br><br>
+<<if $money gte 94000>>
+	<<link [[给他 940 元|School Beggar Give]]>><<set $money -= 94000>><<set $beggarEventDone to 1>><</link>>
+	<br>
+<</if>>
+<<link [[拒绝|School Beggar Refuse]]>><<set $beggarEventDone to 1>><</link>>
+<br>
+<<link [[转身离开|School Front Courtyard]]>><<endevent>><</link>>
+
+:: School Beggar Give
+<<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
+你把钱塞进他手里。他先是一愣，随即飞快地把钞票捂进怀里，警惕地左右看了看。
+<br><br>
+"谢、谢谢……"他压低声音，从怀里摸出一张皱巴巴的纸片塞给你，"这个……给你。就当是回礼。"
+<br><br>
+那是一张你没听说过的火车票——终点站的名字模糊不清，日期也早已过了。你不得不怀疑这张票的真实性，可远处传来脚步声，他一骨碌爬起来，转眼就消失在巷子里。
+<br><br>
+你把车票翻到背面。上面用歪歪扭扭的字写着：
+<br><br>
+<span class="red"><b>"别太相信那个人"</b></span>
+<br><br>
+<span class="gold">你获得了一张来历不明的火车票。</span>
+<<set $beggarTicket to 1>>
+<br><br>
+<<link [[继续|School Front Courtyard]]>><<endevent>><</link>>
+
+:: School Beggar Refuse
+<<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
+<<if $speech_attitude is "meek">>
+	你低下头，声音小得几乎听不见："抱……抱歉，我没有这么多钱。"
+	<br><br>
+	乞丐看了你一眼，没有说话，默默转过头，慢慢走远了。
+<<elseif $speech_attitude is "bratty">>
+	你翻了个白眼："你算哪根葱？我正好有傻子研讨会的名额，你可以去报名当素材。"
+	<br><br>
+	乞丐只是看了你一眼，没接话，默默转过头走了。
+<<else>>
+	"抱歉，今天不行。"你说。
+	<br><br>
+	乞丐没有纠缠，只是看了你一眼，默默转过头走了。
+<</if>>
+<br><br>
+<span class="grey">他走远了。他手臂上的黑蛇纹身在晨光里一闪而过。</span>
+<br><br>
+<<link [[继续|School Front Courtyard]]>><<endevent>><</link>>
+:: Magic Book Investigate
+<<set $outside to 0>><<set $location to "home">><<effects>>
+你走到大厅角落的书架前。缝隙来自最底层——一本被塞在最深处的旧书，封面没有任何字。
+<br><br>
+你把它抽出来。封皮粗糙，像是某种兽皮；书页泛黄，边缘却流淌着稀薄的金色流沙——明明没有风，流沙却在缓慢地移动。
+<br><br>
+"……这是从衣柜里翻出来的？"你想起前几天整理衣物时，确实在柜底摸到过一件硬邦邦的东西，当时没在意。
+<br><br>
+你翻开第一页。一行行字迹浮现又消散，仿佛在回答你心中所想——草莓在哪、哪里能吃饱、怎么活下去。这本书，记载着这座城镇的一切。
+<br><br>
+<span class="gold">你获得了「魔法书」——书页边缘流淌着稀薄的金色流沙。</span>
+<<set $magicBook to 1>>
+<<if $worn.handheld.name is "naked">>
+	<<set $worn.handheld to clone(setup.clothes.handheld.find(function (x) { return x.name === "魔法书"; }))>>
+	<br>
+	<span class="teal">魔书自动放进了你的手里。</span>
+<<elseif $worn.handheld2.name is "naked">>
+	<<set $worn.handheld2 to clone(setup.clothes.handheld.find(function (x) { return x.name === "魔法书"; }))>>
+	<br>
+	<span class="teal">你两手不空，魔书被收进了另一只手。</span>
+<<else>>
+	<br>
+	<span class="teal">你两手都占着，魔书先收进怀里。等空出手再装备它吧——衣柜里能找到它。</span>
+<</if>>
+<<script>>
+	if (!V.wardrobe) V.wardrobe = {};
+	if (!Array.isArray(V.wardrobe.handheld)) V.wardrobe.handheld = [];
+	var _mbItem = setup.clothes.handheld.find(function (x) { return x.name === "魔法书"; });
+	var _mbAdd = function (_w) {
+		if (!_mbItem || !_w) return;
+		if (!Array.isArray(_w.handheld)) _w.handheld = [];
+		if (!_w.handheld.some(function (x) { return x.name === "魔法书"; })) {
+			_w.handheld.push(window.modClone(_mbItem));
+		}
+	};
+	_mbAdd(V.wardrobe);
+	for (var _wl in (V.wardrobes || {})) {
+		var _wobj = V.wardrobes[_wl];
+		if (_wobj && _wobj.unlocked) _mbAdd(_wobj);
+	}
+<</script>>
+<br><br>
+<<link [[继续|Orphanage]]>><<endevent>><</link>>
+
+:: Magic Book Buy Back
+<<set $outside to 0>><<set $location to "home">><<effects>>
+你把钱拍在桌上。贝利慢悠悠地数了一遍，才把书推给你。
+<br><br>
+"记住，下次再弄丢，可就不是这个价了。"他顿了顿，罕见地多看了你一眼，"……那本书，别让不该看的人看见。"
+<br><br>
+魔书回到你手里，书页边缘的金色流沙重新流动起来。
+<br><br>
+<<if $worn.handheld.name is "naked">>
+	<<set $worn.handheld to clone(setup.clothes.handheld.find(function (x) { return x.name === "魔法书"; }))>>
+	<span class="teal">你把它握在手里。</span>
+<<elseif $worn.handheld2.name is "naked">>
+	<<set $worn.handheld2 to clone(setup.clothes.handheld.find(function (x) { return x.name === "魔法书"; }))>>
+	<span class="teal">你把它收进另一只手。</span>
+<<else>>
+	<span class="teal">你把它收进怀里。衣柜里也能找到它。</span>
+<</if>>
+<<script>>
+	if (!V.wardrobe) V.wardrobe = {};
+	if (!Array.isArray(V.wardrobe.handheld)) V.wardrobe.handheld = [];
+	var _mbItem = setup.clothes.handheld.find(function (x) { return x.name === "魔法书"; });
+	var _mbAdd = function (_w) {
+		if (!_mbItem || !_w) return;
+		if (!Array.isArray(_w.handheld)) _w.handheld = [];
+		if (!_w.handheld.some(function (x) { return x.name === "魔法书"; })) {
+			_w.handheld.push(window.modClone(_mbItem));
+		}
+	};
+	_mbAdd(V.wardrobe);
+	for (var _wl in (V.wardrobes || {})) {
+		var _wobj = V.wardrobes[_wl];
+		if (_wobj && _wobj.unlocked) _mbAdd(_wobj);
+	}
+<</script>>
+<br><br>
+<<link [[离开办公室|Bailey's Office]]>><<endevent>><</link>>
+
+:: Casino Jiusi Referral
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<set _r to finalStar.pillAskReferral()>>
+<<if _r is "already">>
+	兔子小姐正在补口红。她从镜子里看见你，随手把口红盖上。
+	<br><br>
+	"名额的事我说过了，已经替你递上去了。"她转过身，"三楼那位记性很好，你上去报我的名字就行。"
+	<br><br>
+	<span class="teal">（保举名额已生效，可以去赌场三楼了。）</span>
+	<br><br>
+<<elseif _r is "ok">>
+	你向她提起三楼的办公室。
+	<br><br>
+	兔子小姐停下手里的动作，上下打量了你一遍，像是第一次认真看你。
+	<br><br>
+	"三楼？"她把头发别到耳后，"那地方不是有钱就能上去的。不过——"
+	<br><br>
+	她伸手："两千块。不是我要，是押金。老板只跟'自己人'谈生意，我得替你担着这个数。"
+	<br><br>
+	你数了两千块放在她掌心。她掂了掂，收进胸口的暗袋里。
+	<br><br>
+	<span class="gold">"行。我替你说。"</span>她朝门口抬了抬下巴，"上去以后别乱看，别乱问，别把我供出来。"
+	<br><br>
+	<span class="teal">（兔子小姐已同意保举：赌场三楼对你开放。）</span>
+	<br><br>
+<<elseif _r is "poor">>
+	你向她提起三楼的办公室。
+	<br><br>
+	兔子小姐看了你一眼，又看了看你身上，笑意淡下去一点。
+	<br><br>
+	"两千块的押金，你有吗？"她问得很直接，没等你回答就摇了摇头，"没有就先别想这些。"
+	<br><br>
+	<span class="grey">"先把眼下的难关渡过去，再来找自己。"</span>她重新拿起口红，
+	"三楼那位不会跑，你跑不动的时候才是真的麻烦。"
+	<br><br>
+	<span class="red">（需要 £2000 才能请她保举。）</span>
+	<br><br>
+<<else>>
+	兔子小姐正忙着补妆，头也不抬："现在不方便说话，晚点再来。"
+	<br><br>
+<</if>>
+<<link [[离开|Casino Jiusi Dressing]]>><</link>>
+<br>
+<<link [[回到大厅|Casino Jiusi Lobby]]>><</link>>
+
+/* ⚠️ 这里原来贴着一整块**没有 `::` 段落头**的孤儿正文（旧版「Casino Jiusi Third Stairs」的文本）：
+   于是玩家找完兔子小姐、看完保举结果之后，正文下面会**凭空多出**一段楼梯铁链的描述
+   和一个「回到二楼」链接 —— 那本该只出现在三楼楼梯段落里。整块已删除。 */
+
+:: Casino Jiusi Third Stairs
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+楼梯口拉着一道细铁链，链子上挂着一块小小的铜牌：<span class="grey">「三楼——仅限受邀请的客人」</span>。
+<br><br>
+你朝楼上看了两眼。铁链后面什么都没有，也没有声音——但你能确定，那上面有人。
+<br><br>
+<span class="fs-sub">想上去，要么先让这里的人认识你，要么让能说得上话的人替你开口。</span>
+<br><br>
+<<if finalStar.pillWorkDays() gt 0>>
+	<span class="teal">（你在这里打工 <<print finalStar.pillWorkDays()>> 天，满 7 天老板就会见你。）</span>
+	<br><br>
+<<else>>
+	<span class="teal">（在赌场打工、或者在换衣间找兔子小姐保举，都可以上三楼。）</span>
+	<br><br>
+<</if>>
+<<link [[回到二楼|Casino Jiusi Second Floor]]>><</link>>
+
+:: Casino Jiusi Third Floor
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<if finalStar.pillFloorOpen() is false>>
+	铁链还挂在那里。铜牌上的字在暗光里泛着一点旧金色。
+	<br><br>
+	<span class="grey">没有邀请，你上不去。</span>
+	<br><br>
+	<<if finalStar.pillWorkDays() gt 0>>
+		<span class="teal">（你在这里打工 <<print finalStar.pillWorkDays()>> 天，满 7 天老板就会见你。）</span>
+		<br><br>
+	<<else>>
+		<span class="teal">（在这里打工、或者在换衣间找兔子小姐保举，都可以上三楼。）</span>
+		<br><br>
+	<</if>>
+	<<link [[下楼|Casino Jiusi Second Floor]]>><</link>>
+<<else>>
+	铁链已经被摘下来了，铜牌挂在旁边的钉子上。你沿着狭窄的楼梯往上走。
+	<br><br>
+	三楼的走廊比楼下任何一层都安静，地毯厚得听不见自己的脚步。尽头只有一扇门，
+	门上嵌着一块磨得发亮的黄铜牌：<span class="gold">「经理室」</span>。
+	<br><br>
+	门边贴着一张手写的纸条，字迹潦草：<span class="grey">「敲两下，等我说进。」</span>
+	<br><br>
+	<<link [[敲门|Casino Jiusi Office]]>><</link>>
+	<br>
+	<<link [[回到二楼|Casino Jiusi Second Floor]]>><</link>>
+<</if>>
+
+:: Casino Jiusi Office
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<set _line to finalStar.pillLine()>>
+<<if _line is "bailey">>
+	门里很暖。办公桌后面坐着一个穿条纹西装的中年男人，正把一叠筹码摞成一座小山。
+	<br><br>
+	他抬眼看了你一下，又低下头去，把最后一枚筹码轻轻放上去。
+	<br><br>
+	"进来吧。"他抬手示意你坐下，笑得像是刚谈成一笔好买卖，"我认得你——楼下那个干活的那位。"
+	<br><br>
+	"贝利那家伙眼光确实不错。他挑人的时候不看你有多能干，只看你肯不肯为了一件小事认真到底。"
+	<br><br>
+	他把筹码山推倒，发出细碎的响声。
+	<br><br>
+	<span class="gold">"我这儿有种东西，很适合认真的人。"</span>
+<</if>>
+<<if _line is "jiusi">>
+	门里很暖。办公桌后面坐着一个穿条纹西装的中年男人，正用一把小刀削苹果皮。
+	<br><br>
+	"坐。"他没有抬头，"兔子小姐跟我提过你。"
+	<br><br>
+	苹果皮断了一次，他就从断口重新开始，慢条斯理地削下去。
+	<br><br>
+	"她说她找到了一个不错的合作伙伴，还说你和你那个身份很有价值。"他终于抬头，笑出了声，
+	<span class="gold">"我一般不投资来路不明的人。但她很少看错——目前为止。"
+	<br><br>
+	"所以，我给你一次机会，证明她没看错。"</span>
+<</if>>
+<br><br>
+<<link [[听听是什么东西|Casino Jiusi Office Offer]]>><</link>>
+<br>
+<<link [[离开|Casino Jiusi Second Floor]]>><</link>>
+
+:: Casino Jiusi Office Offer
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+他从抽屉里拿出一个小小的锡盒，打开。里面并排躺着几枚灰白色的药片，看上去和普通的头痛药没什么区别。
+<br><br>
+<span class="gold">"人格洗脑丸。"</span>
+<br><br>
+"它不杀人。"他把盒子合上，用指节轻轻敲了敲，"它<span class="red">拆人</span>——从心理到生理，一层层把人的意志剥下来。"
+<br><br>
+"最干净的用法不是塞进谁嘴里，是<span class="gold">混进吃的里面</span>。一口面包、一杯水，比任何强迫都有效。"
+<br><br>
+"当然，你要是懒得等，战斗中把它塞进对方嘴里也行——只要对方肯张嘴。咽下去之后，那场架就自己结束了，
+	ta 会从事实上变成你的东西。"
+<br><br>
+"不过先说清楚——"他伸出一根手指点着桌面，
+<br><br>
+<span class="red">"这玩意儿没法后悔。买到手就是买到手了，用掉就是用掉了，而且一次最多只卖你两颗。"</span>
+<br><br>
+"另外，别拿它去对付那些<span class="gold">身上缠着别的东西</span>的家伙——天使、恶魔那一类。对它们，这东西几乎没用。"
+<br><br>
+<span class="teal">你身上带着 <<print finalStar.pillOwned()>> 颗（这一生最多买两颗，还剩 <<print finalStar.pillLeft()>> 颗可以买）。</span>
+<br><br>
+<<if finalStar.pillLeft() gt 0>>
+	<<if $money gte (finalStar.pillPrice() * 100)>>
+		<<link [[买一颗|Casino Jiusi Office Buy]]>><</link>>（£<<print finalStar.pillPrice()>>）
+	<<else>>
+		<span class="red">£<<print finalStar.pillPrice()>> —— 你身上的钱不够。</span>
+	<</if>>
+	<br>
+<<else>>
+	<span class="red">"我说过了，一次只卖你两颗。"他把锡盒收进抽屉，"再多，你自己也未必兜得住。"</span>
+	<br>
+<</if>>
+<br><br>
+<<link [[回去吧|Casino Jiusi Third Floor]]>><</link>>
+
+:: Casino Jiusi Office Buy
+<<set $outside to 0>><<set $location to "town">><<set $bus to "danube">><<effects>>
+<<set _r to finalStar.pillBuy()>>
+<<if _r is "ok">>
+	他把锡盒推过来。你数出 <<print finalStar.pillPrice()>> 块钱，一枚一枚放在桌上，他连看都没看，只把盒子往你这边又推了一寸。
+	<br><br>
+	<span class="gold">你拿到了人格洗脑丸（持有 <<print finalStar.pillOwned()>> 颗）。</span>
+	<br><br>
+	他重新靠回椅背，手指在桌面上轻轻敲着。
+	<br><br>
+	"记住三件事。"他竖起手指，"第一，别让人看见你从这儿出去。第二，别用在那些身上缠着别的东西的家伙身上——浪费。"
+	<br><br>
+	"第三——"他停了一下，笑了一下，
+	<br><br>
+	<span class="red">"用之前想清楚。这东西没有回头路。"</span>
+	<br><br>
+	<span class="fs-sub">（这一生最多买两颗，还剩 <<print finalStar.pillLeft()>> 颗。）</span>
+	<br><br>
+<<elseif _r is "limit">>
+	他把抽屉拉开一半，又推回去。
+	<br><br>
+	"我说过了——一次只卖你两颗。"他抬手打断你，"不是我不做你的生意，是这东西多了容易出事，出在你身上。"
+	<br><br>
+<<elseif _r is "poor">>
+	你把手伸进口袋，又停住了。钱不够。
+	<br><br>
+	"先去挣吧。"他把锡盒合上，"它不会跑，你倒是会。"
+	<br><br>
+<<else>>
+	他皱了皱眉："今天不谈这个。"
+	<br><br>
+<</if>>
+<<link [[回到三楼走廊|Casino Jiusi Third Floor]]>><</link>>
+
+:: FS Pill Use
+<<set _link to true>>
+<<set $outside to 0>><<effects>>
+<<set _r to finalStar.pillUseInCombat()>>
+<<if _r is "ok">>
+	你趁着对方换手的空档凑近过去，指间夹着那枚灰白色的小药片。
+	<br><br>
+	"喂——"你叫了他一声，把药片和着一句半真半假的话递过去，"先吃了这个，你会好受一点。"
+	<br><br>
+	他犹豫了半秒。就是这半秒。
+	<br><br>
+	药片被咽下去的时候，你看见他喉咙动了一下。
+	<br><br>
+	然后一切都慢了下来。他的眼神先是涣散，接着像被人从里面重新点亮——只是点亮的东西已经不是原来那个人了。
+	<br><br>
+	他松开手，退了一步，低下头。
+	<br><br>
+	<span class="gold">"……主人。"</span>
+	<br><br>
+	<span class="teal">遭遇战结束。ta 似乎从事实上成为了你的奴隶。你可以在孤儿院的大厅里找到 ta。</span>
+	<br><br>
+<<elseif _r is "fail">>
+	你凑近过去，指间夹着药片。
+	<br><br>
+	对方根本没有给你开口的机会——他一把扣住你的手腕，把药片打落在地，碾了过去。
+	<br><br>
+	<span class="red">"你以为我傻？"</span>
+	<br><br>
+	<span class="fs-sub">（你的诡术等级：<<print finalStar.pillSkillRank()>>。要让对方毫无戒心地吃下去，至少要 A 级。）</span>
+	<br><br>
+<<elseif _r is "immune">>
+	你把药片递过去。
+	<br><br>
+	对方低头看了看那枚灰白色的小东西，然后抬起头，笑了。
+	<br><br>
+	那不是一个正常人该有的笑。
+	<br><br>
+	药片在他齿间化开，什么也没有发生。
+	<br><br>
+	<span class="red">（人格洗脑丸对拥有异常力量的对象几乎没有效果。）</span>
+	<br><br>
+<<elseif _r is "none">>
+	你摸了摸口袋。药片早就用完了。
+	<br><br>
+<<else>>
+	现在不是做这种事的时候。
+	<br><br>
+<</if>>
+<<if $fsCaveActive>><<link [[继续|Cave Fight]]>><</link>><<else>><<link [[继续|Bedroom]]>><</link>><</if>>
+
+:: FS Pill Bread
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<set _r to finalStar.pillBreadMake()>>
+<<if _r is "ok">>
+	你把那枚灰白色的药片放在案板上，用刀背碾成粉。
+	<br><br>
+	粉很细，落在面包上几乎看不见。你又用手指抹了两下，彻底把它按进面包的气孔里。
+	<br><br>
+	看起来和任何一个普通的面包都没有区别。
+	<br><br>
+	<span class="teal">你做好了一份「偷偷放入洗脑丸的面包」。</span>
+	<br><br>
+	<span class="fs-sub">（可以交给身边能说上话的人——只要 ta 愿意接过去吃。）</span>
+	<br><br>
+<<elseif _r is "have">>
+	案板上已经放着一份做好的面包了。
+	<br><br>
+<<else>>
+	你翻了翻口袋——没有药片了。
+	<br><br>
+<</if>>
+<<link [[回到卧室|Bedroom]]>><</link>>
+
+:: FS Pill Bread Give
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<set _t to finalStar.breadTargetName()>>
+<<if _t is "">>
+	你环顾四周——没有别人在。这份面包暂时递不出去。
+	<br><br>
+<<else>>
+<<set _who to finalStar.pillBreadUse(_t)>>
+<<if _who is "error">>
+	你把面包递出去，对方接过去闻了闻，忽然皱起眉，把它放回了你手里。
+	<br><br>
+<<elseif _who is "none">>
+	你手上没有那份面包。
+	<br><br>
+<<else>>
+	你把面包递过去，说自己烤多了，扔了可惜。
+	<br><br>
+	对方笑着接过去，咬了一口，还夸了一句味道不错。
+	<br><br>
+	第二口下去的时候，他的动作慢了下来。面包从他手里滑下去，落在地上。
+	<br><br>
+	他没有去捡。他抬起头看你，眼神先是一空，随后像被人从里面重新点亮——只是点亮的东西已经不是原来那个人了。
+	<br><br>
+	<span class="gold">"……主人。"</span>
+	<br><br>
+	<span class="teal"><<print _who>> 从事实上成为了你的奴隶。你可以在孤儿院的大厅里找到 ta。</span>
+	<br><br>
+<</if>>
+<</if>>
+<<link [[回到卧室|Bedroom]]>><</link>>
+
+:: FS Slaves
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<set _n to finalStar.slaveCount()>>
+<<if _n lte 0>>
+	大厅里没有人朝你走过来。
+	<br><br>
+<<else>>
+	你朝角落里抬了抬下巴。<<print _n>> 道身影几乎同时站直了，走过来，在你面前停下，低着头等你开口。
+	<br><br>
+	<span class="fs-sub">（ta 们记得自己被谁重新点亮过。）</span>
+	<br><br>
+	<<link [["去做点活，钱拿回来。"|FS Slave Pay]]>><</link>>
+	<br>
+	<<link [["过来，解决一下。"|FS Slave Serve]]>><</link>>
+	<br>
+	<<link [["……你不用再留在这里了。"|FS Slave Kill]]>><</link>>
+	<br><br>
+<</if>>
+<<link [[离开|Orphanage]]>><</link>>
+
+:: FS Slave Pay
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<set _r to finalStar.slavePay()>>
+<<if _r is "notday">>
+	你说了要求。ta 没有问为什么，只是低头应了一声。
+	<br><br>
+	<span class="grey">"……要等到星期六。"ta 小声说，"那天街上人多，能拿到的东西也多。"</span>
+	<br><br>
+<<elseif _r is "paid">>
+	ta 把手里的东西递给你。
+	<br><br>
+	<span class="grey">"这周已经交过一次了。"</span>
+	<br><br>
+<<elseif _r is "none">>
+	大厅里没有人。
+	<br><br>
+<<elseif _r is "error">>
+	ta 张了张嘴，没能说出话来。
+	<br><br>
+<<else>>
+	ta 点了点头，转身出去了。天快黑的时候才回来。
+	<br><br>
+	ta 把一叠皱巴巴的纸币放在你手里，手指上有一道新的口子。
+	<br><br>
+	<span class="gold">你拿到了 £<<print _r>>。</span>
+	<br><br>
+	<span class="fs-sub">（每星期六只能拿一次。）</span>
+	<br><br>
+<</if>>
+<<link [[回到大厅|FS Slaves]]>><</link>>
+
+:: FS Slave Serve
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "home">><<effects>>
+你说完那句话，ta 只是安静地看着你，然后往前走了半步。
+<br><br>
+"好的。"ta 说，声音很轻，像是在哄一个容易受惊的人，<span class="gold">"主人，我来。"</span>
+<br><br>
+ta 跪坐下来，先握住你的手，像是确认温度一样贴了一会儿，才低头靠近。
+<br><br>
+<span class="fs-sub">（ta 的每一个动作都在等你点头。）</span>
+<br><br>
+<<link [["继续。"|FS Slave Serve 2]]>><</link>>
+<br>
+<<link [["……停下。"|FS Slave Serve Stop]]>><</link>>
+<br>
+<<link [["什么都不做。"|FS Slaves]]>><</link>>
+
+:: FS Slave Serve 2
+<<set _link to true>>
+<<set $outside to 0>><<set $location = "home">><<effects>>
+<<set $fsServeRound to (($fsServeRound || 0) + 1)>>
+ta 的动作小心得过分。每一次碰触之前都会先看你一眼，像是在确认自己有没有做错。
+<br><br>
+<<if $fsServeRound is 1>>
+	你皱了一下眉，ta 立刻慢下来，指节悬在半空等你的下一句话。
+	<br><br>
+	"……这样，可以吗？"ta 问，声音抖了一下，"要再轻一点吗？"
+	<br><br>
+<<elseif $fsServeRound is 2>>
+	你稍微偏了一下头。ta 就着这个方向调整过去，连呼吸都压得很低。
+	<br><br>
+	<span class="grey">"你不喜欢的话，告诉我。"</span>ta 说，"我会改的。我什么都能改。"
+	<br><br>
+<<else>>
+	这不是性，倒更像是把手放在一件随时会碎的东西上。
+	<br><br>
+	ta 的睫毛一直在抖。你甚至能听见 ta 在数——数着自己有没有做错。
+	<br><br>
+<</if>>
+<span class="fs-sub">（ta 把"你高兴"当成了唯一需要做到的事。）</span>
+<br><br>
+<<link [["继续。"|FS Slave Serve 2]]>><</link>>
+<br>
+<<link [["……停下。"|FS Slave Serve Stop]]>><</link>>
+<br>
+<<link [["什么都不做。"|FS Slaves]]>><</link>>
+
+:: FS Slave Serve Stop
+<<set _link to true>>
+<<set $outside to 0>><<set $location = "home">><<effects>>
+<<set $fsServeRound to 0>>
+"停下。"
+<br><br>
+ta 的手立刻收了回去，连指尖都不再碰到你。身体还维持着刚才的姿势，像是被按了暂停。
+<br><br>
+<span class="gold">"……好。"</span>
+<br><br>
+没有挣扎，没有求饶，也没有那种被强迫时才有的紧绷。只有一种让人心里发凉的顺从——
+<br><br>
+像是把"你高兴"当成了唯一需要做到的事，连自己被喊停都不算一件值得难过的事。
+<br><br>
+ta 跪坐在一边，久久没有起来。过了一会，才小声开口：
+<br><br>
+"……刚才，有哪里做得不够好吗？"
+<br><br>
+ta 低着头，声音越来越小。
+<br><br>
+"我可以改的。你说，我一定改。"
+<br><br>
+<span class="grey">ta 的肩膀在轻轻发抖，像一只受了伤却不敢叫出声的兔子。</span>
+<br><br>
+<span class="fs-sub">（你没有需要回答的选项。）</span>
+<br><br>
+<<link [[继续|FS Slaves]]>><</link>>
+
+:: FS Slave Kill
+<<set _link to true>>
+<<set $outside to 0>><<set $location = "home">><<effects>>
+<<set _nm to finalStar.slaveSuicide(0)>>
+<<if _nm is "none">>
+	大厅里没有人。
+	<br><br>
+<<elseif _nm is "error">>
+	ta 看着你，长久地没有动。
+	<br><br>
+<<else>>
+	你把那句话说完的时候，ta 的表情几乎没有变化。
+	<br><br>
+	只是眼睛里那点被点亮的东西灭了。
+	<br><br>
+	<span class="grey">"……好。"</span>
+	<br><br>
+	ta 转身走出了大厅，脚步很稳，没有回头。
+	<br><br>
+	第二天早上，西边那片废弃的工地上发现了一具尸体。警方说是自杀，没有他杀痕迹，也没有留下字条。
+	<br><br>
+	<span class="teal"><<print _nm>> 不会再回来了。</span>
+	<br><br>
+	<span class="fs-sub">（有些人记得这件事。尤其是贝利，尤其是玖肆。）</span>
+	<br><br>
+<</if>>
+<<link [[回到大厅|FS Slaves]]>><</link>>
+
+:: FS Bailey Slave Warn
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<set $fsData.pillBaileyWarnShown to 1>>
+你回到卧室的时候，门口站着一个人。
+<br><br>
+贝利靠在门框上，手里夹着一支没点的烟。他看你走近，没有让开。
+<br><br>
+"听说你最近，收了些东西。"他说得很轻，像在谈一件无关紧要的小事，
+"我不在乎你做什么。我在乎的是——你做的事情会不会变成我的麻烦。"
+<br><br>
+他把烟在指间转了半圈。
+<br><br>
+<span class="gold">"这样吧。你每多一个'东西'，每周的欠款，就多三百。"</span>
+<br><br>
+"不是罚你。是我得替你多担一份。"他终于让开了半步，"你要是明天就处理掉，那当我没说。"
+<br><br>
+<span class="red">（若次日仍未处理，每周欠款将永久增加 £<<print 300 * finalStar.slaveCount()>>。）</span>
+<br><br>
+<<link [[关上门|Bedroom]]>><</link>>
+
+:: FS Jiusi Slave Warn
+<<set _link to true>>
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<set $fsData.pillJiusiWarnShown to 1>>
+你半夜醒来的时候，床边坐着一个人。
+<br><br>
+玖肆没有开灯。她只是坐在那里，看着你，眼睛在黑暗里亮得不像活人。
+<br><br>
+"你知道那东西是什么。"她说，"那不是药。那是把一个人从里面拆开，再重新拼成'听话'的形状。"
+<br><br>
+她伸手，指尖几乎碰到你的额头，又停住了。
+<br><br>
+<span class="gold">"这种力量不该出现在现实里。"</span>
+<br><br>
+"我不打算替你隐瞒。"她把手收回去，站起身，"我也不打算假装没看见。"
+<br><br>
+走到门口时她停了一下。
+<br><br>
+<span class="red">"我给你一天时间。你自己想清楚。"</span>
+<br><br>
+<span class="fs-sub">拖到第二天，她每周对你的好感都会下降。</span>
+<br><br>
+<<link [[躺回去|Bedroom]]>><</link>>
+
+:: FS Jiusi Disappointed
+<<set _link to true>>
+<<set $outside = 0>><<set $location = "home">><<effects>>
+街上空着。
+<br><br>
+你路过孤儿院的时候，那个平时靠着门柱的身影不在；你绕到学校后墙，那里也没有人；
+<br><br>
+魔女小屋的门虚掩着，屋里比上回来的时候更暗、更潮，木架上落了一层灰，窗纸破了一角也没人去补。
+<br><br>
+柜台后面的女巫抬起眼睛看了你一下，像是花了点力气才把眼皮撑开。
+<br><br>
+<span class="grey">"她最近不怎么来了。"她说，"你要是找她——她现在不一定想见你。"</span>
+<br><br>
+<span class="red">（玖肆对你感到失望。）</span>
+<br><br>
+<<link [[离开|Elk Street]]>><</link>>
+
+:: FS Jiusi Social Line [widget]
+<<if V.fsData && V.fsData.jiusiDisappointed === 1>>
+<span class="red">玖肆对你感到失望。</span>
+<</if>>
+
+:: FS Shoot
+<<set _link to true>>
+<<set $outside to 0>><<effects>>
+/* ⚠️ 这个段落原来整段是坏的，别再照旧写法改回去：
+   旧代码把 shootOnce() 的返回值和字符串用 is 比较（noammo / nogun / nofight / error），
+   但 shootOnce() 返回的是对象（reason 字段在对象里），而 is 是严格相等 ——
+   所以四个分支一次都不命中、永远掉进 else，打印的又是不存在的 .text / .dmg，
+   结果是白扣一发子弹、伤害一点没结算。
+   现在改为调用 fs.panelShoot()：它内部走同一个 shootOnce()，但把「扣血、已命名角色击杀
+   （含贝利特例）、尸体待埋标记、结果日志」都做全了 —— 战斗物资面板那条路一直就是这么算的。
+   规则：伤害结算只允许有一份实现，不要在段落里再抄第二份。
+   （fs.refreshPanel() 取不到战斗面板容器时会直接 return，所以在这里调用是安全的。） */
+<<if finalStar.inFight()>>
+	<<set _r to finalStar.panelShoot()>>
+	<<print $fs_panelLog>>
+	<br><br>
+	<<if _r.ok>>
+		<span class="fs-sub">弹仓 <<print _r.ammo>> 发 · 本次伤害 <<print _r.dmg>> 点</span>
+		<br><br>
+	<</if>>
+<<else>>
+	现在没有可以射的东西。
+	<br><br>
+<</if>>
+<<if $fsCaveActive>><<link [[继续|Cave Fight]]>><</link>><<else>><<link [[继续|Bedroom]]>><</link>><</if>>
+
+:: FS Bag
+<<set _link to true>>
+<<set $outside to 0>><<effects>>
+你翻了翻背包。
+<br><br>
+<span class="fs-sub"><<print finalStar.hungerWord()>></span>
+<<print finalStar.bagHtml()>>
+<br>
+<<link [[关上背包|FS Bag Close]]>><<run finalStar.closeBag()>><</link>>
+
+:: FS Bag Close
+<<set _fsBack to State.variables.fs_bagFrom>>
+<<if finalStar.hasPassage(_fsBack)>>
+<<goto _fsBack>>
+<</if>>
+<<run finalStar.goPrevious()>>
+/* 「FS Bag Eat」已删除：那是旧版「点链接吃东西」的实现残留，全仓零引用。
+   现在背包吃东西走 fs-links.js 的 fs.bindBagClicks()（文档级委派 → fs.bagEat() → 重绘 FS Bag），
+   不会跳到任何独立段落。留着它只会让「有没有入口」的排查产生假信号。 */
+
+:: FS Eat Here
+<<set _link to true>>
+<<set $outside to 0>><<effects>>
+<<if $fs_eatAt is "cafe">>
+	柜台后面飘着咖啡和黄油的味道。价目牌挂在墙上，字迹有点褪色。
+<<else>>
+	食堂的窗口还开着。今天的套餐写在白板上，旁边的托盘里堆着刚烤好的面包。
+<</if>>
+<br><br>
+<span class="fs-sub"><<print finalStar.hungerWord()>>　钱包：<<print formatMoney($money)>></span>
+<br><br>
+<<set _school to ($fs_eatAt isnot "cafe")>>
+<<if _school and finalStar.canteenUsed()>>
+	<span class="grey">今天的学校套餐已经吃过了，明天再来吧。</span>
+	<br><br>
+<</if>>
+<<for _d, _v range finalStar.dishTable>>
+	<<if (_school and _d is "学校套餐" and !finalStar.canteenUsed()) or (!_school and _d isnot "学校套餐")>>
+		<<capture _d>><span class="fs-tag"><<print _d>></span>　<<if _v.price gt 0>>£<<print _v.price>><<else>><span class="green">免费</span><</if>>　<<link [[吃|FS Eat Dish]]>><<set $fs_eatRes to finalStar.eatDish(_d)>><</link>><br>
+		<</capture>>
+	<</if>>
+<</for>>
+<br>
+<<link "走开">><<run finalStar.goPrevious()>><</link>>
+
+:: FS Eat Dish
+<<set _link to true>>
+<<set $outside to 0>><<effects>>
+<<set _res to ($fs_eatRes is undefined ? "ok" : $fs_eatRes)>>
+<<if _res is "eaten">>
+	你已经吃过今天的学校套餐了。
+<<elseif _res is "full">>
+	你已经吃不下了。
+<<elseif _res is "poor">>
+	你的钱不够。
+<<else>>
+	你坐下来，把东西吃完。盘子被推到一边。<<print finalStar.statHint("饥饿", 1, "green")>>
+<</if>>
+<br><br>
+<span class="green"><<print finalStar.hungerWord()>></span>
+<br><br>
+<<if finalStar.hunger() lt 50>>
+	<span class="orange">还是不太够。你得更认真吃点东西。</span>
+	<br><br>
+<</if>>
+<<link [[再来一份|FS Eat Here]]>><<set $fs_eatRes to undefined>><</link>>
+<br>
+<<link "离开">><<run finalStar.goPrevious()>><</link>>
+
+:: FS Sanity Gift
+<<set _link to true>>
+<<set $outside to 0>><<effects>>
+信封没有署名，里面是一小瓶水和两片药，还有一张字条：<span class="grey">「你最近看着不太好。吃点东西，睡一觉。」</span>
+<br><br>
+<<link [[喝下水，吃下药|FS Sanity Gift Take]]>><</link>>
+<br>
+<<link "先放着">><<run finalStar.goPrevious()>><</link>>
+
+:: FS Sanity Gift Take
+<<set _link to true>>
+<<set $outside to 0>><<effects>>
+水是温的，药片有点苦。
+<br><br>
+<<set _ok to finalStar.sanityTakeGift()>>
+<<if _ok>>
+	<span class="green">你的脑子清楚了一些。<<print finalStar.sanityWord()>></span>
+	<br><br>
+	<span class="fs-sub">（你不知道是谁寄的。信封上没有回信地址。）</span>
+<<else>>
+	<span class="grey">已经吃过了，或者本来就没什么可吃的。</span>
+<</if>>
+<br><br>
+<<link [[继续|Bedroom]]>><</link>>

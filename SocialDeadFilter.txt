@@ -1,0 +1,4 @@
+/* 已死亡 NPC 处理：从关系列表中移除，并记录为"已逝之人" */
+T.deadNPCs = V.NPCName.filter(npc => npc.state === "dead" || npc.state === "missing").map(npc => npc.nam);
+if (V.morganHospital === 1) T.importantNpcOrder.pushUnique("Morgan");
+T.importantNPCs = T.importantNpcOrder.map(name => V.NPCName[V.NPCNameList.indexOf(name)]).filter(npc => npc.state !== "dead" && npc.state !== "missing");

@@ -1,0 +1,6 @@
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+<<if $morganHospital is 1 and Time.hour gte 8 and Time.hour lte 19>>
+	<br>
+	<<icon "access-card.png">><<link [[走进摩根那间病房 (0:05)|Hospital Morgan Chat]]>><<pass 5>><</link>>
+	<br>
+<</if>>

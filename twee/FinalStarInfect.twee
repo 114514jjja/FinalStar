@@ -1,0 +1,182 @@
+/* ============================================================
+   终星 FinalStar —— 感染满值：响尾蛇档案
+
+   用户口述的规格（照此写，不自创设定）：
+     感染满 → 立刻跳过 7 天 → 一个神秘的存在对"坐在屏幕前的玩家"说话
+     → 点继续后二选一（与堕落共沉沦 / 为了别的而努力），两者回应不同
+     → 紧接着解锁响尾蛇：背景出现那只大眼睛、一条白蛇缠绕的十字架渐变出现、
+       红色字体打出 /𝙍𝘼⃟𝙏𝙏𝙇𝙀/档案已自动记录
+     → 无论选哪个都给「窥视真相」人物特质：遭遇战受到的疼痛减少，
+       代价是每晚 23:00 会感受到被偷窥（文本 + 压力）
+
+   为什么单独一个文件：本项目踩过「`:: 段落名` 把 [widget] 段落切开、里面的 widget 全部不注册」
+   的坑（游玩须知就是这么坏的）。新段落一律放独立文件，不去插已有文件。
+   ============================================================ */
+
+:: FS Infect Full
+<<set _link to true>>
+<<set $outside to 0>>
+<<set $fs_infectFullSeen to 1>>
+<<set $fs_ifRuns to (($fs_ifRuns || 0) + 1)>>
+/* 先跳 7 天。用本模组已有的 fs.cheatTimeAdvance（它内部走原版 Time.pass），
+   不自己猜 Time API —— 那个包装是之前验证过能用的。
+
+   注意 fs_ifSkipped 这道闸：原版 Time.pass 跨过午夜时会重走一遍段落渲染，
+   验证段落体被跑两次，于是 7 天变成 14 天（探针量到 8-10 → 8-24）。
+   $fs_infectFullSeen 是幂等的所以盖不住这个症状，必须单独一个闸。 */
+<<if (($fs_ifSkipped || 0) === 0)>>
+<<set $fs_ifSkipped to 1>>
+<<run finalStar.cheatTimeAdvance(10080)>>
+<</if>>
+<style>
+.fs-if-bg {
+	position: fixed; inset: 0; z-index: 900; pointer-events: none;
+	background: radial-gradient(60% 50% at 50% 42%, rgba(120,20,30,.30) 0%, rgba(0,0,0,.86) 70%, #000 100%);
+}
+.fs-if-eye {
+	position: fixed; left: 50%; top: 44%; width: 340px; height: 340px;
+	transform: translate(-50%,-50%); opacity: .6; z-index: 901; pointer-events: none;
+	filter: drop-shadow(0 0 40px rgba(255,80,60,.5));
+	animation: fs-if-eye-in 2.5s ease-in forwards;
+}
+/* 眼睛的最终不透明度要**高于十字架**（十字架渐变到 .5）—— 设计上"眼睛比十字架高一点"。
+   同时给它加淡入：原来是 .085 的极淡底纹，直接跳到 .6 会像硬切。 */
+@keyframes fs-if-eye-in { from { opacity: 0; } to { opacity: .6; } }
+.fs-if-cross {
+	position: fixed; left: 50%; top: 50%; transform: translate(-50%,-50%);
+	width: 300px; height: 420px; z-index: 902; pointer-events: none;
+	opacity: 0;
+	/* 淡入 4.5s → 保持 6s → 再淡出 3s（设计说明：显示 6 秒后渐变淡出）。
+	   两条动画都改 opacity：后一条带 delay，delay 期间不填充，所以由前一条的 forwards 生效；
+	   后一条一旦开始就接管。 */
+	animation: fs-if-cross-in 4.5s ease-in forwards,
+	           fs-if-cross-out 3s ease-out 10.5s forwards;
+}
+@keyframes fs-if-cross-in { from { opacity: 0; filter: blur(6px); } to { opacity: .5; filter: blur(0); } }
+@keyframes fs-if-cross-out { from { opacity: .5; } to { opacity: 0; } }
+.fs-if-archive {
+	position: fixed; left: 0; right: 0; bottom: 7%; text-align: center; z-index: 904;
+	font-family: ui-monospace, Consolas, monospace; font-size: 1.5em; letter-spacing: .22em;
+	color: #ff3b46; opacity: 0; animation: fs-if-arch-in 2.5s ease-in 3.2s forwards;
+	text-shadow: 0 0 14px rgba(255,40,60,.85), 0 0 34px rgba(255,0,30,.45);
+}
+@keyframes fs-if-arch-in { from { opacity: 0; } to { opacity: 1; } }
+/* 「继续」按钮：**和档案文字绑在同一块里显示**（设计上）。
+   它现在是 .fs-if-archive 的子元素，所以跟着档案那行的淡入一起出现（3.2s 起），
+   也一起固定在屏幕底部 —— 不用滚动就能看到（前两版的问题是它被长正文推到了屏幕外）。
+   颜色也对齐档案的红色系（问题记录上一版的高亮颜色不对）：
+   同色系描边 + 红底 + 亮红文字光晕，在这个场景里看着是一套。
+   注意把档案那行的等宽字体和大字距重置掉，否则按钮文字会被拉得很散。 */
+.fs-if-continue {
+	margin-top: 1.1em; letter-spacing: normal;
+	font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+	font-size: .62em; text-shadow: none;
+}
+.fs-if-continue a {
+	display: inline-block; padding: .55em 2.8em;
+	border: 1px solid #ff5a64; border-radius: 3px;
+	color: #fff2f2 !important; background: rgba(150,20,34,.88);
+	text-shadow: 0 0 8px rgba(255,120,120,.9); font-weight: bold;
+	animation: fs-if-cont-pulse 1.7s ease-in-out infinite;
+}
+@keyframes fs-if-cont-pulse {
+	0%, 100% { box-shadow: 0 0 8px rgba(255,50,60,.45), inset 0 0 6px rgba(255,60,60,.2); }
+	50%      { box-shadow: 0 0 24px rgba(255,90,100,.95), inset 0 0 14px rgba(255,60,60,.45); }
+}
+</style>
+<div class="fs-if-bg"></div>
+<img class="fs-if-eye" src="img/misc/icon/finalstar/ui-rattlesnake.png" alt="">
+/* 白蛇缠绕的十字架：真图（gen_snake_cross.cjs 生成，256×352）。
+   之前这里是 SVG 占位，已换掉。渐变淡入由 CSS 负责。 */
+<img class="fs-if-cross" src="img/misc/icon/finalstar/snake-cross.png" alt="">
+<div class="fs-if-archive">
+/𝙍𝘼⃟𝙏𝙏𝙇𝙀/档案已自动记录
+/* 「继续」按钮**放进档案这块里**（设计上"绑在一起显示"）：
+   它是 .fs-if-archive 的子元素，所以跟着这行的淡入一起出现、也一起固定在屏幕底部。
+   ⚠️ 必须真的嵌进来，光改 CSS 是不够的 —— 上一版它在档案外面，
+   于是既不同步也不受固定定位管。 */
+<div class="fs-if-continue"><<link [[继续|FS Infect Full Ask]]>><</link>></div>
+</div>
+
+<div class="fs-if-text">
+时间塌了一下。
+<br><br>
+你数不清中间过去了多久。等你重新感觉到自己的手脚时，窗外的天色已经换过好几轮——
+墙上那道你昨天才划下的刻痕，已经旧了。
+<br><br>
+<span class="red">七天。</span>
+<br><br>
+有东西在你面前坐下了。它没有形状，你却知道它在你面前，也知道它在看着的不是你，
+是坐在屏幕前的那个人。
+<br><br>
+<span class="gold">"这个世界因你而改变。"</span>
+<br><br>
+<span class="gold">"这个世界因你而坠落。"</span>
+<br><br>
+<span class="gold">"无数人的挣扎，只是为了逃避一切。"</span>
+<br><br>
+它停了一下。那一下里，你听见自己心脏的动静，也听见某种更远的东西在缓慢地合拢。
+<br><br>
+/* 「继续」不放这里了 —— 已移进上面 .fs-if-archive 那块里（跟着档案文字一起显示）。
+   留在这里会变成两个按钮，而且这个位置会被长正文推出屏幕外（这正是"找不到"的原因）。 */
+</div>
+
+:: FS Infect Full Ask
+<<set _link to true>>
+<<set $outside to 0>>
+它终于把注意力放在你身上。
+<br><br>
+<span class="gold">"那么——你会与堕落共沉沦，还是为了别的而努力？"</span>
+<br><br>
+<span class="fs-sub">（它问得很轻，像是在问一件早就有了答案的事。）</span>
+<br><br>
+<<link [[与堕落共沉沦|FS Infect Full Fall]]>><</link>>
+<br>
+<<link [[为了别的而努力|FS Infect Full Climb]]>><</link>>
+
+:: FS Infect Full Fall
+<<set _link to true>>
+<<set $outside to 0>>
+"那就这样吧。"你说。
+<br><br>
+它点了点头。
+<br><br>
+<span class="gold">"十分诚实。"</span>
+<br><br>
+它似乎并不失望，反而像是终于确认了什么。
+<br><br>
+<<run finalStar.infectFullFinish("fall")>>
+<<link [[……|FS Infect Full End]]>><</link>>
+
+:: FS Infect Full Climb
+<<set _link to true>>
+<<set $outside to 0>>
+"不。"你说，"我是为了别的。"
+<br><br>
+它沉默了一会儿。
+<br><br>
+<span class="gold">"我的时间不够了。"</span>
+<br><br>
+它没有反驳你，也没有嘲笑你。它只是这样说完，就像一件没来得及做完的事一样，
+慢慢从你面前退开了。
+<br><br>
+<<run finalStar.infectFullFinish("climb")>>
+<<link [[……|FS Infect Full End]]>><</link>>
+
+:: FS Infect Full End
+<<set _link to true>>
+<<set $outside to 0>>
+/* 收尾：解锁响尾蛇 + 给「窥视真相」人物特质。视觉效果（大眼睛 / 白蛇十字架 / 红色档案）
+   都在本段落里用 CSS + SVG 呈现，不依赖外部图片。 */
+<<run finalStar.infectFullUnlock()>>
+背景里有什么东西睁开了眼。
+<br><br>
+它没有恶意，只是一直在那里——像一间你从小住到大的房子，某天你忽然发现墙上一直挂着一幅画。
+<br><br>
+一条白蛇绕上十字架，缓慢地收紧。
+<br><br>
+<span class="red">你获得了「窥视真相」。</span>
+<br><br>
+<span class="fs-sub">（遭遇战中你所受的疼痛会减少；但每到夜里 23:00，你会清楚地感觉到有什么在看着你。）</span>
+<br><br>
+<<link [[回到现实|Bedroom]]>><<endevent>><</link>>
